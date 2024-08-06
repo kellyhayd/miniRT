@@ -42,13 +42,19 @@ $(NAME): $(OBJ)
 	@echo "$(GREEN)Done! Let's go! $(RESET)"
 
 $(BUILD)%.o: %.c
-		mkdir -p $(dir $@)
-		$(CC) $(HEADERS) -c $< -o $@
+	mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) $(HEADERS) -c $< -o $@
 
 clean:
 	rm -rf $(BUILD)
 
 fclean: clean
 	rm -rf $(NAME)
+
+test: all
+	@$(CC) $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") tests/tests_tuples.c $(LIBS) -o test
+	@printf "\nTESTS:\n"
+	./test
+	rm test
 
 re: fclean all

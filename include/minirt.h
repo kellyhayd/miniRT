@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:01:38 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/08/05 21:27:20 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/08/05 21:50:12 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,15 @@
 # define BLINK  "\001\033[5m\002"
 # define REVERSE "\001\033[7m\002"
 
+# define EPSILON 0.00001
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <math.h>
+
+#include "libft.h"
+#include "MLX42/MLX42.h"
 
 typedef struct s_tuple t_tuple;
 typedef struct s_tuple t_point;
@@ -53,6 +58,17 @@ struct s_tuple
 	double	w;
 };
 
+// -------------------------------------------------------------------------- //
+//                                   tuple                                    //
+// -------------------------------------------------------------------------- //
+
 t_tuple	tuple(double x, double y, double z, double w);
+int		tuple_compare(t_tuple tuple1, t_tuple tuple2);
+
+// -------------------------------------------------------------------------- //
+//                                   utils                                    //
+// -------------------------------------------------------------------------- //
+
+int		float_compare(double d1, double d2);
 
 #endif
