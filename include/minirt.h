@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:01:38 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/08/05 21:50:12 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/08/06 21:35:05 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,33 @@ struct s_tuple
 //                                   tuple                                    //
 // -------------------------------------------------------------------------- //
 
-t_tuple	tuple(double x, double y, double z, double w);
-int		tuple_compare(t_tuple tuple1, t_tuple tuple2);
+int			tuple_compare(t_tuple tuple1, t_tuple tuple2);
+t_tuple		tuple(double x, double y, double z, double w);
+t_tuple		tuple_adding(t_tuple tuple1, t_tuple tuple2);
+t_tuple		tuple_subtracting(t_tuple tuple1, t_tuple tuple2);
+t_tuple		tuple_negating(t_tuple tuple);
+t_tuple		tuple_multiplying(t_tuple tuple, double scalar);
+t_tuple		tuple_dividing(t_tuple tuple, double scalar);
+
+// -------------------------------------------------------------------------- //
+//                                   point                                    //
+// -------------------------------------------------------------------------- //
+
+t_point		point(double x, double y, double z);
+
+// -------------------------------------------------------------------------- //
+//                                   vector                                   //
+// -------------------------------------------------------------------------- //
+
+t_vector	vector(double x, double y, double z);
 
 // -------------------------------------------------------------------------- //
 //                                   utils                                    //
 // -------------------------------------------------------------------------- //
 
-int		float_compare(double d1, double d2);
+int			float_compare(double d1, double d2);
+
+double	vector_magnitude(t_vector vector1);
+
 
 #endif

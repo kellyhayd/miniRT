@@ -33,7 +33,8 @@ libft:
 	@echo "$(GREEN)LIBFT is ready!$(RESET)"
 
 libmlx:
-	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
+	@cmake $(LIBMLX) -B $(LIBMLX)/build > /dev/null
+	@make -C $(LIBMLX)/build -j4 > /dev/null
 	@echo "$(GREEN)LIBMLX is ready!$(RESET)"
 
 $(NAME): $(OBJ)
@@ -53,8 +54,7 @@ fclean: clean
 
 test: all
 	@$(CC) $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") tests/tests_tuples.c $(LIBS) -o test
-	@printf "\nTESTS:\n"
 	./test
-	rm test
+	@rm test
 
 re: fclean all
