@@ -3,14 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   tests_tuples.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:32:15 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/08/06 21:42:45 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/08/07 22:03:59 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+#include <stdarg.h>
+
+#define TUPLE 1
+#define FLOAT 2
 
 void	print_ok(int num_test)
 {
@@ -20,9 +24,42 @@ void	print_ok(int num_test)
 void	print_ko(int num_test, t_tuple expected, t_tuple result)
 {
 	printf(PURPLE "%d" RESET " - " RED "[ ✗ ]" RESET
-	" Expected: (%.3lf, %.3lf, %.3lf, %.3lf) \
-	RESULT: (%.3lf, %.3lf, %.3lf, %.3lf)\n", \
+	" Expected: (%.2lf, %.2lf, %.2lf, %.2lf) \
+	RESULT: (%.2lf, %.2lf, %.2lf, %.2lf)\n", \
 	num_test, expected.x, expected.y, expected.z, expected.w, result.x, result.y, result.z, result.w);
+}
+
+void	print_result(int num_test, int type, ...)
+{
+	va_list	args;
+	double	d_result;
+	double	d_expected;
+	t_tuple	t_result;
+	t_tuple	t_expected;
+
+	va_start(args, type);
+	if (type == TUPLE)
+	{
+		t_expected = va_arg(args, t_tuple);
+		t_result = va_arg(args, t_tuple);
+		if (tuple_compare(t_expected, t_result) == 1)
+			print_ok(num_test);
+		else
+			print_ko(num_test, t_expected, t_result);
+	}
+	if (type == FLOAT)
+	{
+		d_expected = va_arg(args, double);
+		d_result = va_arg(args, double);
+		if (float_compare(d_expected, d_result) == 1)
+			print_ok(num_test);
+		else
+		{
+			printf(PURPLE "%d" RESET " - " RED "[ ✗ ]" RESET
+			" Expected: (%.2lf) RESULT: (%.2lf)\n", num_test, d_expected, d_result);
+		}
+	}
+	va_end(args);
 }
 
 void test_tuple_1(int num_test) {
@@ -35,10 +72,7 @@ void test_tuple_1(int num_test) {
 	result = tuple(4.3, -4.2, 3.1, 1.0);
 
 	// ASSERT
-	if (tuple_compare(expected, result) == 1)
-		print_ok(num_test);
-	else
-		print_ko(num_test, expected, result);
+	print_result(num_test, 1, expected, result);
 }
 
 void test_tuple_2(int num_test) {
@@ -51,10 +85,7 @@ void test_tuple_2(int num_test) {
 	result = tuple(4.3, -4.2, 3.1, 0.0);
 
 	// ASSERT
-	if (tuple_compare(expected, result) == 1)
-		print_ok(num_test);
-	else
-		print_ko(num_test, expected, result);
+	print_result(num_test, 1, expected, result);
 }
 
 void	test_point(int num_test)
@@ -67,10 +98,7 @@ void	test_point(int num_test)
 	result = point(4, -4, 3);
 
 	// ASSERT
-	if (tuple_compare(expected, result) == 1)
-		print_ok(num_test);
-	else
-		print_ko(num_test, expected, result);
+	print_result(num_test, 1, expected, result);
 }
 
 void	test_vector(int num_test)
@@ -83,10 +111,7 @@ void	test_vector(int num_test)
 	result = vector(4, -4, 3);
 
 	// ASSERT
-	if (tuple_compare(expected, result) == 1)
-		print_ok(num_test);
-	else
-		print_ko(num_test, expected, result);
+	print_result(num_test, 1, expected, result);
 }
 
 void	test_tuple_adding(int num_test)
@@ -101,10 +126,7 @@ void	test_tuple_adding(int num_test)
 	result = tuple_adding(tuple1, tuple2);
 
 	// ASSERT
-	if (tuple_compare(expected, result) == 1)
-		print_ok(num_test);
-	else
-		print_ko(num_test, expected, result);
+	print_result(num_test, 1, expected, result);
 }
 
 void	test_tuple_subtracting_points(int num_test)
@@ -119,10 +141,7 @@ void	test_tuple_subtracting_points(int num_test)
 	result = tuple_subtracting(point1, point2);
 
 	// ASSERT
-	if (tuple_compare(expected, result) == 1)
-		print_ok(num_test);
-	else
-		print_ko(num_test, expected, result);
+	print_result(num_test, 1, expected, result);
 }
 
 void	test_tuple_subtracting_vector_from_point(int num_test)
@@ -137,10 +156,8 @@ void	test_tuple_subtracting_vector_from_point(int num_test)
 	result = tuple_subtracting(point1, vector1);
 
 	// ASSERT
-	if (tuple_compare(expected, result) == 1)
-		print_ok(num_test);
-	else
-		print_ko(num_test, expected, result);
+	print_result(num_test, 1, expected, result);
+
 }
 
 void	test_tuple_subtracting_vector(int num_test)
@@ -155,10 +172,8 @@ void	test_tuple_subtracting_vector(int num_test)
 	result = tuple_subtracting(vector1, vector2);
 
 	// ASSERT
-	if (tuple_compare(expected, result) == 1)
-		print_ok(num_test);
-	else
-		print_ko(num_test, expected, result);
+	print_result(num_test, 1, expected, result);
+
 }
 
 void	test_tuple_subtracting_vector_from_zero_vector(int num_test)
@@ -173,10 +188,8 @@ void	test_tuple_subtracting_vector_from_zero_vector(int num_test)
 	result = tuple_subtracting(zero_vector, vector1);
 
 	// ASSERT
-	if (tuple_compare(expected, result) == 1)
-		print_ok(num_test);
-	else
-		print_ko(num_test, expected, result);
+	print_result(num_test, 1, expected, result);
+
 }
 
 void	test_tuple_negating(int num_test)
@@ -190,10 +203,8 @@ void	test_tuple_negating(int num_test)
 	result = tuple_negating(tuple1);
 
 	// ASSERT
-	if (tuple_compare(expected, result) == 1)
-		print_ok(num_test);
-	else
-		print_ko(num_test, expected, result);
+	print_result(num_test, 1, expected, result);
+
 }
 
 void	test_tuple_multiplying_scalar(int num_test)
@@ -208,10 +219,8 @@ void	test_tuple_multiplying_scalar(int num_test)
 	result = tuple_multiplying(tuple1, scalar);
 
 	// ASSERT
-	if (tuple_compare(expected, result) == 1)
-		print_ok(num_test);
-	else
-		print_ko(num_test, expected, result);
+	print_result(num_test, 1, expected, result);
+
 }
 
 void	test_tuple_multiplying_fraction(int num_test)
@@ -226,10 +235,8 @@ void	test_tuple_multiplying_fraction(int num_test)
 	result = tuple_multiplying(tuple1, fraction);
 
 	// ASSERT
-	if (tuple_compare(expected, result) == 1)
-		print_ok(num_test);
-	else
-		print_ko(num_test, expected, result);
+	print_result(num_test, 1, expected, result);
+
 }
 
 void	test_tuple_dividing(int num_test)
@@ -244,10 +251,8 @@ void	test_tuple_dividing(int num_test)
 	result = tuple_dividing(tuple1, scalar);
 
 	// ASSERT
-	if (tuple_compare(expected, result) == 1)
-		print_ok(num_test);
-	else
-		print_ko(num_test, expected, result);
+	print_result(num_test, 1, expected, result);
+
 }
 
 void	test_vector_magnitude(int num_test)
@@ -261,14 +266,7 @@ void	test_vector_magnitude(int num_test)
 	result = vector_magnitude(vector1);
 
 	// ASSERT
-	if (float_compare(expected, result))
-		print_ok(num_test);
-	else
-		// print_ko(num_test, expected, result);
-		// Arrumar essa bosta pra ficar bonitinho
-		// Fazer uma função separada
-		printf(PURPLE "%d" RESET " - " RED "[ ✗ ]" RESET
-		" Expected: (%.3lf) RESULT: (%.3lf)\n", num_test, expected, result);
+	print_result(num_test, 2, expected, result);
 }
 
 int	main()
