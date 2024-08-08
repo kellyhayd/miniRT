@@ -401,3 +401,6 @@ FodyWeavers.xsd
 *.a
 build
 miniRT
+test
+.vscode/settings.json
+.vscode/settings.json
