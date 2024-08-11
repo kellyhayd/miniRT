@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 20:31:43 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/08/06 21:38:48 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/08/11 16:12:31 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,32 @@ double	vector_magnitude(t_vector vector1)
 
 	result = sqrt(pow(vector1.x, 2) + pow(vector1.y, 2) + pow(vector1.z, 2));
 	return (result);
+}
+
+t_vector	vector_normalize(t_vector vector1)
+{
+	t_vector	new;
+	double		magnitude;
+
+	magnitude = vector_magnitude(vector1);
+	new.x = vector1.x / magnitude;
+	new.y = vector1.y / magnitude;
+	new.z = vector1.z / magnitude;
+	new.w = vector1.w / magnitude;
+	return (new);
+}
+
+double	vector_dot_product(t_vector vector1, t_vector vector2)
+{
+	return (vector1.x * vector2.x
+		+ vector1.y * vector2.y
+		+ vector1.z * vector2.z
+		+ vector1.w * vector2.w);
+}
+
+t_tuple	vector_cross_product(t_vector vector1, t_vector vector2)
+{
+	return (vector(vector1.y * vector2.z - vector1.z * vector2.y,
+		vector1.z * vector2.x - vector1.x * vector2.z,
+		vector1.x * vector2.y - vector1.y * vector2.x));
 }

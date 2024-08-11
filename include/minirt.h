@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:01:38 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/08/06 21:35:05 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/08/11 16:12:53 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,14 +81,15 @@ t_point		point(double x, double y, double z);
 // -------------------------------------------------------------------------- //
 
 t_vector	vector(double x, double y, double z);
+double		vector_magnitude(t_vector vector1);
+t_vector	vector_normalize(t_vector vector1);
+double		vector_dot_product(t_vector vector1, t_vector vector2);
+t_tuple		vector_cross_product(t_vector vector1, t_vector vector2);
 
 // -------------------------------------------------------------------------- //
 //                                   utils                                    //
 // -------------------------------------------------------------------------- //
 
 int			float_compare(double d1, double d2);
-
-double	vector_magnitude(t_vector vector1);
-
 
 #endif

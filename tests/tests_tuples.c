@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:32:15 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/08/07 22:03:59 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/08/11 16:14:07 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void test_tuple_1(int num_test) {
 	result = tuple(4.3, -4.2, 3.1, 1.0);
 
 	// ASSERT
-	print_result(num_test, 1, expected, result);
+	print_result(num_test, TUPLE, expected, result);
 }
 
 void test_tuple_2(int num_test) {
@@ -85,7 +85,7 @@ void test_tuple_2(int num_test) {
 	result = tuple(4.3, -4.2, 3.1, 0.0);
 
 	// ASSERT
-	print_result(num_test, 1, expected, result);
+	print_result(num_test, TUPLE, expected, result);
 }
 
 void	test_point(int num_test)
@@ -98,7 +98,7 @@ void	test_point(int num_test)
 	result = point(4, -4, 3);
 
 	// ASSERT
-	print_result(num_test, 1, expected, result);
+	print_result(num_test, TUPLE, expected, result);
 }
 
 void	test_vector(int num_test)
@@ -111,7 +111,7 @@ void	test_vector(int num_test)
 	result = vector(4, -4, 3);
 
 	// ASSERT
-	print_result(num_test, 1, expected, result);
+	print_result(num_test, TUPLE, expected, result);
 }
 
 void	test_tuple_adding(int num_test)
@@ -126,7 +126,7 @@ void	test_tuple_adding(int num_test)
 	result = tuple_adding(tuple1, tuple2);
 
 	// ASSERT
-	print_result(num_test, 1, expected, result);
+	print_result(num_test, TUPLE, expected, result);
 }
 
 void	test_tuple_subtracting_points(int num_test)
@@ -141,7 +141,7 @@ void	test_tuple_subtracting_points(int num_test)
 	result = tuple_subtracting(point1, point2);
 
 	// ASSERT
-	print_result(num_test, 1, expected, result);
+	print_result(num_test, TUPLE, expected, result);
 }
 
 void	test_tuple_subtracting_vector_from_point(int num_test)
@@ -156,7 +156,7 @@ void	test_tuple_subtracting_vector_from_point(int num_test)
 	result = tuple_subtracting(point1, vector1);
 
 	// ASSERT
-	print_result(num_test, 1, expected, result);
+	print_result(num_test, TUPLE, expected, result);
 
 }
 
@@ -172,7 +172,7 @@ void	test_tuple_subtracting_vector(int num_test)
 	result = tuple_subtracting(vector1, vector2);
 
 	// ASSERT
-	print_result(num_test, 1, expected, result);
+	print_result(num_test, TUPLE, expected, result);
 
 }
 
@@ -188,7 +188,7 @@ void	test_tuple_subtracting_vector_from_zero_vector(int num_test)
 	result = tuple_subtracting(zero_vector, vector1);
 
 	// ASSERT
-	print_result(num_test, 1, expected, result);
+	print_result(num_test, TUPLE, expected, result);
 
 }
 
@@ -203,7 +203,7 @@ void	test_tuple_negating(int num_test)
 	result = tuple_negating(tuple1);
 
 	// ASSERT
-	print_result(num_test, 1, expected, result);
+	print_result(num_test, TUPLE, expected, result);
 
 }
 
@@ -219,7 +219,7 @@ void	test_tuple_multiplying_scalar(int num_test)
 	result = tuple_multiplying(tuple1, scalar);
 
 	// ASSERT
-	print_result(num_test, 1, expected, result);
+	print_result(num_test, TUPLE, expected, result);
 
 }
 
@@ -235,7 +235,7 @@ void	test_tuple_multiplying_fraction(int num_test)
 	result = tuple_multiplying(tuple1, fraction);
 
 	// ASSERT
-	print_result(num_test, 1, expected, result);
+	print_result(num_test, TUPLE, expected, result);
 
 }
 
@@ -251,8 +251,7 @@ void	test_tuple_dividing(int num_test)
 	result = tuple_dividing(tuple1, scalar);
 
 	// ASSERT
-	print_result(num_test, 1, expected, result);
-
+	print_result(num_test, TUPLE, expected, result);
 }
 
 void	test_vector_magnitude(int num_test)
@@ -266,7 +265,123 @@ void	test_vector_magnitude(int num_test)
 	result = vector_magnitude(vector1);
 
 	// ASSERT
-	print_result(num_test, 2, expected, result);
+	print_result(num_test, FLOAT, expected, result);
+}
+
+void	test_vector_magnitude_positive(int num_test)
+{
+	// ARRANGE
+	t_tuple	vector1 = vector(1, 2, 3);
+	double	expected = sqrt(14);
+	double	result;
+
+	// ACT
+	result = vector_magnitude(vector1);
+
+	// ASSERT
+	print_result(num_test, FLOAT, expected, result);
+}
+
+void	test_vector_magnitude_negative(int num_test)
+{
+	// ARRANGE
+	t_tuple	vector1 = vector(-1, -2, -3);
+	double	expected = sqrt(14);
+	double	result;
+
+	// ACT
+	result = vector_magnitude(vector1);
+
+	// ASSERT
+	print_result(num_test, FLOAT, expected, result);
+}
+
+void	test_vector_normalize_1(int num_test)
+{
+	// ARRANGE
+	t_tuple	vector1 = vector(4, 0, 0);
+	t_tuple	expected = tuple(1, 0, 0, 0);
+	t_tuple	result;
+
+	// ACT
+	result = vector_normalize(vector1);
+
+	// ASSERT
+	print_result(num_test, TUPLE, expected, result);
+}
+
+void	test_vector_normalize_2(int num_test)
+{
+	// ARRANGE
+	t_tuple	vector1 = vector(1, 2, 3);
+	t_tuple	expected = tuple(0.26726, 0.53452, 0.80178, 0);
+	t_tuple	result;
+
+	// ACT
+	result = vector_normalize(vector1);
+
+	// ASSERT
+	print_result(num_test, TUPLE, expected, result);
+}
+
+void	test_vector_normalize_3(int num_test)
+{
+	// ARRANGE
+	t_tuple	vector1 = vector(1, 2, 3);
+	t_tuple	norm_vector = vector_normalize(vector1);
+	double	expected = 1.0;
+	double	result;
+
+	// ACT
+	result = vector_magnitude(norm_vector);
+
+	// ASSERT
+	print_result(num_test, FLOAT, expected, result);
+}
+
+void	test_dot_product(int num_test)
+{
+	// ARRANGE
+	t_tuple	vector1 = vector(1, 2, 3);
+	t_tuple	vector2 = vector(2, 3, 4);
+	double	expected = 20.0;
+	double	result;
+
+	// ACT
+	result = vector_dot_product(vector1, vector2);
+
+	// ASSERT
+	print_result(num_test, FLOAT, expected, result);
+}
+
+void	test_cross_product_A_B(int num_test)
+{
+	// ARRANGE
+	t_tuple	vector1 = vector(1, 2, 3);
+	t_tuple	vector2 = vector(2, 3, 4);
+	t_tuple	expected = tuple(-1, 2, -1, 0);
+	t_tuple	result;
+
+	// ACT
+	result = vector_cross_product(vector1, vector2);
+
+	// ASSERT
+	print_result(num_test, TUPLE, expected, result);
+}
+
+void	test_cross_product_B_A(int num_test)
+{
+	// ARRANGE
+	t_tuple	vector1 = vector(1, 2, 3);
+	t_tuple	vector2 = vector(2, 3, 4);
+	t_tuple	expected = tuple(1, -2, 1, 0);
+	t_tuple	result;
+
+	// ACT
+	result = vector_cross_product(vector2, vector1);
+
+	// ASSERT
+	print_result(num_test, TUPLE, expected, result);
 }
 
 int	main()
@@ -282,7 +397,15 @@ int	main()
 		test_tuple_multiplying_scalar,
 		test_tuple_multiplying_fraction,
 		test_tuple_dividing,
-		test_vector_magnitude
+		test_vector_magnitude,
+		test_vector_magnitude_positive,
+		test_vector_magnitude_negative,
+		test_vector_normalize_1,
+		test_vector_normalize_2,
+		test_vector_normalize_3,
+		test_dot_product,
+		test_cross_product_A_B,
+		test_cross_product_B_A,
 	};
 
 	printf("\n%sTESTING TUPLES:%s\n", YELLOW, RESET);
