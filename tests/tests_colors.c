@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:12:44 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/08/11 18:08:48 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/08/11 20:15:46 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	test_color_adding(int num_test)
 	t_color	result;
 
 	// ACT
-	result = color_adding(color1, color2);
+	result = color_add(color1, color2);
 
 	// ASSERT
 	print_result(num_test, COLOR, expected, result);
@@ -55,7 +55,7 @@ void	test_color_subtracting(int num_test)
 	t_color	result;
 
 	// ACT
-	result = color_subtracting(color1, color2);
+	result = color_subtract(color1, color2);
 
 	// ASSERT
 	print_result(num_test, COLOR, expected, result);
@@ -69,7 +69,7 @@ void	test_color_multiplying(int num_test)
 	t_color	result;
 
 	// ACT
-	result = color_multiplying(color1, 2.0);
+	result = color_multiply(color1, 2.0);
 
 	// ASSERT
 	print_result(num_test, COLOR, expected, result);

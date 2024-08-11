@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:01:38 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/08/11 18:20:52 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/08/11 20:16:32 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,13 @@ typedef struct s_color
 	double	b;
 }	t_color;
 
+typedef struct s_matrix
+{
+	double	*tab;
+	int		row;
+	int		column;
+}	t_matrix;
+
 
 // -------------------------------------------------------------------------- //
 //                                   tuple                                    //
@@ -72,11 +79,11 @@ typedef struct s_color
 
 int			tuple_compare(t_tuple tuple1, t_tuple tuple2);
 t_tuple		tuple(double x, double y, double z, double w);
-t_tuple		tuple_adding(t_tuple tuple1, t_tuple tuple2);
-t_tuple		tuple_subtracting(t_tuple tuple1, t_tuple tuple2);
-t_tuple		tuple_negating(t_tuple tuple);
-t_tuple		tuple_multiplying(t_tuple tuple, double scalar);
-t_tuple		tuple_dividing(t_tuple tuple, double scalar);
+t_tuple		tuple_add(t_tuple tuple1, t_tuple tuple2);
+t_tuple		tuple_subtract(t_tuple tuple1, t_tuple tuple2);
+t_tuple		tuple_negate(t_tuple tuple);
+t_tuple		tuple_multiply(t_tuple tuple, double scalar);
+t_tuple		tuple_divide(t_tuple tuple, double scalar);
 
 // -------------------------------------------------------------------------- //
 //                                   point                                    //
@@ -99,9 +106,9 @@ t_tuple		vector_cross_product(t_vector vector1, t_vector vector2);
 // -------------------------------------------------------------------------- //
 
 t_color		color(double r, double g, double b);
-t_color		color_adding(t_color color1, t_color color2);
-t_color		color_subtracting(t_color color1, t_color color2);
-t_color		color_multiplying(t_color color1, double scalar);
+t_color		color_add(t_color color1, t_color color2);
+t_color		color_subtract(t_color color1, t_color color2);
+t_color		color_multiply(t_color color1, double scalar);
 t_color		hadamard_product(t_color color1, t_color color2);
 
 // -------------------------------------------------------------------------- //

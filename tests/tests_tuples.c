@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:32:15 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/08/11 17:35:19 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/08/11 20:16:32 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	test_tuple_adding(int num_test)
 	t_tuple	result;
 
 	// ACT
-	result = tuple_adding(tuple1, tuple2);
+	result = tuple_add(tuple1, tuple2);
 
 	// ASSERT
 	print_result(num_test, TUPLE, expected, result);
@@ -94,7 +94,7 @@ void	test_tuple_subtracting_points(int num_test)
 	t_tuple	result;
 
 	// ACT
-	result = tuple_subtracting(point1, point2);
+	result = tuple_subtract(point1, point2);
 
 	// ASSERT
 	print_result(num_test, TUPLE, expected, result);
@@ -109,7 +109,7 @@ void	test_tuple_subtracting_vector_from_point(int num_test)
 	t_tuple	result;
 
 	// ACT
-	result = tuple_subtracting(point1, vector1);
+	result = tuple_subtract(point1, vector1);
 
 	// ASSERT
 	print_result(num_test, TUPLE, expected, result);
@@ -125,7 +125,7 @@ void	test_tuple_subtracting_vector(int num_test)
 	t_tuple	result;
 
 	// ACT
-	result = tuple_subtracting(vector1, vector2);
+	result = tuple_subtract(vector1, vector2);
 
 	// ASSERT
 	print_result(num_test, TUPLE, expected, result);
@@ -141,7 +141,7 @@ void	test_tuple_subtracting_vector_from_zero_vector(int num_test)
 	t_tuple	result;
 
 	// ACT
-	result = tuple_subtracting(zero_vector, vector1);
+	result = tuple_subtract(zero_vector, vector1);
 
 	// ASSERT
 	print_result(num_test, TUPLE, expected, result);
@@ -156,7 +156,7 @@ void	test_tuple_negating(int num_test)
 	t_tuple	result;
 
 	// ACT
-	result = tuple_negating(tuple1);
+	result = tuple_negate(tuple1);
 
 	// ASSERT
 	print_result(num_test, TUPLE, expected, result);
@@ -172,7 +172,7 @@ void	test_tuple_multiplying_scalar(int num_test)
 	t_tuple	result;
 
 	// ACT
-	result = tuple_multiplying(tuple1, scalar);
+	result = tuple_multiply(tuple1, scalar);
 
 	// ASSERT
 	print_result(num_test, TUPLE, expected, result);
@@ -188,7 +188,7 @@ void	test_tuple_multiplying_fraction(int num_test)
 	t_tuple	result;
 
 	// ACT
-	result = tuple_multiplying(tuple1, fraction);
+	result = tuple_multiply(tuple1, fraction);
 
 	// ASSERT
 	print_result(num_test, TUPLE, expected, result);
@@ -204,7 +204,7 @@ void	test_tuple_dividing(int num_test)
 	t_tuple	result;
 
 	// ACT
-	result = tuple_dividing(tuple1, scalar);
+	result = tuple_divide(tuple1, scalar);
 
 	// ASSERT
 	print_result(num_test, TUPLE, expected, result);

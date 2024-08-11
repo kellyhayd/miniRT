@@ -6,13 +6,13 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 20:45:35 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/08/07 20:48:10 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/08/11 20:16:32 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_tuple	tuple_adding(t_tuple tuple1, t_tuple tuple2)
+t_tuple	tuple_add(t_tuple tuple1, t_tuple tuple2)
 {
 	t_tuple	result;
 
@@ -23,7 +23,7 @@ t_tuple	tuple_adding(t_tuple tuple1, t_tuple tuple2)
 	return (result);
 }
 
-t_tuple	tuple_subtracting(t_tuple tuple1, t_tuple tuple2)
+t_tuple	tuple_subtract(t_tuple tuple1, t_tuple tuple2)
 {
 	t_tuple	result;
 
@@ -34,7 +34,7 @@ t_tuple	tuple_subtracting(t_tuple tuple1, t_tuple tuple2)
 	return (result);
 }
 
-t_tuple	tuple_negating(t_tuple tuple)
+t_tuple	tuple_negate(t_tuple tuple)
 {
 	t_tuple	result;
 
@@ -45,7 +45,7 @@ t_tuple	tuple_negating(t_tuple tuple)
 	return (result);
 }
 
-t_tuple	tuple_multiplying(t_tuple tuple, double scalar)
+t_tuple	tuple_multiply(t_tuple tuple, double scalar)
 {
 	t_tuple	result;
 
@@ -56,7 +56,7 @@ t_tuple	tuple_multiplying(t_tuple tuple, double scalar)
 	return (result);
 }
 
-t_tuple	tuple_dividing(t_tuple tuple, double fraction)
+t_tuple	tuple_divide(t_tuple tuple, double fraction)
 {
 	t_tuple	result;
 

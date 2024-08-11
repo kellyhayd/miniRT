@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:05:08 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/08/11 17:42:23 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/08/11 20:15:46 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_color	color(double r, double g, double b)
 	return ((t_color){.r = r, .g = g, .b = b});
 }
 
-t_color	color_adding(t_color color1, t_color color2)
+t_color	color_add(t_color color1, t_color color2)
 {
 	t_color	result;
 
@@ -27,7 +27,7 @@ t_color	color_adding(t_color color1, t_color color2)
 	return (result);
 }
 
-t_color color_subtracting(t_color color1, t_color color2)
+t_color color_subtract(t_color color1, t_color color2)
 {
 	t_color	result;
 
@@ -37,7 +37,7 @@ t_color color_subtracting(t_color color1, t_color color2)
 	return (result);
 }
 
-t_color color_multiplying(t_color color1, double scalar)
+t_color color_multiply(t_color color1, double scalar)
 {
 	t_color	result;
 
