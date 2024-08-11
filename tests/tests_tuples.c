@@ -6,61 +6,17 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:32:15 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/08/11 16:14:07 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/08/11 17:35:19 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-#include <stdarg.h>
 
 #define TUPLE 1
 #define FLOAT 2
+#define COLOR 3
 
-void	print_ok(int num_test)
-{
-	printf(PURPLE "%d" RESET " - " GREEN "[ ✓ ]\n" RESET, num_test);
-}
-
-void	print_ko(int num_test, t_tuple expected, t_tuple result)
-{
-	printf(PURPLE "%d" RESET " - " RED "[ ✗ ]" RESET
-	" Expected: (%.2lf, %.2lf, %.2lf, %.2lf) \
-	RESULT: (%.2lf, %.2lf, %.2lf, %.2lf)\n", \
-	num_test, expected.x, expected.y, expected.z, expected.w, result.x, result.y, result.z, result.w);
-}
-
-void	print_result(int num_test, int type, ...)
-{
-	va_list	args;
-	double	d_result;
-	double	d_expected;
-	t_tuple	t_result;
-	t_tuple	t_expected;
-
-	va_start(args, type);
-	if (type == TUPLE)
-	{
-		t_expected = va_arg(args, t_tuple);
-		t_result = va_arg(args, t_tuple);
-		if (tuple_compare(t_expected, t_result) == 1)
-			print_ok(num_test);
-		else
-			print_ko(num_test, t_expected, t_result);
-	}
-	if (type == FLOAT)
-	{
-		d_expected = va_arg(args, double);
-		d_result = va_arg(args, double);
-		if (float_compare(d_expected, d_result) == 1)
-			print_ok(num_test);
-		else
-		{
-			printf(PURPLE "%d" RESET " - " RED "[ ✗ ]" RESET
-			" Expected: (%.2lf) RESULT: (%.2lf)\n", num_test, d_expected, d_result);
-		}
-	}
-	va_end(args);
-}
+void	print_result(int num_test, int type, ...);
 
 void test_tuple_1(int num_test) {
 

@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:01:38 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/08/11 16:12:53 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/08/11 17:45:11 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,14 @@ struct s_tuple
 	double	w;
 };
 
+typedef struct s_color
+{
+	double	r;
+	double	g;
+	double	b;
+}	t_color;
+
+
 // -------------------------------------------------------------------------- //
 //                                   tuple                                    //
 // -------------------------------------------------------------------------- //
@@ -85,6 +93,16 @@ double		vector_magnitude(t_vector vector1);
 t_vector	vector_normalize(t_vector vector1);
 double		vector_dot_product(t_vector vector1, t_vector vector2);
 t_tuple		vector_cross_product(t_vector vector1, t_vector vector2);
+
+// -------------------------------------------------------------------------- //
+//                                  colors                                    //
+// -------------------------------------------------------------------------- //
+
+t_color		color(double r, double g, double b);
+t_color		color_adding(t_color color1, t_color color2);
+t_color		color_subtracting(t_color color1, t_color color2);
+t_color		color_multiplying(t_color color1, double scalar);
+t_color		hadamard_product(t_color color1, t_color color2);
 
 // -------------------------------------------------------------------------- //
 //                                   utils                                    //
