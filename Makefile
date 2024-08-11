@@ -1,3 +1,4 @@
+
 #----------------------------------------------- Basic
 NAME			= miniRT
 .DEFAULT_GOAL	= all
@@ -56,5 +57,9 @@ test: all
 	@$(CC) -g3 $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") tests/tests_tuples.c $(LIBS) -o test
 	./test
 	# @rm test
+
+pit: all
+	@$(CC) -g3 $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/projectiles.c $(LIBS) -o pit
+	./pit
 
 re: fclean all
