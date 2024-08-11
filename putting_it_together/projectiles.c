@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 16:38:28 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/08/11 17:02:15 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/08/11 20:16:02 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ projectile	tick(environment env, projectile proj)
 {
 	projectile	new;
 
-	new.position = tuple_adding(proj.position, proj.velocity);
-	new.velocity = tuple_adding(tuple_adding(proj.velocity, env.gravity), env.wind);
+	new.position = tuple_add(proj.position, proj.velocity);
+	new.velocity = tuple_add(tuple_add(proj.velocity, env.gravity), env.wind);
 	return (new);
 }
 

@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 18:10:47 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/08/11 18:43:52 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/08/11 20:16:24 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ projectile	tick(environment env, projectile proj)
 {
 	projectile	new;
 
-	new.position = tuple_adding(proj.position, proj.velocity);
-	new.velocity = tuple_adding(tuple_adding(proj.velocity, env.gravity), env.wind);
+	new.position = tuple_add(proj.position, proj.velocity);
+	new.velocity = tuple_add(tuple_add(proj.velocity, env.gravity), env.wind);
 	return (new);
 }
 
@@ -52,8 +52,7 @@ void	create_parable(mlx_image_t *image)
 	environment	env;
 
 	proj.position = point(0, 1, 0);
-	proj.velocity = tuple_multiplying(vector_normalize(vector(1, 1.8, 0)), 6.5);
-	// normalize(vector(1, 1.8, 0)) * 11.25
+	proj.velocity = tuple_multiply(vector_normalize(vector(1, 1.8, 0)), 6.5);
 
 	env.gravity = vector(0, -0.1, 0);
 	env.wind = vector(-0.01, 0, 0);
