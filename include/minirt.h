@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:01:38 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/08/11 17:45:11 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/08/11 18:20:52 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,12 @@ t_color		color_adding(t_color color1, t_color color2);
 t_color		color_subtracting(t_color color1, t_color color2);
 t_color		color_multiplying(t_color color1, double scalar);
 t_color		hadamard_product(t_color color1, t_color color2);
+
+// -------------------------------------------------------------------------- //
+//                                   canvas                                   //
+// -------------------------------------------------------------------------- //
+
+void	write_pixel(mlx_image_t *image, int x, int y, int color);
 
 // -------------------------------------------------------------------------- //
 //                                   utils                                    //

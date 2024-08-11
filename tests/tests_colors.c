@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:12:44 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/08/11 17:51:54 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/08/11 18:08:48 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,21 @@ void	test_color_hadamard(int num_test)
 	// ASSERT
 	print_result(num_test, COLOR, expected, result);
 }
+
+// void	test_canvas_create(int num_test)
+// {
+// 	// ARRANGE
+// 	mlx_set_setting(MLX_HEADLESS, true);
+//
+// 	void		*mlx = mlx_init(100, 100, "test", true);
+// 	mlx_image_t	*img;
+//
+// 	// ACT
+// 	img = mlx_new_image(mlx, 100, 100);
+//
+// 	// ASSERT
+// 	print_result(num_test);
+// }
 
 int	main()
 {
