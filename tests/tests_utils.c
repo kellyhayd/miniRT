@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:18:05 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/08/12 00:52:14 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/08/12 01:12:22 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,16 @@ void	print_ok(int num_test)
 
 int	float_compare_test(void *expected, void *result)
 {
-	double	*expected_double = (double *)expected;
-	double	*result_double = (double *)result;
+	double	*expected_double = expected;
+	double	*result_double = result;
 
 	return (float_compare(*expected_double, *result_double));
 }
 
 void	print_ko_float(int num_test, void *expected, void *result)
 {
-	double	*expected_double = (double *)expected;
-	double	*result_double = (double *)result;
+	double	*expected_double = expected;
+	double	*result_double = result;
 
 	printf(PURPLE "%d" RESET " - " RED "[ ✗ ] " RESET
 		"Expected: (%.2lf) "

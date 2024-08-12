@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:12:44 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/08/12 01:10:36 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/08/12 01:12:13 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	color_compare(void *color1, void *color2)
 {
-	t_color	*color1_color = (t_color *)color1;
-	t_color	*color2_color = (t_color *)color2;
+	t_color	*color1_color = color1;
+	t_color	*color2_color = color2;
 
 	return (float_compare(color1_color->r, color2_color->r)
 		&& float_compare(color1_color->g, color2_color->g)
@@ -24,8 +24,8 @@ int	color_compare(void *color1, void *color2)
 
 void	print_ko_color(int num_test, void *expected, void *result)
 {
-	t_color	*expected_color = (t_color *)expected;
-	t_color	*result_color = (t_color *)result;
+	t_color	*expected_color = expected;
+	t_color	*result_color = result;
 
 	printf(PURPLE "%2d" RESET " - " RED "[ ✗ ] " RESET
 		"Expected: (%.2lf, %.2lf, %.2lf) "

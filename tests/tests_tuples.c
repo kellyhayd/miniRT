@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:32:15 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/08/12 01:07:30 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/08/12 01:12:03 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	print_ko_tuple(int num_test, void *expected, void *result)
 {
-	t_tuple	*expected_tuple = (t_tuple *)expected;
-	t_tuple	*result_tuple = (t_tuple *)result;
+	t_tuple	*expected_tuple = expected;
+	t_tuple	*result_tuple = result;
 
 	printf(PURPLE "%2d" RESET " - " RED "[ ✗ ] " RESET
 		"Expected: (%.2lf, %.2lf, %.2lf, %.2lf) "
@@ -28,8 +28,8 @@ void	print_ko_tuple(int num_test, void *expected, void *result)
 
 int	tuple_compare_test(void *expected, void *result)
 {
-	t_tuple	*expected_tuple = (t_tuple *)expected;
-	t_tuple	*result_tuple = (t_tuple *)result;
+	t_tuple	*expected_tuple = expected;
+	t_tuple	*result_tuple = result;
 
 	return (float_compare(expected_tuple->x, result_tuple->x)
 		&& float_compare(expected_tuple->y, result_tuple->y)
