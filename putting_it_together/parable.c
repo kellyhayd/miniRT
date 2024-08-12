@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parable.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 18:10:47 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/08/11 20:16:24 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/08/11 23:10:21 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ projectile	tick(environment env, projectile proj)
 void	print_big_pixel(mlx_image_t *image, int x, int y, int color)
 {
 	int	pixel_size = 3;
+
+	y = (500 / pixel_size) - y;
 
 	x *= pixel_size;
 	y *= pixel_size;

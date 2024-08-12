@@ -26,7 +26,7 @@ SRC			= $(shell find src -iname "*.c")
 
 OBJ			=$(SRC:%.c=$(BUILD)%.o)
 
-#-----------------------------------------------Rules
+#----------------------------------------------- Rules
 all: libft libmlx $(NAME)
 
 libft:
@@ -62,7 +62,6 @@ test: all
 	./test
 	@$(CC) -g3 $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") tests/tests_utils.c tests/tests_matrix.c $(LIBS) -o test
 	./test
-
 
 pit: all
 #	@$(CC) -g3 $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/projectiles.c $(LIBS) -o pit
