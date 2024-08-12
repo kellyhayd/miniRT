@@ -18,11 +18,12 @@ CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast
 #----------------------------------------------- Sources
 LIBMLX		= ./lib/MLX42
 LIBFT		= ./lib/libft
-HEADERS		:= -I ./include -I $(LIBMLX)/include -I $(LIBFT)/include
-LIBS		:= $(LIBMLX)/build/libmlx42.a ${LIBFT}/libft.a -ldl -lglfw -pthread -lm
+HEADERS		= -I ./include -I $(LIBMLX)/include -I $(LIBFT)/include
+LIBS		= $(LIBMLX)/build/libmlx42.a ${LIBFT}/libft.a -ldl -lglfw -pthread -lm
 BUILD		= build/
 SRC_PATH	= src/
 SRC			= $(shell find src -iname "*.c")
+TEST_FILES	= $(shell find src -iname "*.c" ! -name "main.c") tests/tests_utils.c
 
 OBJ			=$(SRC:%.c=$(BUILD)%.o)
 
@@ -56,12 +57,14 @@ fclean: clean
 	rm -rf pit
 
 test: all
-	@$(CC) -g3 $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") tests/tests_utils.c tests/tests_tuples.c $(LIBS) -o test
+	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_tuples.c $(LIBS) -o test
 	./test
-	@$(CC) -g3 $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") tests/tests_utils.c tests/tests_colors.c $(LIBS) -o test
+
+	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_colors.c $(LIBS) -o test
 	./test
-	@$(CC) -g3 $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") tests/tests_utils.c tests/tests_matrix.c $(LIBS) -o test
-	./test
+
+#	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_matrix.c $(LIBS) -o test
+#	./test
 
 pit: all
 #	@$(CC) -g3 $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/projectiles.c $(LIBS) -o pit

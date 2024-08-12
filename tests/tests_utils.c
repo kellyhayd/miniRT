@@ -6,22 +6,15 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:18:05 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/08/12 00:36:12 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/08/12 00:52:14 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tests.h"
 
-int	color_compare(t_color color1, t_color color2)
-{
-	return (float_compare(color1.r, color2.r)
-		&& float_compare(color1.g, color2.g)
-		&& float_compare(color1.b, color2.b));
-}
-
 void	print_ok(int num_test)
 {
-	printf(PURPLE "%d" RESET " - " GREEN "[ ✓ ]\n" RESET, num_test);
+	printf(PURPLE "%2d" RESET " - " GREEN "[ ✓ ]\n" RESET, num_test);
 	// printf("%s%d%s - %s[ ✓ ]%s\n", PURPLE, num_test, RESET, GREEN, RESET);
 }
 
@@ -43,26 +36,6 @@ void	print_ko_float(int num_test, void *expected, void *result)
 		"Result: (%.2lf)\n", num_test, *expected_double, *result_double
 	);
 }
-
-// void	print_ko_tuple(int num_test, t_tuple expected, t_tuple result)
-// {
-// 	printf(PURPLE "%d" RESET " - " RED "[ ✗ ]" RESET
-// 		" Expected: (%.2lf, %.2lf, %.2lf, %.2lf) \
-// 		RESULT: (%.2lf, %.2lf, %.2lf, %.2lf)\n", \
-// 		num_test, expected.x, expected.y, expected.z, expected.w, result.x, result.y, result.z, result.w
-// 	);
-// }
-
-// void	print_ko_color(int num_test, t_color expected, t_color result)
-// {
-// 	printf(PURPLE "%d" RESET " - " RED "[ ✗ ] " RESET
-// 		"Expected: (%.2lf, %.2lf, %.2lf, %.2lf) "
-// 		"RESULT: (%.2lf, %.2lf, %.2lf, %.2lf)\n",
-// 		num_test,
-// 		expected.r, expected.g, expected.b,
-// 		result.r, result.g, result.b
-// 	);
-// }
 
 // void	print_result(int num_test, int type, ...)
 // {

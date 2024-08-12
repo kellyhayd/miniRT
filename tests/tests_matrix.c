@@ -3,21 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   tests_matrix.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 20:09:01 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/08/11 21:12:47 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/08/11 23:49:45 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
-
-#define TUPLE 1
-#define FLOAT 2
-#define COLOR 3
-#define MATRIX 4
-
-void	print_result(int num_test, int type, ...);
+#include "tests.h"
 
 void	test_matrix_create(int num_test)
 {

@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:32:15 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/08/12 00:37:26 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/08/12 01:07:30 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	print_ko_tuple(int num_test, void *expected, void *result)
 	t_tuple	*expected_tuple = (t_tuple *)expected;
 	t_tuple	*result_tuple = (t_tuple *)result;
 
-	printf(PURPLE "%d" RESET " - " RED "[ ✗ ] " RESET
+	printf(PURPLE "%2d" RESET " - " RED "[ ✗ ] " RESET
 		"Expected: (%.2lf, %.2lf, %.2lf, %.2lf) "
 		"Result: (%.2lf, %.2lf, %.2lf, %.2lf)\n",
 		num_test,
