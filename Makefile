@@ -52,6 +52,8 @@ clean:
 
 fclean: clean
 	rm -rf $(NAME)
+	rm -rf test
+	rm -rf pit
 
 test: all
 	@$(CC) -g3 $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") tests/tests_utils.c tests/tests_tuples.c $(LIBS) -o test
