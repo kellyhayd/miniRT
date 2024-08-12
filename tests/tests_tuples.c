@@ -3,20 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   tests_tuples.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:32:15 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/08/11 20:16:32 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/08/12 00:37:26 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "tests.h"
 
-#define TUPLE 1
-#define FLOAT 2
-#define COLOR 3
+void	print_ko_tuple(int num_test, void *expected, void *result)
+{
+	t_tuple	*expected_tuple = (t_tuple *)expected;
+	t_tuple	*result_tuple = (t_tuple *)result;
 
-void	print_result(int num_test, int type, ...);
+	printf(PURPLE "%d" RESET " - " RED "[ ✗ ] " RESET
+		"Expected: (%.2lf, %.2lf, %.2lf, %.2lf) "
+		"Result: (%.2lf, %.2lf, %.2lf, %.2lf)\n",
+		num_test,
+		expected_tuple->x, expected_tuple->y, expected_tuple->z, expected_tuple->w,
+		result_tuple->x, result_tuple->y, result_tuple->z, result_tuple->w
+	);
+}
+
+int	tuple_compare_test(void *expected, void *result)
+{
+	t_tuple	*expected_tuple = (t_tuple *)expected;
+	t_tuple	*result_tuple = (t_tuple *)result;
+
+	return (float_compare(expected_tuple->x, result_tuple->x)
+		&& float_compare(expected_tuple->y, result_tuple->y)
+		&& float_compare(expected_tuple->z, result_tuple->z)
+		&& float_compare(expected_tuple->w, result_tuple->w));
+}
 
 void test_tuple_1(int num_test) {
 
@@ -28,7 +47,7 @@ void test_tuple_1(int num_test) {
 	result = tuple(4.3, -4.2, 3.1, 1.0);
 
 	// ASSERT
-	print_result(num_test, TUPLE, expected, result);
+	print_result(num_test, &expected, &result, tuple_compare_test, print_ko_tuple);
 }
 
 void test_tuple_2(int num_test) {
@@ -41,7 +60,7 @@ void test_tuple_2(int num_test) {
 	result = tuple(4.3, -4.2, 3.1, 0.0);
 
 	// ASSERT
-	print_result(num_test, TUPLE, expected, result);
+	print_result(num_test, &expected, &result, tuple_compare_test, print_ko_tuple);
 }
 
 void	test_point(int num_test)
@@ -54,7 +73,7 @@ void	test_point(int num_test)
 	result = point(4, -4, 3);
 
 	// ASSERT
-	print_result(num_test, TUPLE, expected, result);
+	print_result(num_test, &expected, &result, tuple_compare_test, print_ko_tuple);
 }
 
 void	test_vector(int num_test)
@@ -67,7 +86,7 @@ void	test_vector(int num_test)
 	result = vector(4, -4, 3);
 
 	// ASSERT
-	print_result(num_test, TUPLE, expected, result);
+	print_result(num_test, &expected, &result, tuple_compare_test, print_ko_tuple);
 }
 
 void	test_tuple_adding(int num_test)
@@ -82,7 +101,7 @@ void	test_tuple_adding(int num_test)
 	result = tuple_add(tuple1, tuple2);
 
 	// ASSERT
-	print_result(num_test, TUPLE, expected, result);
+	print_result(num_test, &expected, &result, tuple_compare_test, print_ko_tuple);
 }
 
 void	test_tuple_subtracting_points(int num_test)
@@ -97,7 +116,7 @@ void	test_tuple_subtracting_points(int num_test)
 	result = tuple_subtract(point1, point2);
 
 	// ASSERT
-	print_result(num_test, TUPLE, expected, result);
+	print_result(num_test, &expected, &result, tuple_compare_test, print_ko_tuple);
 }
 
 void	test_tuple_subtracting_vector_from_point(int num_test)
@@ -112,7 +131,7 @@ void	test_tuple_subtracting_vector_from_point(int num_test)
 	result = tuple_subtract(point1, vector1);
 
 	// ASSERT
-	print_result(num_test, TUPLE, expected, result);
+	print_result(num_test, &expected, &result, tuple_compare_test, print_ko_tuple);
 
 }
 
@@ -128,8 +147,7 @@ void	test_tuple_subtracting_vector(int num_test)
 	result = tuple_subtract(vector1, vector2);
 
 	// ASSERT
-	print_result(num_test, TUPLE, expected, result);
-
+	print_result(num_test, &expected, &result, tuple_compare_test, print_ko_tuple);
 }
 
 void	test_tuple_subtracting_vector_from_zero_vector(int num_test)
@@ -144,7 +162,7 @@ void	test_tuple_subtracting_vector_from_zero_vector(int num_test)
 	result = tuple_subtract(zero_vector, vector1);
 
 	// ASSERT
-	print_result(num_test, TUPLE, expected, result);
+	print_result(num_test, &expected, &result, tuple_compare_test, print_ko_tuple);
 
 }
 
@@ -159,8 +177,7 @@ void	test_tuple_negating(int num_test)
 	result = tuple_negate(tuple1);
 
 	// ASSERT
-	print_result(num_test, TUPLE, expected, result);
-
+	print_result(num_test, &expected, &result, tuple_compare_test, print_ko_tuple);
 }
 
 void	test_tuple_multiplying_scalar(int num_test)
@@ -175,8 +192,7 @@ void	test_tuple_multiplying_scalar(int num_test)
 	result = tuple_multiply(tuple1, scalar);
 
 	// ASSERT
-	print_result(num_test, TUPLE, expected, result);
-
+	print_result(num_test, &expected, &result, tuple_compare_test, print_ko_tuple);
 }
 
 void	test_tuple_multiplying_fraction(int num_test)
@@ -191,8 +207,7 @@ void	test_tuple_multiplying_fraction(int num_test)
 	result = tuple_multiply(tuple1, fraction);
 
 	// ASSERT
-	print_result(num_test, TUPLE, expected, result);
-
+	print_result(num_test, &expected, &result, tuple_compare_test, print_ko_tuple);
 }
 
 void	test_tuple_dividing(int num_test)
@@ -207,7 +222,7 @@ void	test_tuple_dividing(int num_test)
 	result = tuple_divide(tuple1, scalar);
 
 	// ASSERT
-	print_result(num_test, TUPLE, expected, result);
+	print_result(num_test, &expected, &result, tuple_compare_test, print_ko_tuple);
 }
 
 void	test_vector_magnitude(int num_test)
@@ -221,7 +236,7 @@ void	test_vector_magnitude(int num_test)
 	result = vector_magnitude(vector1);
 
 	// ASSERT
-	print_result(num_test, FLOAT, expected, result);
+	print_result(num_test, &expected, &result, float_compare_test, print_ko_float);
 }
 
 void	test_vector_magnitude_positive(int num_test)
@@ -235,7 +250,7 @@ void	test_vector_magnitude_positive(int num_test)
 	result = vector_magnitude(vector1);
 
 	// ASSERT
-	print_result(num_test, FLOAT, expected, result);
+	print_result(num_test, &expected, &result, float_compare_test, print_ko_float);
 }
 
 void	test_vector_magnitude_negative(int num_test)
@@ -249,7 +264,7 @@ void	test_vector_magnitude_negative(int num_test)
 	result = vector_magnitude(vector1);
 
 	// ASSERT
-	print_result(num_test, FLOAT, expected, result);
+	print_result(num_test, &expected, &result, float_compare_test, print_ko_float);
 }
 
 void	test_vector_normalize_1(int num_test)
@@ -263,7 +278,7 @@ void	test_vector_normalize_1(int num_test)
 	result = vector_normalize(vector1);
 
 	// ASSERT
-	print_result(num_test, TUPLE, expected, result);
+	print_result(num_test, &expected, &result, tuple_compare_test, print_ko_tuple);
 }
 
 void	test_vector_normalize_2(int num_test)
@@ -277,7 +292,7 @@ void	test_vector_normalize_2(int num_test)
 	result = vector_normalize(vector1);
 
 	// ASSERT
-	print_result(num_test, TUPLE, expected, result);
+	print_result(num_test, &expected, &result, tuple_compare_test, print_ko_tuple);
 }
 
 void	test_vector_normalize_3(int num_test)
@@ -292,7 +307,7 @@ void	test_vector_normalize_3(int num_test)
 	result = vector_magnitude(norm_vector);
 
 	// ASSERT
-	print_result(num_test, FLOAT, expected, result);
+	print_result(num_test, &expected, &result, float_compare_test, print_ko_float);
 }
 
 void	test_dot_product(int num_test)
@@ -307,7 +322,7 @@ void	test_dot_product(int num_test)
 	result = vector_dot_product(vector1, vector2);
 
 	// ASSERT
-	print_result(num_test, FLOAT, expected, result);
+	print_result(num_test, &expected, &result, float_compare_test, print_ko_float);
 }
 
 void	test_cross_product_A_B(int num_test)
@@ -322,7 +337,7 @@ void	test_cross_product_A_B(int num_test)
 	result = vector_cross_product(vector1, vector2);
 
 	// ASSERT
-	print_result(num_test, TUPLE, expected, result);
+	print_result(num_test, &expected, &result, tuple_compare_test, print_ko_tuple);
 }
 
 void	test_cross_product_B_A(int num_test)
@@ -337,7 +352,7 @@ void	test_cross_product_B_A(int num_test)
 	result = vector_cross_product(vector2, vector1);
 
 	// ASSERT
-	print_result(num_test, TUPLE, expected, result);
+	print_result(num_test, &expected, &result, tuple_compare_test, print_ko_tuple);
 }
 
 int	main()
