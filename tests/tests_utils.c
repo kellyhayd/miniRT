@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:18:05 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/08/11 17:28:22 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/08/11 21:07:06 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #define TUPLE 1
 #define FLOAT 2
 #define COLOR 3
+#define MATRIX 4
 
 int	color_compare(t_color color1, t_color color2)
 {
@@ -49,13 +50,15 @@ void	print_ko_color(int num_test, t_color expected, t_color result)
 
 void	print_result(int num_test, int type, ...)
 {
-	va_list	args;
-	double	d_result;
-	double	d_expected;
-	t_tuple	t_result;
-	t_tuple	t_expected;
-	t_color	c_result;
-	t_color	c_expected;
+	va_list		args;
+	double		d_result;
+	double		d_expected;
+	t_tuple		t_result;
+	t_tuple		t_expected;
+	t_color		c_result;
+	t_color		c_expected;
+	t_matrix	m_result;
+	t_matrix	m_expected;
 
 	va_start(args, type);
 	if (type == TUPLE)
@@ -87,6 +90,15 @@ void	print_result(int num_test, int type, ...)
 			print_ok(num_test);
 		else
 			print_ko_color(num_test, c_expected, c_result);
+	}
+	else if (type == MATRIX)
+	{
+		m_expected = va_arg(args, t_matrix);
+		m_result = va_arg(args, t_matrix);
+		if (matrix_compare(m_expected, m_result))
+			print_ok(num_test);
+		else
+			printf(PURPLE "%d" RESET " - " RED "[ ✗ ]\n" RESET, num_test);
 	}
 	va_end(args);
 }

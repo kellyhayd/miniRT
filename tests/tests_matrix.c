@@ -6,35 +6,97 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 20:09:01 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/08/11 20:15:06 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/08/11 21:12:47 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-// 1, 2, 3, 4, 5.5, 6.5, 7.5, 8.5, 9, 10, 11, 12, 13.5, 14.5, 15.5, 16.5
+#define TUPLE 1
+#define FLOAT 2
+#define COLOR 3
+#define MATRIX 4
+
+void	print_result(int num_test, int type, ...);
 
 void	test_matrix_create(int num_test)
 {
 	// ARRANGE
-	t_matrix	expected = {1, 2, 3, 4, 5.5, 6.5, 7.5, 8.5, 9, 10, 11, 12, 13.5, 14.5, 15.5, 16.5};
+	double		matrix[] = {1, 2, 3, 4, 5.5, 6.5, 7.5, 8.5, 9, 10, 11, 12, 13.5, 14.5, 15.5, 16.5};
+	t_matrix	expected = {
+							.tab = matrix,
+							.row = 4, .column = 4
+							};
 	t_matrix	result;
+	int			row_size = 4;
+	int			column_size = 4;
 
 	// ACT
-	result = create_matrix(-0.5, 0.4, 1.7);
+	result = matrix_create(matrix, row_size, column_size);
 
 	// ASSERT
-	print_result(num_test, COLOR, expected, result);
+	print_result(num_test, MATRIX, expected, result);
+}
+
+void	test_matrix_compare_true(int num_test)
+{
+	// ARRANGE
+	double		tab1[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2};
+	double		tab2[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2};
+
+	t_matrix	matrix1 = {
+							.tab = tab1,
+							.row = 4, .column = 4
+							};
+	t_matrix	matrix2 = {
+							.tab = tab2,
+							.row = 4, .column = 4
+							};
+	int			result;
+	int			expected = 1;
+
+	// ACT
+	result = matrix_compare(matrix1, matrix2);
+
+	// ASSERT
+	print_result(num_test, FLOAT, (double)expected, (double)result);
+}
+
+void	test_matrix_compare_false(int num_test)
+{
+	// ARRANGE
+	double		tab1[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2};
+	double		tab2[] = {2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+
+
+	t_matrix	matrix1 = {
+							.tab = tab1,
+							.row = 4, .column = 4
+							};
+	t_matrix	matrix2 = {
+							.tab = tab2,
+							.row = 4, .column = 4
+							};
+	int			result;
+	int			expected = 0;
+
+	// ACT
+	result = matrix_compare(matrix1, matrix2);
+
+	// ASSERT
+	print_result(num_test, FLOAT, (double)expected, (double)result);
 }
 
 int	main()
 {
 	void	(*test_funcs[])(int) =
 	{
-		test_color,
+		test_matrix_create,
+		test_matrix_compare_true,
+		test_matrix_compare_false,
 	};
 
-	printf("\n%sTESTING COLORS:%s\n", YELLOW, RESET);
+	printf("\n%sTESTING MATRICES:%s\n", YELLOW, RESET);
 
 	for (int i = 0; i < sizeof(test_funcs) / sizeof(test_funcs[0]); i++) {
 		test_funcs[i](i + 1);

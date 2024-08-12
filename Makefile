@@ -56,8 +56,9 @@ fclean: clean
 test: all
 	@$(CC) -g3 $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") tests/tests_utils.c tests/tests_tuples.c $(LIBS) -o test
 	./test
-	# @rm test
 	@$(CC) -g3 $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") tests/tests_utils.c tests/tests_colors.c $(LIBS) -o test
+	./test
+	@$(CC) -g3 $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") tests/tests_utils.c tests/tests_matrix.c $(LIBS) -o test
 	./test
 
 
