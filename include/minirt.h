@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:01:38 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/08/11 20:51:36 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/08/19 20:30:22 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,9 @@ void		write_pixel(mlx_image_t *image, int x, int y, int color);
 
 t_matrix	matrix_create(double *tab, int row, int column);
 int			matrix_compare(t_matrix matrix1, t_matrix matrix2);
+void		matrix_set(t_matrix matrix1, int x, int y, double value);
+double		matrix_get(t_matrix matrix1, int x, int y);
+t_matrix	matrix_multiply(t_matrix matrix1, t_matrix matrix2);
 
 // -------------------------------------------------------------------------- //
 //                                   utils                                    //
