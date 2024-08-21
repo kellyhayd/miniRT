@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 20:09:01 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/08/19 20:33:47 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/08/20 21:13:12 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,9 +141,24 @@ void	test_matrix_compare_false(int num_test)
 void	test_matrix_multiplying(int num_test)
 {
 	// ARRANGE
-	double		tab1[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2};
-	double		tab2[] = {-2, 1, 2, 3, 3, 2, 1, -1, 4, 3, 6, 5, 1, 2, 7, 8};
-	double		result_tab[] = {20, 22, 50, 48, 44, 54, 114, 108, 40, 58, 110, 102, 78, 104, 214, 202};
+	double		tab1[] = {
+		1, 2, 3, 4,
+		5, 6, 7, 8,
+		9, 8, 7, 6,
+		5, 4, 3, 2
+	};
+	double		tab2[] = {
+		-2, 1, 2,  3,
+		 3, 2, 1, -1,
+		 4, 3, 6,  5,
+		 1, 2, 7,  8
+	};
+	double		result_tab[] = {
+		20,  22,  50,  48,
+		44,  54, 114, 108,
+		40,  58, 110, 102,
+		16,  26,  46,  42
+	};
 
 	t_matrix	matrix1 = {
 							.tab = tab1,
@@ -154,7 +169,8 @@ void	test_matrix_multiplying(int num_test)
 							.row = 4, .column = 4
 	};
 	t_matrix	expected = {
-
+							.tab = result_tab,
+							.row = 4, .column = 4
 	};
 	t_matrix	result;
 
