@@ -6,35 +6,11 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:12:44 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/08/12 01:12:13 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/08/20 21:54:36 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tests.h"
-
-int	color_compare(void *color1, void *color2)
-{
-	t_color	*color1_color = color1;
-	t_color	*color2_color = color2;
-
-	return (float_compare(color1_color->r, color2_color->r)
-		&& float_compare(color1_color->g, color2_color->g)
-		&& float_compare(color1_color->b, color2_color->b));
-}
-
-void	print_ko_color(int num_test, void *expected, void *result)
-{
-	t_color	*expected_color = expected;
-	t_color	*result_color = result;
-
-	printf(PURPLE "%2d" RESET " - " RED "[ ✗ ] " RESET
-		"Expected: (%.2lf, %.2lf, %.2lf) "
-		"Result: (%.2lf, %.2lf, %.2lf)\n",
-		num_test,
-		expected_color->r, expected_color->g, expected_color->b,
-		result_color->r, result_color->g, result_color->b
-	);
-}
 
 void	test_color(int num_test)
 {
@@ -46,7 +22,7 @@ void	test_color(int num_test)
 	result = color(-0.5, 0.4, 1.7);
 
 	// ASSERT
-	print_result(num_test, &expected, &result, color_compare, print_ko_color);
+	print_result(num_test, &expected, &result, color_compare_test, print_ko_color);
 }
 
 void	test_color_adding(int num_test)
@@ -61,7 +37,7 @@ void	test_color_adding(int num_test)
 	result = color_add(color1, color2);
 
 	// ASSERT
-	print_result(num_test, &expected, &result, color_compare, print_ko_color);
+	print_result(num_test, &expected, &result, color_compare_test, print_ko_color);
 }
 
 void	test_color_subtracting(int num_test)
@@ -76,7 +52,7 @@ void	test_color_subtracting(int num_test)
 	result = color_subtract(color1, color2);
 
 	// ASSERT
-	print_result(num_test, &expected, &result, color_compare, print_ko_color);
+	print_result(num_test, &expected, &result, color_compare_test, print_ko_color);
 }
 
 void	test_color_multiplying(int num_test)
@@ -90,7 +66,7 @@ void	test_color_multiplying(int num_test)
 	result = color_multiply(color1, 2.0);
 
 	// ASSERT
-	print_result(num_test, &expected, &result, color_compare, print_ko_color);
+	print_result(num_test, &expected, &result, color_compare_test, print_ko_color);
 }
 
 void	test_color_hadamard(int num_test)
@@ -98,14 +74,14 @@ void	test_color_hadamard(int num_test)
 	// ARRANGE
 	t_color	color1 = color(1, 0.2, 0.4);
 	t_color	color2 = color(0.9, 1, 0.1);
-	t_color	expected = color(0.9, 1.2, 0.04);
+	t_color	expected = color(0.9, 0.2, 0.04);
 	t_color	result;
 
 	// ACT
 	result = hadamard_product(color1, color2);
 
 	// ASSERT
-	print_result(num_test, &expected, &result, color_compare, print_ko_color);
+	print_result(num_test, &expected, &result, color_compare_test, print_ko_color);
 }
 
 // void	test_canvas_create(int num_test)

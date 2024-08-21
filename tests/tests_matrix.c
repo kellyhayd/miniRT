@@ -6,69 +6,11 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 20:09:01 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/08/20 21:13:12 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/08/20 21:56:35 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tests.h"
-
-int	test_matrix_compare(void *expected, void *result)
-{
-	t_matrix	*matrix_expected = expected;
-	t_matrix	*matrix_result = result;
-
-	int	i;
-	int	size_all;
-
-	if (matrix_expected->row != matrix_result->row || matrix_expected->column != matrix_result->column)
-		return (0);
-	i = 0;
-	size_all = matrix_expected->row * matrix_expected->column;
-	while (i < size_all)
-	{
-		if (matrix_expected->tab[i] != matrix_result->tab[i])
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-int	test_int_compare(void *expected, void *result)
-{
-	return (*(int *) expected == *(int *) result);
-}
-
-void	print_ko_matrix(int num_test, void *expected, void *result)
-{
-	t_matrix	*matrix_expected = expected;
-	t_matrix	*matrix_result = result;
-
-	int	size_matrix = matrix_expected->row * matrix_result->column;
-
-	printf(PURPLE "%2d" RESET " - " RED "[ ✗ ] " RESET"\nExpected: ( ", num_test);
-	for (int i = 0; i < size_matrix; i++)
-		printf("%.2lf ", matrix_expected->tab[i]);
-	printf(")\n");
-
-	printf("Result:   ( ");
-	for (int i = 0; i < size_matrix; i++)
-		printf("%.2lf ", matrix_result->tab[i]);
-	printf(")\n");
-}
-
-void	print_ko_int(int num_test, void *expected, void *result)
-{
-	int	*expected_int = expected;
-	int	*result_int = result;
-
-	printf(PURPLE "%2d" RESET " - " RED "[ ✗ ] " RESET
-		"Expected: (%d) "
-		"Result: (%d)\n",
-		num_test,
-		*expected_int,
-		*result_int
-	);
-}
 
 void	test_matrix_create(int num_test)
 {
@@ -86,7 +28,7 @@ void	test_matrix_create(int num_test)
 	result = matrix_create(matrix, row_size, column_size);
 
 	// ASSERT
-	print_result(num_test, &expected, &result, test_matrix_compare, print_ko_matrix);
+	print_result(num_test, &expected, &result, matrix_compare_test, print_ko_matrix);
 }
 
 void	test_matrix_compare_true(int num_test)
@@ -110,7 +52,7 @@ void	test_matrix_compare_true(int num_test)
 	result = matrix_compare(matrix1, matrix2);
 
 	// ASSERT
-	print_result(num_test, &expected, &result, test_int_compare, print_ko_int);
+	print_result(num_test, &expected, &result, int_compare_test, print_ko_int);
 }
 
 void	test_matrix_compare_false(int num_test)
@@ -135,7 +77,7 @@ void	test_matrix_compare_false(int num_test)
 	result = matrix_compare(matrix1, matrix2);
 
 	// ASSERT
-	print_result(num_test, &expected, &result, test_int_compare, print_ko_int);
+	print_result(num_test, &expected, &result, int_compare_test, print_ko_int);
 }
 
 void	test_matrix_multiplying(int num_test)
@@ -178,17 +120,43 @@ void	test_matrix_multiplying(int num_test)
 	result = matrix_multiply(matrix1, matrix2);
 
 	// ASSERT
-	print_result(num_test, &expected, &result, test_matrix_compare, print_ko_matrix);
+	print_result(num_test, &expected, &result, matrix_compare_test, print_ko_matrix);
 }
+
+// void	test_matrix_multiplying_tuple(int num_test)
+// {
+// 	// ARRANGE
+// 	double		tab1[] = {
+// 		1, 2, 3, 4,
+// 		2, 4, 4, 2,
+// 		8, 6, 4, 1,
+// 		0, 0, 0, 1
+// 	};
+//
+// 	t_matrix	matrix1 = {
+// 							.tab = tab1,
+// 							.row = 4, .column = 4
+// 	};
+// 	t_tuple		tuple1 = {.x = 1, .y = 2, .z = 3, .w = 1};
+// 	t_tuple		expected = {.x = 18, .y = 24, .z = 33, .w = 1};
+// 	t_tuple		result;
+//
+// 	// ACT
+// 	result = matrix_multiply_tuple(matrix1, tuple1);
+//
+// 	// ASSERT
+// 	print_result(num_test, &expected, &result, matrix_compare_test, print_ko_matrix);
+// }
 
 int	main()
 {
 	void	(*test_funcs[])(int) =
 	{
-		test_matrix_create,
-		test_matrix_compare_true,
-		test_matrix_compare_false,
-		test_matrix_multiplying,
+		test_matrix_create,				// 01
+		test_matrix_compare_true,		// 02
+		test_matrix_compare_false,		// 03
+		test_matrix_multiplying,		// 04
+		// test_matrix_multiplying_tuple,	// 05
 	};
 
 	printf("\n%sTESTING MATRICES:%s\n", YELLOW, RESET);

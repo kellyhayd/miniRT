@@ -6,36 +6,11 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:32:15 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/08/12 01:12:03 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/08/20 21:42:09 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tests.h"
-
-void	print_ko_tuple(int num_test, void *expected, void *result)
-{
-	t_tuple	*expected_tuple = expected;
-	t_tuple	*result_tuple = result;
-
-	printf(PURPLE "%2d" RESET " - " RED "[ ✗ ] " RESET
-		"Expected: (%.2lf, %.2lf, %.2lf, %.2lf) "
-		"Result: (%.2lf, %.2lf, %.2lf, %.2lf)\n",
-		num_test,
-		expected_tuple->x, expected_tuple->y, expected_tuple->z, expected_tuple->w,
-		result_tuple->x, result_tuple->y, result_tuple->z, result_tuple->w
-	);
-}
-
-int	tuple_compare_test(void *expected, void *result)
-{
-	t_tuple	*expected_tuple = expected;
-	t_tuple	*result_tuple = result;
-
-	return (float_compare(expected_tuple->x, result_tuple->x)
-		&& float_compare(expected_tuple->y, result_tuple->y)
-		&& float_compare(expected_tuple->z, result_tuple->z)
-		&& float_compare(expected_tuple->w, result_tuple->w));
-}
 
 void test_tuple_1(int num_test) {
 
