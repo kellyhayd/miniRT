@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 20:09:01 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/08/20 21:56:35 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/08/20 22:03:20 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,12 @@
 void	test_matrix_create(int num_test)
 {
 	// ARRANGE
-	double		matrix[] = {1, 2, 3, 4, 5.5, 6.5, 7.5, 8.5, 9, 10, 11, 12, 13.5, 14.5, 15.5, 16.5};
+	double		matrix[] = {
+		1,    2,    3,    4,
+		5.5,  6.5,  7.5,  8.5,
+		9,    10,   11,   12,
+		13.5, 14.5, 15.5, 16.5
+	};
 	t_matrix	expected = {
 							.tab = matrix,
 							.row = 4, .column = 4
@@ -34,8 +39,18 @@ void	test_matrix_create(int num_test)
 void	test_matrix_compare_true(int num_test)
 {
 	// ARRANGE
-	double		tab1[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2};
-	double		tab2[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2};
+	double		tab1[] = {
+		1, 2, 3, 4,
+		5, 6, 7, 8,
+		9, 8, 7, 6,
+		5, 4, 3, 2
+	};
+	double		tab2[] = {
+		1, 2, 3, 4,
+		5, 6, 7, 8,
+		9, 8, 7, 6,
+		5, 4, 3, 2
+	};
 
 	t_matrix	matrix1 = {
 							.tab = tab1,
@@ -58,9 +73,18 @@ void	test_matrix_compare_true(int num_test)
 void	test_matrix_compare_false(int num_test)
 {
 	// ARRANGE
-	double		tab1[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2};
-	double		tab2[] = {2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2, 1};
-
+	double		tab1[] = {
+		1, 2, 3, 4,
+		5, 6, 7, 8,
+		9, 8, 7, 6,
+		5, 4, 3, 2
+	};
+	double		tab2[] = {
+		2, 3, 4, 5,
+		6, 7, 8, 9,
+		8, 7, 6, 5,
+		4, 3, 2, 1
+	};
 
 	t_matrix	matrix1 = {
 							.tab = tab1,
