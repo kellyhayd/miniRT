@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrix.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 20:03:46 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/08/20 22:37:03 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/08/21 20:12:48 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,6 @@ t_tuple	matrix_multiply_tuple(t_matrix matrix1, t_tuple tuple1)
 
 	if (matrix1.column != 4 || matrix1.row != 4)
 		return ((t_tuple) {.x = 0, .y = 0, .z = 0, .w = 0});
-
 	i = 0;
 	while (i < matrix1.column)
 	{
@@ -124,11 +123,9 @@ t_tuple	matrix_multiply_tuple(t_matrix matrix1, t_tuple tuple1)
 							matrix_get(matrix1, 3, i) * tuple1.w;
 		i++;
 	}
-
 	result.x = values_tuple[0];
 	result.y = values_tuple[1];
 	result.z = values_tuple[2];
 	result.w = values_tuple[3];
-
 	return (result);
 }

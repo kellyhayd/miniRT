@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 20:31:43 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/08/11 16:12:31 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/08/21 20:14:25 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,6 @@ double	vector_dot_product(t_vector vector1, t_vector vector2)
 t_tuple	vector_cross_product(t_vector vector1, t_vector vector2)
 {
 	return (vector(vector1.y * vector2.z - vector1.z * vector2.y,
-		vector1.z * vector2.x - vector1.x * vector2.z,
-		vector1.x * vector2.y - vector1.y * vector2.x));
+			vector1.z * vector2.x - vector1.x * vector2.z,
+			vector1.x * vector2.y - vector1.y * vector2.x));
 }

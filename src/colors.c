@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:05:08 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/08/20 22:39:07 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/08/21 20:15:02 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_color	color_add(t_color color1, t_color color2)
 	return (result);
 }
 
-t_color color_subtract(t_color color1, t_color color2)
+t_color	color_subtract(t_color color1, t_color color2)
 {
 	t_color	result;
 
@@ -37,7 +37,7 @@ t_color color_subtract(t_color color1, t_color color2)
 	return (result);
 }
 
-t_color color_multiply(t_color color1, double scalar)
+t_color	color_multiply(t_color color1, double scalar)
 {
 	t_color	result;
 
