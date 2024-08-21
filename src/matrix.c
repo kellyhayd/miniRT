@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 20:03:46 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/08/19 20:53:33 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/08/20 22:37:03 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,7 @@ t_matrix	matrix_multiply(t_matrix matrix1, t_matrix matrix2)
 	int			j;
 
 	if (matrix1.column != matrix2.column || matrix1.row != matrix2.row)
-	{
-		ft_bzero(&result, sizeof(t_matrix));
-		return (result);
-	}
+		return ((t_matrix) {.column = 0, .row = 0, .tab = NULL});
 	new_tab = malloc(sizeof(double) * matrix1.row * matrix1.column);
 	result.tab = new_tab;
 	result.row = matrix1.row;
@@ -107,4 +104,31 @@ t_matrix	matrix_multiply(t_matrix matrix1, t_matrix matrix2)
 // 			matrix_get(matrix1, 1, 2) * matrix_get(matrix2, 2, 1) +
 // 			matrix_get(matrix1, 2, 2) * matrix_get(matrix2, 2, 2) +
 // 			matrix_get(matrix1, 3, 2) * matrix_get(matrix2, 2, 3);
+}
+
+t_tuple	matrix_multiply_tuple(t_matrix matrix1, t_tuple tuple1)
+{
+	int		i;
+	double	values_tuple[4];
+	t_tuple	result;
+
+	if (matrix1.column != 4 || matrix1.row != 4)
+		return ((t_tuple) {.x = 0, .y = 0, .z = 0, .w = 0});
+
+	i = 0;
+	while (i < matrix1.column)
+	{
+		values_tuple[i] = matrix_get(matrix1, 0, i) * tuple1.x + \
+							matrix_get(matrix1, 1, i) * tuple1.y + \
+							matrix_get(matrix1, 2, i) * tuple1.z + \
+							matrix_get(matrix1, 3, i) * tuple1.w;
+		i++;
+	}
+
+	result.x = values_tuple[0];
+	result.y = values_tuple[1];
+	result.z = values_tuple[2];
+	result.w = values_tuple[3];
+
+	return (result);
 }

@@ -23,7 +23,7 @@ LIBS		= $(LIBMLX)/build/libmlx42.a ${LIBFT}/libft.a -ldl -lglfw -pthread -lm
 BUILD		= build/
 SRC_PATH	= src/
 SRC			= $(shell find src -iname "*.c")
-TEST_FILES	= $(shell find src -iname "*.c" ! -name "main.c") tests/tests_utils.c
+TEST_FILES	= $(shell find src -iname "*.c" ! -name "main.c") tests/tests_utils.c tests/tests_utils_print.c
 
 OBJ			=$(SRC:%.c=$(BUILD)%.o)
 
@@ -64,7 +64,7 @@ test: all
 # 	./test
 
 	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_matrix.c $(LIBS) -o test
-#	./test
+	./test
 
 pit: all
 #	@$(CC) -g3 $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/projectiles.c $(LIBS) -o pit

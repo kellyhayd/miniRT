@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:01:38 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/08/19 20:30:22 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/08/20 22:39:07 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ typedef struct s_matrix
 //                                   tuple                                    //
 // -------------------------------------------------------------------------- //
 
-int			tuple_compare(t_tuple tuple1, t_tuple tuple2);
 t_tuple		tuple(double x, double y, double z, double w);
+int			tuple_compare(t_tuple tuple1, t_tuple tuple2);
 t_tuple		tuple_add(t_tuple tuple1, t_tuple tuple2);
 t_tuple		tuple_subtract(t_tuple tuple1, t_tuple tuple2);
 t_tuple		tuple_negate(t_tuple tuple);
@@ -109,7 +109,7 @@ t_color		color(double r, double g, double b);
 t_color		color_add(t_color color1, t_color color2);
 t_color		color_subtract(t_color color1, t_color color2);
 t_color		color_multiply(t_color color1, double scalar);
-t_color		hadamard_product(t_color color1, t_color color2);
+t_color		color_hadamard(t_color color1, t_color color2);
 
 // -------------------------------------------------------------------------- //
 //                                   canvas                                   //
@@ -126,6 +126,7 @@ int			matrix_compare(t_matrix matrix1, t_matrix matrix2);
 void		matrix_set(t_matrix matrix1, int x, int y, double value);
 double		matrix_get(t_matrix matrix1, int x, int y);
 t_matrix	matrix_multiply(t_matrix matrix1, t_matrix matrix2);
+t_tuple		matrix_multiply_tuple(t_matrix matrix1, t_tuple tuple1);
 
 // -------------------------------------------------------------------------- //
 //                                   utils                                    //

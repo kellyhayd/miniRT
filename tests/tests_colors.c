@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:12:44 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/08/20 21:54:36 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/08/20 22:39:07 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	test_color_hadamard(int num_test)
 	t_color	result;
 
 	// ACT
-	result = hadamard_product(color1, color2);
+	result = color_hadamard(color1, color2);
 
 	// ASSERT
 	print_result(num_test, &expected, &result, color_compare_test, print_ko_color);
