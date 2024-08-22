@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:01:38 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/08/20 22:39:07 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/08/21 22:43:46 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,9 @@ void		matrix_set(t_matrix matrix1, int x, int y, double value);
 double		matrix_get(t_matrix matrix1, int x, int y);
 t_matrix	matrix_multiply(t_matrix matrix1, t_matrix matrix2);
 t_tuple		matrix_multiply_tuple(t_matrix matrix1, t_tuple tuple1);
+t_matrix	matrix_transposing(t_matrix matrix1);
+double		matrix_determinant(t_matrix matrix1);
+t_matrix	matrix_submatrix(t_matrix matrix1, int x, int y);
 
 // -------------------------------------------------------------------------- //
 //                                   utils                                    //

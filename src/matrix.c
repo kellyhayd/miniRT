@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 20:03:46 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/08/21 20:23:33 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/08/21 21:27:509 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,3 +108,107 @@ t_tuple	matrix_multiply_tuple(t_matrix matrix1, t_tuple tuple1)
 	result.w = values_tuple[3];
 	return (result);
 }
+
+t_matrix	matrix_transposing(t_matrix matrix1)
+{
+	int			x;
+	int			y;
+	t_matrix	result;
+
+	result.tab = malloc(sizeof(double) * matrix1.row * matrix1.column);
+	result.column = matrix1.column;
+	result.row = matrix1.row;
+	y = 0;
+	while (y < matrix1.row)
+	{
+		x = 0;
+		while (x < matrix1.column)
+		{
+			matrix_set(result, x, y, matrix_get(matrix1, y, x));
+			x++;
+		}
+		y++;
+	}
+	return (result);
+}
+
+double	matrix_determinant(t_matrix matrix1)
+{
+	double	result;
+
+	if (matrix1.column == 2 && matrix1.row == 2)
+		result = matrix_get(matrix1, 0, 0) * matrix_get(matrix1, 1, 1) -
+				matrix_get(matrix1, 1, 0) * matrix_get(matrix1, 0, 1);
+	else if (matrix1.column == 3 && matrix1.row == 3)
+		result = matrix_get(matrix1, 0, 0) * matrix_get(matrix1, 1, 1) * matrix_get(matrix1, 2, 2) +
+				matrix_get(matrix1, 1, 0) * matrix_get(matrix1, 2, 1) * matrix_get(matrix1, 0, 2) +
+				matrix_get(matrix1, 2, 0) * matrix_get(matrix1, 0, 1) * matrix_get(matrix1, 1, 2) -
+				matrix_get(matrix1, 2, 0) * matrix_get(matrix1, 1, 1) * matrix_get(matrix1, 0, 2) -
+				matrix_get(matrix1, 0, 0) * matrix_get(matrix1, 2, 1) * matrix_get(matrix1, 1, 2) -
+				matrix_get(matrix1, 1, 0) * matrix_get(matrix1, 0, 1) * matrix_get(matrix1, 2, 2);
+	else
+		result = 0;
+
+	return (result);
+}
+
+t_matrix	matrix_submatrix(t_matrix matrix1, int x, int y)
+{
+	int			i_m1;
+	int			j_m1;
+	int			i_res;
+	int			j_res;
+	t_matrix	result;
+
+	result.column = matrix1.column - 1;
+	result.row = matrix1.row - 1;
+	result.tab = malloc(sizeof(double) * result.column * result.row);
+
+	j_m1 = 0;
+	j_res = 0;
+	while (j_m1 < matrix1.row)
+	{
+		i_m1 = 0;
+		i_res = 0;
+		while (i_m1 < matrix1.column)
+		{
+			if (i_m1 != x && j_m1 != y)
+			{
+				matrix_set(result, i_res, j_res, matrix_get(matrix1, i_m1, j_m1));
+				i_res++;
+			}
+			i_m1++;
+		}
+		if (j_m1 != y)
+			j_res++;
+		j_m1++;
+	}
+	return (result);
+}
+
+// 0 0
+
+// 0 1 2
+// 2 3 4
+// 5 6 7
+
+// 3 4
+// 6 7
+
+// 1 1
+
+// 0 1 2
+// 2 3 4
+// 5 6 7
+
+// 0 2
+// 5 7
+
+// 2 2
+
+// 0 1 2
+// 2 3 4
+// 5 6 7
+
+// 0 1
+// 2 3

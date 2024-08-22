@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tests_matrix.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kcha-h <kcha-h@student.42spog.br.f      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 20:09:01 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/08/20 22:49:07 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/08/21 22:03:135 by kcha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,6 +211,170 @@ void	test_matrix_multiplying_identity(int num_test)
 	print_result(num_test, &expected, &result, matrix_compare_test, print_ko_matrix);
 }
 
+void	test_matrix_tranpose(int num_test)
+{
+	// ARRANGE
+	double		tab1[] = {
+		0, 9, 3, 0,
+		9, 8, 0, 8,
+		1, 8, 5, 3,
+		0, 0, 5, 8
+	};
+	double		result_tab[] = {
+		0, 9, 1, 0,
+		9, 8, 8, 0,
+		3, 0, 5, 5,
+		0, 8, 3, 8
+	};
+
+	t_matrix	matrix1 = {
+							.tab = tab1,
+							.row = 4, .column = 4
+	};
+	t_matrix	expected = {
+							.tab = result_tab,
+							.row = 4, .column = 4
+	};
+	t_matrix	result;
+
+	// ACT
+	result = matrix_transposing(matrix1);
+
+	// ASSERT
+	print_result(num_test, &expected, &result, matrix_compare_test, print_ko_matrix);
+}
+
+void	test_matrix_tranpose_identity(int num_test)
+{
+	// ARRANGE
+	double		identity[] = {
+		1, 0, 0, 0,
+		0, 1, 0, 0,
+		0, 0, 1, 0,
+		0, 0, 0, 1
+	};
+
+	t_matrix	matrix_identity = {
+							.tab = identity,
+							.row = 4, .column = 4
+	};
+	t_matrix	expected = matrix_identity;
+	t_matrix	result;
+
+	// ACT
+	result = matrix_transposing(matrix_identity);
+
+	// ASSERT
+	print_result(num_test, &expected, &result, matrix_compare_test, print_ko_matrix);
+}
+
+void	test_matrix_determinant_2x2(int num_test)
+{
+	// ARRANGE
+	double		tab1[] = {
+		1, 5,
+		-3, 2
+	};
+
+	t_matrix	matrix1 = {
+							.tab = tab1,
+							.row = 2, .column = 2
+	};
+	double		expected_determinant = 17;
+	double		result;
+
+	// ACT
+	result = matrix_determinant(matrix1);
+
+	// ASSERT
+	print_result(num_test, &expected_determinant, &result, float_compare_test, print_ko_float);
+}
+
+void	test_matrix_determinant_3x3(int num_test)
+{
+	// ARRANGE
+	double		tab1[] = {
+		 1,  2,  6,
+		-5,  8, -4,
+		 2,  6,  4
+	};
+
+	t_matrix	matrix1 = {
+							.tab = tab1,
+							.row = 3, .column = 3
+	};
+	double		expected_determinant = -196;
+	double		result;
+
+	// ACT
+	result = matrix_determinant(matrix1);
+
+	// ASSERT
+	print_result(num_test, &expected_determinant, &result, float_compare_test, print_ko_float);
+}
+
+void	test_matrix_submatrix_3x3(int num_test)
+{
+	// ARRANGE
+	double		tab1[] = {
+		 1,  5,  0,
+		-3,  2,  7,
+		 0,  6, -3
+	};
+	double		result_tab[] = {
+		-3, 2,
+		0,  6
+	};
+
+	t_matrix	matrix1 = {
+							.tab = tab1,
+							.row = 3, .column = 3
+	};
+	t_matrix	expected = {
+							.tab = result_tab,
+							.row = 2, .column = 2
+	};
+	t_matrix	result;
+
+	// ACT
+	result = matrix_submatrix(matrix1, 2, 0);
+
+	// ASSERT
+	print_result(num_test, &expected, &result, matrix_compare_test, print_ko_matrix);
+}
+
+void	test_matrix_submatrix_4x4(int num_test)
+{
+	// ARRANGE
+	double		tab1[] = {
+		-6,  1,  1,  6,
+		-8,  5,  8,  6,
+		-1,  0,  8,  2,
+		-7,  1, -1,  1
+	};
+	double		result_tab[] = {
+		-6,  1,  6,
+		-8,  8,  6,
+		-7, -1,  1
+	};
+
+	t_matrix	matrix1 = {
+							.tab = tab1,
+							.row = 4, .column = 4
+	};
+	t_matrix	expected = {
+							.tab = result_tab,
+							.row = 3, .column = 3
+	};
+	t_matrix	result;
+
+	// ACT
+	result = matrix_submatrix(matrix1, 1, 2);
+
+	// ASSERT
+	print_result(num_test, &expected, &result, matrix_compare_test, print_ko_matrix);
+}
+
 int	main()
 {
 	void	(*test_funcs[])(int) =
@@ -221,6 +385,12 @@ int	main()
 		test_matrix_multiplying,			// 04
 		test_matrix_multiplying_tuple,		// 05
 		test_matrix_multiplying_identity,	// 06
+		test_matrix_tranpose,				// 07
+		test_matrix_tranpose_identity,		// 08
+		test_matrix_determinant_2x2,		// 09
+		test_matrix_determinant_3x3,		// 10
+		test_matrix_submatrix_3x3,			// 11
+		test_matrix_submatrix_4x4,			// 12
 	};
 
 	printf("\n%sTESTING MATRICES:%s\n", YELLOW, RESET);

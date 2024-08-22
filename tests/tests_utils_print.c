@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 21:41:13 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/08/20 21:54:07 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/08/21 21:31:30 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	print_ko_float(int num_test, void *expected, void *result)
 	double	*expected_double = expected;
 	double	*result_double = result;
 
-	printf(PURPLE "%d" RESET " - " RED "[ ✗ ] " RESET
+	printf(PURPLE "%2d" RESET " - " RED "[ ✗ ] " RESET
 		"Expected: (%.2lf) "
 		"Result: (%.2lf)\n",
 		num_test,
