@@ -148,7 +148,6 @@ double	matrix_determinant(t_matrix matrix1)
 				matrix_get(matrix1, 1, 0) * matrix_get(matrix1, 0, 1) * matrix_get(matrix1, 2, 2);
 	else
 		result = 0;
-
 	return (result);
 }
 
@@ -163,7 +162,6 @@ t_matrix	matrix_submatrix(t_matrix matrix1, int x, int y)
 	result.cols = matrix1.cols - 1;
 	result.rows = matrix1.rows - 1;
 	result.tab = malloc(sizeof(double) * result.cols * result.rows);
-
 	j_m1 = 0;
 	j_res = 0;
 	while (j_m1 < matrix1.rows)
@@ -184,4 +182,14 @@ t_matrix	matrix_submatrix(t_matrix matrix1, int x, int y)
 		j_m1++;
 	}
 	return (result);
+}
+
+double	matrix_minor(t_matrix matrix1, int x, int j)
+{
+	t_matrix	sub_matrix;
+	double		minor;
+
+	sub_matrix = matrix_submatrix(matrix1, x, j);
+	minor = matrix_determinant(sub_matrix);
+	return (minor);
 }

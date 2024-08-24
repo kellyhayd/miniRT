@@ -211,7 +211,7 @@ void	test_matrix_multiplying_identity(int num_test)
 	print_result(num_test, &expected, &result, matrix_compare_test, print_ko_matrix);
 }
 
-void	test_matrix_tranpose(int num_test)
+void	test_matrix_transpose(int num_test)
 {
 	// ARRANGE
 	double		tab1[] = {
@@ -244,7 +244,7 @@ void	test_matrix_tranpose(int num_test)
 	print_result(num_test, &expected, &result, matrix_compare_test, print_ko_matrix);
 }
 
-void	test_matrix_tranpose_identity(int num_test)
+void	test_matrix_transpose_identity(int num_test)
 {
 	// ARRANGE
 	double		identity[] = {
@@ -375,6 +375,28 @@ void	test_matrix_submatrix_4x4(int num_test)
 	print_result(num_test, &expected, &result, matrix_compare_test, print_ko_matrix);
 }
 
+void	test_matrix_minor(int num_test)
+{
+	// ARRANGE
+	double		tab1[] = {
+		3,  5,  0,
+		2, -1, -7,
+		6,  -1,  5,
+	};
+	t_matrix	matrix1 = {
+							.tab = tab1,
+							.rows = 3, .cols = 3
+	};
+	double		expected_minor = 25;
+	double		result;
+
+	// ACT
+	result = matrix_minor(matrix1, 0, 1);
+
+	// ASSERT
+	print_result(num_test, &expected_minor, &result, float_compare_test, print_ko_float);
+}
+
 int	main()
 {
 	void	(*test_funcs[])(int) =
@@ -385,12 +407,13 @@ int	main()
 		test_matrix_multiplying,			// 04
 		test_matrix_multiplying_tuple,		// 05
 		test_matrix_multiplying_identity,	// 06
-		test_matrix_tranpose,				// 07
-		test_matrix_tranpose_identity,		// 08
+		test_matrix_transpose,				// 07
+		test_matrix_transpose_identity,		// 08
 		test_matrix_determinant_2x2,		// 09
 		test_matrix_determinant_3x3,		// 10
 		test_matrix_submatrix_3x3,			// 11
 		test_matrix_submatrix_4x4,			// 12
+		test_matrix_minor,					// 13
 	};
 
 	printf("\n%sTESTING MATRICES:%s\n", YELLOW, RESET);
