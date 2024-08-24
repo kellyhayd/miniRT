@@ -135,19 +135,30 @@ t_matrix	matrix_transposing(t_matrix matrix1)
 double	matrix_determinant(t_matrix matrix1)
 {
 	double	result;
+	int		col;
 
+	col = 0;
+	result = 0;
 	if (matrix1.cols == 2 && matrix1.rows == 2)
 		result = matrix_get(matrix1, 0, 0) * matrix_get(matrix1, 1, 1) -
 				matrix_get(matrix1, 1, 0) * matrix_get(matrix1, 0, 1);
-	else if (matrix1.cols == 3 && matrix1.rows == 3)
-		result = matrix_get(matrix1, 0, 0) * matrix_get(matrix1, 1, 1) * matrix_get(matrix1, 2, 2) +
-				matrix_get(matrix1, 1, 0) * matrix_get(matrix1, 2, 1) * matrix_get(matrix1, 0, 2) +
-				matrix_get(matrix1, 2, 0) * matrix_get(matrix1, 0, 1) * matrix_get(matrix1, 1, 2) -
-				matrix_get(matrix1, 2, 0) * matrix_get(matrix1, 1, 1) * matrix_get(matrix1, 0, 2) -
-				matrix_get(matrix1, 0, 0) * matrix_get(matrix1, 2, 1) * matrix_get(matrix1, 1, 2) -
-				matrix_get(matrix1, 1, 0) * matrix_get(matrix1, 0, 1) * matrix_get(matrix1, 2, 2);
 	else
-		result = 0;
+	{
+		while (col < matrix1.cols)
+		{
+			result += matrix_get(matrix1, 0, col) * matrix_cofactor(matrix1, 0, col);
+			col++;
+		}
+	}
+	// else if (matrix1.cols == 3 && matrix1.rows == 3)
+	// 	result = matrix_get(matrix1, 0, 0) * matrix_get(matrix1, 1, 1) * matrix_get(matrix1, 2, 2) +
+	// 			matrix_get(matrix1, 1, 0) * matrix_get(matrix1, 2, 1) * matrix_get(matrix1, 0, 2) +
+	// 			matrix_get(matrix1, 2, 0) * matrix_get(matrix1, 0, 1) * matrix_get(matrix1, 1, 2) -
+	// 			matrix_get(matrix1, 2, 0) * matrix_get(matrix1, 1, 1) * matrix_get(matrix1, 0, 2) -
+	// 			matrix_get(matrix1, 0, 0) * matrix_get(matrix1, 2, 1) * matrix_get(matrix1, 1, 2) -
+	// 			matrix_get(matrix1, 1, 0) * matrix_get(matrix1, 0, 1) * matrix_get(matrix1, 2, 2);
+	// else
+	// 	result = 0;
 	return (result);
 }
 

@@ -313,6 +313,30 @@ void	test_matrix_determinant_3x3(int num_test)
 	print_result(num_test, &expected, &result, float_compare_test, print_ko_float);
 }
 
+void	test_matrix_determinant_4x4(int num_test)
+{
+	// ARRANGE
+	double		tab1[] = {
+		-2, -8,  3,  5,
+		-3,  1,  7,  3,
+		 1,  2, -9,  6,
+		-6,  7,  7, -9
+	};
+
+	t_matrix	matrix1 = {
+							.tab = tab1,
+							.rows = 4, .cols = 4
+	};
+	double		expected = -4071;
+	double		result;
+
+	// ACT
+	result = matrix_determinant(matrix1);
+
+	// ASSERT
+	print_result(num_test, &expected, &result, float_compare_test, print_ko_float);
+}
+
 void	test_matrix_submatrix_3x3(int num_test)
 {
 	// ARRANGE
@@ -455,11 +479,12 @@ int	main()
 		test_matrix_transpose_identity,		// 08
 		test_matrix_determinant_2x2,		// 09
 		test_matrix_determinant_3x3,		// 10
-		test_matrix_submatrix_3x3,			// 11
-		test_matrix_submatrix_4x4,			// 12
-		test_matrix_minor,					// 13
-		test_matrix_cofactor_not_negate,	// 14
-		test_matrix_cofactor_negate,		// 15
+		test_matrix_determinant_4x4,		// 11
+		test_matrix_submatrix_3x3,			// 12
+		test_matrix_submatrix_4x4,			// 13
+		test_matrix_minor,					// 14
+		test_matrix_cofactor_not_negate,	// 15
+		test_matrix_cofactor_negate,		// 16
 	};
 
 	printf("\n%sTESTING MATRICES:%s\n", YELLOW, RESET);
