@@ -193,3 +193,16 @@ double	matrix_minor(t_matrix matrix1, int x, int j)
 	minor = matrix_determinant(sub_matrix);
 	return (minor);
 }
+
+double	matrix_cofactor(t_matrix matrix, int x, int y)
+{
+	double	minor;
+	double	cofactor;
+
+	minor = matrix_minor(matrix, x, y);
+	if ((x + y) % 2 != 0)
+		cofactor = -minor;
+	else
+		cofactor = minor;
+	return (cofactor);
+}

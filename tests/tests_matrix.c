@@ -280,14 +280,14 @@ void	test_matrix_determinant_2x2(int num_test)
 							.tab = tab1,
 							.rows = 2, .cols = 2
 	};
-	double		expected_determinant = 17;
+	double		expected = 17;
 	double		result;
 
 	// ACT
 	result = matrix_determinant(matrix1);
 
 	// ASSERT
-	print_result(num_test, &expected_determinant, &result, float_compare_test, print_ko_float);
+	print_result(num_test, &expected, &result, float_compare_test, print_ko_float);
 }
 
 void	test_matrix_determinant_3x3(int num_test)
@@ -303,14 +303,14 @@ void	test_matrix_determinant_3x3(int num_test)
 							.tab = tab1,
 							.rows = 3, .cols = 3
 	};
-	double		expected_determinant = -196;
+	double		expected = -196;
 	double		result;
 
 	// ACT
 	result = matrix_determinant(matrix1);
 
 	// ASSERT
-	print_result(num_test, &expected_determinant, &result, float_compare_test, print_ko_float);
+	print_result(num_test, &expected, &result, float_compare_test, print_ko_float);
 }
 
 void	test_matrix_submatrix_3x3(int num_test)
@@ -387,14 +387,58 @@ void	test_matrix_minor(int num_test)
 							.tab = tab1,
 							.rows = 3, .cols = 3
 	};
-	double		expected_minor = 25;
+	double		expected = 25;
 	double		result;
 
 	// ACT
 	result = matrix_minor(matrix1, 0, 1);
 
 	// ASSERT
-	print_result(num_test, &expected_minor, &result, float_compare_test, print_ko_float);
+	print_result(num_test, &expected, &result, float_compare_test, print_ko_float);
+}
+
+void	test_matrix_cofactor_not_negate(int num_test)
+{
+	// ARRANGE
+	double		tab1[] = {
+		3,  5,  0,
+		2, -1, -7,
+		6,  -1,  5,
+	};
+	t_matrix	matrix1 = {
+							.tab = tab1,
+							.rows = 3, .cols = 3
+	};
+	double		expected = -12;
+	double		result;
+
+	// ACT
+	result = matrix_cofactor(matrix1, 0, 0);
+
+	// ASSERT
+	print_result(num_test, &expected, &result, float_compare_test, print_ko_float);
+}
+
+void	test_matrix_cofactor_negate(int num_test)
+{
+	// ARRANGE
+	double		tab1[] = {
+		3,  5,  0,
+		2, -1, -7,
+		6,  -1,  5,
+	};
+	t_matrix	matrix1 = {
+							.tab = tab1,
+							.rows = 3, .cols = 3
+	};
+	double		expected = -25;
+	double		result;
+
+	// ACT
+	result = matrix_cofactor(matrix1, 0, 1);
+
+	// ASSERT
+	print_result(num_test, &expected, &result, float_compare_test, print_ko_float);
 }
 
 int	main()
@@ -414,6 +458,8 @@ int	main()
 		test_matrix_submatrix_3x3,			// 11
 		test_matrix_submatrix_4x4,			// 12
 		test_matrix_minor,					// 13
+		test_matrix_cofactor_not_negate,	// 14
+		test_matrix_cofactor_negate,		// 15
 	};
 
 	printf("\n%sTESTING MATRICES:%s\n", YELLOW, RESET);
