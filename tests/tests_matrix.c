@@ -23,7 +23,7 @@ void	test_matrix_create(int num_test)
 	};
 	t_matrix	expected = {
 							.tab = matrix,
-							.row = 4, .column = 4
+							.rows = 4, .cols = 4
 	};
 	t_matrix	result;
 	int			row_size = 4;
@@ -54,11 +54,11 @@ void	test_matrix_compare_true(int num_test)
 
 	t_matrix	matrix1 = {
 							.tab = tab1,
-							.row = 4, .column = 4
+							.rows = 4, .cols = 4
 	};
 	t_matrix	matrix2 = {
 							.tab = tab2,
-							.row = 4, .column = 4
+							.rows = 4, .cols = 4
 	};
 	int			result;
 	int			expected = 1;
@@ -88,11 +88,11 @@ void	test_matrix_compare_false(int num_test)
 
 	t_matrix	matrix1 = {
 							.tab = tab1,
-							.row = 4, .column = 4
+							.rows = 4, .cols = 4
 	};
 	t_matrix	matrix2 = {
 							.tab = tab2,
-							.row = 4, .column = 4
+							.rows = 4, .cols = 4
 	};
 	int			result;
 	int			expected = 0;
@@ -128,15 +128,15 @@ void	test_matrix_multiplying(int num_test)
 
 	t_matrix	matrix1 = {
 							.tab = tab1,
-							.row = 4, .column = 4
+							.rows = 4, .cols = 4
 	};
 	t_matrix	matrix2 = {
 							.tab = tab2,
-							.row = 4, .column = 4
+							.rows = 4, .cols = 4
 	};
 	t_matrix	expected = {
 							.tab = result_tab,
-							.row = 4, .column = 4
+							.rows = 4, .cols = 4
 	};
 	t_matrix	result;
 
@@ -159,7 +159,7 @@ void	test_matrix_multiplying_tuple(int num_test)
 
 	t_matrix	matrix1 = {
 							.tab = tab1,
-							.row = 4, .column = 4
+							.rows = 4, .cols = 4
 	};
 	t_tuple		tuple1 = {
 		.x = 1, .y = 2, .z = 3, .w = 1
@@ -195,11 +195,11 @@ void	test_matrix_multiplying_identity(int num_test)
 
 	t_matrix	matrix1 = {
 							.tab = tab1,
-							.row = 4, .column = 4
+							.rows = 4, .cols = 4
 	};
 	t_matrix	matrix_identity = {
 							.tab = identity,
-							.row = 4, .column = 4
+							.rows = 4, .cols = 4
 	};
 	t_matrix	expected = matrix1;
 	t_matrix	result;
@@ -229,11 +229,11 @@ void	test_matrix_tranpose(int num_test)
 
 	t_matrix	matrix1 = {
 							.tab = tab1,
-							.row = 4, .column = 4
+							.rows = 4, .cols = 4
 	};
 	t_matrix	expected = {
 							.tab = result_tab,
-							.row = 4, .column = 4
+							.rows = 4, .cols = 4
 	};
 	t_matrix	result;
 
@@ -256,7 +256,7 @@ void	test_matrix_tranpose_identity(int num_test)
 
 	t_matrix	matrix_identity = {
 							.tab = identity,
-							.row = 4, .column = 4
+							.rows = 4, .cols = 4
 	};
 	t_matrix	expected = matrix_identity;
 	t_matrix	result;
@@ -278,7 +278,7 @@ void	test_matrix_determinant_2x2(int num_test)
 
 	t_matrix	matrix1 = {
 							.tab = tab1,
-							.row = 2, .column = 2
+							.rows = 2, .cols = 2
 	};
 	double		expected_determinant = 17;
 	double		result;
@@ -301,7 +301,7 @@ void	test_matrix_determinant_3x3(int num_test)
 
 	t_matrix	matrix1 = {
 							.tab = tab1,
-							.row = 3, .column = 3
+							.rows = 3, .cols = 3
 	};
 	double		expected_determinant = -196;
 	double		result;
@@ -328,11 +328,11 @@ void	test_matrix_submatrix_3x3(int num_test)
 
 	t_matrix	matrix1 = {
 							.tab = tab1,
-							.row = 3, .column = 3
+							.rows = 3, .cols = 3
 	};
 	t_matrix	expected = {
 							.tab = result_tab,
-							.row = 2, .column = 2
+							.rows = 2, .cols = 2
 	};
 	t_matrix	result;
 
@@ -360,11 +360,11 @@ void	test_matrix_submatrix_4x4(int num_test)
 
 	t_matrix	matrix1 = {
 							.tab = tab1,
-							.row = 4, .column = 4
+							.rows = 4, .cols = 4
 	};
 	t_matrix	expected = {
 							.tab = result_tab,
-							.row = 3, .column = 3
+							.rows = 3, .cols = 3
 	};
 	t_matrix	result;
 

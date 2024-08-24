@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tests_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:18:05 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/08/20 21:51:38 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/08/24 17:43:15 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ int	matrix_compare_test(void *expected, void *result)
 	int	i;
 	int	size_all;
 
-	if (matrix_expected->row != matrix_result->row || matrix_expected->column != matrix_result->column)
+	if (matrix_expected->rows != matrix_result->rows || matrix_expected->cols != matrix_result->cols)
 		return (0);
 	i = 0;
-	size_all = matrix_expected->row * matrix_expected->column;
+	size_all = matrix_expected->rows * matrix_expected->cols;
 	while (i < size_all)
 	{
 		if (matrix_expected->tab[i] != matrix_result->tab[i])

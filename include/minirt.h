@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:01:38 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/08/21 22:46:48 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/08/24 17:43:15 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ typedef struct s_color
 typedef struct s_matrix
 {
 	double	*tab;
-	int		row;
-	int		column;
+	int		rows;
+	int		cols;
 }	t_matrix;
 
 
@@ -121,7 +121,7 @@ void		write_pixel(mlx_image_t *image, int x, int y, int color);
 //                                   matrix                                   //
 // -------------------------------------------------------------------------- //
 
-t_matrix	matrix_create(double *tab, int row, int column);
+t_matrix	matrix_create(double *tab, int rows, int cols);
 int			matrix_compare(t_matrix matrix1, t_matrix matrix2);
 void		matrix_set(t_matrix matrix1, int x, int y, double value);
 double		matrix_get(t_matrix matrix1, int x, int y);

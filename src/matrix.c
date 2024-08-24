@@ -12,15 +12,15 @@
 
 #include "minirt.h"
 
-t_matrix	matrix_create(double *tab, int row, int column)
+t_matrix	matrix_create(double *tab, int rows, int cols)
 {
 	double		*new_tab;
 	t_matrix	matrix;
 
-	new_tab = malloc(row * column * sizeof(double));
-	ft_memcpy(new_tab, tab, row * column * sizeof(double));
-	matrix.row = row;
-	matrix.column = column;
+	new_tab = malloc(rows * cols * sizeof(double));
+	ft_memcpy(new_tab, tab, rows * cols * sizeof(double));
+	matrix.rows = rows;
+	matrix.cols = cols;
 	matrix.tab = new_tab;
 	return (matrix);
 }
@@ -30,10 +30,10 @@ int	matrix_compare(t_matrix matrix1, t_matrix matrix2)
 	int	i;
 	int	size_all;
 
-	if (matrix1.row != matrix2.row || matrix1.column != matrix2.column)
+	if (matrix1.rows != matrix2.rows || matrix1.cols != matrix2.cols)
 		return (0);
 	i = 0;
-	size_all = matrix1.row * matrix1.column;
+	size_all = matrix1.rows * matrix1.cols;
 	while (i < size_all)
 	{
 		if (matrix1.tab[i] != matrix2.tab[i])
@@ -50,7 +50,7 @@ double	multiply_element(t_matrix matrix1, t_matrix matrix2, int i, int j)
 
 	idx = 0;
 	value = 0;
-	while (idx < matrix1.column)
+	while (idx < matrix1.cols)
 	{
 		value += matrix_get(matrix1, idx, j) * matrix_get(matrix2, i, idx);
 		idx++;
@@ -65,17 +65,17 @@ t_matrix	matrix_multiply(t_matrix matrix1, t_matrix matrix2)
 	int			i;
 	int			j;
 
-	if (matrix1.column != matrix2.column || matrix1.row != matrix2.row)
-		return ((t_matrix){.column = 0, .row = 0, .tab = NULL});
-	new_tab = malloc(sizeof(double) * matrix1.row * matrix1.column);
+	if (matrix1.cols != matrix2.cols || matrix1.rows != matrix2.rows)
+		return ((t_matrix){.cols = 0, .rows = 0, .tab = NULL});
+	new_tab = malloc(sizeof(double) * matrix1.rows * matrix1.cols);
 	result.tab = new_tab;
-	result.row = matrix1.row;
-	result.column = matrix1.column;
+	result.rows = matrix1.rows;
+	result.cols = matrix1.cols;
 	j = 0;
-	while (j < matrix1.row)
+	while (j < matrix1.rows)
 	{
 		i = 0;
-		while (i < matrix1.column)
+		while (i < matrix1.cols)
 		{
 			matrix_set(result, i, j, multiply_element(matrix1, matrix2, i, j));
 			i++;
@@ -91,10 +91,10 @@ t_tuple	matrix_multiply_tuple(t_matrix matrix1, t_tuple tuple1)
 	double	values_tuple[4];
 	t_tuple	result;
 
-	if (matrix1.column != 4 || matrix1.row != 4)
+	if (matrix1.cols != 4 || matrix1.rows != 4)
 		return ((t_tuple){.x = 0, .y = 0, .z = 0, .w = 0});
 	i = 0;
-	while (i < matrix1.column)
+	while (i < matrix1.cols)
 	{
 		values_tuple[i] = matrix_get(matrix1, 0, i) * tuple1.x + \
 							matrix_get(matrix1, 1, i) * tuple1.y + \
@@ -115,14 +115,14 @@ t_matrix	matrix_transposing(t_matrix matrix1)
 	int			y;
 	t_matrix	result;
 
-	result.tab = malloc(sizeof(double) * matrix1.row * matrix1.column);
-	result.column = matrix1.column;
-	result.row = matrix1.row;
+	result.tab = malloc(sizeof(double) * matrix1.rows * matrix1.cols);
+	result.cols = matrix1.cols;
+	result.rows = matrix1.rows;
 	y = 0;
-	while (y < matrix1.row)
+	while (y < matrix1.rows)
 	{
 		x = 0;
-		while (x < matrix1.column)
+		while (x < matrix1.cols)
 		{
 			matrix_set(result, x, y, matrix_get(matrix1, y, x));
 			x++;
@@ -136,10 +136,10 @@ double	matrix_determinant(t_matrix matrix1)
 {
 	double	result;
 
-	if (matrix1.column == 2 && matrix1.row == 2)
+	if (matrix1.cols == 2 && matrix1.rows == 2)
 		result = matrix_get(matrix1, 0, 0) * matrix_get(matrix1, 1, 1) -
 				matrix_get(matrix1, 1, 0) * matrix_get(matrix1, 0, 1);
-	else if (matrix1.column == 3 && matrix1.row == 3)
+	else if (matrix1.cols == 3 && matrix1.rows == 3)
 		result = matrix_get(matrix1, 0, 0) * matrix_get(matrix1, 1, 1) * matrix_get(matrix1, 2, 2) +
 				matrix_get(matrix1, 1, 0) * matrix_get(matrix1, 2, 1) * matrix_get(matrix1, 0, 2) +
 				matrix_get(matrix1, 2, 0) * matrix_get(matrix1, 0, 1) * matrix_get(matrix1, 1, 2) -
@@ -160,17 +160,17 @@ t_matrix	matrix_submatrix(t_matrix matrix1, int x, int y)
 	int			j_res;
 	t_matrix	result;
 
-	result.column = matrix1.column - 1;
-	result.row = matrix1.row - 1;
-	result.tab = malloc(sizeof(double) * result.column * result.row);
+	result.cols = matrix1.cols - 1;
+	result.rows = matrix1.rows - 1;
+	result.tab = malloc(sizeof(double) * result.cols * result.rows);
 
 	j_m1 = 0;
 	j_res = 0;
-	while (j_m1 < matrix1.row)
+	while (j_m1 < matrix1.rows)
 	{
 		i_m1 = 0;
 		i_res = 0;
-		while (i_m1 < matrix1.column)
+		while (i_m1 < matrix1.cols)
 		{
 			if (i_m1 != x && j_m1 != y)
 			{

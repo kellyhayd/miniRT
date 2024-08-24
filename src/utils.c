@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 21:45:10 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/08/19 20:41:41 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/08/24 17:43:15 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ double	matrix_get(t_matrix matrix1, int x, int y)
 {
 	double	result;
 
-	result = matrix1.tab[x + (y * matrix1.column)];
+	result = matrix1.tab[x + (y * matrix1.cols)];
 	return (result);
 }
 
 void	matrix_set(t_matrix matrix1, int x, int y, double value)
 {
-	matrix1.tab[x + (y * matrix1.column)] = value;
+	matrix1.tab[x + (y * matrix1.cols)] = value;
 }

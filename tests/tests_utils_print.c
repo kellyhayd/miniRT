@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tests_utils_print.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 21:41:13 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/08/21 21:31:30 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/08/24 17:43:15 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	print_ko_matrix(int num_test, void *expected, void *result)
 	t_matrix	*matrix_expected = expected;
 	t_matrix	*matrix_result = result;
 
-	int	size_matrix = matrix_expected->row * matrix_result->column;
+	int	size_matrix = matrix_expected->rows * matrix_result->cols;
 
 	printf(PURPLE "%2d" RESET " - " RED "[ ✗ ] " RESET"\nExpected: ( ", num_test);
 	for (int i = 0; i < size_matrix; i++)
