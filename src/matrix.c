@@ -85,21 +85,21 @@ t_matrix	matrix_multiply(t_matrix matrix1, t_matrix matrix2)
 	return (result);
 }
 
-t_tuple	matrix_multiply_tuple(t_matrix matrix1, t_tuple tuple1)
+t_tuple	matrix_multiply_tuple(t_matrix matrix, t_tuple tuple1)
 {
 	int		i;
 	double	values_tuple[4];
 	t_tuple	result;
 
-	if (matrix1.cols != 4 || matrix1.rows != 4)
+	if (matrix.cols != 4 || matrix.rows != 4)
 		return ((t_tuple){.x = 0, .y = 0, .z = 0, .w = 0});
 	i = 0;
-	while (i < matrix1.cols)
+	while (i < matrix.cols)
 	{
-		values_tuple[i] = matrix_get(matrix1, 0, i) * tuple1.x + \
-							matrix_get(matrix1, 1, i) * tuple1.y + \
-							matrix_get(matrix1, 2, i) * tuple1.z + \
-							matrix_get(matrix1, 3, i) * tuple1.w;
+		values_tuple[i] = matrix_get(matrix, 0, i) * tuple1.x + \
+							matrix_get(matrix, 1, i) * tuple1.y + \
+							matrix_get(matrix, 2, i) * tuple1.z + \
+							matrix_get(matrix, 3, i) * tuple1.w;
 		i++;
 	}
 	result.x = values_tuple[0];
@@ -109,22 +109,22 @@ t_tuple	matrix_multiply_tuple(t_matrix matrix1, t_tuple tuple1)
 	return (result);
 }
 
-t_matrix	matrix_transposing(t_matrix matrix1)
+t_matrix	matrix_transposing(t_matrix matrix)
 {
 	int			x;
 	int			y;
 	t_matrix	result;
 
-	result.tab = malloc(sizeof(double) * matrix1.rows * matrix1.cols);
-	result.cols = matrix1.cols;
-	result.rows = matrix1.rows;
+	result.tab = malloc(sizeof(double) * matrix.rows * matrix.cols);
+	result.cols = matrix.cols;
+	result.rows = matrix.rows;
 	y = 0;
-	while (y < matrix1.rows)
+	while (y < matrix.rows)
 	{
 		x = 0;
-		while (x < matrix1.cols)
+		while (x < matrix.cols)
 		{
-			matrix_set(result, x, y, matrix_get(matrix1, y, x));
+			matrix_set(result, x, y, matrix_get(matrix, y, x));
 			x++;
 		}
 		y++;
@@ -132,37 +132,28 @@ t_matrix	matrix_transposing(t_matrix matrix1)
 	return (result);
 }
 
-double	matrix_determinant(t_matrix matrix1)
+double	matrix_determinant(t_matrix matrix)
 {
 	double	result;
 	int		col;
 
 	col = 0;
 	result = 0;
-	if (matrix1.cols == 2 && matrix1.rows == 2)
-		result = matrix_get(matrix1, 0, 0) * matrix_get(matrix1, 1, 1) -
-				matrix_get(matrix1, 1, 0) * matrix_get(matrix1, 0, 1);
+	if (matrix.cols == 2 && matrix.rows == 2)
+		result = matrix_get(matrix, 0, 0) * matrix_get(matrix, 1, 1) -
+				matrix_get(matrix, 1, 0) * matrix_get(matrix, 0, 1);
 	else
 	{
-		while (col < matrix1.cols)
+		while (col < matrix.cols)
 		{
-			result += matrix_get(matrix1, 0, col) * matrix_cofactor(matrix1, 0, col);
+			result += matrix_get(matrix, 0, col) * matrix_cofactor(matrix, 0, col);
 			col++;
 		}
 	}
-	// else if (matrix1.cols == 3 && matrix1.rows == 3)
-	// 	result = matrix_get(matrix1, 0, 0) * matrix_get(matrix1, 1, 1) * matrix_get(matrix1, 2, 2) +
-	// 			matrix_get(matrix1, 1, 0) * matrix_get(matrix1, 2, 1) * matrix_get(matrix1, 0, 2) +
-	// 			matrix_get(matrix1, 2, 0) * matrix_get(matrix1, 0, 1) * matrix_get(matrix1, 1, 2) -
-	// 			matrix_get(matrix1, 2, 0) * matrix_get(matrix1, 1, 1) * matrix_get(matrix1, 0, 2) -
-	// 			matrix_get(matrix1, 0, 0) * matrix_get(matrix1, 2, 1) * matrix_get(matrix1, 1, 2) -
-	// 			matrix_get(matrix1, 1, 0) * matrix_get(matrix1, 0, 1) * matrix_get(matrix1, 2, 2);
-	// else
-	// 	result = 0;
 	return (result);
 }
 
-t_matrix	matrix_submatrix(t_matrix matrix1, int x, int y)
+t_matrix	matrix_submatrix(t_matrix matrix, int x, int y)
 {
 	int			i_m1;
 	int			j_m1;
@@ -170,20 +161,20 @@ t_matrix	matrix_submatrix(t_matrix matrix1, int x, int y)
 	int			j_res;
 	t_matrix	result;
 
-	result.cols = matrix1.cols - 1;
-	result.rows = matrix1.rows - 1;
+	result.cols = matrix.cols - 1;
+	result.rows = matrix.rows - 1;
 	result.tab = malloc(sizeof(double) * result.cols * result.rows);
 	j_m1 = 0;
 	j_res = 0;
-	while (j_m1 < matrix1.rows)
+	while (j_m1 < matrix.rows)
 	{
 		i_m1 = 0;
 		i_res = 0;
-		while (i_m1 < matrix1.cols)
+		while (i_m1 < matrix.cols)
 		{
 			if (i_m1 != x && j_m1 != y)
 			{
-				matrix_set(result, i_res, j_res, matrix_get(matrix1, i_m1, j_m1));
+				matrix_set(result, i_res, j_res, matrix_get(matrix, i_m1, j_m1));
 				i_res++;
 			}
 			i_m1++;
@@ -195,12 +186,12 @@ t_matrix	matrix_submatrix(t_matrix matrix1, int x, int y)
 	return (result);
 }
 
-double	matrix_minor(t_matrix matrix1, int x, int j)
+double	matrix_minor(t_matrix matrix, int x, int j)
 {
 	t_matrix	sub_matrix;
 	double		minor;
 
-	sub_matrix = matrix_submatrix(matrix1, x, j);
+	sub_matrix = matrix_submatrix(matrix, x, j);
 	minor = matrix_determinant(sub_matrix);
 	return (minor);
 }
@@ -216,4 +207,31 @@ double	matrix_cofactor(t_matrix matrix, int x, int y)
 	else
 		cofactor = minor;
 	return (cofactor);
+}
+t_matrix	matrix_inverse(t_matrix matrix)
+{
+	int			i;
+	int			j;
+	double		cofactor;
+	double		determinant;
+	t_matrix	result;
+
+	result.cols = matrix.cols;
+	result.rows = matrix.rows;
+	result.tab = malloc(sizeof(double) * result.cols * result.rows);
+	determinant = matrix_determinant(matrix);
+	if (determinant == 0)
+		return (result);
+	cofactor = 0;
+	j = -1;
+	while (++j < result.rows)
+	{
+		i = -1;
+		while (++i < result.cols)
+		{
+			cofactor = matrix_cofactor(matrix, i, j);
+			matrix_set(result, j, i, cofactor / determinant);
+		}
+	}
+	return (result);
 }

@@ -465,6 +465,40 @@ void	test_matrix_cofactor_negate(int num_test)
 	print_result(num_test, &expected, &result, float_compare_test, print_ko_float);
 }
 
+void	test_matrix_inverse_01(int num_test)
+{
+	// ARRANGE
+	double		tab1[] = {
+		-5,  2,  6, -8,
+		 1, -5,  1,  8,
+		 7,  7, -6, -7,
+		 1, -3,  7,  4
+	};
+	double		result_tab[] = {
+		 0.21805,  0.45113,  0.24060, -0.04511,
+		-0.80827, -1.45677, -0.44361,  0.52068,
+		-0.07895, -0.22368, -0.05263,  0.19737,
+		-0.52256, -0.81391, -0.30075,  0.30639
+	};
+
+	t_matrix	matrix = {
+							.tab = tab1,
+							.rows = 4, .cols = 4
+	};
+	t_matrix	expected = {
+							.tab = result_tab,
+							.rows = 4, .cols = 4
+	};
+	t_matrix	result;
+
+	// ACT
+	result = matrix_inverse(matrix);
+
+	// ASSERT
+	print_result(num_test, &expected, &result, matrix_compare_test, print_ko_matrix);
+}
+
+
 int	main()
 {
 	void	(*test_funcs[])(int) =
@@ -485,6 +519,7 @@ int	main()
 		test_matrix_minor,					// 14
 		test_matrix_cofactor_not_negate,	// 15
 		test_matrix_cofactor_negate,		// 16
+		test_matrix_inverse_01,				// 17
 	};
 
 	printf("\n%sTESTING MATRICES:%s\n", YELLOW, RESET);

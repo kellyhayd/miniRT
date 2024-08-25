@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:01:38 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/08/24 20:04:01 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/08/24 20:47:57 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ double		matrix_determinant(t_matrix matrix1);
 t_matrix	matrix_submatrix(t_matrix matrix1, int x, int y);
 double		matrix_minor(t_matrix matrix1, int x, int j);
 double		matrix_cofactor(t_matrix matrix, int x, int y);
+t_matrix	matrix_inverse(t_matrix matrix);
 
 // -------------------------------------------------------------------------- //
 //                                   utils                                    //
