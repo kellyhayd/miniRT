@@ -231,3 +231,17 @@ t_matrix	matrix_inverse(t_matrix matrix)
 	}
 	return (result);
 }
+
+t_matrix	matrix_identity(void)
+{
+	t_matrix	res;
+
+	res.cols = 4;
+	res.rows = 4;
+	res.tab = ft_calloc(4 * 4, sizeof(double));
+	matrix_set(res, 0, 0, 1);
+	matrix_set(res, 1, 1, 1);
+	matrix_set(res, 2, 2, 1);
+	matrix_set(res, 3, 3, 1);
+	return (res);
+}
