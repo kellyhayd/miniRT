@@ -14,13 +14,13 @@
 # define MINIRT_H
 
 # define RESET  "\001\033[0m\002"
-# define R      "\001\033[1;31m\002"
-# define G      "\001\033[1;32m\002"
-# define Y      "\001\033[1;33m\002"
-# define B      "\001\033[1;34m\002"
-# define M      "\001\033[1;35m\002"
-# define C      "\001\033[1;36m\002"
-# define W      "\001\033[1;37m\002"
+// # define R      "\001\033[1;31m\002"
+// # define G      "\001\033[1;32m\002"
+// # define B      "\001\033[1;34m\002"
+// # define C      "\001\033[1;36m\002"
+// # define M      "\001\033[1;35m\002"
+// # define Y      "\001\033[1;33m\002"
+// # define W      "\001\033[1;37m\002"
 # define ORANGE "\001\033[38;5;208m\002"
 # define BLUE   "\001\033[38;5;27m\002"
 # define GREEN  "\001\033[38;5;46m\002"
@@ -135,9 +135,13 @@ double		matrix_cofactor(t_matrix matrix, int x, int y);
 t_matrix	matrix_inverse(t_matrix matrix);
 t_matrix	matrix_identity(void);
 
-// translations
+// transformation
 t_matrix	matrix_translation(double x, double y, double z);
 t_matrix	matrix_scaling(double x, double y, double z);
+t_matrix	matrix_rotation_x(double radians);
+t_matrix	matrix_rotation_y(double radians);
+t_matrix	matrix_rotation_z(double radians);
+t_matrix	matrix_shearing(double *prop_x, double *prop_y, double *prop_z);
 
 // -------------------------------------------------------------------------- //
 //                                   utils                                    //
