@@ -173,10 +173,7 @@ t_matrix	matrix_submatrix(t_matrix matrix, int x, int y)
 		while (i_m1 < matrix.cols)
 		{
 			if (i_m1 != x && j_m1 != y)
-			{
-				matrix_set(result, i_res, j_res, matrix_get(matrix, i_m1, j_m1));
-				i_res++;
-			}
+				matrix_set(result, i_res++, j_res, matrix_get(matrix, i_m1, j_m1));
 			i_m1++;
 		}
 		if (j_m1 != y)

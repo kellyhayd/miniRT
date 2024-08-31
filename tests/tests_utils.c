@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:18:05 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/08/24 17:43:15 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/08/31 13:14:09 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	matrix_compare_test(void *expected, void *result)
 	size_all = matrix_expected->rows * matrix_expected->cols;
 	while (i < size_all)
 	{
-		if (matrix_expected->tab[i] != matrix_result->tab[i])
+		if (!float_compare(matrix_expected->tab[i], matrix_result->tab[i]))
 			return (0);
 		i++;
 	}

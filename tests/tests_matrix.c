@@ -498,7 +498,6 @@ void	test_matrix_inverse_01(int num_test)
 	print_result(num_test, &expected, &result, matrix_compare_test, print_ko_matrix);
 }
 
-
 int	main()
 {
 	void	(*test_funcs[])(int) =
