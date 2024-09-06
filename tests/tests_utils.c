@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tests_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:18:05 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/08/31 13:14:09 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/05 22:53:56 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,36 @@ int	matrix_compare_test(void *expected, void *result)
 	while (i < size_all)
 	{
 		if (!float_compare(matrix_expected->tab[i], matrix_result->tab[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int	ray_compare_test(void *expected, void *result)
+{
+	t_ray	*ray_expected = expected;
+	t_ray	*ray_result = result;
+	
+	if (tuple_compare_test(&ray_expected->origin, &ray_result->origin)
+		&& tuple_compare_test(&ray_expected->direction, &ray_result->direction))
+		return (1);
+	return (0);
+}
+
+int	hit_compare_test(void *expected, void *result)
+{
+	t_hit	*hit_expected = expected;
+	t_hit	*hit_result = result;
+	int		i;
+	
+	if (hit_expected->count != hit_result->count)
+		return (0);
+	
+	i = 0;
+	while (i < hit_result->count)
+	{
+		if (float_compare_test(&hit_expected->t[i], &hit_result->t[i]) == 0)
 			return (0);
 		i++;
 	}

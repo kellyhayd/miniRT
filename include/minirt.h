@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:01:38 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/08/31 13:57:00 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/05 22:32:22 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,23 @@ typedef struct s_matrix
 	int		cols;
 }	t_matrix;
 
+typedef struct s_ray
+{
+	t_point		origin;
+	t_vector	direction;
+}	t_ray;
+
+typedef struct s_hit
+{
+	int		count;
+	double	t[2];
+}	t_hit;
+
+typedef struct s_sphere
+{
+	t_point	origin;
+	double	radius;
+}	t_sphere;
 
 // -------------------------------------------------------------------------- //
 //                                   tuple                                    //
@@ -142,6 +159,13 @@ t_matrix	matrix_rotation_x(double radians);
 t_matrix	matrix_rotation_y(double radians);
 t_matrix	matrix_rotation_z(double radians);
 t_matrix	matrix_shearing(double *prop_x, double *prop_y, double *prop_z);
+
+// ray
+t_ray		ray(t_point origin, t_vector direction);
+t_point		position(t_ray r, double t);
+
+// sphere
+t_sphere	sphere(void);
 
 // -------------------------------------------------------------------------- //
 //                                   utils                                    //

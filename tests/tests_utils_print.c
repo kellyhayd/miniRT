@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tests_utils_print.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 21:41:13 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/08/24 20:59:43 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/05 22:48:24 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,53 @@ void	print_ko_matrix(int num_test, void *expected, void *result)
 	printf("Result:   ( ");
 	for (int i = 0; i < size_matrix; i++)
 		printf("%.2lf ", matrix_result->tab[i]);
+	printf(")\n");
+}
+
+void	print_ko_ray(int num_test, void *expected, void *result)
+{
+	t_ray	*ray_expected;
+	t_ray	*ray_result;
+	
+	printf(PURPLE "%2d" RESET " - " RED "[ ✗ ] " RESET
+		"Expected: origin (%.2lf, %.2lf, %.2lf, %.2lf) direction (%.2lf, %.2lf, %.2lf, %.2lf)\n"
+		"Result: origin (%.2lf, %.2lf, %.2lf, %.2lf) direction (%.2lf, %.2lf, %.2lf, %.2lf)\n",
+		num_test,
+		ray_expected->origin.x, ray_expected->origin.y, ray_expected->origin.z, ray_expected->origin.w,
+		ray_expected->direction.x, ray_expected->direction.y, ray_expected->direction.z, ray_expected->direction.w,
+		ray_result->origin.x, ray_result->origin.y, ray_result->origin.z, ray_result->origin.w,
+		ray_result->direction.x, ray_result->direction.y, ray_result->direction.z, ray_result->direction.w
+	);
+}
+
+void	print_ko_hit(int num_test, void *expected, void *result)
+{
+	t_hit	*hit_expected = expected;
+	t_hit	*hit_result = result;
+	
+	int		i;	
+	
+	printf(PURPLE "%2d" RESET " - " RED "[ ✗ ] " RESET
+		"Expected: count (%d) hits (",
+		num_test, hit_expected->count
+	);
+	
+	i = 0;
+	while (i < hit_expected->count)
+	{
+		printf("%.2lf ", hit_expected->t[i]);
+		i++;
+	}
+	printf(") ");
+	
+	
+	printf("Result: count (%d) hits (", hit_expected->count);
+	
+	i = 0;
+	while (i < hit_result->count)
+	{
+		printf("%.2lf ", hit_result->t[i]);
+		i++;
+	}
 	printf(")\n");
 }

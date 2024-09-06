@@ -66,7 +66,10 @@ test: all
 #	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_matrix.c $(LIBS) -o test
 #	./test
 
-	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_transformation.c $(LIBS) -o test
+#	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_transformation.c $(LIBS) -o test
+#	./test
+
+	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_ray_intersection.c $(LIBS) -o test
 	./test
 
 pit: all

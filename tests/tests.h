@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 23:44:58 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/08/20 21:52:02 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/09/05 22:48:51 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int	int_compare_test(void *expected, void *result);
 int	tuple_compare_test(void *expected, void *result);
 int	color_compare_test(void *expected, void *result);
 int	matrix_compare_test(void *expected, void *result);
+int	ray_compare_test(void *expected, void *result);
+int	hit_compare_test(void *expected, void *result);
 
 
 // Prints
@@ -46,5 +48,7 @@ void	print_ko_int(int num_test, void *expected, void *result);
 void	print_ko_tuple(int num_test, void *expected, void *result);
 void	print_ko_color(int num_test, void *expected, void *result);
 void	print_ko_matrix(int num_test, void *expected, void *result);
+void	print_ko_ray(int num_test, void *expected, void *result);
+void	print_ko_hit(int num_test, void *expected, void *result);
 
 #endif
