@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 20:39:46 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/07 19:35:16 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/07 19:53:01 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,53 +21,3 @@ t_point	position(t_ray r, double t)
 {
 	return (tuple_add(tuple_multiply(r.direction, t), r.origin));
 }
-
-t_hit	intersect(t_sphere s, t_ray r)
-{
-	t_vector	sphere_to_ray;
-	double		discriminant;
-	t_hit		x;
-	double		a;
-	double		b;
-	double		c;
-
-	sphere_to_ray = tuple_subtract(r.origin, s.origin);
-	a = vector_dot_product(r.direction, r.direction);
-	b = 2 * vector_dot_product(r.direction, sphere_to_ray);
-	c = vector_dot_product(sphere_to_ray, sphere_to_ray) - 1;
-	discriminant = pow(b, 2) - 4 * a * c;
-	if (discriminant < 0)
-		return ((t_hit){0});
-	x.t[0] = (-b - sqrt(discriminant)) / (2 * a);
-	x.t[1] = (-b + sqrt(discriminant)) / (2 * a);
-	x.count = 2;
-	return (x);
-}
-
-// int intersect(Sphere sphere, Ray ray, float *t1, float *t2) {
-//     Vector sphere_to_ray;
-//     sphere_to_ray.x = ray.origin.x - sphere.origin.x;
-//     sphere_to_ray.y = ray.origin.y - sphere.origin.y;
-//     sphere_to_ray.z = ray.origin.z - sphere.origin.z;
-//
-//     float a = ray.direction.x * ray.direction.x +
-//               ray.direction.y * ray.direction.y +
-//               ray.direction.z * ray.direction.z;
-//     float b = 2 * (ray.direction.x * sphere_to_ray.x +
-//                    ray.direction.y * sphere_to_ray.y +
-//                    ray.direction.z * sphere_to_ray.z);
-//     float c = (sphere_to_ray.x * sphere_to_ray.x +
-//                sphere_to_ray.y * sphere_to_ray.y +
-//                sphere_to_ray.z * sphere_to_ray.z) -
-//                sphere.radius * sphere.radius;
-//
-//     float discriminant = b * b - 4 * a * c;
-//
-//     if (discriminant < 0) {
-//         return 0;  // Sem interseção
-//     }
-//
-//     *t1 = (-b - sqrt(discriminant)) / (2 * a);
-//     *t2 = (-b + sqrt(discriminant)) / (2 * a);
-//     return 1;  // Há interseções
-// }
