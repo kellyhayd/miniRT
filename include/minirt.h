@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:01:38 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/05 22:32:22 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/09/07 19:33:04 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,17 @@
 
 # define EPSILON 0.00001
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <math.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <math.h>
 
-#include "libft.h"
-#include "MLX42/MLX42.h"
+# include "libft.h"
+# include "MLX42/MLX42.h"
 
-typedef struct s_tuple t_tuple;
-typedef struct s_tuple t_point;
-typedef struct s_tuple t_vector;
+typedef struct s_tuple	t_tuple;
+typedef struct s_tuple	t_point;
+typedef struct s_tuple	t_vector;
 
 struct s_tuple
 {
@@ -166,6 +166,9 @@ t_point		position(t_ray r, double t);
 
 // sphere
 t_sphere	sphere(void);
+
+// intersection
+t_hit		intersect(t_sphere s, t_ray r);
 
 // -------------------------------------------------------------------------- //
 //                                   utils                                    //
