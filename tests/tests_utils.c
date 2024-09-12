@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:18:05 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/05 22:53:56 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/09/11 23:59:55 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	ray_compare_test(void *expected, void *result)
 {
 	t_ray	*ray_expected = expected;
 	t_ray	*ray_result = result;
-	
+
 	if (tuple_compare_test(&ray_expected->origin, &ray_result->origin)
 		&& tuple_compare_test(&ray_expected->direction, &ray_result->direction))
 		return (1);
@@ -82,17 +82,19 @@ int	hit_compare_test(void *expected, void *result)
 {
 	t_hit	*hit_expected = expected;
 	t_hit	*hit_result = result;
-	int		i;
-	
-	if (hit_expected->count != hit_result->count)
-		return (0);
-	
-	i = 0;
-	while (i < hit_result->count)
+	t_hit	*aux_expected;
+	t_hit	*aux_result;
+
+	if (!hit_expected || hit_result)
+		return (hit_expected == hit_result);
+
+	aux_expected = hit_expected;
+	aux_result = hit_result;
+	while (aux_expected && aux_result && float_compare_test(&aux_expected->t, &aux_result->t))
 	{
-		if (float_compare_test(&hit_expected->t[i], &hit_result->t[i]) == 0)
-			return (0);
-		i++;
+		aux_expected = aux_expected->next;
+		aux_result = aux_result->next;
 	}
-	return (1);
+
+	return (!aux_expected && !aux_result);
 }

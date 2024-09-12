@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:01:38 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/07 19:33:04 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/12 00:03:36 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,10 @@ typedef struct s_tuple	t_tuple;
 typedef struct s_tuple	t_point;
 typedef struct s_tuple	t_vector;
 
+typedef struct s_hit	t_hit;
+typedef struct s_shape	t_shape;
+typedef struct s_sphere	t_sphere;
+
 struct s_tuple
 {
 	double	x;
@@ -78,17 +82,28 @@ typedef struct s_ray
 	t_vector	direction;
 }	t_ray;
 
-typedef struct s_hit
-{
-	int		count;
-	double	t[2];
-}	t_hit;
-
 typedef struct s_sphere
 {
 	t_point	origin;
 	double	radius;
 }	t_sphere;
+
+typedef struct s_shape
+{
+	union
+	{
+		t_sphere	sphere_shape;
+		// t_plane		plane_shape;
+		// t_cylinder	cylinder_shape;
+	};
+}	t_shape;
+
+struct s_hit
+{
+	double	t;
+	t_shape	object;
+	t_hit	*next;
+};
 
 // -------------------------------------------------------------------------- //
 //                                   tuple                                    //
@@ -168,7 +183,8 @@ t_point		position(t_ray r, double t);
 t_sphere	sphere(void);
 
 // intersection
-t_hit		intersect(t_sphere s, t_ray r);
+t_hit		*intersect(t_shape s, t_ray r);
+int			intersection_count(t_hit *hit_list)
 
 // -------------------------------------------------------------------------- //
 //                                   utils                                    //

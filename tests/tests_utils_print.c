@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 21:41:13 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/05 22:48:24 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/09/12 00:04:40 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	print_ko_ray(int num_test, void *expected, void *result)
 {
 	t_ray	*ray_expected;
 	t_ray	*ray_result;
-	
+
 	printf(PURPLE "%2d" RESET " - " RED "[ ✗ ] " RESET
 		"Expected: origin (%.2lf, %.2lf, %.2lf, %.2lf) direction (%.2lf, %.2lf, %.2lf, %.2lf)\n"
 		"Result: origin (%.2lf, %.2lf, %.2lf, %.2lf) direction (%.2lf, %.2lf, %.2lf, %.2lf)\n",
@@ -122,14 +122,13 @@ void	print_ko_hit(int num_test, void *expected, void *result)
 {
 	t_hit	*hit_expected = expected;
 	t_hit	*hit_result = result;
-	
-	int		i;	
-	
+
+
 	printf(PURPLE "%2d" RESET " - " RED "[ ✗ ] " RESET
 		"Expected: count (%d) hits (",
-		num_test, hit_expected->count
+		num_test, intersection_count(expected)
 	);
-	
+
 	i = 0;
 	while (i < hit_expected->count)
 	{
@@ -137,10 +136,10 @@ void	print_ko_hit(int num_test, void *expected, void *result)
 		i++;
 	}
 	printf(") ");
-	
-	
+
+
 	printf("Result: count (%d) hits (", hit_expected->count);
-	
+
 	i = 0;
 	while (i < hit_result->count)
 	{
