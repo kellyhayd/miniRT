@@ -58,7 +58,7 @@ void	test_a_ray_intersects_a_sphere_at_two_points(int num_test)
 	t_ray		r = ray(point(0, 0, -5), vector(0, 0, 1));
 	t_shape		s = {.sphere_shape = sphere()};
 	t_hit		*expected;
-	t_hit		*result;
+	t_hit		*result = NULL;
 	int			xs_count_expected = 2;
 	int			xs_count_result;
 
@@ -71,77 +71,136 @@ void	test_a_ray_intersects_a_sphere_at_two_points(int num_test)
 	expected->next->next = NULL;
 
 	// ACT
-	result = intersect(s, r);
+	intersect(&result, s, r);
 	xs_count_result = intersection_count(result);
 
 	// ASSERT
 	print_result(num_test, &xs_count_expected, &xs_count_result, int_compare_test, print_ko_int);
-	print_result(num_test, &expected, &result, hit_compare_test, print_ko_hit);
+	print_result(num_test, expected, result, hit_compare_test, print_ko_hit);
 
 	// CLEAR
 	hit_clear_list(&expected);
 	hit_clear_list(&result);
 }
 
-// void	test_a_ray_intersects_a_sphere_at_a_tangent(int num_test)
-// {
-// 	// ARRANGE
-// 	t_ray		r = ray(point(0, 1, -5), vector(0, 0, 1));
-// 	t_sphere	s = sphere();
-// 	t_hit		expected = {.count = 2, {5, 5}};
-// 	t_hit		result;
-//
-// 	// ACT
-// 	result = intersect(s, r);
-//
-// 	// ASSERT
-// 	print_result(num_test, &expected, &result, hit_compare_test, print_ko_hit);
-// }
-//
-// void	test_a_ray_misses_a_sphere(int num_test)
-// {
-// 	// ARRANGE
-// 	t_ray		r = ray(point(0, 2, -5), vector(0, 0, 1));
-// 	t_sphere	s = sphere();
-// 	t_hit		expected = {.count = 0};
-// 	t_hit		result;
-//
-// 	// ACT
-// 	result = intersect(s, r);
-//
-// 	// ASSERT
-// 	print_result(num_test, &expected, &result, hit_compare_test, print_ko_hit);
-// }
-//
-// void	test_a_ray_originates_inside_a_sphere(int num_test)
-// {
-// 	// ARRANGE
-// 	t_ray		r = ray(point(0, 0, 0), vector(0, 0, 1));
-// 	t_sphere	s = sphere();
-// 	t_hit		expected = {.count = 2, {-1, 1}};
-// 	t_hit		result;
-//
-// 	// ACT
-// 	result = intersect(s, r);
-//
-// 	// ASSERT
-// 	print_result(num_test, &expected, &result, hit_compare_test, print_ko_hit);
-// }
-//
-// void	test_a_sphere_is_behind_a_ray(int num_test)
-// {
-// 	// ARRANGE
-// 	t_ray		r = ray(point(0, 0, 5), vector(0, 0, 1));
-// 	t_sphere	s = sphere();
-// 	t_hit		expected = {.count = 2, {-6, -4}};
-// 	t_hit		result;
-//
-// 	// ACT
-// 	result = intersect(s, r);
-//
-// 	// ASSERT
-// 	print_result(num_test, &expected, &result, hit_compare_test, print_ko_hit);
-// }
+void	test_a_ray_intersects_a_sphere_at_a_tangent(int num_test)
+{
+	// ARRANGE
+	t_ray		r = ray(point(0, 1, -5), vector(0, 0, 1));
+	t_shape		s = {.sphere_shape = sphere()};
+	t_hit		*expected;
+	t_hit		*result = NULL;
+	int			xs_count_expected = 2;
+	int			xs_count_result;
+
+	expected = malloc(sizeof(t_hit));
+	expected->t = 5.0;
+	expected->object = s;
+
+	expected->next = malloc(sizeof(t_hit));
+	expected->next->t = 5.0;
+	expected->next->object = s;
+	expected->next->next = NULL;
+
+	// ACT
+	intersect(&result, s, r);
+	xs_count_result = intersection_count(result);
+
+	// ASSERT
+	print_result(num_test, &xs_count_expected, &xs_count_result, int_compare_test, print_ko_int);
+	print_result(num_test, expected, result, hit_compare_test, print_ko_hit);
+
+	// CLEAR
+	hit_clear_list(&expected);
+	hit_clear_list(&result);
+}
+
+void	test_a_ray_misses_a_sphere(int num_test)
+{
+	// ARRANGE
+	t_ray		r = ray(point(0, 0, -5), vector(0, 1, 0));
+	t_shape		s = {.sphere_shape = sphere()};
+	t_hit		*expected = NULL;
+	t_hit		*result = NULL;
+	int			xs_count_expected = 0;
+	int			xs_count_result;
+
+	// ACT
+	intersect(&result, s, r);
+	xs_count_result = intersection_count(result);
+
+	// ASSERT
+	print_result(num_test, &xs_count_expected, &xs_count_result, int_compare_test, print_ko_int);
+	print_result(num_test, expected, result, hit_compare_test, print_ko_hit);
+
+	// CLEAR
+	hit_clear_list(&expected);
+	hit_clear_list(&result);
+}
+
+void	test_a_ray_originates_inside_a_sphere(int num_test)
+{
+	// ARRANGE
+	t_ray		r = ray(point(0, 0, 0), vector(0, 0, 1));
+	t_shape		s = {.sphere_shape = sphere()};
+	t_hit		*expected;
+	t_hit		*result = NULL;
+	int			xs_count_expected = 2;
+	int			xs_count_result;
+
+	expected = malloc(sizeof(t_hit));
+	expected->t = -1.0;
+	expected->object = s;
+
+	expected->next = malloc(sizeof(t_hit));
+	expected->next->t = 1.0;
+	expected->next->object = s;
+	expected->next->next = NULL;
+
+	// ACT
+	intersect(&result, s, r);
+	xs_count_result = intersection_count(result);
+
+	// ASSERT
+	print_result(num_test, &xs_count_expected, &xs_count_result, int_compare_test, print_ko_int);
+	print_result(num_test, expected, result, hit_compare_test, print_ko_hit);
+
+	// CLEAR
+	hit_clear_list(&expected);
+	hit_clear_list(&result);
+}
+
+void	test_a_sphere_is_behind_a_ray(int num_test)
+{
+	// ARRANGE
+	t_ray		r = ray(point(0, 0, 5), vector(0, 0, 1));
+	t_shape		s = {.sphere_shape = sphere()};
+	t_hit		*expected;
+	t_hit		*result = NULL;
+	int			xs_count_expected = 2;
+	int			xs_count_result;
+
+	expected = malloc(sizeof(t_hit));
+	expected->t = -6.0;
+	expected->object = s;
+
+	expected->next = malloc(sizeof(t_hit));
+	expected->next->t = -4.0;
+	expected->next->object = s;
+	expected->next->next = NULL;
+
+	// ACT
+	intersect(&result, s, r);
+	xs_count_result = intersection_count(result);
+
+	// ASSERT
+	print_result(num_test, &xs_count_expected, &xs_count_result, int_compare_test, print_ko_int);
+	print_result(num_test, expected, result, hit_compare_test, print_ko_hit);
+
+	// CLEAR
+	hit_clear_list(&expected);
+	hit_clear_list(&result);
+}
 
 int	main()
 {
@@ -150,13 +209,13 @@ int	main()
 		test_creating_and_querying_a_ray,				// 01
 		test_computing_a_point_from_a_distance,			// 02
 		test_a_ray_intersects_a_sphere_at_two_points,	// 03
-		// test_a_ray_intersects_a_sphere_at_a_tangent,	// 04
-		// test_a_ray_misses_a_sphere,						// 05
-		// test_a_ray_originates_inside_a_sphere,			// 06
-		// test_a_sphere_is_behind_a_ray,					// 07
+		test_a_ray_intersects_a_sphere_at_a_tangent,	// 04
+		test_a_ray_misses_a_sphere,						// 05
+		test_a_ray_originates_inside_a_sphere,			// 06
+		test_a_sphere_is_behind_a_ray,					// 07
 	};
 
-	printf("\n%sTESTING TUPLES:%s\n", YELLOW, RESET);
+	printf("\n%sTESTING INTERSECTIONS:%s\n", YELLOW, RESET);
 
 	for (int i = 0; i < sizeof(test_funcs) / sizeof(test_funcs[0]); i++) {
 		test_funcs[i](i + 1);

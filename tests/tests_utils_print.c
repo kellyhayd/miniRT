@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 21:41:13 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/12 00:04:40 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/09/13 15:05:56 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,12 +93,12 @@ void	print_ko_matrix(int num_test, void *expected, void *result)
 
 	printf(PURPLE "%2d" RESET " - " RED "[ ✗ ] " RESET"\nExpected: ( ", num_test);
 	for (int i = 0; i < size_matrix; i++)
-		printf("%.2lf ", matrix_expected->tab[i]);
+		printf("%.2lf%s", matrix_expected->tab[i], i + 1 < size_matrix ? " " : "");
 	printf(")\n");
 
 	printf("Result:   ( ");
 	for (int i = 0; i < size_matrix; i++)
-		printf("%.2lf ", matrix_result->tab[i]);
+		printf("%.2lf%s", matrix_result->tab[i], i + 1 < size_matrix ? " " : "");
 	printf(")\n");
 }
 
@@ -122,29 +122,31 @@ void	print_ko_hit(int num_test, void *expected, void *result)
 {
 	t_hit	*hit_expected = expected;
 	t_hit	*hit_result = result;
-
+	t_hit	*aux;
 
 	printf(PURPLE "%2d" RESET " - " RED "[ ✗ ] " RESET
 		"Expected: count (%d) hits (",
 		num_test, intersection_count(expected)
 	);
 
-	i = 0;
-	while (i < hit_expected->count)
+	aux = hit_expected;
+	while (aux)
 	{
-		printf("%.2lf ", hit_expected->t[i]);
-		i++;
+		printf("%.2lf%s", aux->t, aux->next ? " " : "");
+		aux = aux->next;
 	}
 	printf(") ");
 
 
-	printf("Result: count (%d) hits (", hit_expected->count);
+	printf("Result: count (%d) hits (",
+		intersection_count(hit_result)
+	);
 
-	i = 0;
-	while (i < hit_result->count)
+	aux = hit_result;
+	while (aux)
 	{
-		printf("%.2lf ", hit_result->t[i]);
-		i++;
+		printf("%.2lf%s", aux->t, aux->next ? " " : "");
+		aux = aux->next;
 	}
 	printf(")\n");
 }

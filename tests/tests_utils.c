@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:18:05 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/11 23:59:55 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/09/13 13:58:17 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	hit_compare_test(void *expected, void *result)
 	t_hit	*aux_expected;
 	t_hit	*aux_result;
 
-	if (!hit_expected || hit_result)
+	if (!hit_expected || !hit_result)
 		return (hit_expected == hit_result);
 
 	aux_expected = hit_expected;

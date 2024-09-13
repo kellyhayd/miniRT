@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 19:52:47 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/12 00:04:17 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/09/13 15:21:41 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,15 @@ int	intersection_count(t_hit *hit_list)
 	return (count);
 }
 
+void	hit_clear_list(t_hit **hit_list)
+{
+	if (hit_list && *hit_list)
+	{
+		hit_clear_list(&((*hit_list)->next));
+		free(*hit_list);
+		*hit_list = NULL;
+	}
+}
 ////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -88,12 +97,7 @@ void	intersect_sphere(t_hit **hit_list, t_shape s, t_ray r)
 	add_intersection(hit_list, intersection((-b + sqrt(discriminant)) / (2 * a), s));
 }
 
-t_hit	*intersect(t_shape s, t_ray r)
+void	intersect(t_hit **hit_list, t_shape s, t_ray r)
 {
-	t_hit		*x;
-
-	x = NULL;
-	intersect_sphere(&x, s, r);
-
-	return (x);
+	intersect_sphere(hit_list, s, r);
 }
