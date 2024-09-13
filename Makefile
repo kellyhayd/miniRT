@@ -3,58 +3,77 @@
 NAME			= miniRT
 .DEFAULT_GOAL	= all
 .PHONY:			all clean fclean re libft libmlx
-.SILENT:
+# .SILENT:
 
 #----------------------------------------------- Colors
 CYAN	= \033[0;36m
 PURPLE	= \033[0;35m
 GREEN	= \033[0;32m
+RED		= \033[0;31m
+BLUE	= \033[0;34m
+YELLOW	= \033[0;33m
 RESET	= \033[0m
 
 #----------------------------------------------- Compilation
 CC		:= cc
-CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast
+FLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast -g3
 
 #----------------------------------------------- Sources
-LIBMLX		= ./lib/MLX42
-LIBFT		= ./lib/libft
-HEADERS		= -I ./include -I $(LIBMLX)/include -I $(LIBFT)/include
-LIBS		= $(LIBMLX)/build/libmlx42.a ${LIBFT}/libft.a -ldl -lglfw -pthread -lm
-BUILD		= build/
-SRC_PATH	= src/
-SRC			= $(shell find src -iname "*.c")
-TEST_FILES	= $(shell find src -iname "*.c" ! -name "main.c") tests/tests_utils.c tests/tests_utils_print.c
+LIBFT_FOLDER	= lib/libft
+LIBMLX_FOLDER	= lib/MLX42
 
-OBJ			=$(SRC:%.c=$(BUILD)%.o)
+HEADERS			= -I include \
+					-I $(LIBMLX_FOLDER)/include \
+					-I $(LIBFT_FOLDER)/include
+
+LIBFT			= $(LIBFT_FOLDER)/libft.a
+LIBMLX			= $(LIBMLX_FOLDER)/build/libmlx42.a
+LIBS			= $(LIBMLX) $(LIBFT) -ldl -lglfw -pthread -lm
+
+BUILD			= build
+SRC_PATH		= src
+
+SRC				= $(shell find src -iname "*.c")
+OBJ				= $(SRC:$(SRC_PATH)/%.c=$(BUILD)/%.o)
+
+TEST_FILES		= $(shell find src -iname "*.c" ! -name "main.c") \
+					tests/tests_utils.c \
+					tests/tests_utils_print.c
 
 #----------------------------------------------- Rules
-all: libft libmlx $(NAME)
+all: $(NAME)
 
-libft:
-	$(MAKE) -C ./lib/libft
-	@echo "$(GREEN)LIBFT is ready!$(RESET)"
+$(LIBFT):
+	@$(MAKE) -C $(LIBFT_FOLDER)
+	@echo "$(GREEN)LIBFT $(BLUE)is ready!$(RESET)"
 
-libmlx:
-	@cmake $(LIBMLX) -B $(LIBMLX)/build > /dev/null
-	@make -C $(LIBMLX)/build -j4 > /dev/null
-	@echo "$(GREEN)LIBMLX is ready!$(RESET)"
+$(LIBMLX):
+	@cmake $(LIBMLX_FOLDER) -B $(LIBMLX_FOLDER)/build
+	@make -C $(LIBMLX_FOLDER)/build -j4
+	@echo "$(GREEN)LIBMLX $(BLUE)is ready!$(RESET)"
 
-$(NAME): $(OBJ)
-	@echo "$(PURPLE)Compiling miniRT...$(RESET)"
-	@$(CC) $(OBJ) $(LIBS) $(HEADERS) -o $(NAME)
-	@echo "$(GREEN)Done! Let's go! $(RESET)"
+$(BUILD):
+	@mkdir -p $(BUILD)
 
-$(BUILD)%.o: %.c
-	mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) $(HEADERS) -c $< -o $@
+$(BUILD)/%.o: $(SRC_PATH)/%.c
+	@echo "$(CYAN)Compiling $(GREEN)$(notdir $<)$(RESET)"
+	@$(CC) $(FLAGS) $(HEADERS) -c $< -o $@
+
+$(NAME): $(LIBFT) $(LIBMLX) $(BUILD) $(OBJ)
+	@echo "$(PURPLE)Compiling $(YELLOW)miniRT$(PURPLE)...$(RESET)"
+	@$(CC) $(FLAGS) $(HEADERS) $(OBJ) $(LIBS) -o $(NAME)
+	@echo "$(GREEN)Done! Let's go!$(RESET)"
 
 clean:
-	rm -rf $(BUILD)
+	@echo "$(RED)Removing objects...$(RESET)"
+	@rm -rf $(BUILD)
 
 fclean: clean
-	rm -rf $(NAME)
-	rm -rf test
-	rm -rf pit
+	@make -C $(LIBFT_FOLDER) fclean
+	@rm -rf $(LIBMLX_FOLDER)/build
+	@rm -rf $(NAME)
+	@rm -rf test
+	@rm -rf pit
 
 test: all
 # 	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_tuples.c $(LIBS) -o test

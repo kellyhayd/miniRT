@@ -6,15 +6,20 @@
 #    By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/10 19:29:07 by danbarbo          #+#    #+#              #
-#    Updated: 2024/08/06 20:04:23 by danbarbo         ###   ########.fr        #
+#    Updated: 2024/09/13 13:35:16 by danbarbo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= libft.a
 CC		= cc
-FLAGS	= -Wall -Wextra -Werror -c
+FLAGS	= -Wall -Wextra -Werror
 INCLUDE	= include
-.SILENT:
+# .SILENT:
+
+CYAN	= \033[0;36m
+RED		= \033[0;31m
+GREEN	= \033[0;32m
+RESET	= \033[0m
 
 SRC	= ${addprefix src/, \
 			ft_atoi.c \
@@ -65,23 +70,23 @@ SRC	= ${addprefix src/, \
 OBJ	= ${SRC:src/%.c=obj/%.o}
 
 all: ${NAME}
+
 ${NAME}: ${OBJ}
 	@ar rcs ${NAME} ${OBJ}
 
 obj/%.o: src/%.c
 	@mkdir -p obj
-	@${CC} ${FLAGS} -I ${INCLUDE} $< -o $@
-	@printf "Compiling ${notdir $@}\n"
+	@${CC} ${FLAGS} -I ${INCLUDE} -c $< -o $@
+	@printf "$(CYAN)Compiling $(GREEN)${notdir $<}$(RESET)\n"
 
 clean:
 	@rm -rf obj
-	@printf "Deleting object files\n"
+	@printf "$(RED)Deleting object files$(RESET)\n"
 
 fclean: clean
 	@rm -f ${NAME}
-	@printf "Deleting ${NAME}\n"
+	@printf "$(RED)Deleting ${NAME}$(RESET)\n"
 
 re: fclean all
-rebonus: fclean bonus
 
-.PHONY: all bonus clean fclean re rebonus
+.PHONY: all clean fclean re
