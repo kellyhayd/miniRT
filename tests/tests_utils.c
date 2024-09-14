@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:18:05 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/13 13:58:17 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/09/13 23:50:29 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,33 @@ int	ray_compare_test(void *expected, void *result)
 	return (0);
 }
 
+int	shape_compare_test(void *expected, void *result)
+{
+	t_shape	*shape_expected = expected;
+	t_shape	*shape_result = result;
+
+	if (float_compare_test(&shape_expected->sphere_shape.origin.x, &shape_result->sphere_shape.origin.x)
+		&& float_compare_test(&shape_expected->sphere_shape.origin.y, &shape_result->sphere_shape.origin.y)
+		&& float_compare_test(&shape_expected->sphere_shape.origin.z, &shape_result->sphere_shape.origin.z)
+		&& float_compare_test(&shape_expected->sphere_shape.radius, &shape_result->sphere_shape.radius))
+		return (1);
+}
+
 int	hit_compare_test(void *expected, void *result)
+{
+	t_hit	*hit_expected = expected;
+	t_hit	*hit_result = result;
+
+	if (!hit_expected || !hit_result)
+		return (hit_expected == hit_result);
+
+	if (float_compare_test(&hit_expected->t, &hit_result->t)
+		&& shape_compare_test(&hit_expected->object, &hit_result->object))
+		return (1);
+	return (0);
+}
+
+int	hit_list_compare_test(void *expected, void *result)
 {
 	t_hit	*hit_expected = expected;
 	t_hit	*hit_result = result;

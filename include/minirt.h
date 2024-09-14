@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:01:38 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/13 15:24:55 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/09/13 23:46:58 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,8 +184,11 @@ t_sphere	sphere(void);
 
 // intersection
 void		intersect(t_hit **hit_list, t_shape s, t_ray r);
+t_hit		intersection(double t, t_shape s);
 int			intersection_count(t_hit *hit_list);
 void		hit_clear_list(t_hit **hit_list);
+void		add_intersection(t_hit **hit_list, t_hit isect);
+t_hit		*hit(t_hit *hit_list);
 
 // -------------------------------------------------------------------------- //
 //                                   utils                                    //

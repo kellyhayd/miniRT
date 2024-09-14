@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 21:41:13 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/13 15:05:56 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/09/13 23:58:52 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,44 @@ void	print_ko_ray(int num_test, void *expected, void *result)
 	);
 }
 
+void	print_ko_shape(int num_test, void *expected, void *result)
+{
+	t_shape	*shape_expected = expected;
+	t_shape	*shape_result = result;
+
+	printf(PURPLE "%2d" RESET " - " RED "[ ✗ ] " RESET
+		"Expected: sphere (origin (%.2lf, %.2lf, %.2lf) radius (%.2lf))\n"
+		"Result: sphere (origin (%.2lf, %.2lf, %.2lf) radius (%.2lf))\n",
+		num_test,
+		shape_expected->sphere_shape.origin.x, shape_expected->sphere_shape.origin.y, shape_expected->sphere_shape.origin.z, shape_expected->sphere_shape.radius,
+		shape_result->sphere_shape.origin.x, shape_result->sphere_shape.origin.y, shape_result->sphere_shape.origin.z, shape_result->sphere_shape.radius
+	);
+}
+
 void	print_ko_hit(int num_test, void *expected, void *result)
+{
+	t_hit	*hit_expected = expected;
+	t_hit	*hit_result = result;
+
+	printf(PURPLE "%2d" RESET " - " RED "[ ✗ ] " RESET, num_test);
+	if (hit_expected)
+		printf("Expected: t (%.2lf) object (sphere (origin (%.2lf, %.2lf, %.2lf) radius (%.2lf)))\n",
+			hit_expected->t,
+			hit_expected->object.sphere_shape.origin.x, hit_expected->object.sphere_shape.origin.y, hit_expected->object.sphere_shape.origin.z, hit_expected->object.sphere_shape.radius
+		);
+	else
+		printf("Expected: (NULL)\n");
+
+	if (hit_result)
+		printf("           Result:   t (%.2lf) object (sphere (origin (%.2lf, %.2lf, %.2lf) radius (%.2lf)))\n",
+				hit_result->t,
+				hit_result->object.sphere_shape.origin.x, hit_result->object.sphere_shape.origin.y, hit_result->object.sphere_shape.origin.z, hit_result->object.sphere_shape.radius
+		);
+	else
+		printf("           Result:   (NULL)\n");
+}
+
+void	print_ko_hit_list(int num_test, void *expected, void *result)
 {
 	t_hit	*hit_expected = expected;
 	t_hit	*hit_result = result;
