@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 20:39:46 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/14 11:48:34 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/09/14 19:37:16 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_ray	ray(t_point origin, t_vector direction)
 {
-	return ((t_ray) {.origin = origin, .direction = direction});
+	return ((t_ray){.origin = origin, .direction = direction});
 }
 
 t_point	position(t_ray r, double t)

@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 13:39:07 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/08/31 13:57:10 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/14 19:39:07 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,48 +31,6 @@ t_matrix	matrix_scaling(double x, double y, double z)
 	matrix_set(result, 0, 0, x);
 	matrix_set(result, 1, 1, y);
 	matrix_set(result, 2, 2, z);
-	return (result);
-}
-
-t_matrix	matrix_rotation_x(double radians)
-{
-	t_matrix		result;
-	const double	cos_radians = cos(radians);
-	const double	sin_radians = sin(radians);
-
-	result = matrix_identity();
-	matrix_set(result, 1, 1, cos_radians);
-	matrix_set(result, 2, 1, -sin_radians);
-	matrix_set(result, 1, 2, sin_radians);
-	matrix_set(result, 2, 2, cos_radians);
-	return (result);
-}
-
-t_matrix	matrix_rotation_y(double radians)
-{
-	t_matrix		result;
-	const double	cos_radians = cos(radians);
-	const double	sin_radians = sin(radians);
-
-	result = matrix_identity();
-	matrix_set(result, 0, 0, cos_radians);
-	matrix_set(result, 2, 0, sin_radians);
-	matrix_set(result, 0, 2, -sin_radians);
-	matrix_set(result, 2, 2, cos_radians);
-	return (result);
-}
-
-t_matrix	matrix_rotation_z(double radians)
-{
-	t_matrix		result;
-	const double	cos_radians = cos(radians);
-	const double	sin_radians = sin(radians);
-
-	result = matrix_identity();
-	matrix_set(result, 0, 0, cos_radians);
-	matrix_set(result, 1, 0, -sin_radians);
-	matrix_set(result, 0, 1, sin_radians);
-	matrix_set(result, 1, 1, cos_radians);
 	return (result);
 }
 
