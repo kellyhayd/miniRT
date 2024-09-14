@@ -56,7 +56,7 @@ void	test_a_ray_intersects_a_sphere_at_two_points(int num_test)
 {
 	// ARRANGE
 	t_ray		r = ray(point(0, 0, -5), vector(0, 0, 1));
-	t_shape		s = {.sphere_shape = sphere()};
+	t_shape		s = sphere();
 	t_hit		*expected;
 	t_hit		*result = NULL;
 	int			xs_count_expected = 2;
@@ -87,7 +87,7 @@ void	test_a_ray_intersects_a_sphere_at_a_tangent(int num_test)
 {
 	// ARRANGE
 	t_ray		r = ray(point(0, 1, -5), vector(0, 0, 1));
-	t_shape		s = {.sphere_shape = sphere()};
+	t_shape		s = sphere();
 	t_hit		*expected;
 	t_hit		*result = NULL;
 	int			xs_count_expected = 2;
@@ -119,7 +119,7 @@ void	test_a_ray_misses_a_sphere(int num_test)
 {
 	// ARRANGE
 	t_ray		r = ray(point(0, 0, -5), vector(0, 1, 0));
-	t_shape		s = {.sphere_shape = sphere()};
+	t_shape		s = sphere();
 	t_hit		*expected = NULL;
 	t_hit		*result = NULL;
 	int			xs_count_expected = 0;
@@ -142,7 +142,7 @@ void	test_a_ray_originates_inside_a_sphere(int num_test)
 {
 	// ARRANGE
 	t_ray		r = ray(point(0, 0, 0), vector(0, 0, 1));
-	t_shape		s = {.sphere_shape = sphere()};
+	t_shape		s = sphere();
 	t_hit		*expected;
 	t_hit		*result = NULL;
 	int			xs_count_expected = 2;
@@ -174,7 +174,7 @@ void	test_a_sphere_is_behind_a_ray(int num_test)
 {
 	// ARRANGE
 	t_ray		r = ray(point(0, 0, 5), vector(0, 0, 1));
-	t_shape		s = {.sphere_shape = sphere()};
+	t_shape		s = sphere();
 	t_hit		*expected;
 	t_hit		*result = NULL;
 	int			xs_count_expected = 2;
@@ -205,7 +205,7 @@ void	test_a_sphere_is_behind_a_ray(int num_test)
 void	test_an_intersection_encapsulates_t_and_object(int num_test)
 {
 	// ARRANGE
-	t_shape		s = {.sphere_shape = sphere()};
+	t_shape		s = sphere();
 	t_hit		expected = {.t = 3.5, .object = s, .next = NULL};
 	t_hit		result;
 
@@ -219,7 +219,7 @@ void	test_an_intersection_encapsulates_t_and_object(int num_test)
 void	test_aggregating_intersections(int num_test)
 {
 	// ARRANGE
-	t_shape		s = {.sphere_shape = sphere()};
+	t_shape		s = sphere();
 	t_hit		i1 = {.t = 1, .object = s, .next = NULL};
 	t_hit		i2 = {.t = 2, .object = s, .next = NULL};
 	t_hit		*expected;
@@ -251,7 +251,7 @@ void	test_intersect_sets_the_object_on_the_intersection(int num_test)
 {
 	// ARRANGE
 	t_ray		r = ray(point(0, 0, -5), vector(0, 0, 1));
-	t_shape		s = {.sphere_shape = sphere()};
+	t_shape		s = sphere();
 	t_hit		*expected;
 	t_hit		*result = NULL;
 	int			xs_count_expected = 2;
@@ -282,7 +282,7 @@ void	test_intersect_sets_the_object_on_the_intersection(int num_test)
 void	test_the_hit_when_all_intersections_have_positive_t(int num_test)
 {
 	// ARRANGE
-	t_shape		s = {.sphere_shape = sphere()};
+	t_shape		s = sphere();
 	t_hit		i1 = {.t = 1, .object = s, .next = NULL};
 	t_hit		i2 = {.t = 2, .object = s, .next = NULL};
 	t_hit		*hit_list;
@@ -310,7 +310,7 @@ void	test_the_hit_when_all_intersections_have_positive_t(int num_test)
 void	test_the_hit_when_some_intersections_have_negative_t(int num_test)
 {
 	// ARRANGE
-	t_shape		s = {.sphere_shape = sphere()};
+	t_shape		s = sphere();
 	t_hit		i1 = {.t = -1, .object = s, .next = NULL};
 	t_hit		i2 = {.t = 1, .object = s, .next = NULL};
 	t_hit		*hit_list;
@@ -338,7 +338,7 @@ void	test_the_hit_when_some_intersections_have_negative_t(int num_test)
 void	test_the_hit_when_all_intersections_have_negative_t(int num_test)
 {
 	// ARRANGE
-	t_shape		s = {.sphere_shape = sphere()};
+	t_shape		s = sphere();
 	t_hit		i1 = {.t = -2, .object = s, .next = NULL};
 	t_hit		i2 = {.t = -1, .object = s, .next = NULL};
 	t_hit		*hit_list;
@@ -367,7 +367,7 @@ void	test_the_hit_when_all_intersections_have_negative_t(int num_test)
 void	test_the_hit_is_always_the_lowest_nonnegative_intersection(int num_test)
 {
 	// ARRANGE
-	t_shape		s = {.sphere_shape = sphere()};
+	t_shape		s = sphere();
 	t_hit		i1 = {.t = 5, .object = s, .next = NULL};
 	t_hit		i2 = {.t = 7, .object = s, .next = NULL};
 	t_hit		i3 = {.t = -3, .object = s, .next = NULL};
@@ -401,6 +401,127 @@ void	test_the_hit_is_always_the_lowest_nonnegative_intersection(int num_test)
 	hit_clear_list(&hit_list);
 }
 
+void	test_translating_a_ray(int num_test)
+{
+	// ARRANGE
+	t_ray		r = ray(point(1, 2, 3), vector(0, 1, 0));
+	t_matrix	m = matrix_translation(3, 4, 5);
+	t_ray		expected = ray(point(4, 6, 8), vector(0, 1, 0));
+	t_ray		result;
+
+	// ACT
+	result = ray_transform(r, m);
+
+	// ASSERT
+	print_result(num_test, &expected, &result, ray_compare_test, print_ko_ray);
+}
+
+void test_scaling_a_ray(int num_test)
+{
+	// ARRANGE
+	t_ray		r = ray(point(1, 2, 3), vector(0, 1, 0));
+	t_matrix	m = matrix_scaling(2, 3, 4);
+	t_ray		expected = ray(point(2, 6, 12), vector(0, 3, 0));
+	t_ray		result;
+
+	// ACT
+	result = ray_transform(r, m);
+
+	// ASSERT
+	print_result(num_test, &expected, &result, ray_compare_test, print_ko_ray);
+}
+
+void	test_a_sphere_default_transformation(int num_test)
+{
+	// ARRANGE
+	t_shape		s = sphere();
+	t_matrix	expected = matrix_identity();
+	t_matrix	result;
+
+	// ACT
+	result = s.transform;
+
+	// ASSERT
+	print_result(num_test, &expected, &result, matrix_compare_test, print_ko_matrix);
+}
+
+void	test_changing_a_sphere_transformation(int num_test)
+{
+	// ARRANGE
+	t_shape		s = sphere();
+	t_matrix	t = matrix_translation(2, 3, 4);
+	t_matrix	expected = t;
+	t_matrix	result;
+
+	// ACT
+	set_transformation(&s, t);
+	result = s.transform;
+
+	// ASSERT
+	print_result(num_test, &expected, &result, matrix_compare_test, print_ko_matrix);
+}
+
+void	test_intersecting_a_scaled_sphere_with_a_ray(int num_test)
+{
+	// ARRANGE
+	t_ray		r = ray(point(0, 0, -5), vector(0, 0, 1));
+	t_shape		s = sphere();
+	t_matrix	m = matrix_scaling(2, 2, 2);
+	t_hit		*expected;
+	t_hit		*result = NULL;
+	int			xs_count_expected = 2;
+	int			xs_count_result;
+
+	expected = malloc(sizeof(t_hit));
+	expected->t = 3.0;
+	expected->object = s;
+
+	expected->next = malloc(sizeof(t_hit));
+	expected->next->t = 7.0;
+	expected->next->object = s;
+	expected->next->next = NULL;
+
+	// ACT
+	set_transformation(&s, m);
+	intersect(&result, s, r);
+	xs_count_result = intersection_count(result);
+
+	// ASSERT
+	print_result(num_test, &xs_count_expected, &xs_count_result, int_compare_test, print_ko_int);
+	print_result(num_test, expected, result, hit_list_compare_test, print_ko_hit_list);
+
+	// CLEAR
+	hit_clear_list(&expected);
+	hit_clear_list(&result);
+}
+
+void	test_intersecting_a_translated_sphere_with_a_ray(int num_test)
+{
+	// ARRANGE
+	t_ray		r = ray(point(0, 0, -5), vector(0, 0, 1));
+	t_shape		s = sphere();
+	t_matrix	m = matrix_translation(5, 0, 0);
+	t_hit		*expected;
+	t_hit		*result = NULL;
+	int			xs_count_expected = 0;
+	int			xs_count_result;
+
+	expected = NULL;
+
+	// ACT
+	set_transformation(&s, m);
+	intersect(&result, s, r);
+	xs_count_result = intersection_count(result);
+
+	// ASSERT
+	print_result(num_test, &xs_count_expected, &xs_count_result, int_compare_test, print_ko_int);
+	print_result(num_test, expected, result, hit_list_compare_test, print_ko_hit_list);
+
+	// CLEAR
+	hit_clear_list(&expected);
+	hit_clear_list(&result);
+}
+
 int	main()
 {
 	void	(*test_funcs[])(int) =
@@ -419,6 +540,12 @@ int	main()
 		test_the_hit_when_some_intersections_have_negative_t,		// 12
 		test_the_hit_when_all_intersections_have_negative_t,		// 13
 		test_the_hit_is_always_the_lowest_nonnegative_intersection, // 14
+		test_translating_a_ray,										// 15
+		test_scaling_a_ray,											// 16
+		test_a_sphere_default_transformation,						// 17
+		test_changing_a_sphere_transformation,						// 18
+		test_intersecting_a_scaled_sphere_with_a_ray,				// 19
+		test_intersecting_a_translated_sphere_with_a_ray,			// 20
 	};
 
 	printf("\n%sTESTING INTERSECTIONS:%s\n", YELLOW, RESET);

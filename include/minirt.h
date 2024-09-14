@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:01:38 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/13 23:46:58 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/09/14 12:04:53 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ typedef struct s_shape
 		// t_plane		plane_shape;
 		// t_cylinder	cylinder_shape;
 	};
+	t_matrix	transform;
 }	t_shape;
 
 struct s_hit
@@ -178,9 +179,11 @@ t_matrix	matrix_shearing(double *prop_x, double *prop_y, double *prop_z);
 // ray
 t_ray		ray(t_point origin, t_vector direction);
 t_point		position(t_ray r, double t);
+t_ray		ray_transform(t_ray ray, t_matrix matrix);
 
-// sphere
-t_sphere	sphere(void);
+// Shapes
+t_shape		sphere(void);
+void		set_transformation(t_shape *shape, t_matrix tranformation);
 
 // intersection
 void		intersect(t_hit **hit_list, t_shape s, t_ray r);

@@ -55,7 +55,7 @@ $(LIBMLX):
 $(BUILD):
 	@mkdir -p $(BUILD)
 
-$(BUILD)/%.o: $(SRC_PATH)/%.c
+$(BUILD)/%.o: $(SRC_PATH)/%.c include/minirt.h
 	@echo "$(CYAN)Compiling $(GREEN)$(notdir $<)$(RESET)"
 	@$(CC) $(FLAGS) $(HEADERS) -c $< -o $@
 
