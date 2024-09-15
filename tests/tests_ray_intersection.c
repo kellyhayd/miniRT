@@ -17,7 +17,7 @@ void	test_creating_and_querying_a_ray(int num_test)
 	// ARRANGE
 	t_point		origin = point(1, 2, 3);
 	t_vector	direction = vector(4, 5, 6);
-	t_ray		expected = (t_ray) {.origin = origin, direction = direction};
+	t_ray		expected = {.origin = origin, direction = direction};
 	t_ray		result;
 
 	// ACT
@@ -378,16 +378,16 @@ void	test_the_hit_is_always_the_lowest_nonnegative_intersection(int num_test)
 
 	// A lista precisa estar ordenada
 	hit_list = malloc(sizeof(t_hit));
-	*hit_list = i3;
+	*hit_list = i3;						// -3
 
 	hit_list->next = malloc(sizeof(t_hit));
-	*hit_list->next = i2;
+	*hit_list->next = i4;				// 2
 
 	hit_list->next->next = malloc(sizeof(t_hit));
-	*hit_list->next->next = i1;
+	*hit_list->next->next = i1;			// 5
 
 	hit_list->next->next->next = malloc(sizeof(t_hit));
-	*hit_list->next->next->next = i2;
+	*hit_list->next->next->next = i2;	// 7
 
 	expected = hit_list->next;
 
