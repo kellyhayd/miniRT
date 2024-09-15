@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 19:52:47 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/14 19:48:19 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/09/14 22:06:18 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	intersect(t_hit **hit_list, t_shape s, t_ray r)
 {
 	t_ray	new_ray;
 
-	new_ray = ray_transform(r, matrix_inverse(s.transform));
+	new_ray = ray_transform(r, s.inverse);
 	intersect_sphere(hit_list, s, new_ray);
 }
 

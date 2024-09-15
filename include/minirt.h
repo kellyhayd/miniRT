@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:01:38 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/14 12:04:53 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/09/14 22:05:53 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ typedef struct s_shape
 		// t_cylinder	cylinder_shape;
 	};
 	t_matrix	transform;
+	t_matrix	inverse;
+	t_matrix	transpose;
 }	t_shape;
 
 struct s_hit
