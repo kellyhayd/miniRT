@@ -14,14 +14,11 @@
 
 t_matrix	matrix_create(double *tab, int rows, int cols)
 {
-	double		*new_tab;
 	t_matrix	matrix;
 
-	new_tab = malloc(rows * cols * sizeof(double));
-	ft_memcpy(new_tab, tab, rows * cols * sizeof(double));
 	matrix.rows = rows;
 	matrix.cols = cols;
-	matrix.tab = new_tab;
+	ft_memcpy(matrix.tab, tab, sizeof(double) * rows * cols);
 	return (matrix);
 }
 
@@ -52,7 +49,7 @@ double	multiply_element(t_matrix matrix1, t_matrix matrix2, int i, int j)
 	value = 0;
 	while (idx < matrix1.cols)
 	{
-		value += matrix_get(matrix1, idx, j) * matrix_get(matrix2, i, idx);
+		value += matrix_get(&matrix1, idx, j) * matrix_get(&matrix2, i, idx);
 		idx++;
 	}
 	return (value);
@@ -61,14 +58,12 @@ double	multiply_element(t_matrix matrix1, t_matrix matrix2, int i, int j)
 t_matrix	matrix_multiply(t_matrix matrix1, t_matrix matrix2)
 {
 	t_matrix	result;
-	double		*new_tab;
 	int			i;
 	int			j;
 
+	ft_bzero(&result, sizeof(t_matrix));
 	if (matrix1.cols != matrix2.cols || matrix1.rows != matrix2.rows)
-		return ((t_matrix){.cols = 0, .rows = 0, .tab = NULL});
-	new_tab = malloc(sizeof(double) * matrix1.rows * matrix1.cols);
-	result.tab = new_tab;
+		return (result);
 	result.rows = matrix1.rows;
 	result.cols = matrix1.cols;
 	j = 0;
@@ -77,7 +72,7 @@ t_matrix	matrix_multiply(t_matrix matrix1, t_matrix matrix2)
 		i = 0;
 		while (i < matrix1.cols)
 		{
-			matrix_set(result, i, j, multiply_element(matrix1, matrix2, i, j));
+			matrix_set(&result, i, j, multiply_element(matrix1, matrix2, i, j));
 			i++;
 		}
 		j++;
@@ -96,10 +91,10 @@ t_tuple	matrix_multiply_tuple(t_matrix matrix, t_tuple tuple1)
 	i = 0;
 	while (i < matrix.cols)
 	{
-		values_tuple[i] = matrix_get(matrix, 0, i) * tuple1.x + \
-							matrix_get(matrix, 1, i) * tuple1.y + \
-							matrix_get(matrix, 2, i) * tuple1.z + \
-							matrix_get(matrix, 3, i) * tuple1.w;
+		values_tuple[i] = matrix_get(&matrix, 0, i) * tuple1.x + \
+							matrix_get(&matrix, 1, i) * tuple1.y + \
+							matrix_get(&matrix, 2, i) * tuple1.z + \
+							matrix_get(&matrix, 3, i) * tuple1.w;
 		i++;
 	}
 	result.x = values_tuple[0];
@@ -115,7 +110,6 @@ t_matrix	matrix_transposing(t_matrix matrix)
 	int			y;
 	t_matrix	result;
 
-	result.tab = malloc(sizeof(double) * matrix.rows * matrix.cols);
 	result.cols = matrix.cols;
 	result.rows = matrix.rows;
 	y = 0;
@@ -124,7 +118,7 @@ t_matrix	matrix_transposing(t_matrix matrix)
 		x = 0;
 		while (x < matrix.cols)
 		{
-			matrix_set(result, x, y, matrix_get(matrix, y, x));
+			matrix_set(&result, x, y, matrix_get(&matrix, y, x));
 			x++;
 		}
 		y++;
@@ -140,13 +134,13 @@ double	matrix_determinant(t_matrix matrix)
 	col = 0;
 	result = 0;
 	if (matrix.cols == 2 && matrix.rows == 2)
-		result = matrix_get(matrix, 0, 0) * matrix_get(matrix, 1, 1) -
-				matrix_get(matrix, 1, 0) * matrix_get(matrix, 0, 1);
+		result = matrix_get(&matrix, 0, 0) * matrix_get(&matrix, 1, 1) -
+				matrix_get(&matrix, 1, 0) * matrix_get(&matrix, 0, 1);
 	else
 	{
 		while (col < matrix.cols)
 		{
-			result += matrix_get(matrix, 0, col) * matrix_cofactor(matrix, 0, col);
+			result += matrix_get(&matrix, 0, col) * matrix_cofactor(matrix, 0, col);
 			col++;
 		}
 	}
@@ -163,7 +157,6 @@ t_matrix	matrix_submatrix(t_matrix matrix, int x, int y)
 
 	result.cols = matrix.cols - 1;
 	result.rows = matrix.rows - 1;
-	result.tab = malloc(sizeof(double) * result.cols * result.rows);
 	j_m1 = 0;
 	j_res = 0;
 	while (j_m1 < matrix.rows)
@@ -173,7 +166,7 @@ t_matrix	matrix_submatrix(t_matrix matrix, int x, int y)
 		while (i_m1 < matrix.cols)
 		{
 			if (i_m1 != x && j_m1 != y)
-				matrix_set(result, i_res++, j_res, matrix_get(matrix, i_m1, j_m1));
+				matrix_set(&result, i_res++, j_res, matrix_get(&matrix, i_m1, j_m1));
 			i_m1++;
 		}
 		j_res = j_res + (j_m1 != y);
@@ -212,9 +205,9 @@ t_matrix	matrix_inverse(t_matrix matrix)
 	double		determinant;
 	t_matrix	result;
 
+	ft_bzero(&result.tab, sizeof(double) * 16);
 	result.cols = matrix.cols;
 	result.rows = matrix.rows;
-	result.tab = malloc(sizeof(double) * result.cols * result.rows);
 	determinant = matrix_determinant(matrix);
 	if (determinant == 0)
 		return (result);
@@ -226,7 +219,7 @@ t_matrix	matrix_inverse(t_matrix matrix)
 		while (++i < result.cols)
 		{
 			cofactor = matrix_cofactor(matrix, i, j);
-			matrix_set(result, j, i, cofactor / determinant);
+			matrix_set(&result, j, i, cofactor / determinant);
 		}
 	}
 	return (result);
@@ -234,14 +227,14 @@ t_matrix	matrix_inverse(t_matrix matrix)
 
 t_matrix	matrix_identity(void)
 {
-	t_matrix	res;
+	t_matrix	result;
 
-	res.cols = 4;
-	res.rows = 4;
-	res.tab = ft_calloc(4 * 4, sizeof(double));
-	matrix_set(res, 0, 0, 1);
-	matrix_set(res, 1, 1, 1);
-	matrix_set(res, 2, 2, 1);
-	matrix_set(res, 3, 3, 1);
-	return (res);
+	ft_bzero(&result.tab, sizeof(double) * 16);
+	result.cols = 4;
+	result.rows = 4;
+	matrix_set(&result, 0, 0, 1);
+	matrix_set(&result, 1, 1, 1);
+	matrix_set(&result, 2, 2, 1);
+	matrix_set(&result, 3, 3, 1);
+	return (result);
 }

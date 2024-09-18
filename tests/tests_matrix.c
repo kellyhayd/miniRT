@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tests_matrix.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 20:09:01 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/08/31 13:32:26 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/18 18:23:48 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,14 @@ void	test_matrix_create(int num_test)
 		13.5, 14.5, 15.5, 16.5
 	};
 	t_matrix	expected = {
-							.tab = matrix,
+							// .tab = matrix,
 							.rows = 4, .cols = 4
 	};
 	t_matrix	result;
 	int			row_size = 4;
 	int			column_size = 4;
+
+	ft_memcpy(expected.tab, matrix, sizeof(double) * row_size * column_size);
 
 	// ACT
 	result = matrix_create(matrix, row_size, column_size);
@@ -53,15 +55,18 @@ void	test_matrix_compare_true(int num_test)
 	};
 
 	t_matrix	matrix1 = {
-							.tab = tab1,
+							// .tab = tab1,
 							.rows = 4, .cols = 4
 	};
 	t_matrix	matrix2 = {
-							.tab = tab2,
+							// .tab = tab2,
 							.rows = 4, .cols = 4
 	};
 	int			result;
 	int			expected = 1;
+
+	ft_memcpy(matrix1.tab, tab1, sizeof(double) * matrix1.rows * matrix1.cols);
+	ft_memcpy(matrix2.tab, tab2, sizeof(double) * matrix2.rows * matrix2.cols);
 
 	// ACT
 	result = matrix_compare(matrix1, matrix2);
@@ -87,15 +92,18 @@ void	test_matrix_compare_false(int num_test)
 	};
 
 	t_matrix	matrix1 = {
-							.tab = tab1,
+							// .tab = tab1,
 							.rows = 4, .cols = 4
 	};
 	t_matrix	matrix2 = {
-							.tab = tab2,
+							// .tab = tab2,
 							.rows = 4, .cols = 4
 	};
 	int			result;
 	int			expected = 0;
+
+	ft_memcpy(matrix1.tab, tab1, sizeof(double) * matrix1.rows * matrix1.cols);
+	ft_memcpy(matrix2.tab, tab2, sizeof(double) * matrix2.rows * matrix2.cols);
 
 	// ACT
 	result = matrix_compare(matrix1, matrix2);
@@ -127,18 +135,22 @@ void	test_matrix_multiplying(int num_test)
 	};
 
 	t_matrix	matrix1 = {
-							.tab = tab1,
+							// .tab = tab1,
 							.rows = 4, .cols = 4
 	};
 	t_matrix	matrix2 = {
-							.tab = tab2,
+							// .tab = tab2,
 							.rows = 4, .cols = 4
 	};
 	t_matrix	expected = {
-							.tab = result_tab,
+							// .tab = result_tab,
 							.rows = 4, .cols = 4
 	};
 	t_matrix	result;
+
+	ft_memcpy(matrix1.tab, tab1, sizeof(double) * matrix1.rows * matrix1.cols);
+	ft_memcpy(matrix2.tab, tab2, sizeof(double) * matrix2.rows * matrix2.cols);
+	ft_memcpy(expected.tab, result_tab, sizeof(double) * expected.rows * expected.cols);
 
 	// ACT
 	result = matrix_multiply(matrix1, matrix2);
@@ -158,7 +170,7 @@ void	test_matrix_multiplying_tuple(int num_test)
 	};
 
 	t_matrix	matrix1 = {
-							.tab = tab1,
+							// .tab = tab1,
 							.rows = 4, .cols = 4
 	};
 	t_tuple		tuple1 = {
@@ -168,6 +180,8 @@ void	test_matrix_multiplying_tuple(int num_test)
 		.x = 18, .y = 24, .z = 33, .w = 1
 	};
 	t_tuple		result;
+
+	ft_memcpy(matrix1.tab, tab1, sizeof(double) * matrix1.rows * matrix1.cols);
 
 	// ACT
 	result = matrix_multiply_tuple(matrix1, tuple1);
@@ -194,15 +208,20 @@ void	test_matrix_multiplying_identity(int num_test)
 	};
 
 	t_matrix	matrix1 = {
-							.tab = tab1,
+							// .tab = tab1,
 							.rows = 4, .cols = 4
 	};
 	t_matrix	matrix_identity = {
-							.tab = identity,
+							// .tab = identity,
 							.rows = 4, .cols = 4
 	};
-	t_matrix	expected = matrix1;
+	t_matrix	expected;
 	t_matrix	result;
+
+	ft_memcpy(matrix1.tab, tab1, sizeof(double) * matrix1.rows * matrix1.cols);
+	ft_memcpy(matrix_identity.tab, identity, sizeof(double) * matrix_identity.rows * matrix_identity.cols);
+
+	expected = matrix1;
 
 	// ACT
 	result = matrix_multiply(matrix1, matrix_identity);
@@ -228,14 +247,17 @@ void	test_matrix_transpose(int num_test)
 	};
 
 	t_matrix	matrix1 = {
-							.tab = tab1,
+							// .tab = tab1,
 							.rows = 4, .cols = 4
 	};
 	t_matrix	expected = {
-							.tab = result_tab,
+							// .tab = result_tab,
 							.rows = 4, .cols = 4
 	};
 	t_matrix	result;
+
+	ft_memcpy(matrix1.tab, tab1, sizeof(double) * matrix1.rows * matrix1.cols);
+	ft_memcpy(expected.tab, result_tab, sizeof(double) * expected.rows * expected.cols);
 
 	// ACT
 	result = matrix_transposing(matrix1);
@@ -255,11 +277,15 @@ void	test_matrix_transpose_identity(int num_test)
 	};
 
 	t_matrix	matrix_identity = {
-							.tab = identity,
+							// .tab = identity,
 							.rows = 4, .cols = 4
 	};
-	t_matrix	expected = matrix_identity;
+	t_matrix	expected;
 	t_matrix	result;
+
+	ft_memcpy(matrix_identity.tab, identity, sizeof(double) * matrix_identity.rows * matrix_identity.cols);
+
+	expected = matrix_identity;
 
 	// ACT
 	result = matrix_transposing(matrix_identity);
@@ -277,11 +303,13 @@ void	test_matrix_determinant_2x2(int num_test)
 	};
 
 	t_matrix	matrix1 = {
-							.tab = tab1,
+							// .tab = tab1,
 							.rows = 2, .cols = 2
 	};
 	double		expected = 17;
 	double		result;
+
+	ft_memcpy(matrix1.tab, tab1, sizeof(double) * matrix1.rows * matrix1.cols);
 
 	// ACT
 	result = matrix_determinant(matrix1);
@@ -300,11 +328,13 @@ void	test_matrix_determinant_3x3(int num_test)
 	};
 
 	t_matrix	matrix1 = {
-							.tab = tab1,
+							// .tab = tab1,
 							.rows = 3, .cols = 3
 	};
 	double		expected = -196;
 	double		result;
+
+	ft_memcpy(matrix1.tab, tab1, sizeof(double) * matrix1.rows * matrix1.cols);
 
 	// ACT
 	result = matrix_determinant(matrix1);
@@ -324,11 +354,13 @@ void	test_matrix_determinant_4x4(int num_test)
 	};
 
 	t_matrix	matrix1 = {
-							.tab = tab1,
+							// .tab = tab1,
 							.rows = 4, .cols = 4
 	};
 	double		expected = -4071;
 	double		result;
+
+	ft_memcpy(matrix1.tab, tab1, sizeof(double) * matrix1.rows * matrix1.cols);
 
 	// ACT
 	result = matrix_determinant(matrix1);
@@ -351,14 +383,17 @@ void	test_matrix_submatrix_3x3(int num_test)
 	};
 
 	t_matrix	matrix1 = {
-							.tab = tab1,
+							// .tab = tab1,
 							.rows = 3, .cols = 3
 	};
 	t_matrix	expected = {
-							.tab = result_tab,
+							// .tab = result_tab,
 							.rows = 2, .cols = 2
 	};
 	t_matrix	result;
+
+	ft_memcpy(matrix1.tab, tab1, sizeof(double) * matrix1.rows * matrix1.cols);
+	ft_memcpy(expected.tab, result_tab, sizeof(double) * expected.rows * expected.cols);
 
 	// ACT
 	result = matrix_submatrix(matrix1, 2, 0);
@@ -383,14 +418,17 @@ void	test_matrix_submatrix_4x4(int num_test)
 	};
 
 	t_matrix	matrix1 = {
-							.tab = tab1,
+							// .tab = tab1,
 							.rows = 4, .cols = 4
 	};
 	t_matrix	expected = {
-							.tab = result_tab,
+							// .tab = result_tab,
 							.rows = 3, .cols = 3
 	};
 	t_matrix	result;
+
+	ft_memcpy(matrix1.tab, tab1, sizeof(double) * matrix1.rows * matrix1.cols);
+	ft_memcpy(expected.tab, result_tab, sizeof(double) * expected.rows * expected.cols);
 
 	// ACT
 	result = matrix_submatrix(matrix1, 1, 2);
@@ -408,11 +446,13 @@ void	test_matrix_minor(int num_test)
 		6,  -1,  5,
 	};
 	t_matrix	matrix1 = {
-							.tab = tab1,
+							// .tab = tab1,
 							.rows = 3, .cols = 3
 	};
 	double		expected = 25;
 	double		result;
+
+	ft_memcpy(matrix1.tab, tab1, sizeof(double) * matrix1.rows * matrix1.cols);
 
 	// ACT
 	result = matrix_minor(matrix1, 0, 1);
@@ -430,11 +470,13 @@ void	test_matrix_cofactor_not_negate(int num_test)
 		6,  -1,  5,
 	};
 	t_matrix	matrix1 = {
-							.tab = tab1,
+							// .tab = tab1,
 							.rows = 3, .cols = 3
 	};
 	double		expected = -12;
 	double		result;
+
+	ft_memcpy(matrix1.tab, tab1, sizeof(double) * matrix1.rows * matrix1.cols);
 
 	// ACT
 	result = matrix_cofactor(matrix1, 0, 0);
@@ -452,11 +494,13 @@ void	test_matrix_cofactor_negate(int num_test)
 		6,  -1,  5,
 	};
 	t_matrix	matrix1 = {
-							.tab = tab1,
+							// .tab = tab1,
 							.rows = 3, .cols = 3
 	};
 	double		expected = -25;
 	double		result;
+
+	ft_memcpy(matrix1.tab, tab1, sizeof(double) * matrix1.rows * matrix1.cols);
 
 	// ACT
 	result = matrix_cofactor(matrix1, 0, 1);
@@ -482,14 +526,17 @@ void	test_matrix_inverse_01(int num_test)
 	};
 
 	t_matrix	matrix = {
-							.tab = tab1,
+							// .tab = tab1,
 							.rows = 4, .cols = 4
 	};
 	t_matrix	expected = {
-							.tab = result_tab,
+							// .tab = result_tab,
 							.rows = 4, .cols = 4
 	};
 	t_matrix	result;
+
+	ft_memcpy(matrix.tab, tab1, sizeof(double) * matrix.rows * matrix.cols);
+	ft_memcpy(expected.tab, result_tab, sizeof(double) * expected.rows * expected.cols);
 
 	// ACT
 	result = matrix_inverse(matrix);

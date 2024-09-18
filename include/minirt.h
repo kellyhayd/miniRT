@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:01:38 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/14 22:05:53 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/09/18 17:33:15 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ typedef struct s_color
 
 typedef struct s_matrix
 {
-	double	*tab;
+	double	tab[16];
 	int		rows;
 	int		cols;
 }	t_matrix;
@@ -158,8 +158,8 @@ void		write_pixel(mlx_image_t *image, int x, int y, int color);
 
 t_matrix	matrix_create(double *tab, int rows, int cols);
 int			matrix_compare(t_matrix matrix1, t_matrix matrix2);
-void		matrix_set(t_matrix matrix1, int x, int y, double value);
-double		matrix_get(t_matrix matrix1, int x, int y);
+void		matrix_set(t_matrix *matrix1, int x, int y, double value);
+double		matrix_get(t_matrix *matrix1, int x, int y);
 t_matrix	matrix_multiply(t_matrix matrix1, t_matrix matrix2);
 t_tuple		matrix_multiply_tuple(t_matrix matrix1, t_tuple tuple1);
 t_matrix	matrix_transposing(t_matrix matrix1);
