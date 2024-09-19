@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:01:38 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/18 17:33:15 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/09/18 23:51:04 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,17 +158,19 @@ void		write_pixel(mlx_image_t *image, int x, int y, int color);
 
 t_matrix	matrix_create(double *tab, int rows, int cols);
 int			matrix_compare(t_matrix matrix1, t_matrix matrix2);
-void		matrix_set(t_matrix *matrix1, int x, int y, double value);
-double		matrix_get(t_matrix *matrix1, int x, int y);
+void		matrix_set(t_matrix *matrix1, int y, int x, double value);
+double		matrix_get(t_matrix *matrix1, int y, int x);
+t_matrix	matrix_identity(void);
+
 t_matrix	matrix_multiply(t_matrix matrix1, t_matrix matrix2);
 t_tuple		matrix_multiply_tuple(t_matrix matrix1, t_tuple tuple1);
 t_matrix	matrix_transposing(t_matrix matrix1);
+
 double		matrix_determinant(t_matrix matrix1);
-t_matrix	matrix_submatrix(t_matrix matrix1, int x, int y);
-double		matrix_minor(t_matrix matrix1, int x, int j);
-double		matrix_cofactor(t_matrix matrix, int x, int y);
+t_matrix	matrix_submatrix(t_matrix matrix1, int y, int x);
+double		matrix_minor(t_matrix matrix1, int y, int x);
+double		matrix_cofactor(t_matrix matrix, int y, int x);
 t_matrix	matrix_inverse(t_matrix matrix);
-t_matrix	matrix_identity(void);
 
 // transformation
 t_matrix	matrix_translation(double x, double y, double z);
@@ -183,7 +185,7 @@ t_ray		ray(t_point origin, t_vector direction);
 t_point		position(t_ray r, double t);
 t_ray		ray_transform(t_ray ray, t_matrix matrix);
 
-// Shapes
+// shapes
 t_shape		sphere(void);
 void		set_transformation(t_shape *shape, t_matrix tranformation);
 
