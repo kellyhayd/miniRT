@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrix_modification.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 13:57:37 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/22 16:05:24 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/22 20:08:36 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,10 @@ t_tuple	mx_multiply_tuple(t_matrix matrix, t_tuple tuple1)
 	i = 0;
 	while (i < matrix.cols)
 	{
-		values_tuple[i] = mx_get(&matrix, i, 0) * tuple1.x + \
-							mx_get(&matrix, i, 1) * tuple1.y + \
-							mx_get(&matrix, i, 2) * tuple1.z + \
-							mx_get(&matrix, i, 3) * tuple1.w;
+		values_tuple[i] = mx_get(&matrix, i, 0) * tuple1.x
+							+ mx_get(&matrix, i, 1) * tuple1.y
+							+ mx_get(&matrix, i, 2) * tuple1.z
+							+ mx_get(&matrix, i, 3) * tuple1.w;
 		i++;
 	}
 	result.x = values_tuple[0];

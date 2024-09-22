@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrix_determinant.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 13:55:40 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/22 16:03:01 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/22 20:04:39 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,33 +35,46 @@ double	determinant(t_matrix matrix)
 
 t_matrix	submatrix(t_matrix matrix, int y, int x)
 {
-	int			im1;
-	int			jm1;
-	int			im2;
-	int			jm2;
+	int			x_matrix1;
+	int			y_matrix1;
+	int			x_matrix2;
+	int			y_matrix2;
 	t_matrix	result;
 
 	result.cols = matrix.cols - 1;
 	result.rows = matrix.rows - 1;
-	jm1 = 0;
-	jm2 = 0;
-	while (jm1 < matrix.rows)
+	y_matrix1 = 0;
+	y_matrix2 = 0;
+	while (y_matrix1 < matrix.rows)
 	{
-		im1 = 0;
-		im2 = 0;
-		while (im1 < matrix.cols)
+		x_matrix1 = 0;
+		x_matrix2 = 0;
+		while (x_matrix1 < matrix.cols)
 		{
-			if (im1 != x && jm1 != y)
-				mx_set(&result, jm2, im2++, mx_get(&matrix, jm1, im1));
-			im1++;
+			if (x_matrix1 != x && y_matrix1 != y)
+			{
+				mx_set(&result, y_matrix2, x_matrix2, mx_get(&matrix, y_matrix1, x_matrix1));
+				x_matrix2++;
+			}
+			x_matrix1++;
 		}
-		if (jm1 != y)
-			jm2++;
-		jm1++;
+
+		//////////////////////////////////////////////
+		// NÃO TIRAR ISSO POR ENQUANTO, PODE SER ÚTIL, SE PRECISAR ECONOMIZAR LINHAS DEPOIS
+		//
+		// jres = jres + (y_matrix1 != y);		// if y_matrix1 != y then jres += 1
+		//
+
+		// ISSO É O MESMO QUE O DE CIMA, MAS MAIS LEGÍVEL
+		if (y_matrix1 != y)
+			y_matrix2++;
+
+		//////////////////////////////////////////////
+
+		y_matrix1++;
 	}
 	return (result);
 }
-		// jres = jres + (jm1 != y);		// if jm1 != y then jres += 1
 
 double	minor(t_matrix matrix, int y, int x)
 {

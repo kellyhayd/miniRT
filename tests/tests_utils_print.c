@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 21:41:13 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/13 23:58:52 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/09/22 18:37:32 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void	print_ko_ray(int num_test, void *expected, void *result)
 
 	printf(PURPLE "%2d" RESET " - " RED "[ ✗ ] " RESET
 		"Expected: origin (%.2lf, %.2lf, %.2lf, %.2lf) direction (%.2lf, %.2lf, %.2lf, %.2lf)\n"
-		"Result: origin (%.2lf, %.2lf, %.2lf, %.2lf) direction (%.2lf, %.2lf, %.2lf, %.2lf)\n",
+		"\tResult: origin (%.2lf, %.2lf, %.2lf, %.2lf) direction (%.2lf, %.2lf, %.2lf, %.2lf)\n",
 		num_test,
 		ray_expected->origin.x, ray_expected->origin.y, ray_expected->origin.z, ray_expected->origin.w,
 		ray_expected->direction.x, ray_expected->direction.y, ray_expected->direction.z, ray_expected->direction.w,
@@ -125,7 +125,7 @@ void	print_ko_shape(int num_test, void *expected, void *result)
 
 	printf(PURPLE "%2d" RESET " - " RED "[ ✗ ] " RESET
 		"Expected: sphere (origin (%.2lf, %.2lf, %.2lf) radius (%.2lf))\n"
-		"Result: sphere (origin (%.2lf, %.2lf, %.2lf) radius (%.2lf))\n",
+		"\tResult: sphere (origin (%.2lf, %.2lf, %.2lf) radius (%.2lf))\n",
 		num_test,
 		shape_expected->sphere_shape.origin.x, shape_expected->sphere_shape.origin.y, shape_expected->sphere_shape.origin.z, shape_expected->sphere_shape.radius,
 		shape_result->sphere_shape.origin.x, shape_result->sphere_shape.origin.y, shape_result->sphere_shape.origin.z, shape_result->sphere_shape.radius

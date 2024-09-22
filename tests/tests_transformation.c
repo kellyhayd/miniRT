@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tests_transformation.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 13:31:05 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/22 16:03:26 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/22 18:50:49 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -302,14 +302,12 @@ void	test_transformation_chain_sequence(int num_test)
 	t_matrix	A			= rotation_x(M_PI / 2);
 	t_matrix	B			= scaling(5, 5, 5);
 	t_matrix	C			= translation(10, 5, 7);
-	t_matrix	T1			= mx_multiply(B, A);
-	t_matrix	T			= mx_multiply(C, T1);
+	t_matrix	T			= mx_multiply(C, mx_multiply(B, A));
 	t_tuple		expected	= point(15, 0, 7);
 	t_tuple		result;
 
 	// ACT
 	result = mx_multiply_tuple(T, p);
-	// t = multiply_mx_mx(multiply_mx_mx(c, b), a);
 
 	// ASSERT
 	print_result(num_test, &expected, &result, tuple_compare_test, print_ko_tuple);
