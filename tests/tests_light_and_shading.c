@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 15:24:42 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/22 17:22:35 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/22 17:58:36 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,19 @@ void	test_normal_on_sphere_at_a_point_on_the_z_axis(int num_test)
 	// ASSERT
 	print_result(num_test, &expected, &result, tuple_compare_test, print_ko_tuple);
 }
+void	test_normal_on_sphere_at_a_nonaxial_point(int num_test)
+{
+	// ARRANGE
+	t_shape		s = sphere();
+	t_vector	expected = vector(sqrt(3)/3, sqrt(3)/3, sqrt(3)/3);
+	t_vector	result;
 
+	// ACT
+	result = normal_at(s, point(sqrt(3)/3, sqrt(3)/3, sqrt(3)/3));
+
+	// ASSERT
+	print_result(num_test, &expected, &result, tuple_compare_test, print_ko_tuple);
+}
 
 int	main()
 {
@@ -65,6 +77,7 @@ int	main()
 		test_normal_on_sphere_at_a_point_on_the_x_axis,					// 01
 		test_normal_on_sphere_at_a_point_on_the_y_axis,					// 02
 		test_normal_on_sphere_at_a_point_on_the_z_axis,					// 03
+		test_normal_on_sphere_at_a_nonaxial_point,						// 04
 	};
 
 	printf("\n%sTESTING LIGHT AND SHANDING:%s\n", YELLOW, RESET);

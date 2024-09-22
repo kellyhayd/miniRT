@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:01:38 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/22 16:31:17 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/22 17:44:11 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,7 +213,7 @@ void		add_intersection(t_hit **hit_list, t_hit isect);
 t_hit		*hit(t_hit *hit_list);
 
 // light and shading (reflection?)
-t_vector	normal_at(t_shape shape, t_point p);
+t_tuple	normal_at(t_shape shape, t_point pt);
 
 
 // -------------------------------------------------------------------------- //
