@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:01:38 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/18 23:51:04 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/09/22 13:44:46 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,10 +131,10 @@ t_point		point(double x, double y, double z);
 // -------------------------------------------------------------------------- //
 
 t_vector	vector(double x, double y, double z);
-double		vector_magnitude(t_vector vector1);
-t_vector	vector_normalize(t_vector vector1);
-double		vector_dot_product(t_vector vector1, t_vector vector2);
-t_tuple		vector_cross_product(t_vector vector1, t_vector vector2);
+double		magnitude(t_vector vector1);
+t_vector	normalize(t_vector vector1);
+double		dot(t_vector vector1, t_vector vector2);
+t_tuple		cross(t_vector vector1, t_vector vector2);
 
 // -------------------------------------------------------------------------- //
 //                                  colors                                    //
@@ -164,21 +164,21 @@ t_matrix	matrix_identity(void);
 
 t_matrix	matrix_multiply(t_matrix matrix1, t_matrix matrix2);
 t_tuple		matrix_multiply_tuple(t_matrix matrix1, t_tuple tuple1);
-t_matrix	matrix_transposing(t_matrix matrix1);
+t_matrix	transposing(t_matrix matrix1);
 
-double		matrix_determinant(t_matrix matrix1);
-t_matrix	matrix_submatrix(t_matrix matrix1, int y, int x);
-double		matrix_minor(t_matrix matrix1, int y, int x);
-double		matrix_cofactor(t_matrix matrix, int y, int x);
-t_matrix	matrix_inverse(t_matrix matrix);
+double		determinant(t_matrix matrix1);
+t_matrix	submatrix(t_matrix matrix1, int y, int x);
+double		minor(t_matrix matrix1, int y, int x);
+double		cofactor(t_matrix matrix, int y, int x);
+t_matrix	inverse(t_matrix matrix);
 
 // transformation
-t_matrix	matrix_translation(double x, double y, double z);
-t_matrix	matrix_scaling(double x, double y, double z);
-t_matrix	matrix_rotation_x(double radians);
-t_matrix	matrix_rotation_y(double radians);
-t_matrix	matrix_rotation_z(double radians);
-t_matrix	matrix_shearing(double *prop_x, double *prop_y, double *prop_z);
+t_matrix	translation(double x, double y, double z);
+t_matrix	scaling(double x, double y, double z);
+t_matrix	rotation_x(double radians);
+t_matrix	rotation_y(double radians);
+t_matrix	rotation_z(double radians);
+t_matrix	shearing(double *prop_x, double *prop_y, double *prop_z);
 
 // ray
 t_ray		ray(t_point origin, t_vector direction);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tests_matrix.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 20:09:01 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/18 23:49:01 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/09/22 13:43:33 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -260,7 +260,7 @@ void	test_matrix_transpose(int num_test)
 	ft_memcpy(expected.tab, result_tab, sizeof(double) * expected.rows * expected.cols);
 
 	// ACT
-	result = matrix_transposing(matrix1);
+	result = transposing(matrix1);
 
 	// ASSERT
 	print_result(num_test, &expected, &result, matrix_compare_test, print_ko_matrix);
@@ -288,7 +288,7 @@ void	test_matrix_transpose_identity(int num_test)
 	expected = matrix_identity;
 
 	// ACT
-	result = matrix_transposing(matrix_identity);
+	result = transposing(matrix_identity);
 
 	// ASSERT
 	print_result(num_test, &expected, &result, matrix_compare_test, print_ko_matrix);
@@ -312,7 +312,7 @@ void	test_matrix_determinant_2x2(int num_test)
 	ft_memcpy(matrix1.tab, tab1, sizeof(double) * matrix1.rows * matrix1.cols);
 
 	// ACT
-	result = matrix_determinant(matrix1);
+	result = determinant(matrix1);
 
 	// ASSERT
 	print_result(num_test, &expected, &result, float_compare_test, print_ko_float);
@@ -337,7 +337,7 @@ void	test_matrix_determinant_3x3(int num_test)
 	ft_memcpy(matrix1.tab, tab1, sizeof(double) * matrix1.rows * matrix1.cols);
 
 	// ACT
-	result = matrix_determinant(matrix1);
+	result = determinant(matrix1);
 
 	// ASSERT
 	print_result(num_test, &expected, &result, float_compare_test, print_ko_float);
@@ -363,7 +363,7 @@ void	test_matrix_determinant_4x4(int num_test)
 	ft_memcpy(matrix1.tab, tab1, sizeof(double) * matrix1.rows * matrix1.cols);
 
 	// ACT
-	result = matrix_determinant(matrix1);
+	result = determinant(matrix1);
 
 	// ASSERT
 	print_result(num_test, &expected, &result, float_compare_test, print_ko_float);
@@ -396,7 +396,7 @@ void	test_matrix_submatrix_3x3(int num_test)
 	ft_memcpy(expected.tab, result_tab, sizeof(double) * expected.rows * expected.cols);
 
 	// ACT
-	result = matrix_submatrix(matrix1, 0, 2);
+	result = submatrix(matrix1, 0, 2);
 
 	// ASSERT
 	print_result(num_test, &expected, &result, matrix_compare_test, print_ko_matrix);
@@ -431,7 +431,7 @@ void	test_matrix_submatrix_4x4(int num_test)
 	ft_memcpy(expected.tab, result_tab, sizeof(double) * expected.rows * expected.cols);
 
 	// ACT
-	result = matrix_submatrix(matrix1, 2, 1);
+	result = submatrix(matrix1, 2, 1);
 
 	// ASSERT
 	print_result(num_test, &expected, &result, matrix_compare_test, print_ko_matrix);
@@ -455,7 +455,7 @@ void	test_matrix_minor(int num_test)
 	ft_memcpy(matrix1.tab, tab1, sizeof(double) * matrix1.rows * matrix1.cols);
 
 	// ACT
-	result = matrix_minor(matrix1, 1, 0);
+	result = minor(matrix1, 1, 0);
 
 	// ASSERT
 	print_result(num_test, &expected, &result, float_compare_test, print_ko_float);
@@ -479,7 +479,7 @@ void	test_matrix_cofactor_not_negate(int num_test)
 	ft_memcpy(matrix1.tab, tab1, sizeof(double) * matrix1.rows * matrix1.cols);
 
 	// ACT
-	result = matrix_cofactor(matrix1, 0, 0);
+	result = cofactor(matrix1, 0, 0);
 
 	// ASSERT
 	print_result(num_test, &expected, &result, float_compare_test, print_ko_float);
@@ -503,7 +503,7 @@ void	test_matrix_cofactor_negate(int num_test)
 	ft_memcpy(matrix1.tab, tab1, sizeof(double) * matrix1.rows * matrix1.cols);
 
 	// ACT
-	result = matrix_cofactor(matrix1, 1, 0);
+	result = cofactor(matrix1, 1, 0);
 
 	// ASSERT
 	print_result(num_test, &expected, &result, float_compare_test, print_ko_float);
@@ -539,7 +539,7 @@ void	test_calculating_the_inverse_of_a_matrix(int num_test)
 	ft_memcpy(expected.tab, result_tab, sizeof(double) * expected.rows * expected.cols);
 
 	// ACT
-	result = matrix_inverse(matrix);
+	result = inverse(matrix);
 
 	// ASSERT
 	print_result(num_test, &expected, &result, matrix_compare_test, print_ko_matrix);
@@ -575,7 +575,7 @@ void	test_calculating_the_inverse_of_another_matrix(int num_test)
 	ft_memcpy(expected.tab, result_tab, sizeof(double) * expected.rows * expected.cols);
 
 	// ACT
-	result = matrix_inverse(matrix);
+	result = inverse(matrix);
 
 	// ASSERT
 	print_result(num_test, &expected, &result, matrix_compare_test, print_ko_matrix);
@@ -611,7 +611,7 @@ void	test_calculating_the_inverse_of_a_third_matrix(int num_test)
 	ft_memcpy(expected.tab, result_tab, sizeof(double) * expected.rows * expected.cols);
 
 	// ACT
-	result = matrix_inverse(matrix);
+	result = inverse(matrix);
 
 	// ASSERT
 	print_result(num_test, &expected, &result, matrix_compare_test, print_ko_matrix);
@@ -647,7 +647,7 @@ void	test_multiplying_a_product_by_its_inverse(int num_test)
 	t_matrix	expected = matrix1;
 
 	matrix3 = matrix_multiply(matrix1, matrix2);
-	inverse_matrix2 = matrix_inverse(matrix2);
+	inverse_matrix2 = inverse(matrix2);
 
 	// ACT
 	result = matrix_multiply(matrix3, inverse_matrix2);

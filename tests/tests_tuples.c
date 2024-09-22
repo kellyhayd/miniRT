@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tests_tuples.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:32:15 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/08/20 21:42:09 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/09/22 12:56:14 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,7 +208,7 @@ void	test_vector_magnitude(int num_test)
 	double	result;
 
 	// ACT
-	result = vector_magnitude(vector1);
+	result = magnitude(vector1);
 
 	// ASSERT
 	print_result(num_test, &expected, &result, float_compare_test, print_ko_float);
@@ -222,7 +222,7 @@ void	test_vector_magnitude_positive(int num_test)
 	double	result;
 
 	// ACT
-	result = vector_magnitude(vector1);
+	result = magnitude(vector1);
 
 	// ASSERT
 	print_result(num_test, &expected, &result, float_compare_test, print_ko_float);
@@ -236,7 +236,7 @@ void	test_vector_magnitude_negative(int num_test)
 	double	result;
 
 	// ACT
-	result = vector_magnitude(vector1);
+	result = magnitude(vector1);
 
 	// ASSERT
 	print_result(num_test, &expected, &result, float_compare_test, print_ko_float);
@@ -250,7 +250,7 @@ void	test_vector_normalize_1(int num_test)
 	t_tuple	result;
 
 	// ACT
-	result = vector_normalize(vector1);
+	result = normalize(vector1);
 
 	// ASSERT
 	print_result(num_test, &expected, &result, tuple_compare_test, print_ko_tuple);
@@ -264,7 +264,7 @@ void	test_vector_normalize_2(int num_test)
 	t_tuple	result;
 
 	// ACT
-	result = vector_normalize(vector1);
+	result = normalize(vector1);
 
 	// ASSERT
 	print_result(num_test, &expected, &result, tuple_compare_test, print_ko_tuple);
@@ -274,12 +274,12 @@ void	test_vector_normalize_3(int num_test)
 {
 	// ARRANGE
 	t_tuple	vector1 = vector(1, 2, 3);
-	t_tuple	norm_vector = vector_normalize(vector1);
+	t_tuple	norm_vector = normalize(vector1);
 	double	expected = 1.0;
 	double	result;
 
 	// ACT
-	result = vector_magnitude(norm_vector);
+	result = magnitude(norm_vector);
 
 	// ASSERT
 	print_result(num_test, &expected, &result, float_compare_test, print_ko_float);
@@ -294,7 +294,7 @@ void	test_dot_product(int num_test)
 	double	result;
 
 	// ACT
-	result = vector_dot_product(vector1, vector2);
+	result = dot(vector1, vector2);
 
 	// ASSERT
 	print_result(num_test, &expected, &result, float_compare_test, print_ko_float);
@@ -309,7 +309,7 @@ void	test_cross_product_A_B(int num_test)
 	t_tuple	result;
 
 	// ACT
-	result = vector_cross_product(vector1, vector2);
+	result = cross(vector1, vector2);
 
 	// ASSERT
 	print_result(num_test, &expected, &result, tuple_compare_test, print_ko_tuple);
@@ -324,7 +324,7 @@ void	test_cross_product_B_A(int num_test)
 	t_tuple	result;
 
 	// ACT
-	result = vector_cross_product(vector2, vector1);
+	result = cross(vector2, vector1);
 
 	// ASSERT
 	print_result(num_test, &expected, &result, tuple_compare_test, print_ko_tuple);

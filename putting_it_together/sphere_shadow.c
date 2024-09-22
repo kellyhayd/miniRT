@@ -16,8 +16,8 @@ void	create_sphere(mlx_image_t *image)
 	t_point	wall_point;
 	t_ray	ray_to_wall;
 	t_hit	*hit_list = NULL;
-	
-	t_matrix	scale_matrix = matrix_scaling(2, 2, 2);
+
+	t_matrix	scale_matrix = scaling(2, 2, 2);
 	// t_matrix	rotating_matrix = matrix_rotation_x(3.14159265358979323846 / 4);
 	// t_matrix	result = matrix_multiply(scale_matrix, rotating_matrix);
 	set_transformation(&red_sphere, scale_matrix);
@@ -31,7 +31,7 @@ void	create_sphere(mlx_image_t *image)
 			world_y = half - y * canvas_pixel_world_size;
 
 			wall_point = point(world_x, world_y, wall_position_z);
-			ray_to_wall = ray(ray_origin, vector_normalize(tuple_subtract(wall_point, ray_origin)));
+			ray_to_wall = ray(ray_origin, normalize(tuple_subtract(wall_point, ray_origin)));
 
 			intersect(&hit_list, red_sphere, ray_to_wall);
 

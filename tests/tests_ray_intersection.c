@@ -405,7 +405,7 @@ void	test_translating_a_ray(int num_test)
 {
 	// ARRANGE
 	t_ray		r = ray(point(1, 2, 3), vector(0, 1, 0));
-	t_matrix	m = matrix_translation(3, 4, 5);
+	t_matrix	m = translation(3, 4, 5);
 	t_ray		expected = ray(point(4, 6, 8), vector(0, 1, 0));
 	t_ray		result;
 
@@ -420,7 +420,7 @@ void test_scaling_a_ray(int num_test)
 {
 	// ARRANGE
 	t_ray		r = ray(point(1, 2, 3), vector(0, 1, 0));
-	t_matrix	m = matrix_scaling(2, 3, 4);
+	t_matrix	m = scaling(2, 3, 4);
 	t_ray		expected = ray(point(2, 6, 12), vector(0, 3, 0));
 	t_ray		result;
 
@@ -449,7 +449,7 @@ void	test_changing_a_sphere_transformation(int num_test)
 {
 	// ARRANGE
 	t_shape		s = sphere();
-	t_matrix	t = matrix_translation(2, 3, 4);
+	t_matrix	t = translation(2, 3, 4);
 	t_matrix	expected = t;
 	t_matrix	result;
 
@@ -466,7 +466,7 @@ void	test_intersecting_a_scaled_sphere_with_a_ray(int num_test)
 	// ARRANGE
 	t_ray		r = ray(point(0, 0, -5), vector(0, 0, 1));
 	t_shape		s = sphere();
-	t_matrix	m = matrix_scaling(2, 2, 2);
+	t_matrix	m = scaling(2, 2, 2);
 	t_hit		*expected;
 	t_hit		*result = NULL;
 	int			xs_count_expected = 2;
@@ -500,7 +500,7 @@ void	test_intersecting_a_translated_sphere_with_a_ray(int num_test)
 	// ARRANGE
 	t_ray		r = ray(point(0, 0, -5), vector(0, 0, 1));
 	t_shape		s = sphere();
-	t_matrix	m = matrix_translation(5, 0, 0);
+	t_matrix	m = translation(5, 0, 0);
 	t_hit		*expected;
 	t_hit		*result = NULL;
 	int			xs_count_expected = 0;

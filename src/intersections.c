@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersections.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 19:52:47 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/14 22:06:18 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/09/22 12:56:00 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void	intersect_sphere(t_hit **hit_list, t_shape s, t_ray r)
 	double		c;
 
 	sphere_to_ray = tuple_subtract(r.origin, s.sphere_shape.origin);
-	a = vector_dot_product(r.direction, r.direction);
-	b = 2 * vector_dot_product(r.direction, sphere_to_ray);
-	c = vector_dot_product(sphere_to_ray, sphere_to_ray) - 1;
+	a = dot(r.direction, r.direction);
+	b = 2 * dot(r.direction, sphere_to_ray);
+	c = dot(sphere_to_ray, sphere_to_ray) - 1;
 	discriminant = pow(b, 2) - 4 * a * c;
 	if (discriminant < 0)
 		return ;

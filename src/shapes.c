@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shapes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 12:00:36 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/14 22:02:50 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/09/22 13:43:33 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 void	set_transformation(t_shape *shape, t_matrix tranformation)
 {
 	shape->transform = tranformation;
-	shape->inverse = matrix_inverse(tranformation);
-	shape->transpose = matrix_transposing(tranformation);
+	shape->inverse = inverse(tranformation);
+	shape->transpose = transposing(tranformation);
 }

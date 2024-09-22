@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 16:38:28 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/08/11 20:16:02 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/22 12:55:50 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int main(void)
 	environment	env;
 
 	proj.position = point(0, 1, 0);
-	proj.velocity = vector_normalize(vector(1, 1, 0));
+	proj.velocity = normalize(vector(1, 1, 0));
 
 	env.gravity = vector(0, -0.1, 0);
 	env.wind = vector(-0.01, 0, 0);

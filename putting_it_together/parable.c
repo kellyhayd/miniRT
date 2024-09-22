@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parable.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 18:10:47 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/08/11 23:10:21 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/09/22 12:55:50 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	create_parable(mlx_image_t *image)
 	environment	env;
 
 	proj.position = point(0, 1, 0);
-	proj.velocity = tuple_multiply(vector_normalize(vector(1, 1.8, 0)), 6.5);
+	proj.velocity = tuple_multiply(normalize(vector(1, 1.8, 0)), 6.5);
 
 	env.gravity = vector(0, -0.1, 0);
 	env.wind = vector(-0.01, 0, 0);
