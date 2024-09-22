@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sphere.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 22:28:43 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/18 18:19:34 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/09/22 16:15:29 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ t_shape	sphere(void)
 
 	new_sphere.sphere_shape.origin = point(0, 0, 0);
 	new_sphere.sphere_shape.radius = 1;
-	new_sphere.transform = matrix_identity();
-	new_sphere.inverse = matrix_identity();
-	new_sphere.transpose = matrix_identity();
+	new_sphere.transform = identity();
+	new_sphere.inverse = identity();
+	new_sphere.transpose = identity();
 	return (new_sphere);
 }

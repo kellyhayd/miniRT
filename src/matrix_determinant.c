@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 13:55:40 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/22 14:13:31 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/22 16:03:01 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ double	determinant(t_matrix matrix)
 	col = 0;
 	result = 0;
 	if (matrix.cols == 2 && matrix.rows == 2)
-		result = matrix_get(&matrix, 0, 0) * matrix_get(&matrix, 1, 1)
-			- matrix_get(&matrix, 0, 1) * matrix_get(&matrix, 1, 0);
+		result = mx_get(&matrix, 0, 0) * mx_get(&matrix, 1, 1)
+			- mx_get(&matrix, 0, 1) * mx_get(&matrix, 1, 0);
 	else
 	{
 		while (col < matrix.cols)
 		{
-			result += matrix_get(&matrix, 0, col) * cofactor(matrix, 0, col);
+			result += mx_get(&matrix, 0, col) * cofactor(matrix, 0, col);
 			col++;
 		}
 	}
@@ -52,7 +52,7 @@ t_matrix	submatrix(t_matrix matrix, int y, int x)
 		while (im1 < matrix.cols)
 		{
 			if (im1 != x && jm1 != y)
-				matrix_set(&result, jm2, im2++, matrix_get(&matrix, jm1, im1));
+				mx_set(&result, jm2, im2++, mx_get(&matrix, jm1, im1));
 			im1++;
 		}
 		if (jm1 != y)

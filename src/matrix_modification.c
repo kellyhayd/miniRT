@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 13:57:37 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/22 14:13:03 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/22 16:05:24 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ static double	mult_element(t_matrix matrix1, t_matrix matrix2, int y, int x)
 	value = 0;
 	while (idx < matrix1.cols)
 	{
-		value += matrix_get(&matrix1, y, idx) * matrix_get(&matrix2, idx, x);
+		value += mx_get(&matrix1, y, idx) * mx_get(&matrix2, idx, x);
 		idx++;
 	}
 	return (value);
 }
 
-t_matrix	matrix_multiply(t_matrix matrix1, t_matrix matrix2)
+t_matrix	mx_multiply(t_matrix matrix1, t_matrix matrix2)
 {
 	t_matrix	result;
 	int			i;
@@ -44,7 +44,7 @@ t_matrix	matrix_multiply(t_matrix matrix1, t_matrix matrix2)
 		i = 0;
 		while (i < matrix1.cols)
 		{
-			matrix_set(&result, j, i, multiply_element(matrix1, matrix2, j, i));
+			mx_set(&result, j, i, mult_element(matrix1, matrix2, j, i));
 			i++;
 		}
 		j++;
@@ -52,7 +52,7 @@ t_matrix	matrix_multiply(t_matrix matrix1, t_matrix matrix2)
 	return (result);
 }
 
-t_tuple	matrix_multiply_tuple(t_matrix matrix, t_tuple tuple1)
+t_tuple	mx_multiply_tuple(t_matrix matrix, t_tuple tuple1)
 {
 	int		i;
 	double	values_tuple[4];
@@ -63,10 +63,10 @@ t_tuple	matrix_multiply_tuple(t_matrix matrix, t_tuple tuple1)
 	i = 0;
 	while (i < matrix.cols)
 	{
-		values_tuple[i] = matrix_get(&matrix, i, 0) * tuple1.x + \
-							matrix_get(&matrix, i, 1) * tuple1.y + \
-							matrix_get(&matrix, i, 2) * tuple1.z + \
-							matrix_get(&matrix, i, 3) * tuple1.w;
+		values_tuple[i] = mx_get(&matrix, i, 0) * tuple1.x + \
+							mx_get(&matrix, i, 1) * tuple1.y + \
+							mx_get(&matrix, i, 2) * tuple1.z + \
+							mx_get(&matrix, i, 3) * tuple1.w;
 		i++;
 	}
 	result.x = values_tuple[0];
@@ -90,7 +90,7 @@ t_matrix	transposing(t_matrix matrix)
 		x = 0;
 		while (x < matrix.cols)
 		{
-			matrix_set(&result, y, x, matrix_get(&matrix, x, y));
+			mx_set(&result, y, x, mx_get(&matrix, x, y));
 			x++;
 		}
 		y++;
@@ -120,7 +120,7 @@ t_matrix	inverse(t_matrix matrix)
 		while (++i < result.cols)
 		{
 			matrix_cofactor = cofactor(matrix, i, j);
-			matrix_set(&result, j, i, matrix_cofactor / matrix_determinant);
+			mx_set(&result, j, i, matrix_cofactor / matrix_determinant);
 		}
 	}
 	return (result);

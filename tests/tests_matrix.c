@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 20:09:01 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/22 13:43:33 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/22 16:03:26 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	test_matrix_compare_true(int num_test)
 	ft_memcpy(matrix2.tab, tab2, sizeof(double) * matrix2.rows * matrix2.cols);
 
 	// ACT
-	result = matrix_compare(matrix1, matrix2);
+	result = mx_compare(matrix1, matrix2);
 
 	// ASSERT
 	print_result(num_test, &expected, &result, int_compare_test, print_ko_int);
@@ -106,7 +106,7 @@ void	test_matrix_compare_false(int num_test)
 	ft_memcpy(matrix2.tab, tab2, sizeof(double) * matrix2.rows * matrix2.cols);
 
 	// ACT
-	result = matrix_compare(matrix1, matrix2);
+	result = mx_compare(matrix1, matrix2);
 
 	// ASSERT
 	print_result(num_test, &expected, &result, int_compare_test, print_ko_int);
@@ -153,7 +153,7 @@ void	test_matrix_multiplying(int num_test)
 	ft_memcpy(expected.tab, result_tab, sizeof(double) * expected.rows * expected.cols);
 
 	// ACT
-	result = matrix_multiply(matrix1, matrix2);
+	result = mx_multiply(matrix1, matrix2);
 
 	// ASSERT
 	print_result(num_test, &expected, &result, matrix_compare_test, print_ko_matrix);
@@ -184,7 +184,7 @@ void	test_matrix_multiplying_tuple(int num_test)
 	ft_memcpy(matrix1.tab, tab1, sizeof(double) * matrix1.rows * matrix1.cols);
 
 	// ACT
-	result = matrix_multiply_tuple(matrix1, tuple1);
+	result = mx_multiply_tuple(matrix1, tuple1);
 
 	// ASSERT
 	print_result(num_test, &expected, &result, tuple_compare_test, print_ko_tuple);
@@ -224,7 +224,7 @@ void	test_matrix_multiplying_identity(int num_test)
 	expected = matrix1;
 
 	// ACT
-	result = matrix_multiply(matrix1, matrix_identity);
+	result = mx_multiply(matrix1, matrix_identity);
 
 	// ASSERT
 	print_result(num_test, &expected, &result, matrix_compare_test, print_ko_matrix);
@@ -646,11 +646,11 @@ void	test_multiplying_a_product_by_its_inverse(int num_test)
 	t_matrix	result;
 	t_matrix	expected = matrix1;
 
-	matrix3 = matrix_multiply(matrix1, matrix2);
+	matrix3 = mx_multiply(matrix1, matrix2);
 	inverse_matrix2 = inverse(matrix2);
 
 	// ACT
-	result = matrix_multiply(matrix3, inverse_matrix2);
+	result = mx_multiply(matrix3, inverse_matrix2);
 
 	// ASSERT
 	print_result(num_test, &expected, &result, matrix_compare_test, print_ko_matrix);

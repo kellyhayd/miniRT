@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 20:39:46 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/14 19:37:16 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/22 16:03:26 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_ray	ray_transform(t_ray ray, t_matrix matrix)
 {
 	t_ray	new_ray;
 
-	new_ray.origin = matrix_multiply_tuple(matrix, ray.origin);
-	new_ray.direction = matrix_multiply_tuple(matrix, ray.direction);
+	new_ray.origin = mx_multiply_tuple(matrix, ray.origin);
+	new_ray.direction = mx_multiply_tuple(matrix, ray.direction);
 	return (new_ray);
 }

@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:01:38 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/22 13:44:46 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/22 16:31:17 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ typedef struct s_tuple	t_point;
 typedef struct s_tuple	t_vector;
 
 typedef struct s_hit	t_hit;
-typedef struct s_shape	t_shape;
-typedef struct s_sphere	t_sphere;
+// typedef struct s_shape	t_shape;
+// typedef struct s_sphere	t_sphere;
 
 struct s_tuple
 {
@@ -156,23 +156,29 @@ void		write_pixel(mlx_image_t *image, int x, int y, int color);
 //                                   matrix                                   //
 // -------------------------------------------------------------------------- //
 
+//--------------------------------------------------------------------- basic
 t_matrix	matrix_create(double *tab, int rows, int cols);
-int			matrix_compare(t_matrix matrix1, t_matrix matrix2);
-void		matrix_set(t_matrix *matrix1, int y, int x, double value);
-double		matrix_get(t_matrix *matrix1, int y, int x);
-t_matrix	matrix_identity(void);
+int			mx_compare(t_matrix matrix1, t_matrix matrix2);
+void		mx_set(t_matrix *matrix1, int y, int x, double value);
+double		mx_get(t_matrix *matrix1, int y, int x);
+t_matrix	identity(void);
 
-t_matrix	matrix_multiply(t_matrix matrix1, t_matrix matrix2);
-t_tuple		matrix_multiply_tuple(t_matrix matrix1, t_tuple tuple1);
+//--------------------------------------------------------------- modification
+t_matrix	mx_multiply(t_matrix matrix1, t_matrix matrix2);
+t_tuple		mx_multiply_tuple(t_matrix matrix1, t_tuple tuple1);
 t_matrix	transposing(t_matrix matrix1);
+t_matrix	inverse(t_matrix matrix);
 
+//---------------------------------------------------------------- determinant
 double		determinant(t_matrix matrix1);
 t_matrix	submatrix(t_matrix matrix1, int y, int x);
 double		minor(t_matrix matrix1, int y, int x);
 double		cofactor(t_matrix matrix, int y, int x);
-t_matrix	inverse(t_matrix matrix);
 
-// transformation
+// -------------------------------------------------------------------------- //
+//                             transformation                                 //
+// -------------------------------------------------------------------------- //
+
 t_matrix	translation(double x, double y, double z);
 t_matrix	scaling(double x, double y, double z);
 t_matrix	rotation_x(double radians);
@@ -180,22 +186,35 @@ t_matrix	rotation_y(double radians);
 t_matrix	rotation_z(double radians);
 t_matrix	shearing(double *prop_x, double *prop_y, double *prop_z);
 
-// ray
+// -------------------------------------------------------------------------- //
+//                                    ray                                     //
+// -------------------------------------------------------------------------- //
+
 t_ray		ray(t_point origin, t_vector direction);
 t_point		position(t_ray r, double t);
 t_ray		ray_transform(t_ray ray, t_matrix matrix);
 
-// shapes
+// -------------------------------------------------------------------------- //
+//                                   shapes                                   //
+// -------------------------------------------------------------------------- //
+
 t_shape		sphere(void);
 void		set_transformation(t_shape *shape, t_matrix tranformation);
 
-// intersection
+// -------------------------------------------------------------------------- //
+//                                intersection                                //
+// -------------------------------------------------------------------------- //
+
 void		intersect(t_hit **hit_list, t_shape s, t_ray r);
 t_hit		intersection(double t, t_shape s);
 int			intersection_count(t_hit *hit_list);
 void		hit_clear_list(t_hit **hit_list);
 void		add_intersection(t_hit **hit_list, t_hit isect);
 t_hit		*hit(t_hit *hit_list);
+
+// light and shading (reflection?)
+t_vector	normal_at(t_shape shape, t_point p);
+
 
 // -------------------------------------------------------------------------- //
 //                                   utils                                    //

@@ -435,7 +435,7 @@ void	test_a_sphere_default_transformation(int num_test)
 {
 	// ARRANGE
 	t_shape		s = sphere();
-	t_matrix	expected = matrix_identity();
+	t_matrix	expected = identity();
 	t_matrix	result;
 
 	// ACT
