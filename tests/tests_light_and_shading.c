@@ -6,11 +6,12 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 15:24:42 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/22 17:58:36 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/22 21:47:38 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tests.h"
+#include <math.h>
 
 // TEST 01
 void	test_normal_on_sphere_at_a_point_on_the_x_axis(int num_test)
@@ -56,6 +57,8 @@ void	test_normal_on_sphere_at_a_point_on_the_z_axis(int num_test)
 	// ASSERT
 	print_result(num_test, &expected, &result, tuple_compare_test, print_ko_tuple);
 }
+
+// TEST 04
 void	test_normal_on_sphere_at_a_nonaxial_point(int num_test)
 {
 	// ARRANGE
@@ -70,14 +73,50 @@ void	test_normal_on_sphere_at_a_nonaxial_point(int num_test)
 	print_result(num_test, &expected, &result, tuple_compare_test, print_ko_tuple);
 }
 
+// TEST 05
+void	test_normal_on_a_translated_sphere(int num_test)
+{
+	// ARRANGE
+	t_shape		s = sphere();
+	t_vector	expected = vector(0, 0.70711, -0.70711);
+	t_vector	result;
+
+	// ACT
+	set_transformation(&s, translation(0, 1, 0));
+	result = normal_at(s, point(0, 1.70711, -0.70711));
+
+	// ASSERT
+	print_result(num_test, &expected, &result, tuple_compare_test, print_ko_tuple);
+}
+
+// TEST 06
+void	test_normal_on_a_transformed_sphere(int num_test)
+{
+	// ARRANGE
+	t_shape		s = sphere();
+	t_matrix	mx;
+	t_vector	expected = vector(0, 0.97014, -0.24254);
+	t_vector	result;
+
+	// ACT
+	mx = mx_multiply(scaling(1, 0.5, 1), rotation_z(M_PI/5));
+	set_transformation(&s, mx);
+	result = normal_at(s, point(0, sqrt(2)/2, -sqrt(2)/2));
+
+	// ASSERT
+	print_result(num_test, &expected, &result, tuple_compare_test, print_ko_tuple);
+}
+
 int	main()
 {
 	void	(*test_funcs[])(int) =
 	{
-		test_normal_on_sphere_at_a_point_on_the_x_axis,					// 01
-		test_normal_on_sphere_at_a_point_on_the_y_axis,					// 02
-		test_normal_on_sphere_at_a_point_on_the_z_axis,					// 03
-		test_normal_on_sphere_at_a_nonaxial_point,						// 04
+		test_normal_on_sphere_at_a_point_on_the_x_axis,			// 01
+		test_normal_on_sphere_at_a_point_on_the_y_axis,			// 02
+		test_normal_on_sphere_at_a_point_on_the_z_axis,			// 03
+		test_normal_on_sphere_at_a_nonaxial_point,				// 04
+		test_normal_on_a_translated_sphere,						// 05
+		test_normal_on_a_transformed_sphere,					// 06
 	};
 
 	printf("\n%sTESTING LIGHT AND SHANDING:%s\n", YELLOW, RESET);

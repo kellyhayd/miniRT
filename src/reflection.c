@@ -6,14 +6,21 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 15:49:48 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/22 17:55:46 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/22 22:08:52 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_tuple	normal_at(t_shape shape, t_point pt)
+t_vector	normal_at(t_shape s, t_point world_point)
 {
-	(void)shape;
-	return (normalize(tuple_subtract(pt, point(0, 0, 0))));
+	t_point		obj_point;
+	t_point		obj_normal;
+	t_vector	world_normal;
+
+	obj_point = mx_multiply_tuple(inverse(s.transform), world_point);
+	obj_normal = tuple_subtract(obj_point, point(0, 0, 0));
+	world_normal = mx_multiply_tuple(transpose(inverse(s.transform)), obj_normal);
+	world_normal.w = 0;
+	return (normalize(world_normal));
 }
