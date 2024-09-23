@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 21:41:13 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/22 18:37:32 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/09/22 22:11:15 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@ void	print_result(int num_test, void *expected, void *result,
 						int (*compare)(void *, void *),
 						void (*print_ko)(int, void *, void *))
 {
+	static int	num_test_global = 0;
+
+	num_test_global++;
+	printf(BLUE "%2d" RESET " -> ", num_test_global);
+
 	if (compare(expected, result))
 		print_ok(num_test);
 	else
