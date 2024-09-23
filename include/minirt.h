@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:01:38 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/22 17:44:11 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/22 22:04:08 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,7 @@ t_matrix	identity(void);
 //--------------------------------------------------------------- modification
 t_matrix	mx_multiply(t_matrix matrix1, t_matrix matrix2);
 t_tuple		mx_multiply_tuple(t_matrix matrix1, t_tuple tuple1);
-t_matrix	transposing(t_matrix matrix1);
+t_matrix	transpose(t_matrix matrix1);
 t_matrix	inverse(t_matrix matrix);
 
 //---------------------------------------------------------------- determinant
@@ -213,7 +213,7 @@ void		add_intersection(t_hit **hit_list, t_hit isect);
 t_hit		*hit(t_hit *hit_list);
 
 // light and shading (reflection?)
-t_tuple	normal_at(t_shape shape, t_point pt);
+t_vector	normal_at(t_shape shape, t_point world_point);
 
 
 // -------------------------------------------------------------------------- //

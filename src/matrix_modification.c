@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 13:57:37 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/22 16:05:24 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/22 22:01:11 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ t_tuple	mx_multiply_tuple(t_matrix matrix, t_tuple tuple1)
 	return (result);
 }
 
-t_matrix	transposing(t_matrix matrix)
+t_matrix	transpose(t_matrix matrix)
 {
 	int			x;
 	int			y;

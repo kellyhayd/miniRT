@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 20:09:01 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/22 16:03:26 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/22 22:01:11 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -260,7 +260,7 @@ void	test_matrix_transpose(int num_test)
 	ft_memcpy(expected.tab, result_tab, sizeof(double) * expected.rows * expected.cols);
 
 	// ACT
-	result = transposing(matrix1);
+	result = transpose(matrix1);
 
 	// ASSERT
 	print_result(num_test, &expected, &result, matrix_compare_test, print_ko_matrix);
@@ -288,7 +288,7 @@ void	test_matrix_transpose_identity(int num_test)
 	expected = matrix_identity;
 
 	// ACT
-	result = transposing(matrix_identity);
+	result = transpose(matrix_identity);
 
 	// ASSERT
 	print_result(num_test, &expected, &result, matrix_compare_test, print_ko_matrix);
