@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:01:38 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/22 22:04:08 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/22 18:32:34 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,6 @@
 # define MINIRT_H
 
 # define RESET  "\001\033[0m\002"
-// # define R      "\001\033[1;31m\002"
-// # define G      "\001\033[1;32m\002"
-// # define B      "\001\033[1;34m\002"
-// # define C      "\001\033[1;36m\002"
-// # define M      "\001\033[1;35m\002"
-// # define Y      "\001\033[1;33m\002"
-// # define W      "\001\033[1;37m\002"
 # define ORANGE "\001\033[38;5;208m\002"
 # define BLUE   "\001\033[38;5;27m\002"
 # define GREEN  "\001\033[38;5;46m\002"
@@ -156,20 +149,20 @@ void		write_pixel(mlx_image_t *image, int x, int y, int color);
 //                                   matrix                                   //
 // -------------------------------------------------------------------------- //
 
-//--------------------------------------------------------------------- basic
+// ---------------------------------- basic --------------------------------- //
 t_matrix	matrix_create(double *tab, int rows, int cols);
 int			mx_compare(t_matrix matrix1, t_matrix matrix2);
 void		mx_set(t_matrix *matrix1, int y, int x, double value);
 double		mx_get(t_matrix *matrix1, int y, int x);
 t_matrix	identity(void);
 
-//--------------------------------------------------------------- modification
+// ------------------------------ modification ------------------------------ //
 t_matrix	mx_multiply(t_matrix matrix1, t_matrix matrix2);
 t_tuple		mx_multiply_tuple(t_matrix matrix1, t_tuple tuple1);
 t_matrix	transpose(t_matrix matrix1);
 t_matrix	inverse(t_matrix matrix);
 
-//---------------------------------------------------------------- determinant
+// ------------------------------ determinant ------------------------------- //
 double		determinant(t_matrix matrix1);
 t_matrix	submatrix(t_matrix matrix1, int y, int x);
 double		minor(t_matrix matrix1, int y, int x);

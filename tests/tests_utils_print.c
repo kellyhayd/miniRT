@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 21:41:13 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/13 23:58:52 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/09/22 23:06:34 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@ void	print_result(int num_test, void *expected, void *result,
 						int (*compare)(void *, void *),
 						void (*print_ko)(int, void *, void *))
 {
+	static int	num_test_global = 0;
+
+	num_test_global++;
+	printf(BLUE "%2d" RESET " -> ", num_test_global);
+
 	if (compare(expected, result))
 		print_ok(num_test);
 	else
@@ -104,12 +109,12 @@ void	print_ko_matrix(int num_test, void *expected, void *result)
 
 void	print_ko_ray(int num_test, void *expected, void *result)
 {
-	t_ray	*ray_expected;
-	t_ray	*ray_result;
+	t_ray	*ray_expected = expected;
+	t_ray	*ray_result = result;
 
 	printf(PURPLE "%2d" RESET " - " RED "[ ✗ ] " RESET
 		"Expected: origin (%.2lf, %.2lf, %.2lf, %.2lf) direction (%.2lf, %.2lf, %.2lf, %.2lf)\n"
-		"Result: origin (%.2lf, %.2lf, %.2lf, %.2lf) direction (%.2lf, %.2lf, %.2lf, %.2lf)\n",
+		"\t\tResult: origin (%.2lf, %.2lf, %.2lf, %.2lf) direction (%.2lf, %.2lf, %.2lf, %.2lf)\n",
 		num_test,
 		ray_expected->origin.x, ray_expected->origin.y, ray_expected->origin.z, ray_expected->origin.w,
 		ray_expected->direction.x, ray_expected->direction.y, ray_expected->direction.z, ray_expected->direction.w,
@@ -125,7 +130,7 @@ void	print_ko_shape(int num_test, void *expected, void *result)
 
 	printf(PURPLE "%2d" RESET " - " RED "[ ✗ ] " RESET
 		"Expected: sphere (origin (%.2lf, %.2lf, %.2lf) radius (%.2lf))\n"
-		"Result: sphere (origin (%.2lf, %.2lf, %.2lf) radius (%.2lf))\n",
+		"\t\tResult: sphere (origin (%.2lf, %.2lf, %.2lf) radius (%.2lf))\n",
 		num_test,
 		shape_expected->sphere_shape.origin.x, shape_expected->sphere_shape.origin.y, shape_expected->sphere_shape.origin.z, shape_expected->sphere_shape.radius,
 		shape_result->sphere_shape.origin.x, shape_result->sphere_shape.origin.y, shape_result->sphere_shape.origin.z, shape_result->sphere_shape.radius

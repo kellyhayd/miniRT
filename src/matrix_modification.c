@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrix_modification.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 13:57:37 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/22 22:01:11 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/22 21:43:38 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,10 @@ t_tuple	mx_multiply_tuple(t_matrix matrix, t_tuple tuple1)
 	i = 0;
 	while (i < matrix.cols)
 	{
-		values_tuple[i] = mx_get(&matrix, i, 0) * tuple1.x + \
-							mx_get(&matrix, i, 1) * tuple1.y + \
-							mx_get(&matrix, i, 2) * tuple1.z + \
-							mx_get(&matrix, i, 3) * tuple1.w;
+		values_tuple[i] = mx_get(&matrix, i, 0) * tuple1.x
+							+ mx_get(&matrix, i, 1) * tuple1.y
+							+ mx_get(&matrix, i, 2) * tuple1.z
+							+ mx_get(&matrix, i, 3) * tuple1.w;
 		i++;
 	}
 	result.x = values_tuple[0];
@@ -100,8 +100,8 @@ t_matrix	transpose(t_matrix matrix)
 
 t_matrix	inverse(t_matrix matrix)
 {
-	int			i;
-	int			j;
+	int			x;
+	int			y;
 	double		matrix_cofactor;
 	double		matrix_determinant;
 	t_matrix	result;
@@ -113,15 +113,17 @@ t_matrix	inverse(t_matrix matrix)
 	if (matrix_determinant == 0)
 		return (result);
 	matrix_cofactor = 0;
-	j = -1;
-	while (++j < result.rows)
+	y = 0;
+	while (y < result.rows)
 	{
-		i = -1;
-		while (++i < result.cols)
+		x = 0;
+		while (x < result.cols)
 		{
-			matrix_cofactor = cofactor(matrix, i, j);
-			mx_set(&result, j, i, matrix_cofactor / matrix_determinant);
+			matrix_cofactor = cofactor(matrix, x, y);
+			mx_set(&result, y, x, matrix_cofactor / matrix_determinant);
+			x++;
 		}
+		y++;
 	}
 	return (result);
 }

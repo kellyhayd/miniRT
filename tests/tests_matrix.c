@@ -3,42 +3,91 @@
 /*                                                        :::      ::::::::   */
 /*   tests_matrix.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 20:09:01 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/22 22:01:11 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/22 21:33:54 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tests.h"
 
-void	test_matrix_create(int num_test)
+void	test_constructing_and_inspecting_a_4x4_matrix(int num_test)
 {
 	// ARRANGE
-	double		matrix[] = {
+	double		tab[] = {
 		1,    2,    3,    4,
 		5.5,  6.5,  7.5,  8.5,
 		9,    10,   11,   12,
 		13.5, 14.5, 15.5, 16.5
 	};
 	t_matrix	expected = {
-							// .tab = matrix,
-							.rows = 4, .cols = 4
+							.rows = 4,
+							.cols = 4
 	};
 	t_matrix	result;
 	int			row_size = 4;
 	int			column_size = 4;
 
-	ft_memcpy(expected.tab, matrix, sizeof(double) * row_size * column_size);
+	ft_memcpy(expected.tab, tab, sizeof(double) * row_size * column_size);
 
 	// ACT
-	result = matrix_create(matrix, row_size, column_size);
+	result = matrix_create(tab, row_size, column_size);
 
 	// ASSERT
 	print_result(num_test, &expected, &result, matrix_compare_test, print_ko_matrix);
 }
 
-void	test_matrix_compare_true(int num_test)
+void	test_A_2x2_matrix_ought_to_be_representable(int num_test)
+{
+	// ARRANGE
+	double		tab[] = {
+		-3, 5,
+		1, -2
+	};
+	t_matrix	expected = {
+							.rows = 2,
+							.cols = 2
+	};
+	t_matrix	result;
+	int			row_size = 2;
+	int			column_size = 2;
+
+	ft_memcpy(expected.tab, tab, sizeof(double) * row_size * column_size);
+
+	// ACT
+	result = matrix_create(tab, row_size, column_size);
+
+	// ASSERT
+	print_result(num_test, &expected, &result, matrix_compare_test, print_ko_matrix);
+}
+
+void	test_a_3x3_matrix_ought_to_be_representable(int num_test)
+{
+	// ARRANGE
+	double		tab[] = {
+		-3, 5, 0,
+		1, -2, -7,
+		0, 1, 1
+	};
+	t_matrix	expected = {
+							.rows = 3,
+							.cols = 3
+	};
+	t_matrix	result;
+	int			row_size = 3;
+	int			column_size = 3;
+
+	ft_memcpy(expected.tab, tab, sizeof(double) * row_size * column_size);
+
+	// ACT
+	result = matrix_create(tab, row_size, column_size);
+
+	// ASSERT
+	print_result(num_test, &expected, &result, matrix_compare_test, print_ko_matrix);
+}
+
+void	test_matrix_equality_with_identical_matrices(int num_test)
 {
 	// ARRANGE
 	double		tab1[] = {
@@ -55,12 +104,12 @@ void	test_matrix_compare_true(int num_test)
 	};
 
 	t_matrix	matrix1 = {
-							// .tab = tab1,
-							.rows = 4, .cols = 4
+							.rows = 4,
+							.cols = 4
 	};
 	t_matrix	matrix2 = {
-							// .tab = tab2,
-							.rows = 4, .cols = 4
+							.rows = 4,
+							.cols = 4
 	};
 	int			result;
 	int			expected = 1;
@@ -75,7 +124,7 @@ void	test_matrix_compare_true(int num_test)
 	print_result(num_test, &expected, &result, int_compare_test, print_ko_int);
 }
 
-void	test_matrix_compare_false(int num_test)
+void	test_matrix_equality_with_different_matrices(int num_test)
 {
 	// ARRANGE
 	double		tab1[] = {
@@ -92,12 +141,12 @@ void	test_matrix_compare_false(int num_test)
 	};
 
 	t_matrix	matrix1 = {
-							// .tab = tab1,
-							.rows = 4, .cols = 4
+							.rows = 4,
+							.cols = 4
 	};
 	t_matrix	matrix2 = {
-							// .tab = tab2,
-							.rows = 4, .cols = 4
+							.rows = 4,
+							.cols = 4
 	};
 	int			result;
 	int			expected = 0;
@@ -112,7 +161,7 @@ void	test_matrix_compare_false(int num_test)
 	print_result(num_test, &expected, &result, int_compare_test, print_ko_int);
 }
 
-void	test_matrix_multiplying(int num_test)
+void	test_multiplying_two_matrices(int num_test)
 {
 	// ARRANGE
 	double		tab1[] = {
@@ -135,16 +184,16 @@ void	test_matrix_multiplying(int num_test)
 	};
 
 	t_matrix	matrix1 = {
-							// .tab = tab1,
-							.rows = 4, .cols = 4
+							.rows = 4,
+							.cols = 4
 	};
 	t_matrix	matrix2 = {
-							// .tab = tab2,
-							.rows = 4, .cols = 4
+							.rows = 4,
+							.cols = 4
 	};
 	t_matrix	expected = {
-							// .tab = result_tab,
-							.rows = 4, .cols = 4
+							.rows = 4,
+							.cols = 4
 	};
 	t_matrix	result;
 
@@ -159,7 +208,7 @@ void	test_matrix_multiplying(int num_test)
 	print_result(num_test, &expected, &result, matrix_compare_test, print_ko_matrix);
 }
 
-void	test_matrix_multiplying_tuple(int num_test)
+void	test_a_matrix_multiplied_by_a_tuple(int num_test)
 {
 	// ARRANGE
 	double		tab1[] = {
@@ -170,8 +219,8 @@ void	test_matrix_multiplying_tuple(int num_test)
 	};
 
 	t_matrix	matrix1 = {
-							// .tab = tab1,
-							.rows = 4, .cols = 4
+							.rows = 4,
+							.cols = 4
 	};
 	t_tuple		tuple1 = {
 		.x = 1, .y = 2, .z = 3, .w = 1
@@ -190,7 +239,7 @@ void	test_matrix_multiplying_tuple(int num_test)
 	print_result(num_test, &expected, &result, tuple_compare_test, print_ko_tuple);
 }
 
-void	test_matrix_multiplying_identity(int num_test)
+void	test_multiplying_a_matrix_by_the_identity_matrix(int num_test)
 {
 	// ARRANGE
 	double		tab1[] = {
@@ -208,12 +257,12 @@ void	test_matrix_multiplying_identity(int num_test)
 	};
 
 	t_matrix	matrix1 = {
-							// .tab = tab1,
-							.rows = 4, .cols = 4
+							.rows = 4,
+							.cols = 4
 	};
 	t_matrix	matrix_identity = {
-							// .tab = identity,
-							.rows = 4, .cols = 4
+							.rows = 4,
+							.cols = 4
 	};
 	t_matrix	expected;
 	t_matrix	result;
@@ -230,7 +279,38 @@ void	test_matrix_multiplying_identity(int num_test)
 	print_result(num_test, &expected, &result, matrix_compare_test, print_ko_matrix);
 }
 
-void	test_matrix_transpose(int num_test)
+void	test_mutiplying_the_identity_matrix_by_a_tuple(int num_test)
+{
+	// ARRANGE
+	double		tab[] = {
+		1, 0, 0, 0,
+		0, 1, 0, 0,
+		0, 0, 1, 0,
+		0, 0, 0, 1
+	};
+
+	t_matrix	matrix_identity = {
+							.rows = 4,
+							.cols = 4
+	};
+	t_tuple		tuple1 = {
+		.x = 1, .y = 2, .z = 3, .w = 4
+	};
+	t_tuple		expected = {
+		.x = 1, .y = 2, .z = 3, .w = 4
+	};
+	t_tuple		result;
+
+	ft_memcpy(matrix_identity.tab, tab, sizeof(double) * matrix_identity.rows * matrix_identity.cols);
+
+	// ACT
+	result = mx_multiply_tuple(matrix_identity, tuple1);
+
+	// ASSERT
+	print_result(num_test, &expected, &result, tuple_compare_test, print_ko_tuple);
+}
+
+void	test_transposing_a_matrix(int num_test)
 {
 	// ARRANGE
 	double		tab1[] = {
@@ -247,12 +327,12 @@ void	test_matrix_transpose(int num_test)
 	};
 
 	t_matrix	matrix1 = {
-							// .tab = tab1,
-							.rows = 4, .cols = 4
+							.rows = 4,
+							.cols = 4
 	};
 	t_matrix	expected = {
-							// .tab = result_tab,
-							.rows = 4, .cols = 4
+							.rows = 4,
+							.cols = 4
 	};
 	t_matrix	result;
 
@@ -266,7 +346,7 @@ void	test_matrix_transpose(int num_test)
 	print_result(num_test, &expected, &result, matrix_compare_test, print_ko_matrix);
 }
 
-void	test_matrix_transpose_identity(int num_test)
+void	test_transposing_the_identity_matrix(int num_test)
 {
 	// ARRANGE
 	double		identity[] = {
@@ -277,8 +357,8 @@ void	test_matrix_transpose_identity(int num_test)
 	};
 
 	t_matrix	matrix_identity = {
-							// .tab = identity,
-							.rows = 4, .cols = 4
+							.rows = 4,
+							.cols = 4
 	};
 	t_matrix	expected;
 	t_matrix	result;
@@ -294,7 +374,7 @@ void	test_matrix_transpose_identity(int num_test)
 	print_result(num_test, &expected, &result, matrix_compare_test, print_ko_matrix);
 }
 
-void	test_matrix_determinant_2x2(int num_test)
+void	test_calculating_the_determinant_of_a_2x2_matrix(int num_test)
 {
 	// ARRANGE
 	double		tab1[] = {
@@ -303,8 +383,8 @@ void	test_matrix_determinant_2x2(int num_test)
 	};
 
 	t_matrix	matrix1 = {
-							// .tab = tab1,
-							.rows = 2, .cols = 2
+							.rows = 2,
+							.cols = 2
 	};
 	double		expected = 17;
 	double		result;
@@ -318,58 +398,7 @@ void	test_matrix_determinant_2x2(int num_test)
 	print_result(num_test, &expected, &result, float_compare_test, print_ko_float);
 }
 
-void	test_matrix_determinant_3x3(int num_test)
-{
-	// ARRANGE
-	double		tab1[] = {
-		 1,  2,  6,
-		-5,  8, -4,
-		 2,  6,  4
-	};
-
-	t_matrix	matrix1 = {
-							// .tab = tab1,
-							.rows = 3, .cols = 3
-	};
-	double		expected = -196;
-	double		result;
-
-	ft_memcpy(matrix1.tab, tab1, sizeof(double) * matrix1.rows * matrix1.cols);
-
-	// ACT
-	result = determinant(matrix1);
-
-	// ASSERT
-	print_result(num_test, &expected, &result, float_compare_test, print_ko_float);
-}
-
-void	test_matrix_determinant_4x4(int num_test)
-{
-	// ARRANGE
-	double		tab1[] = {
-		-2, -8,  3,  5,
-		-3,  1,  7,  3,
-		 1,  2, -9,  6,
-		-6,  7,  7, -9
-	};
-
-	t_matrix	matrix1 = {
-							// .tab = tab1,
-							.rows = 4, .cols = 4
-	};
-	double		expected = -4071;
-	double		result;
-
-	ft_memcpy(matrix1.tab, tab1, sizeof(double) * matrix1.rows * matrix1.cols);
-
-	// ACT
-	result = determinant(matrix1);
-
-	// ASSERT
-	print_result(num_test, &expected, &result, float_compare_test, print_ko_float);
-}
-
-void	test_matrix_submatrix_3x3(int num_test)
+void	test_a_submatrix_of_a_3x3_matrix_is_a_2x2_matrix(int num_test)
 {
 	// ARRANGE
 	double		tab1[] = {
@@ -383,12 +412,12 @@ void	test_matrix_submatrix_3x3(int num_test)
 	};
 
 	t_matrix	matrix1 = {
-							// .tab = tab1,
-							.rows = 3, .cols = 3
+							.rows = 3,
+							.cols = 3
 	};
 	t_matrix	expected = {
-							// .tab = result_tab,
-							.rows = 2, .cols = 2
+							.rows = 2,
+							.cols = 2
 	};
 	t_matrix	result;
 
@@ -402,7 +431,7 @@ void	test_matrix_submatrix_3x3(int num_test)
 	print_result(num_test, &expected, &result, matrix_compare_test, print_ko_matrix);
 }
 
-void	test_matrix_submatrix_4x4(int num_test)
+void	test_a_submatrix_of_a_4x4_matrix_is_a_3x3_matrix(int num_test)
 {
 	// ARRANGE
 	double		tab1[] = {
@@ -418,12 +447,12 @@ void	test_matrix_submatrix_4x4(int num_test)
 	};
 
 	t_matrix	matrix1 = {
-							// .tab = tab1,
-							.rows = 4, .cols = 4
+							.rows = 4,
+							.cols = 4
 	};
 	t_matrix	expected = {
-							// .tab = result_tab,
-							.rows = 3, .cols = 3
+							.rows = 3,
+							.cols = 3
 	};
 	t_matrix	result;
 
@@ -437,17 +466,17 @@ void	test_matrix_submatrix_4x4(int num_test)
 	print_result(num_test, &expected, &result, matrix_compare_test, print_ko_matrix);
 }
 
-void	test_matrix_minor(int num_test)
+void	test_calculating_a_minor_of_a_3x3_matrix(int num_test)
 {
 	// ARRANGE
 	double		tab1[] = {
 		3,  5,  0,
 		2, -1, -7,
-		6,  -1,  5,
+		6, -1,  5,
 	};
 	t_matrix	matrix1 = {
-							// .tab = tab1,
-							.rows = 3, .cols = 3
+							.rows = 3,
+							.cols = 3
 	};
 	double		expected = 25;
 	double		result;
@@ -461,52 +490,157 @@ void	test_matrix_minor(int num_test)
 	print_result(num_test, &expected, &result, float_compare_test, print_ko_float);
 }
 
-void	test_matrix_cofactor_not_negate(int num_test)
+void	test_calculating_a_cofactor_of_a_3x3_matrix(int num_test)
 {
 	// ARRANGE
 	double		tab1[] = {
 		3,  5,  0,
 		2, -1, -7,
-		6,  -1,  5,
+		6, -1,  5,
 	};
 	t_matrix	matrix1 = {
-							// .tab = tab1,
-							.rows = 3, .cols = 3
+							.rows = 3,
+							.cols = 3
 	};
-	double		expected = -12;
+	double		expected1 = -12;
+	double		expected2 = -25;
+	double		result1;
+	double		result2;
+
+	ft_memcpy(matrix1.tab, tab1, sizeof(double) * matrix1.rows * matrix1.cols);
+
+	// ACT
+	result1 = cofactor(matrix1, 0, 0);
+	result2 = cofactor(matrix1, 1, 0);
+
+	// ASSERT
+	print_result(num_test, &expected1, &result1, float_compare_test, print_ko_float);
+	print_result(num_test, &expected2, &result2, float_compare_test, print_ko_float);
+}
+
+void	test_calculating_the_determinant_of_a_3x3_matrix(int num_test)
+{
+	// ARRANGE
+	double		tab1[] = {
+		 1,  2,  6,
+		-5,  8, -4,
+		 2,  6,  4
+	};
+
+	t_matrix	matrix1 = {
+							.rows = 3,
+							.cols = 3
+	};
+	double		cofactor_expected[] = {56, 12, -46};
+	double		cofactor_result[3];
+	double		expected = -196;
 	double		result;
 
 	ft_memcpy(matrix1.tab, tab1, sizeof(double) * matrix1.rows * matrix1.cols);
 
 	// ACT
-	result = cofactor(matrix1, 0, 0);
+	cofactor_result[0] = cofactor(matrix1, 0, 0);
+	cofactor_result[1] = cofactor(matrix1, 0, 1);
+	cofactor_result[2] = cofactor(matrix1, 0, 2);
+	result = determinant(matrix1);
 
 	// ASSERT
+	print_result(num_test, &(cofactor_result[0]), &(cofactor_expected[0]), float_compare_test, print_ko_float);
+	print_result(num_test, &(cofactor_result[1]), &(cofactor_expected[1]), float_compare_test, print_ko_float);
+	print_result(num_test, &(cofactor_result[2]), &(cofactor_expected[2]), float_compare_test, print_ko_float);
 	print_result(num_test, &expected, &result, float_compare_test, print_ko_float);
 }
 
-void	test_matrix_cofactor_negate(int num_test)
+void	test_matrix_determinant_4x4(int num_test)
 {
 	// ARRANGE
 	double		tab1[] = {
-		3,  5,  0,
-		2, -1, -7,
-		6,  -1,  5,
+		-2, -8,  3,  5,
+		-3,  1,  7,  3,
+		 1,  2, -9,  6,
+		-6,  7,  7, -9
 	};
+
 	t_matrix	matrix1 = {
-							// .tab = tab1,
-							.rows = 3, .cols = 3
+							.rows = 4,
+							.cols = 4
 	};
-	double		expected = -25;
+	double		cofactor_expected[] = {690, 447, 210, 51};
+	double		cofactor_result[4];
+	double		expected = -4071;
 	double		result;
 
 	ft_memcpy(matrix1.tab, tab1, sizeof(double) * matrix1.rows * matrix1.cols);
 
 	// ACT
-	result = cofactor(matrix1, 1, 0);
+	cofactor_result[0] = cofactor(matrix1, 0, 0);
+	cofactor_result[1] = cofactor(matrix1, 0, 1);
+	cofactor_result[2] = cofactor(matrix1, 0, 2);
+	cofactor_result[3] = cofactor(matrix1, 0, 3);
+	result = determinant(matrix1);
 
 	// ASSERT
+	print_result(num_test, &(cofactor_result[0]), &(cofactor_expected[0]), float_compare_test, print_ko_float);
+	print_result(num_test, &(cofactor_result[1]), &(cofactor_expected[1]), float_compare_test, print_ko_float);
+	print_result(num_test, &(cofactor_result[2]), &(cofactor_expected[2]), float_compare_test, print_ko_float);
+	print_result(num_test, &(cofactor_result[3]), &(cofactor_expected[3]), float_compare_test, print_ko_float);
 	print_result(num_test, &expected, &result, float_compare_test, print_ko_float);
+}
+
+void	test_testing_an_invertible_matrix_for_invertibility(int num_test)
+{
+	// ARRANGE
+	double		tab1[] = {
+		-5,  2,  6, -8,
+		 1, -5,  1,  8,
+		 7,  7, -6, -7,
+		 1, -3,  7,  4
+	};
+
+	t_matrix	matrix = {
+							.rows = 4,
+							.cols = 4
+	};
+
+	int			determinant_result;
+	int			result;
+	int			expected = 1;
+
+	ft_memcpy(matrix.tab, tab1, sizeof(double) * matrix.rows * matrix.cols);
+
+	// ACT
+	result = determinant(matrix) != 0;
+
+	// ASSERT
+	print_result(num_test, &expected, &result, int_compare_test, print_ko_int);
+}
+
+void	test_testing_a_noninvertible_matrix_for_invertibility(int num_test)
+{
+	// ARRANGE
+	double		tab1[] = {
+		-4,  2, -2, -3,
+		 9,  6,  2,  6,
+		 0, -5,  1, -5,
+		 0,  0,  0,  0
+	};
+
+	t_matrix	matrix = {
+							.rows = 4,
+							.cols = 4
+	};
+
+	int			determinant_result;
+	int			result;
+	int			expected = 0;
+
+	ft_memcpy(matrix.tab, tab1, sizeof(double) * matrix.rows * matrix.cols);
+
+	// ACT
+	result = determinant(matrix) != 0;
+
+	// ASSERT
+	print_result(num_test, &expected, &result, int_compare_test, print_ko_int);
 }
 
 void	test_calculating_the_inverse_of_a_matrix(int num_test)
@@ -526,22 +660,50 @@ void	test_calculating_the_inverse_of_a_matrix(int num_test)
 	};
 
 	t_matrix	matrix = {
-							// .tab = tab1,
-							.rows = 4, .cols = 4
+							.rows = 4,
+							.cols = 4
 	};
 	t_matrix	expected = {
-							// .tab = result_tab,
-							.rows = 4, .cols = 4
+							.rows = 4,
+							.cols = 4
 	};
-	t_matrix	result;
+	t_matrix result;
+
+	// determinant
+	double		determinant_expected = 532;
+	double		determinant_result;
+
+	// cofactors
+	double		cofactor_expected_2y_3x = -160;
+	double		cofactor_result_2y_3x;
+
+	double		cofactor_expected_3y_2x = 105;
+	double		cofactor_result_3y_2x;
+
+	// values
+	double		value_expected_2y_3x = -160 / 532.0;
+	double		value_result_2y_3x;
+
+	double		value_expected_3y_2x = 105 / 532.0;
+	double		value_result_3y_2x;
 
 	ft_memcpy(matrix.tab, tab1, sizeof(double) * matrix.rows * matrix.cols);
 	ft_memcpy(expected.tab, result_tab, sizeof(double) * expected.rows * expected.cols);
 
 	// ACT
+	determinant_result = determinant(matrix);
 	result = inverse(matrix);
+	cofactor_result_2y_3x = cofactor(matrix, 2, 3);
+	cofactor_result_3y_2x = cofactor(matrix, 3, 2);
+	value_result_2y_3x = cofactor_result_2y_3x / determinant_result;
+	value_result_3y_2x = cofactor_result_3y_2x / determinant_result;
 
 	// ASSERT
+	print_result(num_test, &determinant_expected, &determinant_result, float_compare_test, print_ko_float);
+	print_result(num_test, &cofactor_expected_2y_3x, &cofactor_result_2y_3x, float_compare_test, print_ko_float);
+	print_result(num_test, &cofactor_expected_3y_2x, &cofactor_result_3y_2x, float_compare_test, print_ko_float);
+	print_result(num_test, &value_expected_2y_3x, &value_result_2y_3x, float_compare_test, print_ko_float);
+	print_result(num_test, &value_expected_3y_2x, &value_result_3y_2x, float_compare_test, print_ko_float);
 	print_result(num_test, &expected, &result, matrix_compare_test, print_ko_matrix);
 }
 
@@ -562,12 +724,12 @@ void	test_calculating_the_inverse_of_another_matrix(int num_test)
 	};
 
 	t_matrix	matrix = {
-							// .tab = tab1,
-							.rows = 4, .cols = 4
+							.rows = 4,
+							.cols = 4
 	};
 	t_matrix	expected = {
-							// .tab = result_tab,
-							.rows = 4, .cols = 4
+							.rows = 4,
+							.cols = 4
 	};
 	t_matrix	result;
 
@@ -598,12 +760,12 @@ void	test_calculating_the_inverse_of_a_third_matrix(int num_test)
 	};
 
 	t_matrix	matrix = {
-							// .tab = tab1,
-							.rows = 4, .cols = 4
+							.rows = 4,
+							.cols = 4
 	};
 	t_matrix	expected = {
-							// .tab = result_tab,
-							.rows = 4, .cols = 4
+							.rows = 4,
+							.cols = 4
 	};
 	t_matrix	result;
 
@@ -634,12 +796,12 @@ void	test_multiplying_a_product_by_its_inverse(int num_test)
 	};
 
 	t_matrix	matrix1 = {
-							// .tab = tab1,
-							.rows = 4, .cols = 4
+							.rows = 4,
+							.cols = 4
 	};
 	t_matrix	matrix2 = {
-							// .tab = tab2,
-							.rows = 4, .cols = 4
+							.rows = 4,
+							.cols = 4
 	};
 	t_matrix	matrix3;
 	t_matrix	inverse_matrix2;
@@ -660,26 +822,28 @@ int	main()
 {
 	void	(*test_funcs[])(int) =
 	{
-		test_matrix_create,								// 01
-		test_matrix_compare_true,						// 02
-		test_matrix_compare_false,						// 03
-		test_matrix_multiplying,						// 04
-		test_matrix_multiplying_tuple,					// 05
-		test_matrix_multiplying_identity,				// 06
-		test_matrix_transpose,							// 07
-		test_matrix_transpose_identity,					// 08
-		test_matrix_determinant_2x2,					// 09
-		test_matrix_determinant_3x3,					// 10
-		test_matrix_determinant_4x4,					// 11
-		test_matrix_submatrix_3x3,						// 12
-		test_matrix_submatrix_4x4,						// 13
-		test_matrix_minor,								// 14
-		test_matrix_cofactor_not_negate,				// 15
-		test_matrix_cofactor_negate,					// 16
-		test_calculating_the_inverse_of_a_matrix,		// 17
-		test_calculating_the_inverse_of_another_matrix,	// 18
-		test_calculating_the_inverse_of_a_third_matrix,	// 19
-		test_multiplying_a_product_by_its_inverse,		// 20
+		test_constructing_and_inspecting_a_4x4_matrix,
+		test_A_2x2_matrix_ought_to_be_representable,
+		test_a_3x3_matrix_ought_to_be_representable,
+		test_matrix_equality_with_identical_matrices,
+		test_matrix_equality_with_different_matrices,
+		test_multiplying_two_matrices,
+		test_a_matrix_multiplied_by_a_tuple,
+		test_multiplying_a_matrix_by_the_identity_matrix,
+		test_transposing_a_matrix,
+		test_transposing_the_identity_matrix,
+		test_calculating_the_determinant_of_a_2x2_matrix,
+		test_a_submatrix_of_a_3x3_matrix_is_a_2x2_matrix,
+		test_a_submatrix_of_a_4x4_matrix_is_a_3x3_matrix,
+		test_calculating_a_minor_of_a_3x3_matrix,
+		test_calculating_a_cofactor_of_a_3x3_matrix,
+		test_calculating_the_determinant_of_a_3x3_matrix,
+		test_matrix_determinant_4x4,
+		test_testing_an_invertible_matrix_for_invertibility,
+		test_testing_a_noninvertible_matrix_for_invertibility,
+		test_calculating_the_inverse_of_another_matrix,
+		test_calculating_the_inverse_of_a_third_matrix,
+		test_multiplying_a_product_by_its_inverse,
 	};
 
 	printf("\n%sTESTING MATRICES:%s\n", YELLOW, RESET);
