@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "tests.h"
-#include <math.h>
 
 // TEST 01
 void	test_normal_on_sphere_at_a_point_on_the_x_axis(int num_test)
@@ -63,11 +62,11 @@ void	test_normal_on_sphere_at_a_nonaxial_point(int num_test)
 {
 	// ARRANGE
 	t_shape		s = sphere();
-	t_vector	expected = vector(sqrt(3)/3, sqrt(3)/3, sqrt(3)/3);
+	t_vector	expected = vector(sqrt(3) / 3, sqrt(3) / 3, sqrt(3) / 3);
 	t_vector	result;
 
 	// ACT
-	result = normal_at(s, point(sqrt(3)/3, sqrt(3)/3, sqrt(3)/3));
+	result = normal_at(s, point(sqrt(3) / 3, sqrt(3) / 3, sqrt(3) / 3));
 
 	// ASSERT
 	print_result(num_test, &expected, &result, tuple_compare_test, print_ko_tuple);
@@ -81,8 +80,9 @@ void	test_normal_on_a_translated_sphere(int num_test)
 	t_vector	expected = vector(0, 0.70711, -0.70711);
 	t_vector	result;
 
-	// ACT
 	set_transformation(&s, translation(0, 1, 0));
+
+	// ACT
 	result = normal_at(s, point(0, 1.70711, -0.70711));
 
 	// ASSERT
@@ -94,14 +94,15 @@ void	test_normal_on_a_transformed_sphere(int num_test)
 {
 	// ARRANGE
 	t_shape		s = sphere();
-	t_matrix	mx;
+	t_matrix	transformation_matrix;
 	t_vector	expected = vector(0, 0.97014, -0.24254);
 	t_vector	result;
 
+	transformation_matrix = mx_multiply(scaling(1, 0.5, 1), rotation_z(M_PI / 5));
+	set_transformation(&s, transformation_matrix);
+
 	// ACT
-	mx = mx_multiply(scaling(1, 0.5, 1), rotation_z(M_PI/5));
-	set_transformation(&s, mx);
-	result = normal_at(s, point(0, sqrt(2)/2, -sqrt(2)/2));
+	result = normal_at(s, point(0, sqrt(2) / 2, -sqrt(2) / 2));
 
 	// ASSERT
 	print_result(num_test, &expected, &result, tuple_compare_test, print_ko_tuple);
