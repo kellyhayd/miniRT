@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 13:57:37 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/22 20:08:36 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/09/22 21:43:38 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,8 @@ t_matrix	transposing(t_matrix matrix)
 
 t_matrix	inverse(t_matrix matrix)
 {
-	int			i;
-	int			j;
+	int			x;
+	int			y;
 	double		matrix_cofactor;
 	double		matrix_determinant;
 	t_matrix	result;
@@ -113,15 +113,17 @@ t_matrix	inverse(t_matrix matrix)
 	if (matrix_determinant == 0)
 		return (result);
 	matrix_cofactor = 0;
-	j = -1;
-	while (++j < result.rows)
+	y = 0;
+	while (y < result.rows)
 	{
-		i = -1;
-		while (++i < result.cols)
+		x = 0;
+		while (x < result.cols)
 		{
-			matrix_cofactor = cofactor(matrix, i, j);
-			mx_set(&result, j, i, matrix_cofactor / matrix_determinant);
+			matrix_cofactor = cofactor(matrix, x, y);
+			mx_set(&result, y, x, matrix_cofactor / matrix_determinant);
+			x++;
 		}
+		y++;
 	}
 	return (result);
 }
