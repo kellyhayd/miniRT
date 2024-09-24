@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 15:24:42 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/23 20:38:02 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/23 22:54:43 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,22 @@ void	test_reflecting_a_vector_approaching_at_45_degrees(int num_test)
 	print_result(num_test, &expected, &result, tuple_compare_test, print_ko_tuple);
 }
 
+// TEST 08
+void	test_reflecting_a_vector_off_slanted_surface(int num_test)
+{
+	// ARRANGE
+	t_vector	v = vector(0, -1, 0);
+	t_vector	n = vector(sqrt(2) / 2, sqrt(2) / 2, 0);
+	t_vector	expected = vector(1, 0, 0);
+	t_vector	result;
+
+	// ACT
+	result = reflect(v, n);
+
+	// ASSERT
+	print_result(num_test, &expected, &result, tuple_compare_test, print_ko_tuple);
+}
+
 int	main()
 {
 	void	(*test_funcs[])(int) =
@@ -136,6 +152,7 @@ int	main()
 		test_normal_on_a_translated_sphere,						// 05
 		test_normal_on_a_transformed_sphere,					// 06
 		test_reflecting_a_vector_approaching_at_45_degrees,		// 07
+		test_reflecting_a_vector_off_slanted_surface,			// 08
 	};
 
 	printf("\n%sTESTING LIGHT AND SHANDING:%s\n", YELLOW, RESET);
