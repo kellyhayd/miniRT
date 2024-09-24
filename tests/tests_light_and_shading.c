@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 15:24:42 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/23 22:54:43 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/23 23:24:13 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,46 @@ void	test_reflecting_a_vector_off_slanted_surface(int num_test)
 	print_result(num_test, &expected, &result, tuple_compare_test, print_ko_tuple);
 }
 
+// TEST 09
+void	test_a_point_light_has_a_position_and_intensity(int num_test)
+{
+	// ARRANGE
+	t_color		intensity = color(1, 1, 1);
+	t_point		position = point(0, 0, 0);
+	t_light		expected = point_light(position, intensity);
+	t_light		result;
+
+	// ACT
+	result = point_light(position, intensity);
+
+	// ASSERT
+	print_result(num_test, &expected, &result, tuple_compare_test, print_ko_tuple);
+}
+
+// TEST 10
+void	test_the_default_material(int num_test)
+{
+	// ARRANGE
+	t_material	expected = material();
+	t_material	result;
+
+	// ACT
+	result = material();
+
+	// ASSERT
+	print_result(num_test, &expected, &result, tuple_compare_test, print_ko_tuple);
+}
+
+/*
+Scenario: The default material
+Given m ← material()
+Then m.color = color(1, 1, 1)
+And m.ambient = 0.1
+And m.diffuse = 0.9
+And m.specular = 0.9
+And m.shininess = 200.0
+*/
+
 int	main()
 {
 	void	(*test_funcs[])(int) =
@@ -153,6 +193,8 @@ int	main()
 		test_normal_on_a_transformed_sphere,					// 06
 		test_reflecting_a_vector_approaching_at_45_degrees,		// 07
 		test_reflecting_a_vector_off_slanted_surface,			// 08
+		test_a_point_light_has_a_position_and_intensity,		// 09
+		test_the_default_material,								// 10
 	};
 
 	printf("\n%sTESTING LIGHT AND SHANDING:%s\n", YELLOW, RESET);
