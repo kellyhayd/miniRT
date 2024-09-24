@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:01:38 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/23 20:40:21 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/23 23:11:56 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,12 @@ struct s_hit
 	t_shape	object;
 	t_hit	*next;
 };
+
+typedef	struct s_light
+{
+	t_color	intensity;
+	t_point	position;
+}	t_light;
 
 // -------------------------------------------------------------------------- //
 //                                   tuple                                    //
@@ -208,6 +214,7 @@ t_hit		*hit(t_hit *hit_list);
 // light and shading (reflection?)
 t_vector	normal_at(t_shape shape, t_point world_point);
 t_vector	reflect(t_vector in, t_vector normal);
+t_light		point_light(t_point position, t_color intensity);
 
 
 // -------------------------------------------------------------------------- //
