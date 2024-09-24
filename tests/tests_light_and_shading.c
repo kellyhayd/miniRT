@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 15:24:42 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/24 00:10:58 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/24 07:59:38 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,6 +204,25 @@ void	test_a_sphere_may_be_assigned_a_material(int num_test)
 	// ASSERT
 	print_result(num_test, &expected, &result, tuple_compare_test, print_ko_tuple);
 }
+
+void	test_lighting_with_the_eye_between_the_light_and_the_surface(int num_test)
+{
+	// ARRANGE
+	t_color		result;
+	t_light		light = point_light(point(0, 0, -10), color(1, 1, 1));
+	t_material	m = material();
+	t_point		position = point(0, 0, 0);
+	t_vector	eyev = vector(0, 0, -1);
+	t_vector	normalv = vector(0, 0, -1);
+	t_color		expected = color(1.9, 1.9, 1.9);
+
+	// ACT
+	result = lighting(m, light, position, eyev, normalv);
+
+	// ASSERT
+	print_result(num_test, &expected, &result, color_compare_test, print_ko_color);
+}
+
 
 int	main()
 {
