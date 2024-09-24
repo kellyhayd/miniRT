@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:01:38 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/22 18:32:34 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/09/23 20:40:21 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,6 +207,7 @@ t_hit		*hit(t_hit *hit_list);
 
 // light and shading (reflection?)
 t_vector	normal_at(t_shape shape, t_point world_point);
+t_vector	reflect(t_vector in, t_vector normal);
 
 
 // -------------------------------------------------------------------------- //
