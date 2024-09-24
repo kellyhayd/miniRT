@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:01:38 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/23 23:23:49 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/23 23:30:37 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,15 @@ typedef struct s_sphere
 	double	radius;
 }	t_sphere;
 
+typedef struct s_material
+{
+	double	ambient;
+	double	diffuse;
+	double	specular;
+	double	shininess;
+	t_color	color;
+}	t_material;
+
 typedef struct s_shape
 {
 	union
@@ -92,6 +101,7 @@ typedef struct s_shape
 	t_matrix	transform;
 	t_matrix	inverse;
 	t_matrix	transpose;
+	t_material	material;
 }	t_shape;
 
 struct s_hit
@@ -106,15 +116,6 @@ typedef struct s_light
 	t_color	intensity;
 	t_point	position;
 }	t_light;
-
-typedef struct s_material
-{
-	double	ambient;
-	double	diffuse;
-	double	specular;
-	double	shininess;
-	t_color	color;
-}	t_material;
 
 // -------------------------------------------------------------------------- //
 //                                   tuple                                    //
