@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 15:24:42 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/23 23:24:13 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/24 00:10:58 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,15 +171,39 @@ void	test_the_default_material(int num_test)
 	print_result(num_test, &expected, &result, tuple_compare_test, print_ko_tuple);
 }
 
-/*
-Scenario: The default material
-Given m ← material()
-Then m.color = color(1, 1, 1)
-And m.ambient = 0.1
-And m.diffuse = 0.9
-And m.specular = 0.9
-And m.shininess = 200.0
-*/
+// TEST 11
+void	test_a_sphere_has_a_default_material(int num_test)
+{
+	// ARRANGE
+	t_shape		s = sphere();
+	t_material	expected = material();
+	t_material	result;
+
+	// ACT
+	result = (s.material = material());
+
+	// ASSERT
+	print_result(num_test, &expected, &result, tuple_compare_test, print_ko_tuple);
+}
+
+// TEST 12
+void	test_a_sphere_may_be_assigned_a_material(int num_test)
+{
+	// ARRANGE
+	t_shape		s = sphere();
+	t_material	m = material();
+	m.ambient = 1;
+	t_material	expected = m;
+	t_material	result;
+
+
+	// ACT
+	s.material = m;
+	result = s.material;
+
+	// ASSERT
+	print_result(num_test, &expected, &result, tuple_compare_test, print_ko_tuple);
+}
 
 int	main()
 {
@@ -195,6 +219,8 @@ int	main()
 		test_reflecting_a_vector_off_slanted_surface,			// 08
 		test_a_point_light_has_a_position_and_intensity,		// 09
 		test_the_default_material,								// 10
+		test_a_sphere_has_a_default_material,					// 11
+		test_a_sphere_may_be_assigned_a_material,				// 12
 	};
 
 	printf("\n%sTESTING LIGHT AND SHANDING:%s\n", YELLOW, RESET);
