@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 15:24:42 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/25 21:47:16 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/26 13:50:27 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,7 +168,7 @@ void	test_the_default_material(int num_test)
 	result = material();
 
 	// ASSERT
-	print_result(num_test, &expected, &result, tuple_compare_test, print_ko_tuple);
+	print_result(num_test, &expected, &result, material_compare_test, print_ko_tuple);
 }
 
 // TEST 11
@@ -183,7 +183,7 @@ void	test_a_sphere_has_a_default_material(int num_test)
 	result = (s.material = material());
 
 	// ASSERT
-	print_result(num_test, &expected, &result, tuple_compare_test, print_ko_tuple);
+	print_result(num_test, &expected, &result, material_compare_test, print_ko_tuple);
 }
 
 // TEST 12
@@ -202,7 +202,7 @@ void	test_a_sphere_may_be_assigned_a_material(int num_test)
 	result = s.material;
 
 	// ASSERT
-	print_result(num_test, &expected, &result, tuple_compare_test, print_ko_tuple);
+	print_result(num_test, &expected, &result, material_compare_test, print_ko_tuple);
 }
 
 // TEST 13
@@ -328,6 +328,5 @@ int	main()
 	for (int i = 0; i < sizeof(test_funcs) / sizeof(test_funcs[0]); i++) {
 		test_funcs[i](i + 1);
 	}
-
 	return (0);
 }

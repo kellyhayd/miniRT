@@ -37,7 +37,7 @@ SRC				= $(shell find src -iname "*.c")
 OBJ				= $(SRC:$(SRC_PATH)/%.c=$(BUILD)/%.o)
 
 TEST_FILES		= $(shell find src -iname "*.c" ! -name "main.c") \
-					tests/tests_utils.c \
+					tests/tests_utils_compare.c \
 					tests/tests_utils_print.c
 
 #----------------------------------------------- Rules
