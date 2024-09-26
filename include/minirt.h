@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:01:38 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/25 22:12:41 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/26 08:16:36 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,12 @@ typedef struct s_light
 	t_color	intensity;
 	t_point	position;
 }	t_light;
+
+typedef struct s_world
+{
+	t_shape	*shape;
+	t_light	src_light;
+}	t_world;
 
 // -------------------------------------------------------------------------- //
 //                                   tuple                                    //
