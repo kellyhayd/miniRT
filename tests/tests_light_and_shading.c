@@ -117,7 +117,6 @@ void	test_reflecting_a_vector_approaching_at_45_degrees(int num_test)
 	t_vector	expected = vector(1, 1, 0);
 	t_vector	result;
 
-
 	// ACT
 	result = reflect(v, n);
 
@@ -192,10 +191,11 @@ void	test_a_sphere_may_be_assigned_a_material(int num_test)
 	// ARRANGE
 	t_shape		s = sphere();
 	t_material	m = material();
-	m.ambient = 1;
-	t_material	expected = m;
+	t_material	expected;
 	t_material	result;
 
+	m.ambient = 1;
+	expected = m;
 
 	// ACT
 	s.material = m;
