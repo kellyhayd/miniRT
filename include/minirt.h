@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:01:38 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/25 21:04:51 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/25 22:12:41 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,9 @@ t_color		color_hadamard(t_color color1, t_color color2);
 //                                   canvas                                   //
 // -------------------------------------------------------------------------- //
 
-void		write_pixel(mlx_image_t *image, int x, int y, int color);
+// void		write_pixel(mlx_image_t *image, int x, int y, int color);
+void	write_pixel(mlx_image_t *image, int x, int y, t_color color);
+int		color_to_int(t_color color);
 
 // -------------------------------------------------------------------------- //
 //                                   matrix                                   //
