@@ -3,7 +3,7 @@
 void	create_sphere(mlx_image_t *image)
 {
 	// Forms and colors
-	t_color	red = color(1, 0, 0);
+	// t_color	red = color(1, 0, 0);
 	t_shape	s = sphere();
 	s.material = material();
 	s.material.color = color(1, 0.2, 1);
