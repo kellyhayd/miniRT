@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 15:24:42 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/24 07:59:38 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/25 21:47:16 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,6 +205,7 @@ void	test_a_sphere_may_be_assigned_a_material(int num_test)
 	print_result(num_test, &expected, &result, tuple_compare_test, print_ko_tuple);
 }
 
+// TEST 13
 void	test_lighting_with_the_eye_between_the_light_and_the_surface(int num_test)
 {
 	// ARRANGE
@@ -223,23 +224,103 @@ void	test_lighting_with_the_eye_between_the_light_and_the_surface(int num_test)
 	print_result(num_test, &expected, &result, color_compare_test, print_ko_color);
 }
 
+// TEST 14
+void	test_lighting_with_the_eye_between_light_and_surface_eye_offset_45_degrees(int num_test)
+{
+	// ARRANGE
+	t_color		result;
+	t_light		light = point_light(point(0, 0, -10), color(1, 1, 1));
+	t_material	m = material();
+	t_point		position = point(0, 0, 0);
+	t_vector	eyev = vector(0, sqrt(2) / 2, -sqrt(2) / 2);
+	t_vector	normalv = vector(0, 0, -1);
+	t_color		expected = color(1.0, 1.0, 1.0);
+
+	// ACT
+	result = lighting(m, light, position, eyev, normalv);
+
+	// ASSERT
+	print_result(num_test, &expected, &result, color_compare_test, print_ko_color);
+}
+
+// TEST 15
+void	test_lighting_with_eye_opposite_surface_light_offset_45_degrees(int num_test)
+{
+	// ARRANGE
+	t_color		result;
+	t_light		light = point_light(point(0, 10, -10), color(1, 1, 1));
+	t_material	m = material();
+	t_point		position = point(0, 0, 0);
+	t_vector	eyev = vector(0, 0, -1);
+	t_vector	normalv = vector(0, 0, -1);
+	t_color		expected = color(0.7364, 0.7364, 0.7364);
+
+	// ACT
+	result = lighting(m, light, position, eyev, normalv);
+
+	// ASSERT
+	print_result(num_test, &expected, &result, color_compare_test, print_ko_color);
+}
+
+// TEST 16
+void	test_lighting_with_eye_in_the_path_of_the_reflection_vector(int num_test)
+{
+	// ARRANGE
+	t_color		result;
+	t_light		light = point_light(point(0, 10, -10), color(1, 1, 1));
+	t_material	m = material();
+	t_point		position = point(0, 0, 0);
+	t_vector	eyev = vector(0, -sqrt(2) / 2, -sqrt(2) / 2);
+	t_vector	normalv = vector(0, 0, -1);
+	t_color		expected = color(1.6364, 1.6364, 1.6364);
+
+	// ACT
+	result = lighting(m, light, position, eyev, normalv);
+
+	// ASSERT
+	print_result(num_test, &expected, &result, color_compare_test, print_ko_color);
+}
+
+// TEST 17
+void	test_lighting_with_light_behind_the_surface(int num_test)
+{
+	// ARRANGE
+	t_color		result;
+	t_light		light = point_light(point(0, 0, 10), color(1, 1, 1));
+	t_material	m = material();
+	t_point		position = point(0, 0, 0);
+	t_vector	eyev = vector(0, 0, -1);
+	t_vector	normalv = vector(0, 0, -1);
+	t_color		expected = color(0.1, 0.1, 0.1);
+
+	// ACT
+	result = lighting(m, light, position, eyev, normalv);
+
+	// ASSERT
+	print_result(num_test, &expected, &result, color_compare_test, print_ko_color);
+}
 
 int	main()
 {
 	void	(*test_funcs[])(int) =
 	{
-		test_normal_on_sphere_at_a_point_on_the_x_axis,			// 01
-		test_normal_on_sphere_at_a_point_on_the_y_axis,			// 02
-		test_normal_on_sphere_at_a_point_on_the_z_axis,			// 03
-		test_normal_on_sphere_at_a_nonaxial_point,				// 04
-		test_normal_on_a_translated_sphere,						// 05
-		test_normal_on_a_transformed_sphere,					// 06
-		test_reflecting_a_vector_approaching_at_45_degrees,		// 07
-		test_reflecting_a_vector_off_slanted_surface,			// 08
-		test_a_point_light_has_a_position_and_intensity,		// 09
-		test_the_default_material,								// 10
-		test_a_sphere_has_a_default_material,					// 11
-		test_a_sphere_may_be_assigned_a_material,				// 12
+		test_normal_on_sphere_at_a_point_on_the_x_axis,								// 01
+		test_normal_on_sphere_at_a_point_on_the_y_axis,								// 02
+		test_normal_on_sphere_at_a_point_on_the_z_axis,								// 03
+		test_normal_on_sphere_at_a_nonaxial_point,									// 04
+		test_normal_on_a_translated_sphere,											// 05
+		test_normal_on_a_transformed_sphere,										// 06
+		test_reflecting_a_vector_approaching_at_45_degrees,							// 07
+		test_reflecting_a_vector_off_slanted_surface,								// 08
+		test_a_point_light_has_a_position_and_intensity,							// 09
+		test_the_default_material,													// 10
+		test_a_sphere_has_a_default_material,										// 11
+		test_a_sphere_may_be_assigned_a_material,									// 12
+		test_lighting_with_the_eye_between_the_light_and_the_surface,				// 13
+		test_lighting_with_the_eye_between_light_and_surface_eye_offset_45_degrees,	// 14
+		test_lighting_with_eye_opposite_surface_light_offset_45_degrees,			// 15
+		test_lighting_with_eye_in_the_path_of_the_reflection_vector,				// 16
+		test_lighting_with_light_behind_the_surface,								// 17
 	};
 
 	printf("\n%sTESTING LIGHT AND SHANDING:%s\n", YELLOW, RESET);
