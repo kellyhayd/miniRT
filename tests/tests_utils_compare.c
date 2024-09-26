@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tests_utils.c                                      :+:      :+:    :+:   */
+/*   tests_utils_compare.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:18:05 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/13 23:50:29 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/09/26 13:34:22 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ int	shape_compare_test(void *expected, void *result)
 		&& float_compare_test(&shape_expected->sphere_shape.origin.z, &shape_result->sphere_shape.origin.z)
 		&& float_compare_test(&shape_expected->sphere_shape.radius, &shape_result->sphere_shape.radius))
 		return (1);
+		// if (shape_expected->shape_type == SPHERE)
+			// return (sphere_compare_test(shape_expected, shape_result));
 }
 
 int	hit_compare_test(void *expected, void *result)
@@ -123,4 +125,38 @@ int	hit_list_compare_test(void *expected, void *result)
 	}
 
 	return (!aux_expected && !aux_result);
+}
+
+int	material_compare_test(void *expected, void *result)
+{
+	t_material	*material_expected = expected;
+	t_material	*material_result = result;
+
+	if (float_compare_test(&material_expected->ambient, &material_result->ambient)
+		&& float_compare_test(&material_expected->diffuse, &material_result->diffuse)
+		&& float_compare_test(&material_expected->specular, &material_result->specular)
+		&& float_compare_test(&material_expected->shininess, &material_result->shininess)
+		&& color_compare_test(&material_expected->color, &material_result->color))
+		return (1);
+	return (0);
+}
+
+int	world_compare_test(void *expected, void *result)
+{
+	t_world	*w_expected = expected;
+	t_world	*w_result = result;
+
+	if (tuple_compare_test(&w_expected->light.position, &w_result->light.position)
+		&& tuple_compare_test(&w_expected->light.intensity, &w_result->light.intensity))
+	{
+		while (w_expected->shape && w_result->shape)
+		{
+			if (!shape_compare_test(w_expected->shape, w_result->shape))
+				return (0);
+			w_expected->shape++;
+			w_result->shape++;
+		}
+		return (1);
+	}
+	return (0);
 }

@@ -3,15 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 19:46:49 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/14 19:49:34 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/09/26 15:19:39 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+/**
+ * @brief Adds an intersection to the hit list.
+ *
+ * This function takes a pointer to a hit list and an intersection, and adds
+ * the intersection to the hit list.
+ *
+ * @param hit_list A pointer to the list of hits (intersections).
+ * @param isect The intersection to be added to the hit list.
+ */
 void	add_intersection(t_hit **hit_list, t_hit isect)
 {
 	t_hit	*new;
@@ -37,6 +46,15 @@ void	add_intersection(t_hit **hit_list, t_hit isect)
 	new->next = aux;
 }
 
+/**
+ * @brief Counts the number of intersections in the hit list.
+ *
+ * This function iterates through the provided hit list and counts the number
+ * of intersections present.
+ *
+ * @param hit_list A pointer to the head of the hit list.
+ * @return The number of intersections in the hit list.
+ */
 int	intersection_count(t_hit *hit_list)
 {
 	int		count;
@@ -52,6 +70,14 @@ int	intersection_count(t_hit *hit_list)
 	return (count);
 }
 
+/**
+ * @brief Clears the list of hit records.
+ *
+ * This function takes a pointer to a list of hit records and clears the list,
+ * freeing any allocated memory associated with the hit records.
+ *
+ * @param hit_list A double pointer to the head of the list of hit records.
+ */
 void	hit_clear_list(t_hit **hit_list)
 {
 	if (hit_list && *hit_list)

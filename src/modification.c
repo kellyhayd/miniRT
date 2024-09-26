@@ -1,17 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   matrix_modification.c                              :+:      :+:    :+:   */
+/*   modification.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 13:57:37 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/22 21:43:38 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/09/26 15:27:07 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+/**
+ * @brief Multiplies corresponding elements of two matrices at a given position.
+ *
+ * This static function takes two matrices and multiplies their elements at the
+ * specified row (y) and column (x). It is used internally within the module to
+ * perform element-wise multiplication.
+ *
+ * @param matrix1 The first matrix.
+ * @param matrix2 The second matrix.
+ * @param y The row index of the element to be multiplied.
+ * @param x The column index of the element to be multiplied.
+ * @return The product of the elements at the specified position in the two matrices.
+ */
 static double	mult_element(t_matrix matrix1, t_matrix matrix2, int y, int x)
 {
 	int		idx;
@@ -27,6 +40,16 @@ static double	mult_element(t_matrix matrix1, t_matrix matrix2, int y, int x)
 	return (value);
 }
 
+/**
+ * @brief Multiplies two matrices and returns the resulting matrix.
+ *
+ * This function takes two matrices as input and performs matrix multiplication.
+ * The resulting matrix is returned.
+ *
+ * @param matrix1 The first matrix to be multiplied.
+ * @param matrix2 The second matrix to be multiplied.
+ * @return The resulting matrix after multiplication.
+ */
 t_matrix	mx_multiply(t_matrix matrix1, t_matrix matrix2)
 {
 	t_matrix	result;
@@ -52,6 +75,13 @@ t_matrix	mx_multiply(t_matrix matrix1, t_matrix matrix2)
 	return (result);
 }
 
+/**
+ * Multiplies a matrix by a tuple.
+ *
+ * @param matrix The matrix to be multiplied.
+ * @param tuple1 The tuple to be multiplied by the matrix.
+ * @return The resulting tuple after the multiplication.
+ */
 t_tuple	mx_multiply_tuple(t_matrix matrix, t_tuple tuple1)
 {
 	int		i;
@@ -76,6 +106,15 @@ t_tuple	mx_multiply_tuple(t_matrix matrix, t_tuple tuple1)
 	return (result);
 }
 
+/**
+ * @brief Transposes the given matrix.
+ *
+ * This function takes a matrix as input and returns its transpose.
+ * The transpose of a matrix is obtained by swapping its rows and columns.
+ *
+ * @param matrix The matrix to be transposed.
+ * @return The transposed matrix.
+ */
 t_matrix	transpose(t_matrix matrix)
 {
 	int			x;
@@ -98,6 +137,15 @@ t_matrix	transpose(t_matrix matrix)
 	return (result);
 }
 
+/**
+ * @brief Computes the inverse of a given matrix.
+ *
+ * This function takes a matrix as input and returns its inverse.
+ * The input matrix is expected to be a square matrix.
+ *
+ * @param matrix The matrix to be inverted.
+ * @return The inverse of the input matrix.
+ */
 t_matrix	inverse(t_matrix matrix)
 {
 	int			x;

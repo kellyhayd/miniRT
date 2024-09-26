@@ -42,7 +42,7 @@ SRC				= $(shell find src -iname "*.c")
 OBJ				= $(SRC:$(SRC_PATH)/%.c=$(BUILD)/%.o)
 
 TEST_FILES		= $(shell find src -iname "*.c" ! -name "main.c") \
-					tests/tests_utils.c \
+					tests/tests_utils_compare.c \
 					tests/tests_utils_print.c
 
 #----------------------------------------------- Rules
@@ -82,21 +82,19 @@ fclean: clean
 
 test: all
 #	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_tuples.c $(LIBS) -o test
-#	@./test
-#
+
 #	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_colors.c $(LIBS) -o test
-#	@./test
-#
+
 #	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_matrix.c $(LIBS) -o test
-#	@./test
-#
+
 #	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_transformation.c $(LIBS) -o test
-#	@./test
-#
+
 #	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_ray_intersection.c $(LIBS) -o test
-#	@./test
-#
-	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_light_and_shading.c $(LIBS) -o test
+
+#	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_light_and_shading.c $(LIBS) -o test
+
+	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_world.c $(LIBS) -o test
+
 	@./test
 
 pit: all
@@ -109,5 +107,6 @@ ifeq ($(PROF), 1)
 	@gprof pit gmon.out > prof
 	@< prof gprof2dot | dot -Tpng -o output.png
 endif
+
 
 re: fclean all
