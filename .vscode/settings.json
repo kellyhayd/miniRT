@@ -3,6 +3,7 @@
 		"minirt.h": "c",
 		"tests.h": "c",
 		"random": "c",
-		"cmath": "c"
+		"cmath": "c",
+		"functional": "c"
 	}
 }

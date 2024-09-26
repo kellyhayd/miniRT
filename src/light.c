@@ -23,7 +23,10 @@
  */
 t_light	point_light(t_point position, t_color intensity)
 {
-	return ((t_light){.intensity = intensity, .position = position});
+	return ((t_light){
+		.intensity = intensity,
+		.position = position
+	});
 }
 
 /**
@@ -36,7 +39,12 @@ t_light	point_light(t_point position, t_color intensity)
  */
 t_material	material(void)
 {
-	return ((t_material){.color = color(1, 1, 1), .ambient = 0.1, .diffuse = 0.9, .specular = 0.9, .shininess = 200.0});
+	return ((t_material){
+		.color = color(1, 1, 1),
+		.ambient = 0.1,
+		.diffuse = 0.9,
+		.specular = 0.9,
+		.shininess = 200.0});
 }
 
 /**

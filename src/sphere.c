@@ -28,5 +28,6 @@ t_shape	sphere(void)
 	new_sphere.transform = identity();
 	new_sphere.inverse = identity();
 	new_sphere.transpose = identity();
+	new_sphere.material = material();
 	return (new_sphere);
 }

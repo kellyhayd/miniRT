@@ -95,7 +95,7 @@ test: all
 
 	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_world.c $(LIBS) -o test
 
-	@./test
+	@valgrind ./test
 
 pit: all
 #	@$(CC) $(FLAGS) $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/projectiles.c $(LIBS) -o pit

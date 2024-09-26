@@ -193,6 +193,22 @@ void	print_ko_hit_list(int num_test, void *expected, void *result)
 	printf(")\n");
 }
 
+void	print_ko_light(int num_test, void *expected, void *result)
+{
+	t_light	*light_expected = expected;
+	t_light	*light_result = result;
+
+	printf(PURPLE "%2d" RESET " - " RED "[ ✗ ] " RESET
+		"Expected: position (%.2lf, %.2lf, %.2lf) intensity (%.2lf, %.2lf, %.2lf)\n"
+		"\t\tResult: position (%.2lf, %.2lf, %.2lf) intensity (%.2lf, %.2lf, %.2lf)\n",
+		num_test,
+		light_expected->position.x, light_expected->position.y, light_expected->position.z,
+		light_expected->intensity.r, light_expected->intensity.g, light_expected->intensity.b,
+		light_result->position.x, light_result->position.y, light_result->position.z,
+		light_result->intensity.r, light_result->intensity.g, light_result->intensity.b
+	);
+}
+
 void	print_ko_material(int num_test, void *expectet, void *result)
 {
 	t_material	*material_expected = expectet;
