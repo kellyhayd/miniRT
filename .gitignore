@@ -397,12 +397,14 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 
+# Others
 *.o
 *.a
 build
 miniRT
 test
-.vscode/settings.json
-.vscode/settings.json
 pit
 .vscode/settings.json
+gmon.out
+output.png
+prof
