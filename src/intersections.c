@@ -6,17 +6,36 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 19:52:47 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/22 12:56:00 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/26 15:18:37 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+/**
+ * @brief Represents an intersection between a ray and a shape.
+ *
+ * This function creates an intersection record given a time `t` and a shape `s`.
+ *
+ * @param t The time at which the intersection occurs.
+ * @param s The shape that is intersected.
+ * @return A `t_hit` structure representing the intersection.
+ */
 t_hit	intersection(double t, t_shape s)
 {
 	return ((t_hit){.t = t, .object = s, .next = NULL});
 }
 
+/**
+ * @brief Intersects a ray with a sphere and updates the hit list with intersection points.
+ *
+ * This function calculates the intersection points between a given ray and a sphere.
+ * If intersections are found, they are added to the hit list.
+ *
+ * @param hit_list A pointer to the list of hit points to be updated with intersection points.
+ * @param s The sphere shape to be intersected with the ray.
+ * @param r The ray to be intersected with the sphere.
+ */
 void	intersect_sphere(t_hit **hit_list, t_shape s, t_ray r)
 {
 	t_vector	sphere_to_ray;
@@ -38,6 +57,16 @@ void	intersect_sphere(t_hit **hit_list, t_shape s, t_ray r)
 		intersection((-b + sqrt(discriminant)) / (2 * a), s));
 }
 
+/**
+ * @brief Intersects a ray with a shape and updates the hit list with intersection points.
+ *
+ * This function calculates the intersection points between a given ray and a shape,
+ * and updates the provided hit list with the results.
+ *
+ * @param hit_list A pointer to the list of hit points to be updated.
+ * @param s The shape to be intersected with the ray.
+ * @param r The ray to be intersected with the shape.
+ */
 void	intersect(t_hit **hit_list, t_shape s, t_ray r)
 {
 	t_ray	new_ray;
@@ -46,6 +75,17 @@ void	intersect(t_hit **hit_list, t_shape s, t_ray r)
 	intersect_sphere(hit_list, s, new_ray);
 }
 
+/**
+ * @brief Processes a list of hit records and returns the most relevant hit.
+ *
+ * This function takes a list of hit records and determines the most relevant
+ * hit based on the criteria defined within the function. The returned hit
+ * record can be used for further processing in ray tracing or collision
+ * detection algorithms.
+ *
+ * @param hit_list A pointer to the list of hit records to be processed.
+ * @return A pointer to the most relevant hit record from the list.
+ */
 t_hit	*hit(t_hit *hit_list)
 {
 	t_hit	*aux;

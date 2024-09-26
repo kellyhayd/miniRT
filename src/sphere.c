@@ -6,12 +6,19 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 22:28:43 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/22 16:15:29 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/26 14:57:29 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+/**
+ * @brief Creates and returns a new sphere shape.
+ *
+ * This function initializes a new sphere shape and returns it.
+ *
+ * @return A new sphere shape.
+ */
 t_shape	sphere(void)
 {
 	t_shape	new_sphere;

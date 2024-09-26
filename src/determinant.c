@@ -1,17 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   matrix_determinant.c                               :+:      :+:    :+:   */
+/*   determinant.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 13:55:40 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/22 20:04:39 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/09/26 15:25:45 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+/**
+ * @brief Calculates the determinant of a given matrix.
+ *
+ * This function takes a matrix of type `t_matrix` and computes its determinant.
+ * The determinant is a scalar value that can be computed from the elements of a square matrix
+ * and encodes certain properties of the matrix.
+ *
+ * @param matrix The matrix for which the determinant is to be calculated.
+ * @return The determinant of the matrix.
+ */
 double	determinant(t_matrix matrix)
 {
 	double	result;
@@ -33,6 +43,14 @@ double	determinant(t_matrix matrix)
 	return (result);
 }
 
+/**
+ * Extracts a submatrix from the given matrix by removing the specified row and column.
+ *
+ * @param matrix The original matrix from which the submatrix will be extracted.
+ * @param y The row index to be removed from the original matrix.
+ * @param x The column index to be removed from the original matrix.
+ * @return A new matrix that is the submatrix of the original matrix with the specified row and column removed.
+ */
 t_matrix	submatrix(t_matrix matrix, int y, int x)
 {
 	int			x_matrix1;
@@ -76,6 +94,14 @@ t_matrix	submatrix(t_matrix matrix, int y, int x)
 	return (result);
 }
 
+/**
+ * Calculates the minor of a matrix element.
+ *
+ * @param matrix The matrix from which to calculate the minor.
+ * @param y The row index of the element.
+ * @param x The column index of the element.
+ * @return The minor of the specified element in the matrix.
+ */
 double	minor(t_matrix matrix, int y, int x)
 {
 	t_matrix	sub_matrix;
@@ -86,6 +112,17 @@ double	minor(t_matrix matrix, int y, int x)
 	return (minor);
 }
 
+/**
+ * @brief Computes the cofactor of a given element in a matrix.
+ *
+ * This function calculates the cofactor of the element located at the
+ * specified row (y) and column (x) in the provided matrix.
+ *
+ * @param matrix The matrix from which to compute the cofactor.
+ * @param y The row index of the element.
+ * @param x The column index of the element.
+ * @return The cofactor of the specified element.
+ */
 double	cofactor(t_matrix matrix, int y, int x)
 {
 	double	matrix_minor;

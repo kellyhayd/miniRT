@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 08:14:46 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/26 14:03:22 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/26 15:31:50 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,3 +41,8 @@ t_world	default_world(void)
 	w.shape[1] = s2;
 	return (w);
 }
+
+// t_hit	*intersect_world(t_world world, t_ray ray)
+// {
+
+// }
