@@ -13,6 +13,24 @@
 #include "minirt.h"
 
 /**
+ * @brief Converts a normalized color value to an 8-bit color value.
+ *
+ * This function takes a color value in the range [0, 1] and converts it to
+ * an 8-bit color value in the range [0, 255]. If the input color value is
+ * greater than 1, it returns 255. Otherwise, it scales the color value by 255.
+ *
+ * @param color_value The normalized color value to be converted.
+ * @return The 8-bit color value.
+ */
+static int	convert(double color_value)
+{
+	if (color_value > 1)
+		return (255);
+	color_value *= 255 + 0.5;
+	return (color_value);
+}
+
+/**
  * Converts a t_color structure to an integer representation.
  *
  * @param color The t_color structure containing the color components.
@@ -20,11 +38,16 @@
  */
 int	color_to_int(t_color color)
 {
-	int	r = (int) (color.r * 255.999);
-	int	g = (int) (color.g * 255.999);
-	int	b = (int) (color.b * 255.999);
+	int	r;
+	int	g;
+	int	b;
+	int color_int;
 
-	return (r << 16 | g << 8 | b);
+	color_int = ((int) convert(color.r) & 0xFF) << 24
+				| ((int) convert(color.g) & 0xFF) << 16
+				| ((int) convert(color.b) & 0xFF) << 8
+				| 0xFF;
+	return (color_int);
 }
 
 /**
