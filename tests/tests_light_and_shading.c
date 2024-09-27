@@ -160,14 +160,20 @@ void	test_a_point_light_has_a_position_and_intensity(int num_test)
 void	test_the_default_material(int num_test)
 {
 	// ARRANGE
-	t_material	expected = material();
+	t_material	expected;
 	t_material	result;
+
+	expected.color = color(1, 1, 1);
+	expected.ambient = 0.1;
+	expected.diffuse = 0.9;
+	expected.specular = 0.9;
+	expected.shininess = 200.0;
 
 	// ACT
 	result = material();
 
 	// ASSERT
-	print_result(num_test, &expected, &result, material_compare_test, print_ko_tuple);
+	print_result(num_test, &expected, &result, material_compare_test, print_ko_material);
 }
 
 // TEST 11
@@ -182,7 +188,7 @@ void	test_a_sphere_has_a_default_material(int num_test)
 	result = s.material;
 
 	// ASSERT
-	print_result(num_test, &expected, &result, material_compare_test, print_ko_tuple);
+	print_result(num_test, &expected, &result, material_compare_test, print_ko_material);
 }
 
 // TEST 12
@@ -202,7 +208,7 @@ void	test_a_sphere_may_be_assigned_a_material(int num_test)
 	result = s.material;
 
 	// ASSERT
-	print_result(num_test, &expected, &result, material_compare_test, print_ko_tuple);
+	print_result(num_test, &expected, &result, material_compare_test, print_ko_material);
 }
 
 // TEST 13

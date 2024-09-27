@@ -44,7 +44,16 @@ t_material	material(void)
 		.ambient = 0.1,
 		.diffuse = 0.9,
 		.specular = 0.9,
-		.shininess = 200.0});
+		.shininess = 200
+	});
+}
+
+static int	convert(double color_value)
+{
+	if (color_value > 1)
+		return (1);
+	color_value *= 255 + 0.5;
+	return (color_value);
 }
 
 /**
@@ -71,23 +80,20 @@ t_color	lighting(t_material m, t_light light, t_point position, t_vector eye, t_
 	t_vector	reflectv;
 	double		reflect_dot_eye;
 	double		factor;
+	double		light_dot_normal;
 
+	diffuse = color(0, 0, 0);
+	specular = color(0, 0, 0);
 	effective_color = color_hadamard(m.color, light.intensity);
 	lightv = normalize(tuple_subtract(light.position, position));
 	ambient = color_multiply(effective_color, m.ambient);
-	if(dot(lightv, normal) < 0)
+	light_dot_normal = dot(lightv, normal);
+	if (light_dot_normal > 0)
 	{
-		diffuse = color(0, 0, 0);
-		specular = color(0, 0, 0);
-	}
-	else
-	{
-		diffuse = color_multiply(effective_color, (m.diffuse * dot(lightv, normal)));
+		diffuse = color_multiply(effective_color, m.diffuse * light_dot_normal);
 		reflectv = reflect(tuple_negate(lightv), normal);
 		reflect_dot_eye = dot(reflectv, eye);
-		if(reflect_dot_eye <= 0)
-			specular = color(0, 0, 0);
-		else
+		if (reflect_dot_eye > 0)
 		{
 			factor = pow(reflect_dot_eye, m.shininess);
 			specular = color_multiply(light.intensity, factor * m.specular);

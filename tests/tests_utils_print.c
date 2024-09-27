@@ -221,7 +221,6 @@ void	print_ko_material(int num_test, void *expectet, void *result)
 		material_expected->ambient, material_expected->diffuse, material_expected->specular, material_expected->shininess, material_expected->color.r, material_expected->color.g, material_expected->color.b,
 		material_result->ambient, material_result->diffuse, material_result->specular, material_result->shininess, material_result->color.r, material_result->color.g, material_result->color.b
 	);
-	printf(")\n");
 }
 
 void	print_ko_world(int num_test, void *expected, void *result)
@@ -231,14 +230,19 @@ void	print_ko_world(int num_test, void *expected, void *result)
 
 	printf(PURPLE "%2d" RESET " - " RED "[ ✗ ] " RESET
 		"Expected: light (point (%.2lf, %.2lf, %.2lf) color (%.2lf, %.2lf, %.2lf))\n"
-		"\t\tResult: light (point (%.2lf, %.2lf, %.2lf) color (%.2lf, %.2lf, %.2lf))\n",
-		"Expected: sphere (origin (%.2lf, %.2lf, %.2lf) radius (%.2lf))\n"
-		"\t\tResult: sphere (origin (%.2lf, %.2lf, %.2lf) radius (%.2lf))\n",
+		"          sphere (origin (%.2lf, %.2lf, %.2lf) radius (%.2lf))\n"
+		"\t\tResult: light (point (%.2lf, %.2lf, %.2lf) color (%.2lf, %.2lf, %.2lf))\n"
+		"\t\t        sphere (origin (%.2lf, %.2lf, %.2lf) radius (%.2lf))\n",
 		num_test,
-		w_expected->light.position.x, w_expected->light.position.y, w_expected->light.position.z, w_expected->light.intensity.r, w_expected->light.intensity.g, w_expected->light.intensity.b,
-		w_result->light.position.x, w_result->light.position.y, w_result->light.position.z, w_result->light.intensity.r, w_result->light.intensity.g, w_result->light.intensity.b,
-		w_expected->shape->sphere_shape.origin.x, w_expected->shape->sphere_shape.origin.y, w_expected->shape->sphere_shape.origin.z, w_expected->shape->sphere_shape.radius,
-		w_result->shape->sphere_shape.origin.x, w_result->shape->sphere_shape.origin.y, w_result->shape->sphere_shape.origin.z, w_result->shape->sphere_shape.radius
+
+		w_expected->light.position.x, w_expected->light.position.y, w_expected->light.position.z,
+		w_expected->light.intensity.r, w_expected->light.intensity.g, w_expected->light.intensity.b,
+		w_expected->shape->sphere_shape.origin.x, w_expected->shape->sphere_shape.origin.y, w_expected->shape->sphere_shape.origin.z,
+		w_expected->shape->sphere_shape.radius,
+
+		w_result->light.position.x, w_result->light.position.y, w_result->light.position.z,
+		w_result->light.intensity.r, w_result->light.intensity.g, w_result->light.intensity.b,
+		w_result->shape->sphere_shape.origin.x, w_result->shape->sphere_shape.origin.y, w_result->shape->sphere_shape.origin.z,
+		w_result->shape->sphere_shape.radius
 	);
-	printf(")\n");
 }

@@ -87,9 +87,9 @@ int	shape_compare_test(void *expected, void *result)
 		&& float_compare_test(&shape_expected->sphere_shape.origin.y, &shape_result->sphere_shape.origin.y)
 		&& float_compare_test(&shape_expected->sphere_shape.origin.z, &shape_result->sphere_shape.origin.z)
 		&& float_compare_test(&shape_expected->sphere_shape.radius, &shape_result->sphere_shape.radius))
-		return (1);
 		// if (shape_expected->shape_type == SPHERE)
 			// return (sphere_compare_test(shape_expected, shape_result));
+		return (1);
 	return (0);
 }
 
