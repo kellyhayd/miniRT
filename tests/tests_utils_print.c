@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 21:41:13 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/26 13:47:31 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/26 21:36:59 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,16 +213,5 @@ void	print_ko_world(int num_test, void *expected, void *result)
 	t_world	*w_expected = expected;
 	t_world	*w_result = result;
 
-	printf(PURPLE "%2d" RESET " - " RED "[ ✗ ] " RESET
-		"Expected: light (point (%.2lf, %.2lf, %.2lf) color (%.2lf, %.2lf, %.2lf))\n"
-		"\t\tResult: light (point (%.2lf, %.2lf, %.2lf) color (%.2lf, %.2lf, %.2lf))\n",
-		"Expected: sphere (origin (%.2lf, %.2lf, %.2lf) radius (%.2lf))\n"
-		"\t\tResult: sphere (origin (%.2lf, %.2lf, %.2lf) radius (%.2lf))\n",
-		num_test,
-		w_expected->light.position.x, w_expected->light.position.y, w_expected->light.position.z, w_expected->light.intensity.r, w_expected->light.intensity.g, w_expected->light.intensity.b,
-		w_result->light.position.x, w_result->light.position.y, w_result->light.position.z, w_result->light.intensity.r, w_result->light.intensity.g, w_result->light.intensity.b,
-		w_expected->shape->sphere_shape.origin.x, w_expected->shape->sphere_shape.origin.y, w_expected->shape->sphere_shape.origin.z, w_expected->shape->sphere_shape.radius,
-		w_result->shape->sphere_shape.origin.x, w_result->shape->sphere_shape.origin.y, w_result->shape->sphere_shape.origin.z, w_result->shape->sphere_shape.radius
-	);
-	printf(")\n");
+	printf(PURPLE "%2d" RESET " - " RED "[ ✗ ]" RESET " Your world is out of this galaxy!\n", num_test);
 }

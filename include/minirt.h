@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:01:38 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/26 13:10:30 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/26 15:52:13 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ typedef struct s_world
 {
 	t_shape	*shape;
 	t_light	light;
+	int		shape_nb;
 }	t_world;
 
 // -------------------------------------------------------------------------- //
@@ -243,7 +244,7 @@ t_color		lighting(t_material m, t_light light, t_point position, t_vector eye, t
 // -------------------------------------------------------------------------- //
 t_world		world(void);
 t_world		default_world(void);
-
+t_hit		*intersect_world(t_world w, t_ray ray);
 
 // -------------------------------------------------------------------------- //
 //                                   utils                                    //
