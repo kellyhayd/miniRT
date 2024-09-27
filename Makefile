@@ -2,7 +2,14 @@
 #----------------------------------------------- Basic
 NAME			= miniRT
 .DEFAULT_GOAL	= all
-.PHONY:			all clean fclean re libft libmlx
+.PHONY:			all clean fclean re libft libmlx test \
+				tests_tuples \
+				tests_colors \
+				tests_matrix \
+				tests_transformation \
+				tests_ray_intersection \
+				tests_light_and_shading \
+				tests_world
 # .SILENT:
 
 #----------------------------------------------- Colors
@@ -75,22 +82,42 @@ fclean: clean
 	@rm -rf test
 	@rm -rf pit
 
-test: all
-#	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_tuples.c $(LIBS) -o test
+test: all \
+	tests_tuples \
+	tests_colors \
+	tests_matrix \
+	tests_transformation \
+	tests_ray_intersection \
+	tests_light_and_shading \
+	tests_world
 
-#	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_colors.c $(LIBS) -o test
+tests_tuples:
+	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_tuples.c $(LIBS) -o $@
+	@./$@
 
-#	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_matrix.c $(LIBS) -o test
+tests_colors:
+	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_colors.c $(LIBS) -o $@
+	@./$@
 
-#	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_transformation.c $(LIBS) -o test
+tests_matrix:
+	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_matrix.c $(LIBS) -o $@
+	@./$@
 
-#	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_ray_intersection.c $(LIBS) -o test
+tests_transformation:
+	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_transformation.c $(LIBS) -o $@
+	@./$@
 
-#	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_light_and_shading.c $(LIBS) -o test
+tests_ray_intersection:
+	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_ray_intersection.c $(LIBS) -o $@
+	@./$@
 
-	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_world.c $(LIBS) -o test
+tests_light_and_shading:
+	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_light_and_shading.c $(LIBS) -o $@
+	@./$@
 
-	@./test
+tests_world:
+	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_world.c $(LIBS) -o $@
+	@./$@
 
 pit: all
 #	@$(CC) -g3 $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/projectiles.c $(LIBS) -o pit
