@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 13:39:07 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/26 14:58:16 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/26 22:27:56 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
  * @brief Creates a translation matrix.
  *
  * This function generates a translation matrix that can be used to translate
- * points or objects in 3D space by the specified amounts along the x, y, and z axes.
+ * points or objects in 3D space by the specified amounts along the x, y, and z
+ * axes.
  *
  * @param x The translation distance along the x-axis.
  * @param y The translation distance along the y-axis.
@@ -58,11 +59,18 @@ t_matrix	scaling(double x, double y, double z)
 }
 
 /**
- * Applies a shearing transformation to a matrix.
+ * @brief Creates a shearing transformation matrix.
  *
- * @param prop_x A pointer to an array of doubles representing the shearing factors in the x direction.
- * @param prop_y A pointer to an array of doubles representing the shearing factors in the y direction.
- * @param prop_z A pointer to an array of doubles representing the shearing factors in the z direction.
+ * This function generates a shearing matrix that can be used to shear objects
+ * in 3D space. The shearing factors for the x, y, and z axes are provided as
+ * parameters.
+ *
+ * @param prop_x A pointer to an array of doubles representing the shearing
+ * factors in the x direction.
+ * @param prop_y A pointer to an array of doubles representing the shearing
+ * factors in the y direction.
+ * @param prop_z A pointer to an array of doubles representing the shearing
+ * factors in the z direction.
  * @return A t_matrix structure representing the sheared matrix.
  */
 t_matrix	shearing(double *prop_x, double *prop_y, double *prop_z)
@@ -86,7 +94,8 @@ t_matrix	shearing(double *prop_x, double *prop_y, double *prop_z)
  * allowing for various geometric transformations such as translation,
  * rotation, scaling, and shearing to be applied to the shape.
  *
- * @param shape A pointer to the shape to which the transformation matrix will be applied.
+ * @param shape A pointer to the shape to which the transformation matrix
+ * will be applied.
  * @param transformation The transformation matrix to be set for the shape.
  */
 void	set_transformation(t_shape *shape, t_matrix tranformation)

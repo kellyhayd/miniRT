@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 20:45:35 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/26 15:08:42 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/26 22:25:34 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 /**
  * @brief Adds two tuples together.
  *
- * This function takes two tuples as input and returns a new tuple that is the result
- * of adding the corresponding components of the input tuples.
+ * This function takes two tuples as input and returns a new tuple that is the
+ * result of adding the corresponding components of the input tuples.
  *
  * @param tuple1 The first tuple to be added.
  * @param tuple2 The second tuple to be added.
@@ -73,8 +73,8 @@ t_tuple	tuple_negate(t_tuple tuple)
  *
  * @param tuple The tuple to be multiplied.
  * @param scalar The scalar value to multiply each component of the tuple by.
- * @return A new tuple where each component is the result of the original component
- *         multiplied by the scalar.
+ * @return A new tuple where each component is the result of the original
+ *         component multiplied by the scalar.
  */
 t_tuple	tuple_multiply(t_tuple tuple, double scalar)
 {

@@ -43,39 +43,39 @@ void	test_default_world(int num_test)
 }
 
 // TEST 03
-// void	test_intersect_a_world_with_a_ray(int num_test)
-// {
-// 	// ARRANGE
-// 	t_world	w = default_world();
-// 	t_ray	r = ray(point(0, 0, -5), vector(0, 0, 1));
-// 	t_hit	*result = malloc(sizeof(t_hit) * 4);
-// 	t_hit	*expected;
-// 	t_hit	*hit;
+void	test_intersect_a_world_with_a_ray(int num_test)
+{
+	// ARRANGE
+	t_world	w = default_world();
+	t_ray	r = ray(point(0, 0, -5), vector(0, 0, 1));
+	t_hit	*result = malloc(sizeof(t_hit) * 4);
+	t_hit	*expected;
+	t_hit	*hit;
 
-// 	expected = malloc(sizeof(t_hit) * 4);
-// 	expected[0] = intersection(4, w.shape[0]);
-// 	expected[1] = intersection(4.5, w.shape[0]);
-// 	expected[2] = intersection(5.5, w.shape[0]);
-// 	expected[3] = intersection(6, w.shape[0]);
+	expected = malloc(sizeof(t_hit) * 4);
+	expected[0] = intersection(4, w.shape[0]);
+	expected[1] = intersection(4.5, w.shape[0]);
+	expected[2] = intersection(5.5, w.shape[0]);
+	expected[3] = intersection(6, w.shape[0]);
 
-// 	int			xs_count_expected = 4;
-// 	int			xs_count_result = intersection_count(result);
+	int	xs_count_expected = 4;
+	int	xs_count_result = intersection_count(result);
 
-// 	// ACT
-// 	result = intersect_world(w, r);
+	// ACT
+	result = intersect_world(w, r);
 
-// 	// ASSERT
-// 	print_result(num_test, &xs_count_expected, &xs_count_result, int_compare_test, print_ko_int);
-// 	print_result(num_test, expected, result, hit_list_compare_test, print_ko_hit_list);
-// }
+	// ASSERT
+	print_result(num_test, &xs_count_expected, &xs_count_result, int_compare_test, print_ko_int);
+	print_result(num_test, expected, result, hit_list_compare_test, print_ko_hit_list);
+}
 
 int main(void)
 {
 	void	(*test_funcs[])(int) =
 	{
-		test_creating_a_world,							// 01
-		test_default_world,								// 02
-		// test_intersect_a_world_with_a_ray,			// 03
+		test_creating_a_world,						// 01
+		test_default_world,							// 02
+		test_intersect_a_world_with_a_ray,			// 03
 	};
 
 	printf("\n%sTESTING WORLD CREATION:%s\n", YELLOW, RESET);

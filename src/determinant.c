@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 13:55:40 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/26 15:25:45 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/26 22:19:43 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
  * @brief Calculates the determinant of a given matrix.
  *
  * This function takes a matrix of type `t_matrix` and computes its determinant.
- * The determinant is a scalar value that can be computed from the elements of a square matrix
- * and encodes certain properties of the matrix.
+ * The determinant is a scalar value that can be computed from the elements of a
+ * square matrix and encodes certain properties of the matrix.
  *
  * @param matrix The matrix for which the determinant is to be calculated.
  * @return The determinant of the matrix.
@@ -44,12 +44,15 @@ double	determinant(t_matrix matrix)
 }
 
 /**
- * Extracts a submatrix from the given matrix by removing the specified row and column.
+ * Extracts a submatrix from the given matrix by removing the specified row
+ * and column.
  *
- * @param matrix The original matrix from which the submatrix will be extracted.
+ * @param matrix The original matrix from which the submatrix will be
+ * extracted.
  * @param y The row index to be removed from the original matrix.
  * @param x The column index to be removed from the original matrix.
- * @return A new matrix that is the submatrix of the original matrix with the specified row and column removed.
+ * @return A new matrix that is the submatrix of the original matrix with the
+ * specified row and column removed.
  */
 t_matrix	submatrix(t_matrix matrix, int y, int x)
 {

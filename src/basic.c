@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 14:01:17 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/26 15:24:05 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/26 22:12:41 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,9 @@ t_matrix	matrix_create(double *tab, int rows, int cols)
 /**
  * @brief Compares two matrices for equality.
  *
- * This function takes two matrices as input and compares them element by element.
- * It returns a non-zero value if the matrices are equal, and zero if they are not.
+ * This function takes two matrices as input and compares them element by
+ * element. It returns a non-zero value if the matrices are equal, and zero
+ * if they are not.
  *
  * @param matrix1 The first matrix to compare.
  * @param matrix2 The second matrix to compare.

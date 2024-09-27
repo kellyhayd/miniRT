@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 08:14:46 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/26 21:43:23 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/26 22:05:26 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,17 @@ t_world	default_world(void)
 	return (w);
 }
 
-// t_hit	*intersect_world(t_world w, t_ray ray)
-// {
-// 	t_hit	*hit_list;
-// 	int		i;
+t_hit	*intersect_world(t_world w, t_ray ray)
+{
+	t_hit	*hit_list;
+	int		i;
 
-// 	hit_list = NULL;
-// 	i = 0;
-// 	while (i < w.shape_nb)
-// 	{
-// 		intersect(&hit_list, w.shape[i], ray);
-// 		i++;
-// 	}
-// 	return (hit_list);
-// }
+	hit_list = NULL;
+	i = 0;
+	while (i < w.shape_nb)
+	{
+		intersect(&hit_list, w.shape[i], ray);
+		i++;
+	}
+	return (hit_list);
+}

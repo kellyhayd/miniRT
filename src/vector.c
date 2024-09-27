@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 20:31:43 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/26 14:55:53 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/26 22:28:51 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,15 @@ t_vector	normalize(t_vector vector1)
 	new.w = vector1.w / v_magnitude;
 	return (new);
 }
+
 /**
- * Calculates the dot product of two vectors.
+ * @brief Calculates the dot product of two vectors.
+ *
+ * This function takes two vectors as input and returns their dot product.
  *
  * @param vector1 The first vector.
  * @param vector2 The second vector.
- * @return The cross product of t * @return The dot product of vector1 and vector2.ector2)
+ * @return The dot product of vector1 and vector2.
  */
 double	dot(t_vector vector1, t_vector vector2)
 {
