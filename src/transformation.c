@@ -93,5 +93,5 @@ void	set_transformation(t_shape *shape, t_matrix tranformation)
 {
 	shape->transform = tranformation;
 	shape->inverse = inverse(tranformation);
-	shape->transpose = transpose(tranformation);
+	shape->transposed_inverse = transpose(shape->inverse);
 }
