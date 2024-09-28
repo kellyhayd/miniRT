@@ -26,20 +26,20 @@ t_world	default_world(void)
 	t_world	w;
 
 	w = world();
-	w.shape = malloc(sizeof(t_shape) * 2);
-	if (w.shape == NULL)
-	{
-		printf("Memory allocation failed\n");
-		exit(EXIT_FAILURE);
-	}
 	w.shape_nb = 2;
+	w.shape = malloc(sizeof(t_shape) * 2);
+	w.light = point_light(point(-10, 10, -10), color(1, 1, 1));
+	// if (w.shape == NULL)
+	// {
+	// 	printf("Memory allocation failed\n");
+	// 	exit(EXIT_FAILURE);
+	// }
 	w.shape[0] = sphere();
 	w.shape[0].material.color = color(0.8, 1.0, 0.6);
 	w.shape[0].material.diffuse = 0.7;
-	w.shape[0].material.shininess = 0.2;
+	w.shape[0].material.specular = 0.2;
 	w.shape[1] = sphere();
 	set_transformation(&w.shape[1], scaling(0.5, 0.5, 0.5));
-	w.light = point_light(point(-10, 10, -10), color(1, 1, 1));
 	return (w);
 }
 
