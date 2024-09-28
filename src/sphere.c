@@ -27,6 +27,7 @@ t_shape	sphere(void)
 	new_sphere.sphere_shape.radius = 1;
 	new_sphere.transform = identity();
 	new_sphere.inverse = identity();
-	new_sphere.transpose = identity();
+	new_sphere.transposed_inverse = identity();
+	new_sphere.material = material();
 	return (new_sphere);
 }

@@ -3,10 +3,12 @@
 void	create_sphere(mlx_image_t *image)
 {
 	// Forms and colors
-	t_color	red = color(1, 0, 0);
+	// t_color	red = color(1, 0, 0);
 	t_shape	s = sphere();
 	s.material = material();
 	s.material.color = color(1, 0.2, 1);
+	s.material.specular = 0.9;
+	s.material.shininess = 30;
 
 	// Light
 	t_point	light_position = point(-10, 10, -10);
@@ -27,6 +29,12 @@ void	create_sphere(mlx_image_t *image)
 	double	half = wall_size / 2;
 	t_point	wall_point;
 
+	// Utils
+	t_point		hit_point;
+	t_vector	normal;
+	t_vector	eye;
+	t_color		color;
+
 	t_matrix	scale_matrix = scaling(2, 2, 2);
 	set_transformation(&s, scale_matrix);
 
@@ -44,10 +52,10 @@ void	create_sphere(mlx_image_t *image)
 			intersect(&hit_list, s, ray_to_wall);
 			if (hit_list)
 			{
-				t_point hit_point = position(ray_to_wall, hit_list->t);
-				t_vector normal = normal_at(hit_list->object, hit_point);
-				t_vector eye = normalize(tuple_negate(ray_to_wall.direction));
-				t_color color = lighting(hit_list->object.material, light, hit_point, eye, normal);
+				hit_point = position(ray_to_wall, hit_list->t);
+				normal = normal_at(hit_list->object, hit_point);
+				eye = normalize(tuple_negate(ray_to_wall.direction));
+				color = lighting(hit_list->object.material, light, hit_point, eye, normal);
 				write_pixel(image, x, y, color);
 			}
 			hit_clear_list(&hit_list);

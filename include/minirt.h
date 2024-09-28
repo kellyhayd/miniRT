@@ -100,7 +100,7 @@ typedef struct s_shape
 	};
 	t_matrix	transform;
 	t_matrix	inverse;
-	t_matrix	transpose;
+	t_matrix	transposed_inverse;
 	t_material	material;
 }	t_shape;
 

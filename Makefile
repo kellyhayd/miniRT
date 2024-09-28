@@ -16,7 +16,12 @@ RESET	= \033[0m
 
 #----------------------------------------------- Compilation
 CC		:= cc
-FLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast -g3
+# FLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast -g3
+ifeq ($(PROF), 1)
+	FLAGS	:= -pg
+else
+	FLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast -g3
+endif
 
 #----------------------------------------------- Sources
 LIBFT_FOLDER	= lib/libft
@@ -90,14 +95,19 @@ test: all
 
 	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_world.c $(LIBS) -o test
 
-	@./test
+	@valgrind -q ./test
 
 pit: all
-#	@$(CC) -g3 $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/projectiles.c $(LIBS) -o pit
-#	@$(CC) -g3 $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/parable.c $(LIBS) -o pit
-#	@$(CC) -g3 $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/silhouette.c $(LIBS) -o pit
-	@$(CC) -g3 $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/sphere.c $(LIBS) -o pit
-
+#	@$(CC) $(FLAGS) $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/projectiles.c $(LIBS) -o pit
+#	@$(CC) $(FLAGS) $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/parable.c $(LIBS) -o pit
+#	@$(CC) $(FLAGS) $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/silhouette.c $(LIBS) -o pit
+	@$(CC) $(FLAGS) $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/sphere.c $(LIBS) -o pit
 	@./pit
+
+ifeq ($(PROF), 1)
+	@gprof pit gmon.out > prof
+	@< prof gprof2dot | dot -Tpng -o output.png
+endif
+
 
 re: fclean all
