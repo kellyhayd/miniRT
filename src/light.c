@@ -25,27 +25,35 @@ t_light	point_light(t_point position, t_color intensity)
 {
 	return ((t_light){
 		.intensity = intensity,
-		.position = position
+		.position = position,
+		.next = NULL
 	});
 }
 
-/**
- * @brief Creates and returns a default material.
- *
- * This function initializes a material structure with default values.
- * The default material can be used as a base for further customization.
- *
- * @return A t_material structure initialized with default values.
- */
-t_material	material(void)
+void	add_light(t_light **light_list, t_light light_to_add)
 {
-	return ((t_material){
-		.color = color(1, 1, 1),
-		.ambient = 0.1,
-		.diffuse = 0.9,
-		.specular = 0.9,
-		.shininess = 200
-	});
+	t_light	*new_light;
+	t_light	*aux;
+
+	new_light = malloc(sizeof(t_light));
+	*new_light = light_to_add;
+	aux = *light_list;
+	while (aux && aux->next)
+		aux = aux->next;
+	if (aux)
+		aux->next = new_light;
+	else
+		*light_list = new_light;
+}
+
+void	light_clear_list(t_light **light_list)
+{
+	if (light_list && *light_list)
+	{
+		light_clear_list(&((*light_list)->next));
+		free(*light_list);
+		*light_list = NULL;
+	}
 }
 
 /**

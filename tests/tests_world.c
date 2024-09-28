@@ -4,60 +4,64 @@
 void	test_creating_a_world(int num_test)
 {
 	// ARRANGE
-	t_world	w;
-	t_world	expected;
-
-	expected.light = point_light(point(0, 0, 0), color(1, 1, 1));
-	expected.shape = NULL;
-	expected.shape_nb = 0;
+	t_world	expected = {0};
+	t_world	result;
 
 	// ACT
-	w = world();
+	result = world();
 
 	// ASSERT
-	print_result(num_test, &expected, &w, world_compare_test, print_ko_world);
+	print_result(num_test, &expected, &result, world_compare_test, print_ko_world);
 }
 
 // TEST 02
 void	test_default_world(int num_test)
 {
 	// ARRANGE
-	t_world	w;
 	t_world	expected;
+	t_world	result;
+	t_shape	sphere1 = sphere();
+	t_shape	sphere2 = sphere();
 
 	expected = world();
-	expected.shape_nb = 2;
-	expected.shape = malloc(sizeof(t_shape) * 2);
-	expected.light = point_light(point(-10, 10, -10), color(1, 1, 1));
 
-	expected.shape[0] = sphere();
-	expected.shape[0].material.color = color(0.8, 1.0, 0.6);
-	expected.shape[0].material.diffuse = 0.7;
-	expected.shape[0].material.specular = 0.2;
+	// Create list of shapes
+	expected.light = malloc(sizeof(t_light));
+	*expected.light = point_light(point(-10, 10, -10), color(1, 1, 1));
 
-	expected.shape[1] = sphere();
+	// Create first sphere
+	sphere1.material.color = color(0.8, 1.0, 0.6);
+	sphere1.material.diffuse = 0.7;
+	sphere1.material.specular = 0.2;
+
+	// Create second sphere
 	set_transformation(&expected.shape[1], scaling(0.5, 0.5, 0.5));
 
+	// Add shapes to world
+	add_shape(&expected.shape, sphere1);
+	add_shape(&expected.shape, sphere2);
+
 	// ACT
-	w = default_world();
+	result = default_world();
 
 	// ASSERT
-	print_result(num_test, &expected, &w, world_compare_test, print_ko_world);
+	print_result(num_test, &expected, &result, world_compare_test, print_ko_world);
 
 	// CLEAR
-	free(expected.shape);
+	world_clear(&expected);
+	world_clear(&result);
 }
 
 // TEST 03
 void	test_intersect_a_world_with_a_ray(int num_test)
 {
 	// ARRANGE
-	t_world	w = default_world();
-	t_ray	r = ray(point(0, 0, -5), vector(0, 0, 1));
-	t_hit	*result;
-	t_hit	*expected = NULL;
 	int		xs_count_expected = 4;
 	int		xs_count_result;
+	t_world	w = default_world();
+	t_ray	r = ray(point(0, 0, -5), vector(0, 0, 1));
+	t_hit	*expected = NULL;
+	t_hit	*result;
 
 	add_intersection(&expected, intersection(4, w.shape[0]));
 	add_intersection(&expected, intersection(4.5, w.shape[1]));
@@ -73,6 +77,7 @@ void	test_intersect_a_world_with_a_ray(int num_test)
 	print_result(num_test, expected, result, hit_list_compare_test, print_ko_hit_list);
 
 	// CLEAR
+	world_clear(&w);
 	hit_clear_list(&expected);
 	hit_clear_list(&result);
 }

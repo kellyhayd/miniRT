@@ -155,22 +155,67 @@ int	material_compare_test(void *expected, void *result)
 	return (0);
 }
 
+int	shape_list_compare_test(void *expected, void *result)
+{
+	t_shape	*shape_expected = expected;
+	t_shape	*shape_result = result;
+	t_shape	*aux_expected;
+	t_shape	*aux_result;
+
+	if (!shape_expected || !shape_result)
+		return (shape_expected == shape_result);
+
+	aux_expected = shape_expected;
+	aux_result = shape_result;
+	while (aux_expected && aux_result && shape_compare_test(aux_expected, aux_result))
+	{
+		aux_expected = aux_expected->next;
+		aux_result = aux_result->next;
+	}
+
+	return (!aux_expected && !aux_result);
+}
+
+int	light_list_compare_test(void *expected, void *result)
+{
+	t_light	*light_expected = expected;
+	t_light	*light_result = result;
+	t_light	*aux_expected;
+	t_light	*aux_result;
+
+	if (!light_expected || !light_result)
+		return (light_expected == light_result);
+
+	aux_expected = light_expected;
+	aux_result = light_result;
+	while (aux_expected && aux_result && light_compare_test(aux_expected, aux_result))
+	{
+		aux_expected = aux_expected->next;
+		aux_result = aux_result->next;
+	}
+
+	return (!aux_expected && !aux_result);
+}
+
 int	world_compare_test(void *expected, void *result)
 {
 	t_world	*w_expected = expected;
 	t_world	*w_result = result;
 	int		i = 0;
 
-	if (tuple_compare_test(&w_expected->light.position, &w_result->light.position)
-		&& color_compare_test(&w_expected->light.intensity, &w_result->light.intensity)
-		&& int_compare_test(&w_expected->shape_nb, &w_result->shape_nb))
+	// if (tuple_compare_test(&w_expected->light.position, &w_result->light.position)
+	// 	&& color_compare_test(&w_expected->light.intensity, &w_result->light.intensity)
+	// 	&& int_compare_test(&w_expected->shape_nb, &w_result->shape_nb))
+
+	if (shape_list_compare_test(&w_expected->shape, &w_result->shape)
+		&& light_list_compare_test(&w_result->light, &w_expected->light))
 	{
-		while (i < w_expected->shape_nb)
-		{
-			if (!shape_compare_test(&w_expected->shape[i], &w_result->shape[i]))
-				return (0);
-			i++;
-		}
+		// while (i < w_expected->shape_nb)
+		// {
+		// 	if (!shape_compare_test(&w_expected->shape[i], &w_result->shape[i]))
+		// 		return (0);
+		// 	i++;
+		// }
 		return (1);
 	}
 	return (0);

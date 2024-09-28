@@ -14,46 +14,49 @@
 
 t_world	world(void)
 {
-	t_world	w;
+	return ((t_world) {0});
+}
 
-	ft_bzero(&w, sizeof(t_world));
-	w.light = point_light(point(0, 0, 0), color(1, 1, 1));
-	return (w);
+void	world_clear(t_world *world_to_clear)
+{
+	shape_clear_list(&world_to_clear->shape);
+	light_clear_list(&world_to_clear->light);
 }
 
 t_world	default_world(void)
 {
-	t_world	w;
+	t_world	dfl_world;
+	t_shape	sphere1;
+	t_shape	sphere2;
+	t_light	light1;
 
-	w = world();
-	w.shape_nb = 2;
-	w.shape = malloc(sizeof(t_shape) * 2);
-	w.light = point_light(point(-10, 10, -10), color(1, 1, 1));
-	// if (w.shape == NULL)
-	// {
-	// 	printf("Memory allocation failed\n");
-	// 	exit(EXIT_FAILURE);
-	// }
-	w.shape[0] = sphere();
-	w.shape[0].material.color = color(0.8, 1.0, 0.6);
-	w.shape[0].material.diffuse = 0.7;
-	w.shape[0].material.specular = 0.2;
-	w.shape[1] = sphere();
-	set_transformation(&w.shape[1], scaling(0.5, 0.5, 0.5));
-	return (w);
+	dfl_world = world();
+	light1 = point_light(point(-10, 10, -10), color(1, 1, 1));
+	add_light(&dfl_world.light, light1);
+	dfl_world.light = malloc(sizeof(t_light));
+	*dfl_world.light = point_light(point(-10, 10, -10), color(1, 1, 1));
+	sphere1 = sphere();
+	sphere2 = sphere();
+	sphere1.material.color = color(0.8, 1.0, 0.6);
+	sphere1.material.diffuse = 0.7;
+	sphere1.material.specular = 0.2;
+	set_transformation(&dfl_world.shape[1], scaling(0.5, 0.5, 0.5));
+	add_shape(&dfl_world.shape, sphere1);
+	add_shape(&dfl_world.shape, sphere2);
+	return (dfl_world);
 }
 
 t_hit	*intersect_world(t_world w, t_ray ray)
 {
 	t_hit	*hit_list;
-	int		i;
+	t_shape	*aux;
 
 	hit_list = NULL;
-	i = 0;
-	while (i < w.shape_nb)
+	aux = w.shape;
+	while (aux)
 	{
-		intersect(&hit_list, w.shape[i], ray);
-		i++;
+		intersect(&hit_list, *aux, ray);
+		aux = aux->next;
 	}
 	return (hit_list);
 }

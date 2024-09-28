@@ -44,8 +44,9 @@ typedef struct s_tuple	t_point;
 typedef struct s_tuple	t_vector;
 
 typedef struct s_hit	t_hit;
-// typedef struct s_shape	t_shape;
+typedef struct s_shape	t_shape;
 // typedef struct s_sphere	t_sphere;
+typedef struct s_light	t_light;
 
 struct s_tuple
 {
@@ -90,7 +91,7 @@ typedef struct s_material
 	t_color	color;
 }	t_material;
 
-typedef struct s_shape
+struct s_shape
 {
 	union
 	{
@@ -102,7 +103,8 @@ typedef struct s_shape
 	t_matrix	inverse;
 	t_matrix	transposed_inverse;
 	t_material	material;
-}	t_shape;
+	t_shape		*next;
+};
 
 struct s_hit
 {
@@ -111,17 +113,17 @@ struct s_hit
 	t_hit	*next;
 };
 
-typedef struct s_light
+struct s_light
 {
 	t_color	intensity;
 	t_point	position;
-}	t_light;
+	t_light	*next;
+};
 
 typedef struct s_world
 {
 	t_shape	*shape;
-	t_light	light;
-	int		shape_nb;
+	t_light	*light;
 }	t_world;
 
 typedef struct s_exposure
@@ -267,5 +269,12 @@ t_hit		*intersect_world(t_world w, t_ray ray);
 // -------------------------------------------------------------------------- //
 
 int			float_compare(double d1, double d2);
+
+// NÃO SEI ONDE POR
+void	add_shape(t_shape **shape_list, t_shape shape);
+void	world_clear(t_world *world_to_clear);
+void	shape_clear_list(t_shape **shape_list);
+void	add_light(t_light **light_list, t_light light_to_add);
+void	light_clear_list(t_light **light_list);
 
 #endif

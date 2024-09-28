@@ -40,6 +40,9 @@ int	hit_list_compare_test(void *expected, void *result);
 int	light_compare_test(void *expected, void *result);
 int	material_compare_test(void *expected, void *result);
 int	world_compare_test(void *expected, void *result);
+int	shape_list_compare_test(void *expected, void *result);
+int	light_list_compare_test(void *expected, void *result);
+int	world_compare_test(void *expected, void *result);
 
 
 // Prints
