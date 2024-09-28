@@ -1,6 +1,9 @@
 {
 	"files.associations": {
 		"minirt.h": "c",
-		"tests.h": "c"
+		"tests.h": "c",
+		"random": "c",
+		"cmath": "c",
+		"functional": "c"
 	}
 }

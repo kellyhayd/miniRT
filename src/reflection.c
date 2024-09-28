@@ -25,10 +25,9 @@ t_vector	normal_at(t_shape s, t_point world_point)
 	t_point		obj_normal;
 	t_vector	world_normal;
 
-	obj_point = mx_multiply_tuple(inverse(s.transform), world_point);
+	obj_point = mx_multiply_tuple(s.inverse, world_point);
 	obj_normal = tuple_subtract(obj_point, point(0, 0, 0));
-	world_normal = mx_multiply_tuple(transpose(inverse(s.transform)), \
-		obj_normal);
+	world_normal = mx_multiply_tuple(s.transposed_inverse, obj_normal);
 	world_normal.w = 0;
 	return (normalize(world_normal));
 }

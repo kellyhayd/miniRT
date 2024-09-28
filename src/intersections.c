@@ -42,21 +42,27 @@ void	intersect_sphere(t_hit **hit_list, t_shape s, t_ray r)
 {
 	t_vector	sphere_to_ray;
 	double		discriminant;
-	double		a;
-	double		b;
-	double		c;
+	double		coefficient[3];
+	double		two_times_a;
+	double		square_root;
 
 	sphere_to_ray = tuple_subtract(r.origin, s.sphere_shape.origin);
-	a = dot(r.direction, r.direction);
-	b = 2 * dot(r.direction, sphere_to_ray);
-	c = dot(sphere_to_ray, sphere_to_ray) - 1;
-	discriminant = pow(b, 2) - 4 * a * c;
+	coefficient[0] = dot(r.direction, r.direction);
+	coefficient[1] = 2 * dot(r.direction, sphere_to_ray);
+	coefficient[2] = dot(sphere_to_ray, sphere_to_ray) - 1;
+	discriminant = pow(coefficient[1], 2)
+						- 4 * coefficient[0]
+						* coefficient[2];
 	if (discriminant < 0)
 		return ;
+	two_times_a = 2 * coefficient[0];
+	square_root = sqrt(discriminant);
 	add_intersection(hit_list,
-		intersection((-b - sqrt(discriminant)) / (2 * a), s));
+		intersection((-coefficient[1] - square_root) / (two_times_a),s)
+	);
 	add_intersection(hit_list,
-		intersection((-b + sqrt(discriminant)) / (2 * a), s));
+		intersection((-coefficient[1] + square_root) / (two_times_a), s)
+	);
 }
 
 /**

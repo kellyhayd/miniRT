@@ -23,7 +23,12 @@ RESET	= \033[0m
 
 #----------------------------------------------- Compilation
 CC		:= cc
-FLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast -g3
+# FLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast -g3
+ifeq ($(PROF), 1)
+	FLAGS	:= -pg
+else
+	FLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast -g3
+endif
 
 #----------------------------------------------- Sources
 LIBFT_FOLDER	= lib/libft
@@ -93,38 +98,43 @@ test: all \
 
 tests_tuples:
 	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_tuples.c $(LIBS) -o $@
-	@./$@
+	@valgrind -q ./$@
 
 tests_colors:
 	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_colors.c $(LIBS) -o $@
-	@./$@
+	@valgrind -q ./$@
 
 tests_matrix:
 	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_matrix.c $(LIBS) -o $@
-	@./$@
+	@valgrind -q ./$@
 
 tests_transformation:
 	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_transformation.c $(LIBS) -o $@
-	@./$@
+	@valgrind -q ./$@
 
 tests_ray_intersection:
 	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_ray_intersection.c $(LIBS) -o $@
-	@./$@
+	@valgrind -q ./$@
 
 tests_light_and_shading:
 	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_light_and_shading.c $(LIBS) -o $@
-	@./$@
+	@valgrind -q ./$@
 
 tests_world:
 	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_world.c $(LIBS) -o $@
-	@./$@
+	@valgrind -q ./$@
 
 pit: all
-#	@$(CC) -g3 $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/projectiles.c $(LIBS) -o pit
-#	@$(CC) -g3 $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/parable.c $(LIBS) -o pit
-#	@$(CC) -g3 $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/silhouette.c $(LIBS) -o pit
-	@$(CC) -g3 $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/sphere.c $(LIBS) -o pit
-
+#	@$(CC) $(FLAGS) $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/projectiles.c $(LIBS) -o pit
+#	@$(CC) $(FLAGS) $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/parable.c $(LIBS) -o pit
+#	@$(CC) $(FLAGS) $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/silhouette.c $(LIBS) -o pit
+	@$(CC) $(FLAGS) $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/sphere.c $(LIBS) -o pit
 	@./pit
+
+ifeq ($(PROF), 1)
+	@gprof pit gmon.out > prof
+	@< prof gprof2dot | dot -Tpng -o output.png
+endif
+
 
 re: fclean all

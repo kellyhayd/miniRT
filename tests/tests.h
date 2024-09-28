@@ -37,6 +37,7 @@ int	hit_list_compare_test(void *expected, void *result);
 int	shape_compare_test(void *expected, void *result);
 int	hit_compare_test(void *expected, void *result);
 int	hit_list_compare_test(void *expected, void *result);
+int	light_compare_test(void *expected, void *result);
 int	material_compare_test(void *expected, void *result);
 int	world_compare_test(void *expected, void *result);
 
@@ -57,6 +58,7 @@ void	print_ko_ray(int num_test, void *expected, void *result);
 void	print_ko_hit_list(int num_test, void *expected, void *result);
 void	print_ko_shape(int num_test, void *expected, void *result);
 void	print_ko_hit(int num_test, void *expected, void *result);
+void	print_ko_light(int num_test, void *expected, void *result);
 void	print_ko_material(int num_test, void *expectet, void *result);
 void	print_ko_world(int num_test, void *expected, void *result);
 

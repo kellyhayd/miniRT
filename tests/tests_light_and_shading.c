@@ -117,7 +117,6 @@ void	test_reflecting_a_vector_approaching_at_45_degrees(int num_test)
 	t_vector	expected = vector(1, 1, 0);
 	t_vector	result;
 
-
 	// ACT
 	result = reflect(v, n);
 
@@ -154,21 +153,27 @@ void	test_a_point_light_has_a_position_and_intensity(int num_test)
 	result = point_light(position, intensity);
 
 	// ASSERT
-	print_result(num_test, &expected, &result, tuple_compare_test, print_ko_tuple);
+	print_result(num_test, &expected, &result, light_compare_test, print_ko_light);
 }
 
 // TEST 10
 void	test_the_default_material(int num_test)
 {
 	// ARRANGE
-	t_material	expected = material();
+	t_material	expected;
 	t_material	result;
+
+	expected.color = color(1, 1, 1);
+	expected.ambient = 0.1;
+	expected.diffuse = 0.9;
+	expected.specular = 0.9;
+	expected.shininess = 200.0;
 
 	// ACT
 	result = material();
 
 	// ASSERT
-	print_result(num_test, &expected, &result, material_compare_test, print_ko_tuple);
+	print_result(num_test, &expected, &result, material_compare_test, print_ko_material);
 }
 
 // TEST 11
@@ -180,10 +185,10 @@ void	test_a_sphere_has_a_default_material(int num_test)
 	t_material	result;
 
 	// ACT
-	result = (s.material = material());
+	result = s.material;
 
 	// ASSERT
-	print_result(num_test, &expected, &result, material_compare_test, print_ko_tuple);
+	print_result(num_test, &expected, &result, material_compare_test, print_ko_material);
 }
 
 // TEST 12
@@ -192,17 +197,18 @@ void	test_a_sphere_may_be_assigned_a_material(int num_test)
 	// ARRANGE
 	t_shape		s = sphere();
 	t_material	m = material();
-	m.ambient = 1;
-	t_material	expected = m;
+	t_material	expected;
 	t_material	result;
 
+	m.ambient = 1;
+	expected = m;
 
 	// ACT
 	s.material = m;
 	result = s.material;
 
 	// ASSERT
-	print_result(num_test, &expected, &result, material_compare_test, print_ko_tuple);
+	print_result(num_test, &expected, &result, material_compare_test, print_ko_material);
 }
 
 // TEST 13
