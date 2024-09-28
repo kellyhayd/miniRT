@@ -86,7 +86,9 @@ int	shape_compare_test(void *expected, void *result)
 	if (float_compare_test(&shape_expected->sphere_shape.origin.x, &shape_result->sphere_shape.origin.x)
 		&& float_compare_test(&shape_expected->sphere_shape.origin.y, &shape_result->sphere_shape.origin.y)
 		&& float_compare_test(&shape_expected->sphere_shape.origin.z, &shape_result->sphere_shape.origin.z)
-		&& float_compare_test(&shape_expected->sphere_shape.radius, &shape_result->sphere_shape.radius))
+		&& float_compare_test(&shape_expected->sphere_shape.radius, &shape_result->sphere_shape.radius)
+		&& matrix_compare_test(&shape_expected->transform, &shape_result->transform)
+		&& material_compare_test(&shape_expected->material, &shape_result->material))
 		// if (shape_expected->shape_type == SPHERE)
 			// return (sphere_compare_test(shape_expected, shape_result));
 		return (1);
@@ -157,12 +159,12 @@ int	world_compare_test(void *expected, void *result)
 {
 	t_world	*w_expected = expected;
 	t_world	*w_result = result;
+	int		i = 0;
 
 	if (tuple_compare_test(&w_expected->light.position, &w_result->light.position)
 		&& color_compare_test(&w_expected->light.intensity, &w_result->light.intensity)
-		&& w_expected->shape_nb == w_result->shape_nb)
+		&& int_compare_test(&w_expected->shape_nb, &w_result->shape_nb))
 	{
-		int i = 0;
 		while (i < w_expected->shape_nb)
 		{
 			if (!shape_compare_test(&w_expected->shape[i], &w_result->shape[i]))
