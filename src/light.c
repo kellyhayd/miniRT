@@ -48,14 +48,6 @@ t_material	material(void)
 	});
 }
 
-static int	convert(double color_value)
-{
-	if (color_value > 1)
-		return (1);
-	color_value *= 255 + 0.5;
-	return (color_value);
-}
-
 /**
  * @brief Calculates the lighting effect on a material at a given position.
  *

@@ -25,9 +25,9 @@
 static int	convert(double color_value)
 {
 	if (color_value > 1)
-		return (255);
+		color_value = 1;
 	color_value *= 255 + 0.5;
-	return (color_value);
+	return ((int) color_value & 0xFF);
 }
 
 /**
@@ -38,14 +38,11 @@ static int	convert(double color_value)
  */
 int	color_to_int(t_color color)
 {
-	int	r;
-	int	g;
-	int	b;
 	int color_int;
 
-	color_int = ((int) convert(color.r) & 0xFF) << 24
-				| ((int) convert(color.g) & 0xFF) << 16
-				| ((int) convert(color.b) & 0xFF) << 8
+	color_int = convert(color.r) << 24
+				| convert(color.g) << 16
+				| convert(color.b) << 8
 				| 0xFF;
 	return (color_int);
 }
