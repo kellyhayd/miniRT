@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:08:09 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/26 15:10:02 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/28 18:14:51 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,33 +62,30 @@ t_material	material(void)
  * @param normal The normal vector at the point being shaded.
  * @return The resulting color after applying the lighting effect.
  */
-t_color	lighting(t_material m, t_light light, t_point position, t_vector eye, t_vector normal)
+t_color	lighting(t_material m, t_light light, t_point position, \
+					t_sight sight)
 {
 	t_color		ambient;
 	t_color		diffuse;
 	t_color		specular;
-	t_color		effective_color;
-	t_vector	lightv;
-	t_vector	reflectv;
-	double		reflect_dot_eye;
-	double		factor;
-	double		light_dot_normal;
+	t_exposure	e;
 
 	diffuse = color(0, 0, 0);
 	specular = color(0, 0, 0);
-	effective_color = color_hadamard(m.color, light.intensity);
-	lightv = normalize(tuple_subtract(light.position, position));
-	ambient = color_multiply(effective_color, m.ambient);
-	light_dot_normal = dot(lightv, normal);
-	if (light_dot_normal > 0)
+	e.effective_color = color_hadamard(m.color, light.intensity);
+	e.lightv = normalize(tuple_subtract(light.position, position));
+	ambient = color_multiply(e.effective_color, m.ambient);
+	e.light_dot_normal = dot(e.lightv, sight.normal);
+	if (e.light_dot_normal > 0)
 	{
-		diffuse = color_multiply(effective_color, m.diffuse * light_dot_normal);
-		reflectv = reflect(tuple_negate(lightv), normal);
-		reflect_dot_eye = dot(reflectv, eye);
-		if (reflect_dot_eye > 0)
+		diffuse = color_multiply(e.effective_color, \
+									m.diffuse * e.light_dot_normal);
+		e.reflectv = reflect(tuple_negate(e.lightv), sight.normal);
+		e.reflect_dot_eye = dot(e.reflectv, sight.eye);
+		if (e.reflect_dot_eye > 0)
 		{
-			factor = pow(reflect_dot_eye, m.shininess);
-			specular = color_multiply(light.intensity, factor * m.specular);
+			e.factor = pow(e.reflect_dot_eye, m.shininess);
+			specular = color_multiply(light.intensity, e.factor * m.specular);
 		}
 	}
 	return (color_add(color_add(ambient, diffuse), specular));
