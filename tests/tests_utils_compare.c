@@ -207,8 +207,8 @@ int	world_compare_test(void *expected, void *result)
 	// 	&& color_compare_test(&w_expected->light.intensity, &w_result->light.intensity)
 	// 	&& int_compare_test(&w_expected->shape_nb, &w_result->shape_nb))
 
-	if (shape_list_compare_test(&w_expected->shape, &w_result->shape)
-		&& light_list_compare_test(&w_result->light, &w_expected->light))
+	if (shape_list_compare_test(w_expected->shape, w_result->shape)
+		&& light_list_compare_test(w_result->light, w_expected->light))
 	{
 		// while (i < w_expected->shape_nb)
 		// {

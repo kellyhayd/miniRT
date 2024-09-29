@@ -7,7 +7,6 @@ void	add_shape(t_shape **shape_list, t_shape shape_to_add)
 
 	new_shape = malloc(sizeof(t_shape));
 	*new_shape = shape_to_add;
-	new_shape->next = *shape_list;
 	aux = *shape_list;
 	while (aux && aux->next)
 		aux = aux->next;

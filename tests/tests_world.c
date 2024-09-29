@@ -26,8 +26,7 @@ void	test_default_world(int num_test)
 	expected = world();
 
 	// Create list of shapes
-	expected.light = malloc(sizeof(t_light));
-	*expected.light = point_light(point(-10, 10, -10), color(1, 1, 1));
+	add_light(&expected.light, point_light(point(-10, 10, -10), color(1, 1, 1)));
 
 	// Create first sphere
 	sphere1.material.color = color(0.8, 1.0, 0.6);
@@ -35,7 +34,7 @@ void	test_default_world(int num_test)
 	sphere1.material.specular = 0.2;
 
 	// Create second sphere
-	set_transformation(&expected.shape[1], scaling(0.5, 0.5, 0.5));
+	set_transformation(&sphere2, scaling(0.5, 0.5, 0.5));
 
 	// Add shapes to world
 	add_shape(&expected.shape, sphere1);
@@ -63,10 +62,10 @@ void	test_intersect_a_world_with_a_ray(int num_test)
 	t_hit	*expected = NULL;
 	t_hit	*result;
 
-	add_intersection(&expected, intersection(4, w.shape[0]));
-	add_intersection(&expected, intersection(4.5, w.shape[1]));
-	add_intersection(&expected, intersection(5.5, w.shape[1]));
-	add_intersection(&expected, intersection(6, w.shape[0]));
+	add_intersection(&expected, intersection(4, *w.shape));
+	add_intersection(&expected, intersection(4.5, *w.shape->next));
+	add_intersection(&expected, intersection(5.5, *w.shape->next));
+	add_intersection(&expected, intersection(6, *w.shape));
 
 	// ACT
 	result = intersect_world(w, r);

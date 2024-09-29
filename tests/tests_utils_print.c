@@ -14,8 +14,8 @@
 
 void	print_ok(int num_test)
 {
-	printf(PURPLE "%2d" RESET " - " GREEN "[ ✓ ]\n" RESET, num_test);
-	// printf("%s%d%s - %s[ ✓ ]%s\n", PURPLE, num_test, RESET, GREEN, RESET);
+	// printf(PURPLE "%2d" RESET " - " GREEN "[ ✓ ]" RESET "\n", num_test);
+	printf("%s%d%s - %s[ ✓ ]%s\n", PURPLE, num_test, RESET, GREEN, RESET);
 }
 
 void	print_result(int num_test, void *expected, void *result,

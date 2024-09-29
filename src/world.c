@@ -33,14 +33,12 @@ t_world	default_world(void)
 	dfl_world = world();
 	light1 = point_light(point(-10, 10, -10), color(1, 1, 1));
 	add_light(&dfl_world.light, light1);
-	dfl_world.light = malloc(sizeof(t_light));
-	*dfl_world.light = point_light(point(-10, 10, -10), color(1, 1, 1));
 	sphere1 = sphere();
 	sphere2 = sphere();
 	sphere1.material.color = color(0.8, 1.0, 0.6);
 	sphere1.material.diffuse = 0.7;
 	sphere1.material.specular = 0.2;
-	set_transformation(&dfl_world.shape[1], scaling(0.5, 0.5, 0.5));
+	set_transformation(&sphere2, scaling(0.5, 0.5, 0.5));
 	add_shape(&dfl_world.shape, sphere1);
 	add_shape(&dfl_world.shape, sphere2);
 	return (dfl_world);
