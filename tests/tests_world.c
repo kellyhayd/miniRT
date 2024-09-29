@@ -261,21 +261,106 @@ void	test_color_at_with_intersection_behind_ray(int num_test)
 	world_clear(&w);
 }
 
+// TEST 12
+void	test_the_transformation_martix_for_the_default_orientation(int num_test)
+{
+	// ARRANGE
+	t_tuple		from = point(0, 0, 0);
+	t_tuple		to = point(0, 0, -1);
+	t_tuple		up = vector(0, 1, 0);
+	t_matrix	expected;
+	t_matrix	result;
+
+	expected = identity();
+
+	// ACT
+	result = view_transform(from, to, up);
+
+	// ASSERT
+	print_result(num_test, &expected, &result, matrix_compare_test, print_ko_matrix);
+}
+
+// TEST 13
+void	test_a_view_transformation_matrix_looking_in_positive_z_direction(int num_test)
+{
+	// ARRANGE
+	t_tuple		from = point(0, 0, 0);
+	t_tuple		to = point(0, 0, 1);
+	t_tuple		up = vector(0, 1, 0);
+	t_matrix	expected;
+	t_matrix	result;
+
+	expected = scaling(-1, 1, -1);
+
+	// ACT
+	result = view_transform(from, to, up);
+
+	// ASSERT
+	print_result(num_test, &expected, &result, matrix_compare_test, print_ko_matrix);
+}
+
+// TEST 14
+void	test_the_view_transformation_moves_the_world(int num_test)
+{
+	// ARRANGE
+	t_tuple		from = point(0, 0, 8);
+	t_tuple		to = point(0, 0, 0);
+	t_tuple		up = vector(0, 1, 0);
+	t_matrix	expected;
+	t_matrix	result;
+
+	expected = translation(0, 0, -8);
+
+	// ACT
+	result = view_transform(from, to, up);
+
+	// ASSERT
+	print_result(num_test, &expected, &result, matrix_compare_test, print_ko_matrix);
+}
+
+// TEST 15
+void	test_an_arbitrary_view_transformation(int num_test)
+{
+	// ARRANGE
+	double		tab[] = {
+		-0.50709, 0.50709,  0.67612, -2.36643,
+		 0.76772, 0.60609,  0.12122, -2.82843,
+		-0.35857, 0.59761, -0.71714,  0.00000,
+		 0.00000, 0.00000,  0.00000,  1.00000
+	};
+
+	t_tuple		from = point(1, 3, 2);
+	t_tuple		to = point(4, -2, 8);
+	t_tuple		up = vector(1, 1, 0);
+	t_matrix	expected = matrix_create(tab, 4, 4);
+	t_matrix	result;
+
+	// ACT
+	result = view_transform(from, to, up);
+
+	// ASSERT
+	print_result(num_test, &expected, &result, matrix_compare_test, print_ko_matrix);
+}
+
 int main(void)
 {
 	void	(*test_funcs[])(int) =
 	{
-		test_creating_a_world,										// 01
-		test_default_world,											// 02
-		test_intersect_a_world_with_a_ray,							// 03
-		test_precomputing_state_of_an_intersection,					// 04
-		test_the_hit_when_an_intersection_occurs_on_the_outside,	// 05
-		test_the_hit_when_an_intersection_occurs_on_the_inside,		// 06
-		test_shading_an_intersection,								// 07
-		test_shading_an_intersection_from_the_inside,				// 08
-		test_color_at_with_ray_misses,								// 09
-		test_color_at_with_ray_hits,								// 10
-		test_color_at_with_intersection_behind_ray,					// 11
+		test_creating_a_world,												// 01
+		test_default_world,													// 02
+		test_intersect_a_world_with_a_ray,									// 03
+		test_precomputing_state_of_an_intersection,							// 04
+		test_the_hit_when_an_intersection_occurs_on_the_outside,			// 05
+		test_the_hit_when_an_intersection_occurs_on_the_inside,				// 06
+		test_shading_an_intersection,										// 07
+		test_shading_an_intersection_from_the_inside,						// 08
+		test_color_at_with_ray_misses,										// 09
+		test_color_at_with_ray_hits,										// 10
+		test_color_at_with_intersection_behind_ray,							// 11
+		test_the_transformation_martix_for_the_default_orientation,			// 12
+		test_a_view_transformation_matrix_looking_in_positive_z_direction,	// 13
+		test_the_view_transformation_moves_the_world,						// 14
+		test_an_arbitrary_view_transformation,								// 15
 	};
 
 	printf("\n%sTESTING WORLD CREATION:%s\n", YELLOW, RESET);

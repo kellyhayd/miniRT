@@ -305,13 +305,14 @@ int			float_compare(double d1, double d2);
 void		ft_error(char *message);
 
 // NÃO SEI ONDE POR
-void	add_shape(t_shape **shape_list, t_shape shape);
-void	world_clear(t_world *world_to_clear);
-void	shape_clear_list(t_shape **shape_list);
-void	add_light(t_light **light_list, t_light light_to_add);
-void	light_clear_list(t_light **light_list);
-t_comps	prepare_computations(t_hit hit, t_ray ray);
-t_color	shade_hit(t_world world, t_comps comps);
-t_color	color_at(t_world w, t_ray r);
+void		add_shape(t_shape **shape_list, t_shape shape);
+void		world_clear(t_world *world_to_clear);
+void		shape_clear_list(t_shape **shape_list);
+void		add_light(t_light **light_list, t_light light_to_add);
+void		light_clear_list(t_light **light_list);
+t_comps		prepare_computations(t_hit hit, t_ray ray);
+t_color		shade_hit(t_world world, t_comps comps);
+t_color		color_at(t_world w, t_ray r);
+t_matrix	view_transform(t_point from, t_point to, t_vector up);
 
 #endif

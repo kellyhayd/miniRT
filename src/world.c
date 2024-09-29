@@ -120,3 +120,31 @@ t_color	color_at(t_world w, t_ray r)
 	}
 	return (color_at_hit);
 }
+
+t_matrix	view_transform(t_point from, t_point to, t_vector up)
+{
+	t_vector	forward;
+	t_vector	left;
+	t_vector	true_up;
+	t_matrix	orientation;
+	t_matrix	view_matrix;
+
+	forward = normalize(tuple_subtract(to, from));
+	left = cross(forward, normalize(up));
+	true_up = cross(left, forward);
+	orientation = identity();
+	mx_set(&orientation, 0, 0, left.x);
+	mx_set(&orientation, 0, 1, left.y);
+	mx_set(&orientation, 0, 2, left.z);
+	mx_set(&orientation, 1, 0, true_up.x);
+	mx_set(&orientation, 1, 1, true_up.y);
+	mx_set(&orientation, 1, 2, true_up.z);
+	mx_set(&orientation, 2, 0, -forward.x);
+	mx_set(&orientation, 2, 1, -forward.y);
+	mx_set(&orientation, 2, 2, -forward.z);
+	view_matrix = mx_multiply(
+		orientation,
+		translation(-from.x, -from.y, -from.z)
+	);
+	return (view_matrix);
+}
