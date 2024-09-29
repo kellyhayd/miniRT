@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:18:05 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/29 07:43:03 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/29 16:03:30 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,7 +201,7 @@ int	world_compare_test(void *expected, void *result)
 {
 	t_world	*w_expected = expected;
 	t_world	*w_result = result;
-	int		i = 0;
+	// int		i = 0;
 
 	// if (tuple_compare_test(&w_expected->light.position, &w_result->light.position)
 	// 	&& color_compare_test(&w_expected->light.intensity, &w_result->light.intensity)

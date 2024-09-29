@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:01:38 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/29 11:53:45 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/29 14:45:11 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,7 @@ typedef struct s_sight
 {
 	t_vector	eye;
 	t_vector	normal;
+	bool		in_shadow;
 }	t_sight;
 
 typedef struct s_camera
@@ -277,6 +278,11 @@ t_vector	reflect(t_vector in, t_vector normal);
 t_light		point_light(t_point position, t_color intensity);
 t_material	material(void);
 t_color		lighting(t_material m, t_light light, t_point position, t_sight sight);
+
+// -------------------------------------------------------------------------- //
+//                                  shadow                                    //
+// -------------------------------------------------------------------------- //
+bool		is_shadowed(t_world w, t_point position);
 
 // -------------------------------------------------------------------------- //
 //                                   world                                    //
