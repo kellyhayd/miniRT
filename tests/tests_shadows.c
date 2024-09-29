@@ -118,7 +118,7 @@ int	main()
 {
 	void(*test_funcs[])(int) =
 	{
-		// test_lighting_with_the_surface_in_shadow,								// 01
+		test_lighting_with_the_surface_in_shadow,								// 01
 		test_there_is_no_shadow_when_nothing_is_collinear_with_point_and_light,	// 02
 		test_the_shadow_when_an_object_is_between_the_point_and_the_light,		// 03
 		test_there_is_no_shadow_when_an_object_is_behind_the_light,				// 04
@@ -128,7 +128,7 @@ int	main()
 
 	printf("\n%sTESTING SHADOWS:%s\n", YELLOW, RESET);
 
-	for (int i = 0; i < sizeof(test_funcs) / sizeof(test_funcs[0]); i++) {
+	for (unsigned int i = 0; i < sizeof(test_funcs) / sizeof(test_funcs[0]); i++) {
 		test_funcs[i](i + 1);
 	}
 	return (0);

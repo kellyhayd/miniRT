@@ -58,3 +58,45 @@ t_hit	*intersect_world(t_world w, t_ray ray)
 	}
 	return (hit_list);
 }
+
+t_comps	prepare_computations(t_hit hit, t_ray ray)
+{
+	t_comps	comps;
+
+	comps.t = hit.t;
+	comps.object = hit.object;
+	comps.point = position(ray, comps.t);
+	comps.sight.eye = tuple_negate(ray.direction);
+	comps.sight.normal = normal_at(comps.object, comps.point);
+	if (dot(comps.sight.normal, comps.sight.eye) < 0)
+	{
+		comps.inside = true;
+		comps.sight.normal = tuple_negate(comps.sight.normal);
+	}
+	else
+		comps.inside = false;
+	return (comps);
+}
+
+t_color	shade_hit(t_world world, t_comps comps)
+{
+	t_color	color_shaded;
+	t_light	*aux;
+
+	color_shaded = color(0, 0, 0);
+	aux = world.light;
+	while (aux)
+	{
+		color_shaded = color_add(
+			color_shaded,
+			lighting(
+				comps.object.material,
+				*aux,
+				comps.point,
+				comps.sight
+			)
+		);
+		aux = aux->next;
+	}
+	return (color_shaded);
+}

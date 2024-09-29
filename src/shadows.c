@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 13:04:14 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/29 15:45:56 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/29 16:16:28 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,3 @@ bool	is_shadowed(t_world w, t_point position)
 		return (true);
 	return (false);
 }
-
-// t_color	shade_hit(t_world w, t_comp comps)
-// {
-// 	return (lighting(comps.object.material, *w.light, comp.point, comp.sight));
-// }

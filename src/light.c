@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:08:09 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/29 10:26:18 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/29 16:23:14 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,7 @@ t_color	lighting(t_material m, t_light light, t_point position, \
 			specular = color_multiply(light.intensity, e.factor * m.specular);
 		}
 	}
+	if (sight.in_shadow)
+		return (ambient);
 	return (color_add(color_add(ambient, diffuse), specular));
 }

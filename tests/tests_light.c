@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 15:24:42 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/29 13:58:28 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/29 16:05:30 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -341,7 +341,7 @@ int	main()
 
 	printf("\n%sTESTING LIGHT:%s\n", YELLOW, RESET);
 
-	for (int i = 0; i < sizeof(test_funcs) / sizeof(test_funcs[0]); i++) {
+	for (unsigned int i = 0; i < sizeof(test_funcs) / sizeof(test_funcs[0]); i++) {
 		test_funcs[i](i + 1);
 	}
 	return (0);

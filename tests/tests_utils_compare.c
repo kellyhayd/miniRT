@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:18:05 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/29 07:43:03 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/29 16:03:30 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,7 +201,7 @@ int	world_compare_test(void *expected, void *result)
 {
 	t_world	*w_expected = expected;
 	t_world	*w_result = result;
-	int		i = 0;
+	// int		i = 0;
 
 	// if (tuple_compare_test(&w_expected->light.position, &w_result->light.position)
 	// 	&& color_compare_test(&w_expected->light.intensity, &w_result->light.intensity)
@@ -230,6 +230,20 @@ int	camera_compare_test(void *expected, void *result)
 		&& int_compare_test(&camera_expected->vsize, &camera_result->vsize)
 		&& float_compare_test(&camera_expected->field_of_view, &camera_result->field_of_view)
 		&& matrix_compare_test(&camera_expected->transform, &camera_result->transform))
+		return (1);
+	return (0);
+}
+
+int	comps_compare_test(void *expected, void *result)
+{
+	t_comps	*comps_expected = expected;
+	t_comps	*comps_result = result;
+
+	if (float_compare_test(&comps_expected->t, &comps_result->t)
+		&& shape_compare_test(&comps_expected->object, &comps_result->object)
+		&& tuple_compare_test(&comps_expected->point, &comps_result->point)
+		&& tuple_compare_test(&comps_expected->sight.eye, &comps_result->sight.eye)
+		&& tuple_compare_test(&comps_expected->sight.normal, &comps_result->sight.normal))
 		return (1);
 	return (0);
 }
