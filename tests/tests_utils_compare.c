@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:18:05 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/29 16:03:30 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/29 17:06:34 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,7 +243,8 @@ int	comps_compare_test(void *expected, void *result)
 		&& shape_compare_test(&comps_expected->object, &comps_result->object)
 		&& tuple_compare_test(&comps_expected->point, &comps_result->point)
 		&& tuple_compare_test(&comps_expected->sight.eye, &comps_result->sight.eye)
-		&& tuple_compare_test(&comps_expected->sight.normal, &comps_result->sight.normal))
+		&& tuple_compare_test(&comps_expected->sight.normal, &comps_result->sight.normal)
+		&& tuple_compare_test(&comps_expected->over_point, &comps_result->over_point))
 		return (1);
 	return (0);
 }

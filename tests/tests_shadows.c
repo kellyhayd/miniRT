@@ -86,33 +86,62 @@ void	test_there_is_no_shadow_when_an_object_is_behind_the_point(int num_test)
 	print_result(num_test, &expected, &result, int_compare_test, print_ko_int);
 }
 
-// // TEST 06
-// void	test_shade_hit_is_given_an_intersection_in_shadow(int num_test)
-// {
-// 	// ARRANGE
-// 	t_color		expected = color(0.1, 0.1, 0.1);
-// 	t_color		result;
-// 	t_ray		r;
-// 	t_world		w;
-// 	t_hit		hit;
-// 	t_comp		comps;
+// TEST 06
+void	test_shade_hit_is_given_an_intersection_in_shadow(int num_test)
+{
+	// ARRANGE
+	t_color		expected = color(0.1, 0.1, 0.1);
+	t_color		result;
+	t_ray		r;
+	t_world		w;
+	t_hit		hit;
+	t_comps		comps;
 
-// 	w = world();
-// 	*w.light = point_light(point(0, 0, -10), color(1, 1, 1));
-// 	w.shape[0]	= sphere();
-// 	w.shape[1]	= sphere();
-// 	set_transformation(&w.shape[1], translation(0, 0, 10));
-// 	r = ray(point(0, 0, 5), vector(0, 0, 1));
-// 	hit = intersection(4, w.shape[1]);
-// 	comps = prepare_computations(hit, r);
+	w = world();
+	w.light = malloc(sizeof(t_light));
+	*w.light = point_light(point(0, 0, -10), color(1, 1, 1));
+	w.shape = malloc(sizeof(t_shape) * 2);
+	w.shape[0]	= sphere();
+	w.shape[1]	= sphere();
+	set_transformation(&w.shape[1], translation(0, 0, 10));
+	r = ray(point(0, 0, 5), vector(0, 0, 1));
+	hit = intersection(4, w.shape[1]);
+	comps = prepare_computations(hit, r);
 
-// 	// ACT
-// 	result = shade_hit(w, comps);
+	// ACT
+	result = shade_hit(w, comps);
 
-// 	// ASSERT
-// 	print_result(num_test, &expected, &result, color_compare_test, print_ko_color);
-// }
+	// ASSERT
+	print_result(num_test, &expected, &result, color_compare_test, print_ko_color);
+}
 
+#include <assert.h>
+
+// TEST 07
+void	test_the_hit_should_offset_the_point(int num_test)
+{
+	// ARRANGE
+	// t_comps		expected;
+	t_comps		result;
+	t_ray		r;
+	t_shape		shape;
+	t_hit		h;
+
+	r = ray(point(0, 0, -5), vector(0, 0, 1));
+	shape = sphere();
+	set_transformation(&shape, translation(0, 0, 1));
+	h = intersection(5, shape);
+
+	// ACT
+	result = prepare_computations(h, r);
+
+	// ASSERT
+	assert(result.over_point.z < -EPSILON / 2);
+	assert(result.point.z > result.over_point.z);
+	printf(BLUE "%2d" RESET " -> ", num_test);
+	printf("%s%2d%s - %s[ ✓ ]%s ", PURPLE, num_test, RESET, GREEN, RESET);
+	printf("If you see this message, the test passed.\n");
+}
 
 int	main()
 {
@@ -123,7 +152,8 @@ int	main()
 		test_the_shadow_when_an_object_is_between_the_point_and_the_light,		// 03
 		test_there_is_no_shadow_when_an_object_is_behind_the_light,				// 04
 		test_there_is_no_shadow_when_an_object_is_behind_the_point,				// 05
-		// test_shade_hit_is_given_an_intersection_in_shadow,						// 06
+		test_shade_hit_is_given_an_intersection_in_shadow,						// 06
+		test_the_hit_should_offset_the_point,									// 07
 	};
 
 	printf("\n%sTESTING SHADOWS:%s\n", YELLOW, RESET);
