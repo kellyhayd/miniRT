@@ -99,12 +99,12 @@ void	print_ko_matrix(int num_test, void *expected, void *result)
 	printf(PURPLE "%2d" RESET " - " RED "[ ✗ ] " RESET"\nExpected: ( ", num_test);
 	for (int i = 0; i < size_matrix; i++)
 		printf("%.2lf%s", matrix_expected->tab[i], i + 1 < size_matrix ? " " : "");
-	printf(")\n");
+	printf(" )\n");
 
 	printf("Result:   ( ");
 	for (int i = 0; i < size_matrix; i++)
 		printf("%.2lf%s", matrix_result->tab[i], i + 1 < size_matrix ? " " : "");
-	printf(")\n");
+	printf(" )\n");
 }
 
 void	print_ko_ray(int num_test, void *expected, void *result)

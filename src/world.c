@@ -68,6 +68,7 @@ t_comps	prepare_computations(t_hit hit, t_ray ray)
 	comps.point = position(ray, comps.t);
 	comps.sight.eye = tuple_negate(ray.direction);
 	comps.sight.normal = normal_at(comps.object, comps.point);
+	comps.sight.in_shadow = false;
 	if (dot(comps.sight.normal, comps.sight.eye) < 0)
 	{
 		comps.inside = true;
@@ -99,4 +100,51 @@ t_color	shade_hit(t_world world, t_comps comps)
 		aux = aux->next;
 	}
 	return (color_shaded);
+}
+
+t_color	color_at(t_world w, t_ray r)
+{
+	t_color	color_at_hit;
+	t_comps	comps;
+	t_hit	*nearest_hit;
+	t_hit	*hits;
+
+	color_at_hit = color(0, 0, 0);
+	hits = intersect_world(w, r);
+	nearest_hit = hit(hits);
+	if (nearest_hit)
+	{
+		comps = prepare_computations(*nearest_hit, r);
+		color_at_hit = shade_hit(w, comps);
+		hit_clear_list(&hits);
+	}
+	return (color_at_hit);
+}
+
+t_matrix	view_transform(t_point from, t_point to, t_vector up)
+{
+	t_vector	forward;
+	t_vector	left;
+	t_vector	true_up;
+	t_matrix	orientation;
+	t_matrix	view_matrix;
+
+	forward = normalize(tuple_subtract(to, from));
+	left = cross(forward, normalize(up));
+	true_up = cross(left, forward);
+	orientation = identity();
+	mx_set(&orientation, 0, 0, left.x);
+	mx_set(&orientation, 0, 1, left.y);
+	mx_set(&orientation, 0, 2, left.z);
+	mx_set(&orientation, 1, 0, true_up.x);
+	mx_set(&orientation, 1, 1, true_up.y);
+	mx_set(&orientation, 1, 2, true_up.z);
+	mx_set(&orientation, 2, 0, -forward.x);
+	mx_set(&orientation, 2, 1, -forward.y);
+	mx_set(&orientation, 2, 2, -forward.z);
+	view_matrix = mx_multiply(
+		orientation,
+		translation(-from.x, -from.y, -from.z)
+	);
+	return (view_matrix);
 }

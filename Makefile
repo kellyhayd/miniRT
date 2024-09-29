@@ -32,6 +32,8 @@ else
 	FLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast -g3
 endif
 
+VALGRIND	:= valgrind -q --leak-check=full --show-leak-kinds=all --track-origins=yes
+
 #----------------------------------------------- Sources
 LIBFT_FOLDER	= lib/libft
 LIBMLX_FOLDER	= lib/MLX42
@@ -113,39 +115,39 @@ test: all \
 
 tests_tuples:
 	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_tuples.c $(LIBS) -o $@
-	@valgrind -q ./$@
+	@$(VALGRIND) ./$@
 
 tests_colors:
 	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_colors.c $(LIBS) -o $@
-	@valgrind -q ./$@
+	@$(VALGRIND) ./$@
 
 tests_matrix:
 	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_matrix.c $(LIBS) -o $@
-	@valgrind -q ./$@
+	@$(VALGRIND) ./$@
 
 tests_transformation:
 	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_transformation.c $(LIBS) -o $@
-	@valgrind -q ./$@
+	@$(VALGRIND) ./$@
 
 tests_ray_intersection:
 	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_ray_intersection.c $(LIBS) -o $@
-	@valgrind -q ./$@
+	@$(VALGRIND) ./$@
 
 tests_light:
 	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_light.c $(LIBS) -o $@
-	@valgrind -q ./$@
+	@$(VALGRIND) ./$@
 
 tests_world:
-	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_world.c $(LIBS) -o $@
-	@valgrind -q ./$@
+	@$(CC) $(FLAGS) $(HEADERS) $(TEST_FILES) tests/tests_world.c $(LIBS) -o $@
+	@$(VALGRIND) ./$@
 
 tests_camera:
 	@$(CC) $(FLAGS) $(HEADERS) $(TEST_FILES) tests/tests_camera.c $(LIBS) -o $@
-	@valgrind -q ./$@
+	@$(VALGRIND) ./$@
 
 tests_shadows:
 	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_shadows.c $(LIBS) -o $@
-	@valgrind -q ./$@
+	@$(VALGRIND) ./$@
 
 pit: all
 #	@$(CC) $(FLAGS) $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/projectiles.c $(LIBS) -o pit
