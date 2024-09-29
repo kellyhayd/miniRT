@@ -10,7 +10,8 @@ NAME			= miniRT
 				tests_ray_intersection \
 				tests_light_and_shading \
 				tests_world \
-				tests_camera
+				tests_camera \
+				tests_shadows
 # .SILENT:
 
 #----------------------------------------------- Colors
@@ -58,9 +59,10 @@ TESTS 			=	tests_tuples \
 					tests_matrix \
 					tests_transformation \
 					tests_ray_intersection \
-					tests_light_and_shading \
+					tests_light \
 					tests_world \
-					tests_camera
+					tests_camera \
+					tests_shadows
 
 #----------------------------------------------- Rules
 all: $(NAME)
@@ -106,7 +108,8 @@ test: all \
 	tests_ray_intersection \
 	tests_light_and_shading \
 	tests_world \
-	tests_camera
+	tests_camera \
+	tests_shadows
 
 tests_tuples:
 	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_tuples.c $(LIBS) -o $@
@@ -128,8 +131,8 @@ tests_ray_intersection:
 	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_ray_intersection.c $(LIBS) -o $@
 	@valgrind -q ./$@
 
-tests_light_and_shading:
-	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_light_and_shading.c $(LIBS) -o $@
+tests_light:
+	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_light.c $(LIBS) -o $@
 	@valgrind -q ./$@
 
 tests_world:
@@ -139,6 +142,11 @@ tests_world:
 tests_camera:
 	@$(CC) $(FLAGS) $(HEADERS) $(TEST_FILES) tests/tests_camera.c $(LIBS) -o $@
 	@valgrind -q ./$@
+
+tests_shadows:
+	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_shadows.c $(LIBS) -o $@
+	@valgrind -q ./$@
+#	./$@
 
 pit: all
 #	@$(CC) $(FLAGS) $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/projectiles.c $(LIBS) -o pit
