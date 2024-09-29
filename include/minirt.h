@@ -312,5 +312,6 @@ void	add_light(t_light **light_list, t_light light_to_add);
 void	light_clear_list(t_light **light_list);
 t_comps	prepare_computations(t_hit hit, t_ray ray);
 t_color	shade_hit(t_world world, t_comps comps);
+t_color	color_at(t_world w, t_ray r);
 
 #endif

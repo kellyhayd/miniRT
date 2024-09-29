@@ -68,6 +68,7 @@ t_comps	prepare_computations(t_hit hit, t_ray ray)
 	comps.point = position(ray, comps.t);
 	comps.sight.eye = tuple_negate(ray.direction);
 	comps.sight.normal = normal_at(comps.object, comps.point);
+	comps.sight.in_shadow = false;
 	if (dot(comps.sight.normal, comps.sight.eye) < 0)
 	{
 		comps.inside = true;
@@ -99,4 +100,23 @@ t_color	shade_hit(t_world world, t_comps comps)
 		aux = aux->next;
 	}
 	return (color_shaded);
+}
+
+t_color	color_at(t_world w, t_ray r)
+{
+	t_color	color_at_hit;
+	t_comps	comps;
+	t_hit	*nearest_hit;
+	t_hit	*hits;
+
+	color_at_hit = color(0, 0, 0);
+	hits = intersect_world(w, r);
+	nearest_hit = hit(hits);
+	if (nearest_hit)
+	{
+		comps = prepare_computations(*nearest_hit, r);
+		color_at_hit = shade_hit(w, comps);
+		hit_clear_list(&hits);
+	}
+	return (color_at_hit);
 }

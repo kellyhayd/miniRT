@@ -184,11 +184,75 @@ void	test_shading_an_intersection_from_the_inside(int num_test)
 
 	w.light->intensity = color(1, 1, 1);
 	w.light->position = point(0, 0.25, 0);
-	s.material.ambient = 1;
 	expected = color(0.90498, 0.90498, 0.90498);
 
 	// ACT
 	result = shade_hit(w, comps);
+
+	// ASSERT
+	print_result(num_test, &expected, &result, color_compare_test, print_ko_color);
+
+	// CLEAR
+	world_clear(&w);
+}
+
+// TEST 09
+void	test_color_at_with_ray_misses(int num_test)
+{
+	// ARRANGE
+	t_world	w = default_world();
+	t_ray	r = ray(point(0, 0, -5), vector(0, 1, 0));
+	t_color	expected;
+	t_color	result;
+
+	expected = color(0, 0, 0);
+
+	// ACT
+	result = color_at(w, r);
+
+	// ASSERT
+	print_result(num_test, &expected, &result, color_compare_test, print_ko_color);
+
+	// CLEAR
+	world_clear(&w);
+}
+
+// TEST 10
+void	test_color_at_with_ray_hits(int num_test)
+{
+	// ARRANGE
+	t_world	w = default_world();
+	t_ray	r = ray(point(0, 0, -5), vector(0, 0, 1));
+	t_color	expected;
+	t_color	result;
+
+	expected = color(0.38066, 0.47583, 0.2855);
+
+	// ACT
+	result = color_at(w, r);
+
+	// ASSERT
+	print_result(num_test, &expected, &result, color_compare_test, print_ko_color);
+
+	// CLEAR
+	world_clear(&w);
+}
+
+// TEST 11
+void	test_color_at_with_intersection_behind_ray(int num_test)
+{
+	// ARRANGE
+	t_world	w = default_world();
+	t_ray	r = ray(point(0, 0, 0.75), vector(0, 0, -1));
+	t_color	expected;
+	t_color	result;
+
+	w.shape->material.ambient = 1;
+	w.shape->next->material.ambient = 1;
+	expected = w.shape->next->material.color;
+
+	// ACT
+	result = color_at(w, r);
 
 	// ASSERT
 	print_result(num_test, &expected, &result, color_compare_test, print_ko_color);
@@ -209,6 +273,9 @@ int main(void)
 		test_the_hit_when_an_intersection_occurs_on_the_inside,		// 06
 		test_shading_an_intersection,								// 07
 		test_shading_an_intersection_from_the_inside,				// 08
+		test_color_at_with_ray_misses,								// 09
+		test_color_at_with_ray_hits,								// 10
+		test_color_at_with_intersection_behind_ray,					// 11
 	};
 
 	printf("\n%sTESTING WORLD CREATION:%s\n", YELLOW, RESET);
