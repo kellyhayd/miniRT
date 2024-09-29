@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:01:38 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/29 11:15:15 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/29 11:53:45 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ typedef struct s_world
 {
 	t_shape	*shape;
 	t_light	*light;
+	mlx_t	*mlx;
 }	t_world;
 
 typedef struct s_exposure
@@ -203,20 +204,20 @@ int			color_to_int(t_color color);
 //                                   matrix                                   //
 // -------------------------------------------------------------------------- //
 
-// ---------------------------------- basic --------------------------------- //
+// ---------------------------------- basic ---------------------------------
 t_matrix	matrix_create(double *tab, int rows, int cols);
 int			mx_compare(t_matrix matrix1, t_matrix matrix2);
 void		mx_set(t_matrix *matrix1, int y, int x, double value);
 double		mx_get(t_matrix *matrix1, int y, int x);
 t_matrix	identity(void);
 
-// ------------------------------ modification ------------------------------ //
+// ------------------------------ modification ------------------------------
 t_matrix	mx_multiply(t_matrix matrix1, t_matrix matrix2);
 t_tuple		mx_multiply_tuple(t_matrix matrix1, t_tuple tuple1);
 t_matrix	transpose(t_matrix matrix1);
 t_matrix	inverse(t_matrix matrix);
 
-// ------------------------------ determinant ------------------------------- //
+// ------------------------------ determinant -------------------------------
 double		determinant(t_matrix matrix1);
 t_matrix	submatrix(t_matrix matrix1, int y, int x);
 double		minor(t_matrix matrix1, int y, int x);

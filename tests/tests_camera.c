@@ -117,13 +117,37 @@ void	test_constructing_a_ray_when_the_camera_is_transformed(int num_test)
 	print_result(num_test, &expected, &result, ray_compare_test, print_ko_ray);
 }
 
+// TEST 07
+// void	test_rendering_a_world_with_a_camera(int num_test)
+// {
+// 	// ARRANGE
+// 	t_world		w;
+// 	t_camera	c;
+// 	mlx_image_t	*image;
+// 	t_color		result;
+// 	t_color		expected;
+
+// 	w = default_world();
+// 	c = camera(11, 11, M_PI / 2);
+// 	c.transform = view_transform(point(0, 0, -5), point(0, 0, 0), vector(0, 1, 0));
+// 	image = malloc(sizeof(mlx_image_t *));
+// 	image = render(c, w);
+// 	expected = color(0.38066, 0.47583, 0.2855);
+
+// 	// ACT
+// 	result = pixel_at(image, 5, 5);
+
+// 	// ASSERT
+// 	print_result(num_test, &expected, &result, color_compare_test, print_ko_color);
+// }
+
 /*
-Scenario: Constructing a ray when the camera is transformed
-  Given c ← camera(201, 101, π/2)
-  When c.transform ← rotation_y(π/4) * translation(0, -2, 5)
-    And r ← ray_for_pixel(c, 100, 50)
-  Then r.origin = point(0, 2, -5)
-    And r.direction = vector(√2/2, 0, -√2/2)
+Scenario: Rendering a world with a camera
+Given w ← default_world()
+And c ← camera(11, 11, π/2)
+And c.transform ← view_transform(point(0, 0,-5), point(0, 0, 0), vector(0, 1, 0))
+When image ← render(c, w)
+Then pixel_at(image, 5, 5) = color(0.38066, 0.47583, 0.2855)
 */
 
 int main(void)
