@@ -66,12 +66,12 @@ t_comps	prepare_computations(t_hit hit, t_ray ray)
 	comps.t = hit.t;
 	comps.object = hit.object;
 	comps.point = position(ray, comps.t);
-	comps.eyev = tuple_negate(ray.direction);
-	comps.normalv = normal_at(comps.object, comps.point);
-	if (dot(comps.normalv, comps.eyev) < 0)
+	comps.sight.eye = tuple_negate(ray.direction);
+	comps.sight.normal = normal_at(comps.object, comps.point);
+	if (dot(comps.sight.normal, comps.sight.eye) < 0)
 	{
 		comps.inside = true;
-		comps.normalv = tuple_negate(comps.normalv);
+		comps.sight.normal = tuple_negate(comps.sight.normal);
 	}
 	else
 		comps.inside = false;

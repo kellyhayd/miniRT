@@ -94,8 +94,8 @@ void	test_precomputing_state_of_an_intersection(int num_test)
 	expected.t = i.t;
 	expected.object = i.object;
 	expected.point = point(0, 0, -1);
-	expected.eyev = vector(0, 0, -1);
-	expected.normalv = vector(0, 0, -1);
+	expected.sight.eye = vector(0, 0, -1);
+	expected.sight.normal = vector(0, 0, -1);
 
 	// ACT
 	result = prepare_computations(i, r);

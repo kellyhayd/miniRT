@@ -159,8 +159,9 @@ typedef struct s_comps
 	double		t;
 	t_shape		object;
 	t_point		point;
-	t_vector	eyev;
-	t_vector	normalv;
+	// t_vector	eyev;
+	// t_vector	normalv;
+	t_sight		sight;
 	int			inside;
 }	t_comps;
 
