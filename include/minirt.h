@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:01:38 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/28 18:15:10 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/29 11:15:15 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,17 @@ typedef struct s_sight
 	t_vector	normal;
 }	t_sight;
 
+typedef struct s_camera
+{
+	double		hsize;
+	double		vsize;
+	double		field_of_view;
+	double		half_width;
+	double		half_height;
+	double		pixel_size;
+	t_matrix	transform;
+}	t_camera;
+
 // -------------------------------------------------------------------------- //
 //                                   tuple                                    //
 // -------------------------------------------------------------------------- //
@@ -185,8 +196,8 @@ t_color		color_hadamard(t_color color1, t_color color2);
 // -------------------------------------------------------------------------- //
 
 // void		write_pixel(mlx_image_t *image, int x, int y, int color);
-void	write_pixel(mlx_image_t *image, int x, int y, t_color color);
-int		color_to_int(t_color color);
+void		write_pixel(mlx_image_t *image, int x, int y, t_color color);
+int			color_to_int(t_color color);
 
 // -------------------------------------------------------------------------- //
 //                                   matrix                                   //
@@ -265,10 +276,17 @@ t_world		default_world(void);
 t_hit		*intersect_world(t_world w, t_ray ray);
 
 // -------------------------------------------------------------------------- //
+//                                  camera                                    //
+// -------------------------------------------------------------------------- //
+t_camera	camera(double hsize, double vsize, double field_of_view);
+t_ray		ray_for_pixel(t_camera c, int x, int y);
+
+// -------------------------------------------------------------------------- //
 //                                   utils                                    //
 // -------------------------------------------------------------------------- //
 
 int			float_compare(double d1, double d2);
+void		ft_error(char *message);
 
 // NÃO SEI ONDE POR
 void	add_shape(t_shape **shape_list, t_shape shape);

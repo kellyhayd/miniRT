@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 23:44:58 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/26 13:50:02 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/29 07:46:15 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	world_compare_test(void *expected, void *result);
 int	shape_list_compare_test(void *expected, void *result);
 int	light_list_compare_test(void *expected, void *result);
 int	world_compare_test(void *expected, void *result);
+int	camera_compare_test(void *expected, void *result);
 
 
 // Prints
@@ -64,5 +65,6 @@ void	print_ko_hit(int num_test, void *expected, void *result);
 void	print_ko_light(int num_test, void *expected, void *result);
 void	print_ko_material(int num_test, void *expectet, void *result);
 void	print_ko_world(int num_test, void *expected, void *result);
+void	print_ko_camera(int num_test, void *expected, void *result);
 
 #endif

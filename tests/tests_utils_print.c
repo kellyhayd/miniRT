@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 21:41:13 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/26 21:36:59 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/29 07:45:20 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -251,4 +251,19 @@ void	print_ko_world(int num_test, void *expected, void *result)
 // 		w_result->shape->sphere_shape.origin.x, w_result->shape->sphere_shape.origin.y, w_result->shape->sphere_shape.origin.z,
 // 		w_result->shape->sphere_shape.radius
 // 	);
+}
+
+void	print_ko_camera(int num_test, void *expected, void *result)
+{
+	t_camera	*camera_expected = expected;
+	t_camera	*camera_result = result;
+
+	printf(PURPLE "%2d" RESET " - " RED "[ ✗ ] " RESET
+		"Expected: hsize (%d) vsize (%d) field_of_view (%.2lf)\n"
+		"\t\tResult: hsize (%d) vsize (%d) field_of_view (%.2lf)\n"
+		"If until here everything is right, maybe the matrix has a problem\n",
+		num_test,
+		camera_expected->hsize, camera_expected->vsize, camera_expected->field_of_view,
+		camera_result->hsize, camera_result->vsize, camera_result->field_of_view
+	);
 }
