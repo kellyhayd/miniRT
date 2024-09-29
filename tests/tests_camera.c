@@ -164,7 +164,7 @@ int main(void)
 
 	printf("\n%sTESTING CAMERA CREATION:%s\n", YELLOW, RESET);
 
-	for (int i = 0; i < sizeof(test_funcs) / sizeof(test_funcs[0]); i++)
+	for (unsigned int i = 0; i < sizeof(test_funcs) / sizeof(test_funcs[0]); i++)
 		test_funcs[i](i + 1);
 	return (0);
 }

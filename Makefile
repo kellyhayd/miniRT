@@ -8,7 +8,7 @@ NAME			= miniRT
 				tests_matrix \
 				tests_transformation \
 				tests_ray_intersection \
-				tests_light_and_shading \
+				tests_light \
 				tests_world \
 				tests_camera \
 				tests_shadows
@@ -106,7 +106,7 @@ test: all \
 	tests_matrix \
 	tests_transformation \
 	tests_ray_intersection \
-	tests_light_and_shading \
+	tests_light \
 	tests_world \
 	tests_camera \
 	tests_shadows
@@ -146,7 +146,6 @@ tests_camera:
 tests_shadows:
 	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_shadows.c $(LIBS) -o $@
 	@valgrind -q ./$@
-#	./$@
 
 pit: all
 #	@$(CC) $(FLAGS) $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/projectiles.c $(LIBS) -o pit
