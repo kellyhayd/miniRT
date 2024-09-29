@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 19:46:49 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/26 15:19:39 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/29 10:25:46 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	add_intersection(t_hit **hit_list, t_hit isect)
 	t_hit	*prev;
 
 	new = malloc(sizeof(t_hit));
+	if (!new)
+		ft_error("Failed to allocate memory for new intersection.");
 	*new = isect;
 	prev = NULL;
 	aux = *hit_list;

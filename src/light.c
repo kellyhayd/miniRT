@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:08:09 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/28 18:14:51 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/29 10:26:18 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	add_light(t_light **light_list, t_light light_to_add)
 	t_light	*aux;
 
 	new_light = malloc(sizeof(t_light));
+	if (!new_light)
+		ft_error("Failed to allocate memory for new light.");
 	*new_light = light_to_add;
 	aux = *light_list;
 	while (aux && aux->next)

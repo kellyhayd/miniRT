@@ -6,6 +6,8 @@ void	add_shape(t_shape **shape_list, t_shape shape_to_add)
 	t_shape	*aux;
 
 	new_shape = malloc(sizeof(t_shape));
+	if (!new_shape)
+		ft_error("Failed to allocate memory for new shape.");
 	*new_shape = shape_to_add;
 	aux = *shape_list;
 	while (aux && aux->next)

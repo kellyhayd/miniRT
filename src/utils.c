@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 21:45:10 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/26 15:31:27 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/29 10:25:07 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,13 @@ double	mx_get(t_matrix *matrix1, int y, int x)
 void	mx_set(t_matrix *matrix1, int y, int x, double value)
 {
 	matrix1->tab[x + (y * matrix1->cols)] = value;
+}
+
+void	ft_error(char *message)
+{
+	ft_putstr_fd(RED, 2);
+	ft_putstr_fd("Error\n", 2);
+	ft_putstr_fd(message, 2);
+	ft_putstr_fd(RESET, 2);
+	exit(EXIT_FAILURE);
 }
