@@ -52,6 +52,14 @@ TEST_FILES		= $(shell find src -iname "*.c" ! -name "main.c") \
 					tests/tests_utils_compare.c \
 					tests/tests_utils_print.c
 
+TESTS 			=	tests_tuples \
+					tests_colors \
+					tests_matrix \
+					tests_transformation \
+					tests_ray_intersection \
+					tests_light_and_shading \
+					tests_world
+
 #----------------------------------------------- Rules
 all: $(NAME)
 
@@ -85,6 +93,7 @@ fclean: clean
 #	@rm -rf $(LIBMLX_FOLDER)/build
 	@rm -rf $(NAME)
 	@rm -rf test
+	@rm -rf $(TESTS)
 	@rm -rf pit
 
 test: all \
