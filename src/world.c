@@ -77,3 +77,26 @@ t_comps	prepare_computations(t_hit hit, t_ray ray)
 		comps.inside = false;
 	return (comps);
 }
+
+t_color	shade_hit(t_world world, t_comps comps)
+{
+	t_color	color_shaded;
+	t_light	*aux;
+
+	color_shaded = color(0, 0, 0);
+	aux = world.light;
+	while (aux)
+	{
+		color_shaded = color_add(
+			color_shaded,
+			lighting(
+				comps.object.material,
+				*aux,
+				comps.point,
+				comps.sight
+			)
+		);
+		aux = aux->next;
+	}
+	return (color_shaded);
+}

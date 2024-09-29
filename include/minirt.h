@@ -159,8 +159,6 @@ typedef struct s_comps
 	double		t;
 	t_shape		object;
 	t_point		point;
-	// t_vector	eyev;
-	// t_vector	normalv;
 	t_sight		sight;
 	int			inside;
 }	t_comps;
@@ -307,5 +305,6 @@ void	shape_clear_list(t_shape **shape_list);
 void	add_light(t_light **light_list, t_light light_to_add);
 void	light_clear_list(t_light **light_list);
 t_comps	prepare_computations(t_hit hit, t_ray ray);
+t_color	shade_hit(t_world world, t_comps comps);
 
 #endif

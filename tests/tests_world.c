@@ -146,6 +146,57 @@ void	test_the_hit_when_an_intersection_occurs_on_the_inside(int num_test)
 	print_result(num_test, &expected, &result, int_compare_test, print_ko_int);
 }
 
+// TEST 07
+void	test_shading_an_intersection(int num_test)
+{
+	// ARRANGE
+	t_world	w = default_world();
+	t_ray	r = ray(point(0, 0, -5), vector(0, 0, 1));
+	t_shape	s = *w.shape;
+	t_hit	i = intersection(4, s);
+	t_comps	comps = prepare_computations(i, r);
+	t_color	expected;
+	t_color	result;
+
+	expected = color(0.38066, 0.47583, 0.2855);
+
+	// ACT
+	result = shade_hit(w, comps);
+
+	// ASSERT
+	print_result(num_test, &expected, &result, color_compare_test, print_ko_color);
+
+	// CLEAR
+	world_clear(&w);
+}
+
+// TEST 08
+void	test_shading_an_intersection_from_the_inside(int num_test)
+{
+	// ARRANGE
+	t_world	w = default_world();
+	t_ray	r = ray(point(0, 0, 0), vector(0, 0, 1));
+	t_shape	s = *w.shape->next;
+	t_hit	i = intersection(0.5, s);
+	t_comps	comps = prepare_computations(i, r);
+	t_color	expected;
+	t_color	result;
+
+	w.light->intensity = color(1, 1, 1);
+	w.light->position = point(0, 0.25, 0);
+	s.material.ambient = 1;
+	expected = color(0.90498, 0.90498, 0.90498);
+
+	// ACT
+	result = shade_hit(w, comps);
+
+	// ASSERT
+	print_result(num_test, &expected, &result, color_compare_test, print_ko_color);
+
+	// CLEAR
+	world_clear(&w);
+}
+
 int main(void)
 {
 	void	(*test_funcs[])(int) =
@@ -156,11 +207,13 @@ int main(void)
 		test_precomputing_state_of_an_intersection,					// 04
 		test_the_hit_when_an_intersection_occurs_on_the_outside,	// 05
 		test_the_hit_when_an_intersection_occurs_on_the_inside,		// 06
+		test_shading_an_intersection,								// 07
+		test_shading_an_intersection_from_the_inside,				// 08
 	};
 
 	printf("\n%sTESTING WORLD CREATION:%s\n", YELLOW, RESET);
 
-	for (int i = 0; i < sizeof(test_funcs) / sizeof(test_funcs[0]); i++)
+	for (unsigned int i = 0; i < sizeof(test_funcs) / sizeof(test_funcs[0]); i++)
 		test_funcs[i](i + 1);
 	return (0);
 }

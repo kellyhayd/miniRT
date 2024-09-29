@@ -137,7 +137,7 @@ tests_world:
 	@valgrind -q ./$@
 
 tests_camera:
-	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_camera.c $(LIBS) -o $@
+	@$(CC) $(FLAGS) $(HEADERS) $(TEST_FILES) tests/tests_camera.c $(LIBS) -o $@
 	@valgrind -q ./$@
 
 pit: all
