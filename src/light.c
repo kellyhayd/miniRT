@@ -84,7 +84,7 @@ t_color	lighting(t_material m, t_light light, t_point position, \
 	e.lightv = normalize(tuple_subtract(light.position, position));
 	ambient = color_multiply(e.effective_color, m.ambient);
 	e.light_dot_normal = dot(e.lightv, sight.normal);
-	if (e.light_dot_normal > 0)
+	if (e.light_dot_normal >= 0)
 	{
 		diffuse = color_multiply(e.effective_color, \
 									m.diffuse * e.light_dot_normal);
