@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 13:57:37 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/26 15:27:07 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/26 22:24:19 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@
  * @param matrix2 The second matrix.
  * @param y The row index of the element to be multiplied.
  * @param x The column index of the element to be multiplied.
- * @return The product of the elements at the specified position in the two matrices.
+ * @return The product of the elements at the specified position in the two
+ * matrices.
  */
 static double	mult_element(t_matrix matrix1, t_matrix matrix2, int y, int x)
 {
@@ -94,9 +95,9 @@ t_tuple	mx_multiply_tuple(t_matrix matrix, t_tuple tuple1)
 	while (i < matrix.cols)
 	{
 		values_tuple[i] = mx_get(&matrix, i, 0) * tuple1.x
-							+ mx_get(&matrix, i, 1) * tuple1.y
-							+ mx_get(&matrix, i, 2) * tuple1.z
-							+ mx_get(&matrix, i, 3) * tuple1.w;
+			+ mx_get(&matrix, i, 1) * tuple1.y
+			+ mx_get(&matrix, i, 2) * tuple1.z
+			+ mx_get(&matrix, i, 3) * tuple1.w;
 		i++;
 	}
 	result.x = values_tuple[0];

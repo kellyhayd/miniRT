@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 08:14:46 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/26 15:31:50 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/26 22:05:26 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,35 +14,89 @@
 
 t_world	world(void)
 {
-	t_world	w;
+	return ((t_world) {0});
+}
 
-	w.shape = NULL;
-	w.light = point_light(point(0, 0, 0), color(1, 1, 1));
-	return (w);
+void	world_clear(t_world *world_to_clear)
+{
+	shape_clear_list(&world_to_clear->shape);
+	light_clear_list(&world_to_clear->light);
 }
 
 t_world	default_world(void)
 {
-	t_world	w;
-	t_shape	s1;
-	t_shape	s2;
-	t_light	light;
+	t_world	dfl_world;
+	t_shape	sphere1;
+	t_shape	sphere2;
+	t_light	light1;
 
-	w.shape = malloc(sizeof(t_shape) * 2);
-	s1 = sphere();
-	s2 = sphere();
-	s1.material.color = color(0.8, 1.0, 0.6);
-	s1.material.diffuse = 0.7;
-	s1.material.shininess = 0.2;
-	s2.transform = scaling(0.5, 0.5, 0.5);
-	light = point_light(point(-10, 10, -10), color(1, 1, 1));
-	w.light = light;
-	w.shape[0] = s1;
-	w.shape[1] = s2;
-	return (w);
+	dfl_world = world();
+	light1 = point_light(point(-10, 10, -10), color(1, 1, 1));
+	add_light(&dfl_world.light, light1);
+	sphere1 = sphere();
+	sphere2 = sphere();
+	sphere1.material.color = color(0.8, 1.0, 0.6);
+	sphere1.material.diffuse = 0.7;
+	sphere1.material.specular = 0.2;
+	set_transformation(&sphere2, scaling(0.5, 0.5, 0.5));
+	add_shape(&dfl_world.shape, sphere1);
+	add_shape(&dfl_world.shape, sphere2);
+	return (dfl_world);
 }
 
-// t_hit	*intersect_world(t_world world, t_ray ray)
-// {
+t_hit	*intersect_world(t_world w, t_ray ray)
+{
+	t_hit	*hit_list;
+	t_shape	*aux;
 
-// }
+	hit_list = NULL;
+	aux = w.shape;
+	while (aux)
+	{
+		intersect(&hit_list, *aux, ray);
+		aux = aux->next;
+	}
+	return (hit_list);
+}
+
+t_comps	prepare_computations(t_hit hit, t_ray ray)
+{
+	t_comps	comps;
+
+	comps.t = hit.t;
+	comps.object = hit.object;
+	comps.point = position(ray, comps.t);
+	comps.sight.eye = tuple_negate(ray.direction);
+	comps.sight.normal = normal_at(comps.object, comps.point);
+	if (dot(comps.sight.normal, comps.sight.eye) < 0)
+	{
+		comps.inside = true;
+		comps.sight.normal = tuple_negate(comps.sight.normal);
+	}
+	else
+		comps.inside = false;
+	return (comps);
+}
+
+t_color	shade_hit(t_world world, t_comps comps)
+{
+	t_color	color_shaded;
+	t_light	*aux;
+
+	color_shaded = color(0, 0, 0);
+	aux = world.light;
+	while (aux)
+	{
+		color_shaded = color_add(
+			color_shaded,
+			lighting(
+				comps.object.material,
+				*aux,
+				comps.point,
+				comps.sight
+			)
+		);
+		aux = aux->next;
+	}
+	return (color_shaded);
+}

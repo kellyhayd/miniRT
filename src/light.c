@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:08:09 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/26 15:10:02 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/29 10:26:18 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,27 +25,37 @@ t_light	point_light(t_point position, t_color intensity)
 {
 	return ((t_light){
 		.intensity = intensity,
-		.position = position
+		.position = position,
+		.next = NULL
 	});
 }
 
-/**
- * @brief Creates and returns a default material.
- *
- * This function initializes a material structure with default values.
- * The default material can be used as a base for further customization.
- *
- * @return A t_material structure initialized with default values.
- */
-t_material	material(void)
+void	add_light(t_light **light_list, t_light light_to_add)
 {
-	return ((t_material){
-		.color = color(1, 1, 1),
-		.ambient = 0.1,
-		.diffuse = 0.9,
-		.specular = 0.9,
-		.shininess = 200
-	});
+	t_light	*new_light;
+	t_light	*aux;
+
+	new_light = malloc(sizeof(t_light));
+	if (!new_light)
+		ft_error("Failed to allocate memory for new light.");
+	*new_light = light_to_add;
+	aux = *light_list;
+	while (aux && aux->next)
+		aux = aux->next;
+	if (aux)
+		aux->next = new_light;
+	else
+		*light_list = new_light;
+}
+
+void	light_clear_list(t_light **light_list)
+{
+	if (light_list && *light_list)
+	{
+		light_clear_list(&((*light_list)->next));
+		free(*light_list);
+		*light_list = NULL;
+	}
 }
 
 /**
@@ -62,33 +72,30 @@ t_material	material(void)
  * @param normal The normal vector at the point being shaded.
  * @return The resulting color after applying the lighting effect.
  */
-t_color	lighting(t_material m, t_light light, t_point position, t_vector eye, t_vector normal)
+t_color	lighting(t_material m, t_light light, t_point position, \
+					t_sight sight)
 {
 	t_color		ambient;
 	t_color		diffuse;
 	t_color		specular;
-	t_color		effective_color;
-	t_vector	lightv;
-	t_vector	reflectv;
-	double		reflect_dot_eye;
-	double		factor;
-	double		light_dot_normal;
+	t_exposure	e;
 
 	diffuse = color(0, 0, 0);
 	specular = color(0, 0, 0);
-	effective_color = color_hadamard(m.color, light.intensity);
-	lightv = normalize(tuple_subtract(light.position, position));
-	ambient = color_multiply(effective_color, m.ambient);
-	light_dot_normal = dot(lightv, normal);
-	if (light_dot_normal > 0)
+	e.effective_color = color_hadamard(m.color, light.intensity);
+	e.lightv = normalize(tuple_subtract(light.position, position));
+	ambient = color_multiply(e.effective_color, m.ambient);
+	e.light_dot_normal = dot(e.lightv, sight.normal);
+	if (e.light_dot_normal >= 0)
 	{
-		diffuse = color_multiply(effective_color, m.diffuse * light_dot_normal);
-		reflectv = reflect(tuple_negate(lightv), normal);
-		reflect_dot_eye = dot(reflectv, eye);
-		if (reflect_dot_eye > 0)
+		diffuse = color_multiply(e.effective_color, \
+									m.diffuse * e.light_dot_normal);
+		e.reflectv = reflect(tuple_negate(e.lightv), sight.normal);
+		e.reflect_dot_eye = dot(e.reflectv, sight.eye);
+		if (e.reflect_dot_eye > 0)
 		{
-			factor = pow(reflect_dot_eye, m.shininess);
-			specular = color_multiply(light.intensity, factor * m.specular);
+			e.factor = pow(e.reflect_dot_eye, m.shininess);
+			specular = color_multiply(light.intensity, e.factor * m.specular);
 		}
 	}
 	return (color_add(color_add(ambient, diffuse), specular));

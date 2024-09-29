@@ -6,18 +6,19 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:05:08 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/26 15:21:44 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/26 22:20:19 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 /**
- * @brief Creates a color structure with the specified red, green, and blue values.
+ * @brief Creates a color structure with the specified red, green, and blue
+ * values.
  *
- * This function initializes a t_color structure with the given red (r), green (g),
- * and blue (b) components. Each component should be a double value representing
- * the intensity of the color channel.
+ * This function initializes a t_color structure with the given red (r), green
+ * (g), and blue (b) components. Each component should be a double value
+ * representing the intensity of the color channel.
  *
  * @param r The red component of the color.
  * @param g The green component of the color.
@@ -81,7 +82,8 @@ t_color	color_multiply(t_color color1, double scalar)
 }
 
 /**
- * @brief Performs the Hadamard product (element-wise multiplication) of two colors.
+ * @brief Performs the Hadamard product (element-wise multiplication) of two
+ * colors.
  *
  * This function takes two colors as input and returns a new color where each
  * component (red, green, blue) is the product of the corresponding components

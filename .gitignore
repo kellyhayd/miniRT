@@ -397,14 +397,23 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 
-# Others
+# Executables
+miniRT
+pit
+tests_colors
+tests_light_and_shading
+tests_matrix
+tests_ray_intersection
+tests_transformation
+tests_tuples
+tests_world
+
+# Object files
 *.o
 *.a
 build
-miniRT
-test
-pit
-.vscode/settings.json
+
+# Profiling files
 gmon.out
 output.png
 prof

@@ -31,9 +31,8 @@ void	create_sphere(mlx_image_t *image)
 
 	// Utils
 	t_point		hit_point;
-	t_vector	normal;
-	t_vector	eye;
 	t_color		color;
+	t_sight		sight;
 
 	t_matrix	scale_matrix = scaling(2, 2, 2);
 	set_transformation(&s, scale_matrix);
@@ -53,9 +52,9 @@ void	create_sphere(mlx_image_t *image)
 			if (hit_list)
 			{
 				hit_point = position(ray_to_wall, hit_list->t);
-				normal = normal_at(hit_list->object, hit_point);
-				eye = normalize(tuple_negate(ray_to_wall.direction));
-				color = lighting(hit_list->object.material, light, hit_point, eye, normal);
+				sight.normal = normal_at(hit_list->object, hit_point);
+				sight.eye = normalize(tuple_negate(ray_to_wall.direction));
+				color = lighting(hit_list->object.material, light, hit_point, sight);
 				write_pixel(image, x, y, color);
 			}
 			hit_clear_list(&hit_list);

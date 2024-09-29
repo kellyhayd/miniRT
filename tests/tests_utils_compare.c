@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:18:05 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/26 13:34:22 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/29 07:43:03 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,9 @@ int	shape_compare_test(void *expected, void *result)
 	if (float_compare_test(&shape_expected->sphere_shape.origin.x, &shape_result->sphere_shape.origin.x)
 		&& float_compare_test(&shape_expected->sphere_shape.origin.y, &shape_result->sphere_shape.origin.y)
 		&& float_compare_test(&shape_expected->sphere_shape.origin.z, &shape_result->sphere_shape.origin.z)
-		&& float_compare_test(&shape_expected->sphere_shape.radius, &shape_result->sphere_shape.radius))
+		&& float_compare_test(&shape_expected->sphere_shape.radius, &shape_result->sphere_shape.radius)
+		&& matrix_compare_test(&shape_expected->transform, &shape_result->transform)
+		&& material_compare_test(&shape_expected->material, &shape_result->material))
 		// if (shape_expected->shape_type == SPHERE)
 			// return (sphere_compare_test(shape_expected, shape_result));
 		return (1);
@@ -153,22 +155,95 @@ int	material_compare_test(void *expected, void *result)
 	return (0);
 }
 
+int	shape_list_compare_test(void *expected, void *result)
+{
+	t_shape	*shape_expected = expected;
+	t_shape	*shape_result = result;
+	t_shape	*aux_expected;
+	t_shape	*aux_result;
+
+	if (!shape_expected || !shape_result)
+		return (shape_expected == shape_result);
+
+	aux_expected = shape_expected;
+	aux_result = shape_result;
+	while (aux_expected && aux_result && shape_compare_test(aux_expected, aux_result))
+	{
+		aux_expected = aux_expected->next;
+		aux_result = aux_result->next;
+	}
+
+	return (!aux_expected && !aux_result);
+}
+
+int	light_list_compare_test(void *expected, void *result)
+{
+	t_light	*light_expected = expected;
+	t_light	*light_result = result;
+	t_light	*aux_expected;
+	t_light	*aux_result;
+
+	if (!light_expected || !light_result)
+		return (light_expected == light_result);
+
+	aux_expected = light_expected;
+	aux_result = light_result;
+	while (aux_expected && aux_result && light_compare_test(aux_expected, aux_result))
+	{
+		aux_expected = aux_expected->next;
+		aux_result = aux_result->next;
+	}
+
+	return (!aux_expected && !aux_result);
+}
+
 int	world_compare_test(void *expected, void *result)
 {
 	t_world	*w_expected = expected;
 	t_world	*w_result = result;
+	int		i = 0;
 
-	if (tuple_compare_test(&w_expected->light.position, &w_result->light.position)
-		&& tuple_compare_test(&w_expected->light.intensity, &w_result->light.intensity))
+	// if (tuple_compare_test(&w_expected->light.position, &w_result->light.position)
+	// 	&& color_compare_test(&w_expected->light.intensity, &w_result->light.intensity)
+	// 	&& int_compare_test(&w_expected->shape_nb, &w_result->shape_nb))
+
+	if (shape_list_compare_test(w_expected->shape, w_result->shape)
+		&& light_list_compare_test(w_result->light, w_expected->light))
 	{
-		while (w_expected->shape && w_result->shape)
-		{
-			if (!shape_compare_test(w_expected->shape, w_result->shape))
-				return (0);
-			w_expected->shape++;
-			w_result->shape++;
-		}
+		// while (i < w_expected->shape_nb)
+		// {
+		// 	if (!shape_compare_test(&w_expected->shape[i], &w_result->shape[i]))
+		// 		return (0);
+		// 	i++;
+		// }
 		return (1);
 	}
+	return (0);
+}
+
+int	camera_compare_test(void *expected, void *result)
+{
+	t_camera	*camera_expected = expected;
+	t_camera	*camera_result = result;
+
+	if (int_compare_test(&camera_expected->hsize, &camera_result->hsize)
+		&& int_compare_test(&camera_expected->vsize, &camera_result->vsize)
+		&& float_compare_test(&camera_expected->field_of_view, &camera_result->field_of_view)
+		&& matrix_compare_test(&camera_expected->transform, &camera_result->transform))
+		return (1);
+	return (0);
+}
+
+int	comps_compare_test(void *expected, void *result)
+{
+	t_comps	*comps_expected = expected;
+	t_comps	*comps_result = result;
+
+	if (float_compare_test(&comps_expected->t, &comps_result->t)
+		&& shape_compare_test(&comps_expected->object, &comps_result->object)
+		&& tuple_compare_test(&comps_expected->point, &comps_result->point)
+		&& tuple_compare_test(&comps_expected->sight.eye, &comps_result->sight.eye)
+		&& tuple_compare_test(&comps_expected->sight.normal, &comps_result->sight.normal))
+		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 19:52:47 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/26 15:18:37 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/26 22:22:38 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /**
  * @brief Represents an intersection between a ray and a shape.
  *
- * This function creates an intersection record given a time `t` and a shape `s`.
+ * This function creates an intersection record given a time `t` and a shape `s`
  *
  * @param t The time at which the intersection occurs.
  * @param s The shape that is intersected.
@@ -27,12 +27,14 @@ t_hit	intersection(double t, t_shape s)
 }
 
 /**
- * @brief Intersects a ray with a sphere and updates the hit list with intersection points.
+ * @brief Intersects a ray with a sphere and updates the hit list with
+ * intersection points.
  *
- * This function calculates the intersection points between a given ray and a sphere.
- * If intersections are found, they are added to the hit list.
+ * This function calculates the intersection points between a given ray and a
+ * sphere. If intersections are found, they are added to the hit list.
  *
- * @param hit_list A pointer to the list of hit points to be updated with intersection points.
+ * @param hit_list A pointer to the list of hit points to be updated with
+ * intersection points.
  * @param s The sphere shape to be intersected with the ray.
  * @param r The ray to be intersected with the sphere.
  */
@@ -64,10 +66,11 @@ void	intersect_sphere(t_hit **hit_list, t_shape s, t_ray r)
 }
 
 /**
- * @brief Intersects a ray with a shape and updates the hit list with intersection points.
+ * @brief Intersects a ray with a shape and updates the hit list with
+ * intersection points.
  *
- * This function calculates the intersection points between a given ray and a shape,
- * and updates the provided hit list with the results.
+ * This function calculates the intersection points between a given ray and a
+ * shape, and updates the provided hit list with the results.
  *
  * @param hit_list A pointer to the list of hit points to be updated.
  * @param s The shape to be intersected with the ray.

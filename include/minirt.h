@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:01:38 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/26 13:10:30 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/29 11:53:45 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,9 @@ typedef struct s_tuple	t_point;
 typedef struct s_tuple	t_vector;
 
 typedef struct s_hit	t_hit;
-// typedef struct s_shape	t_shape;
+typedef struct s_shape	t_shape;
 // typedef struct s_sphere	t_sphere;
+typedef struct s_light	t_light;
 
 struct s_tuple
 {
@@ -90,7 +91,7 @@ typedef struct s_material
 	t_color	color;
 }	t_material;
 
-typedef struct s_shape
+struct s_shape
 {
 	union
 	{
@@ -102,7 +103,8 @@ typedef struct s_shape
 	t_matrix	inverse;
 	t_matrix	transposed_inverse;
 	t_material	material;
-}	t_shape;
+	t_shape		*next;
+};
 
 struct s_hit
 {
@@ -111,17 +113,55 @@ struct s_hit
 	t_hit	*next;
 };
 
-typedef struct s_light
+struct s_light
 {
 	t_color	intensity;
 	t_point	position;
-}	t_light;
+	t_light	*next;
+};
 
 typedef struct s_world
 {
 	t_shape	*shape;
-	t_light	light;
+	t_light	*light;
+	mlx_t	*mlx;
 }	t_world;
+
+typedef struct s_exposure
+{
+	t_color		effective_color;
+	t_vector	lightv;
+	t_vector	reflectv;
+	double		reflect_dot_eye;
+	double		factor;
+	double		light_dot_normal;
+}	t_exposure;
+
+typedef struct s_sight
+{
+	t_vector	eye;
+	t_vector	normal;
+}	t_sight;
+
+typedef struct s_camera
+{
+	double		hsize;
+	double		vsize;
+	double		field_of_view;
+	double		half_width;
+	double		half_height;
+	double		pixel_size;
+	t_matrix	transform;
+}	t_camera;
+
+typedef struct s_comps
+{
+	double		t;
+	t_shape		object;
+	t_point		point;
+	t_sight		sight;
+	int			inside;
+}	t_comps;
 
 // -------------------------------------------------------------------------- //
 //                                   tuple                                    //
@@ -166,27 +206,27 @@ t_color		color_hadamard(t_color color1, t_color color2);
 // -------------------------------------------------------------------------- //
 
 // void		write_pixel(mlx_image_t *image, int x, int y, int color);
-void	write_pixel(mlx_image_t *image, int x, int y, t_color color);
-int		color_to_int(t_color color);
+void		write_pixel(mlx_image_t *image, int x, int y, t_color color);
+int			color_to_int(t_color color);
 
 // -------------------------------------------------------------------------- //
 //                                   matrix                                   //
 // -------------------------------------------------------------------------- //
 
-// ---------------------------------- basic --------------------------------- //
+// ---------------------------------- basic ---------------------------------
 t_matrix	matrix_create(double *tab, int rows, int cols);
 int			mx_compare(t_matrix matrix1, t_matrix matrix2);
 void		mx_set(t_matrix *matrix1, int y, int x, double value);
 double		mx_get(t_matrix *matrix1, int y, int x);
 t_matrix	identity(void);
 
-// ------------------------------ modification ------------------------------ //
+// ------------------------------ modification ------------------------------
 t_matrix	mx_multiply(t_matrix matrix1, t_matrix matrix2);
 t_tuple		mx_multiply_tuple(t_matrix matrix1, t_tuple tuple1);
 t_matrix	transpose(t_matrix matrix1);
 t_matrix	inverse(t_matrix matrix);
 
-// ------------------------------ determinant ------------------------------- //
+// ------------------------------ determinant -------------------------------
 double		determinant(t_matrix matrix1);
 t_matrix	submatrix(t_matrix matrix1, int y, int x);
 double		minor(t_matrix matrix1, int y, int x);
@@ -236,19 +276,35 @@ t_vector	normal_at(t_shape shape, t_point world_point);
 t_vector	reflect(t_vector in, t_vector normal);
 t_light		point_light(t_point position, t_color intensity);
 t_material	material(void);
-t_color		lighting(t_material m, t_light light, t_point position, t_vector eye, t_vector normal);
+t_color		lighting(t_material m, t_light light, t_point position, t_sight sight);
 
 // -------------------------------------------------------------------------- //
 //                                   world                                    //
 // -------------------------------------------------------------------------- //
 t_world		world(void);
 t_world		default_world(void);
+t_hit		*intersect_world(t_world w, t_ray ray);
 
+// -------------------------------------------------------------------------- //
+//                                  camera                                    //
+// -------------------------------------------------------------------------- //
+t_camera	camera(double hsize, double vsize, double field_of_view);
+t_ray		ray_for_pixel(t_camera c, int x, int y);
 
 // -------------------------------------------------------------------------- //
 //                                   utils                                    //
 // -------------------------------------------------------------------------- //
 
 int			float_compare(double d1, double d2);
+void		ft_error(char *message);
+
+// NÃO SEI ONDE POR
+void	add_shape(t_shape **shape_list, t_shape shape);
+void	world_clear(t_world *world_to_clear);
+void	shape_clear_list(t_shape **shape_list);
+void	add_light(t_light **light_list, t_light light_to_add);
+void	light_clear_list(t_light **light_list);
+t_comps	prepare_computations(t_hit hit, t_ray ray);
+t_color	shade_hit(t_world world, t_comps comps);
 
 #endif

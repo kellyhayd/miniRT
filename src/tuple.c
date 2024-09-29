@@ -6,12 +6,11 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:51:06 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/26 14:51:31 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/26 22:14:09 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
 /**
  * @brief Creates a tuple with the given x, y, z, and w components.
  *
@@ -33,7 +32,8 @@ t_tuple	tuple(double x, double y, double z, double w)
 /**
  * @brief Compares two tuples for equality.
  *
- * This function takes two tuples as input and compares them to determine if they are equal.
+ * This function takes two tuples as input and compares them to determine
+ * if they are equal.
  *
  * @param tuple1 The first tuple to compare.
  * @param tuple2 The second tuple to compare.
