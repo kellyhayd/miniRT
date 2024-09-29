@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:18:05 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/26 21:45:51 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/29 07:43:03 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,5 +218,18 @@ int	world_compare_test(void *expected, void *result)
 		// }
 		return (1);
 	}
+	return (0);
+}
+
+int	camera_compare_test(void *expected, void *result)
+{
+	t_camera	*camera_expected = expected;
+	t_camera	*camera_result = result;
+
+	if (int_compare_test(&camera_expected->hsize, &camera_result->hsize)
+		&& int_compare_test(&camera_expected->vsize, &camera_result->vsize)
+		&& float_compare_test(&camera_expected->field_of_view, &camera_result->field_of_view)
+		&& matrix_compare_test(&camera_expected->transform, &camera_result->transform))
+		return (1);
 	return (0);
 }

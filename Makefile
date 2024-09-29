@@ -9,7 +9,8 @@ NAME			= miniRT
 				tests_transformation \
 				tests_ray_intersection \
 				tests_light_and_shading \
-				tests_world
+				tests_world \
+				tests_camera
 # .SILENT:
 
 #----------------------------------------------- Colors
@@ -58,7 +59,8 @@ TESTS 			=	tests_tuples \
 					tests_transformation \
 					tests_ray_intersection \
 					tests_light_and_shading \
-					tests_world
+					tests_world \
+					tests_camera
 
 #----------------------------------------------- Rules
 all: $(NAME)
@@ -103,7 +105,8 @@ test: all \
 	tests_transformation \
 	tests_ray_intersection \
 	tests_light_and_shading \
-	tests_world
+	tests_world \
+	tests_camera
 
 tests_tuples:
 	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_tuples.c $(LIBS) -o $@
@@ -131,6 +134,10 @@ tests_light_and_shading:
 
 tests_world:
 	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_world.c $(LIBS) -o $@
+	@valgrind -q ./$@
+
+tests_camera:
+	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_camera.c $(LIBS) -o $@
 	@valgrind -q ./$@
 
 pit: all
