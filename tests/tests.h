@@ -44,6 +44,7 @@ int	shape_list_compare_test(void *expected, void *result);
 int	light_list_compare_test(void *expected, void *result);
 int	world_compare_test(void *expected, void *result);
 int	camera_compare_test(void *expected, void *result);
+int	comps_compare_test(void *expected, void *result);
 
 
 // Prints
@@ -66,5 +67,6 @@ void	print_ko_light(int num_test, void *expected, void *result);
 void	print_ko_material(int num_test, void *expectet, void *result);
 void	print_ko_world(int num_test, void *expected, void *result);
 void	print_ko_camera(int num_test, void *expected, void *result);
+void	print_ko_comps(int num_test, void *expected, void *result);
 
 #endif

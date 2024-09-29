@@ -81,13 +81,81 @@ void	test_intersect_a_world_with_a_ray(int num_test)
 	hit_clear_list(&result);
 }
 
+// TEST 04
+void	test_precomputing_state_of_an_intersection(int num_test)
+{
+	// ARRANGE
+	t_ray	r = ray(point(0, 0, -5), vector(0, 0, 1));
+	t_shape	s = sphere();
+	t_hit	i = intersection(4, s);
+	t_comps	expected;
+	t_comps	result;
+
+	expected.t = i.t;
+	expected.object = i.object;
+	expected.point = point(0, 0, -1);
+	expected.eyev = vector(0, 0, -1);
+	expected.normalv = vector(0, 0, -1);
+
+	// ACT
+	result = prepare_computations(i, r);
+
+	// ASSERT
+	print_result(num_test, &expected, &result, comps_compare_test, print_ko_comps);
+}
+
+// TEST 05
+void	test_the_hit_when_an_intersection_occurs_on_the_outside(int num_test)
+{
+	// ARRANGE
+	t_ray	r = ray(point(0, 0, -5), vector(0, 0, 1));
+	t_shape	s = sphere();
+	t_hit	i = intersection(4, s);
+	t_comps	comps;
+	int		expected;
+	int		result;
+
+	expected = false;
+
+	// ACT
+	comps = prepare_computations(i, r);
+	result = comps.inside;
+
+	// ASSERT
+	print_result(num_test, &expected, &result, int_compare_test, print_ko_int);
+}
+
+// TEST 06
+void	test_the_hit_when_an_intersection_occurs_on_the_inside(int num_test)
+{
+	// ARRANGE
+	t_ray	r = ray(point(0, 0, 0), vector(0, 0, 1));
+	t_shape	s = sphere();
+	t_hit	i = intersection(1, s);
+	t_comps	comps;
+	int		expected;
+	int		result;
+
+	expected = true;
+
+	// ACT
+	comps = prepare_computations(i, r);
+	result = comps.inside;
+
+	// ASSERT
+	print_result(num_test, &expected, &result, int_compare_test, print_ko_int);
+}
+
 int main(void)
 {
 	void	(*test_funcs[])(int) =
 	{
-		test_creating_a_world,						// 01
-		test_default_world,							// 02
-		test_intersect_a_world_with_a_ray,			// 03
+		test_creating_a_world,										// 01
+		test_default_world,											// 02
+		test_intersect_a_world_with_a_ray,							// 03
+		test_precomputing_state_of_an_intersection,					// 04
+		test_the_hit_when_an_intersection_occurs_on_the_outside,	// 05
+		test_the_hit_when_an_intersection_occurs_on_the_inside,		// 06
 	};
 
 	printf("\n%sTESTING WORLD CREATION:%s\n", YELLOW, RESET);

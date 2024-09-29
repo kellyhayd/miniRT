@@ -58,3 +58,22 @@ t_hit	*intersect_world(t_world w, t_ray ray)
 	}
 	return (hit_list);
 }
+
+t_comps	prepare_computations(t_hit hit, t_ray ray)
+{
+	t_comps	comps;
+
+	comps.t = hit.t;
+	comps.object = hit.object;
+	comps.point = position(ray, comps.t);
+	comps.eyev = tuple_negate(ray.direction);
+	comps.normalv = normal_at(comps.object, comps.point);
+	if (dot(comps.normalv, comps.eyev) < 0)
+	{
+		comps.inside = true;
+		comps.normalv = tuple_negate(comps.normalv);
+	}
+	else
+		comps.inside = false;
+	return (comps);
+}

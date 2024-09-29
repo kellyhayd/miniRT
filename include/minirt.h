@@ -154,6 +154,16 @@ typedef struct s_camera
 	t_matrix	transform;
 }	t_camera;
 
+typedef struct s_comps
+{
+	double		t;
+	t_shape		object;
+	t_point		point;
+	t_vector	eyev;
+	t_vector	normalv;
+	int			inside;
+}	t_comps;
+
 // -------------------------------------------------------------------------- //
 //                                   tuple                                    //
 // -------------------------------------------------------------------------- //
@@ -295,5 +305,6 @@ void	world_clear(t_world *world_to_clear);
 void	shape_clear_list(t_shape **shape_list);
 void	add_light(t_light **light_list, t_light light_to_add);
 void	light_clear_list(t_light **light_list);
+t_comps	prepare_computations(t_hit hit, t_ray ray);
 
 #endif

@@ -15,7 +15,7 @@
 void	print_ok(int num_test)
 {
 	// printf(PURPLE "%2d" RESET " - " GREEN "[ ✓ ]" RESET "\n", num_test);
-	printf("%s%d%s - %s[ ✓ ]%s\n", PURPLE, num_test, RESET, GREEN, RESET);
+	printf("%s%2d%s - %s[ ✓ ]%s\n", PURPLE, num_test, RESET, GREEN, RESET);
 }
 
 void	print_result(int num_test, void *expected, void *result,
@@ -259,11 +259,27 @@ void	print_ko_camera(int num_test, void *expected, void *result)
 	t_camera	*camera_result = result;
 
 	printf(PURPLE "%2d" RESET " - " RED "[ ✗ ] " RESET
-		"Expected: hsize (%d) vsize (%d) field_of_view (%.2lf)\n"
-		"\t\tResult: hsize (%d) vsize (%d) field_of_view (%.2lf)\n"
+		"Expected: hsize (%.2f) vsize (%.2f) field_of_view (%.2lf)\n"
+		"\t\tResult: hsize (%.2f) vsize (%.2f) field_of_view (%.2lf)\n"
 		"If until here everything is right, maybe the matrix has a problem\n",
 		num_test,
 		camera_expected->hsize, camera_expected->vsize, camera_expected->field_of_view,
 		camera_result->hsize, camera_result->vsize, camera_result->field_of_view
+	);
+}
+
+void	print_ko_comps(int num_test, void *expected, void *result)
+{
+	t_comps	*comps_expected = expected;
+	t_comps	*comps_result = result;
+
+	printf(PURPLE "%2d" RESET " - " RED "[ ✗ ] " RESET
+		"Expected: t (%.2lf) object (sphere (origin (%.2lf, %.2lf, %.2lf) radius (%.2lf)))\n"
+		"\t\tResult: t (%.2lf) object (sphere (origin (%.2lf, %.2lf, %.2lf) radius (%.2lf)))\n",
+		num_test,
+		comps_expected->t,
+		comps_expected->object.sphere_shape.origin.x, comps_expected->object.sphere_shape.origin.y, comps_expected->object.sphere_shape.origin.z, comps_expected->object.sphere_shape.radius,
+		comps_result->t,
+		comps_result->object.sphere_shape.origin.x, comps_result->object.sphere_shape.origin.y, comps_result->object.sphere_shape.origin.z, comps_result->object.sphere_shape.radius
 	);
 }

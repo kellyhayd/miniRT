@@ -233,3 +233,17 @@ int	camera_compare_test(void *expected, void *result)
 		return (1);
 	return (0);
 }
+
+int	comps_compare_test(void *expected, void *result)
+{
+	t_comps	*comps_expected = expected;
+	t_comps	*comps_result = result;
+
+	if (float_compare_test(&comps_expected->t, &comps_result->t)
+		&& shape_compare_test(&comps_expected->object, &comps_result->object)
+		&& tuple_compare_test(&comps_expected->point, &comps_result->point)
+		&& tuple_compare_test(&comps_expected->eyev, &comps_result->eyev)
+		&& tuple_compare_test(&comps_expected->normalv, &comps_result->normalv))
+		return (1);
+	return (0);
+}
