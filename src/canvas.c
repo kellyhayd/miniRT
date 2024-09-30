@@ -65,3 +65,59 @@ void	write_pixel(mlx_image_t *image, int x, int y, t_color color)
 		return ;
 	mlx_put_pixel(image, (unsigned int)x, (unsigned int)y, color_to_int(color));
 }
+
+t_canvas	create_canvas(int width, int height)
+{
+	t_canvas	canvas;
+
+	canvas.width = width;
+	canvas.height = height;
+	canvas.pixels = (t_color *)malloc(sizeof(t_color) * width * height);
+	ft_bzero(canvas.pixels, sizeof(t_color) * width * height);
+	if (!canvas.pixels)
+	{
+		perror("Error allocating memory for canvas pixels");
+		exit(EXIT_FAILURE);
+	}
+	return (canvas);
+}
+
+void	write_pixel_to_canvas(t_canvas *canvas, int x, int y, t_color color)
+{
+	if (x < 0 || x >= canvas->width || y < 0 || y >= canvas->height)
+		return ;
+	canvas->pixels[y * canvas->width + x] = color;
+}
+
+t_color	pixel_at(t_canvas canvas, int x, int y)
+{
+	if (x < 0 || x >= canvas.width || y < 0 || y >= canvas.height)
+		return (color(0, 0, 0));
+	return (canvas.pixels[y * canvas.width + x]);
+}
+
+mlx_image_t	*canvas_to_image(t_canvas canvas, mlx_t *mlx)
+{
+	mlx_image_t	*image;
+	int			x;
+	int			y;
+
+	image = mlx_new_image(mlx, canvas.width, canvas.height);
+	if (!image)
+	{
+		perror("Error creating image from canvas");
+		exit(EXIT_FAILURE);
+	}
+	y = 0;
+	while (y < canvas.height)
+	{
+		x = 0;
+		while (x < canvas.width)
+		{
+			write_pixel(image, x, y, pixel_at(canvas, x, y));
+			x++;
+		}
+		y++;
+	}
+	return (image);
+}

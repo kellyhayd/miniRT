@@ -54,45 +54,27 @@ t_ray	ray_for_pixel(t_camera c, int x, int y)
 	return (ray(origin, direction));
 }
 
-// FUNÇÃO NÃO TESTADA POR FALTA DE IMPLEMENTAÇÃO DE 'COLOR_AT' E 'VIEW_TRANSFORM'
+t_canvas	render(t_camera c, t_world w)
+{
+	t_canvas	image;
+	t_ray		ray;
+	t_color		coloring;
+	int			x;
+	int			y;
 
-// mlx_image_t	*render(t_camera c, t_world w)
-// {
-// 	mlx_image_t	*image;
-// 	t_ray		ray;
-// 	t_color		coloring;
-// 	int			x;
-// 	int			y;
-
-// 	image = mlx_new_image(w.mlx, c.hsize, c.vsize);
-// 	y = 0;
-// 	while (y < c.vsize)
-// 	{
-// 		x = 0;
-// 		while (x < c.hsize)
-// 		{
-// 			ray = ray_for_pixel(c, x, y);
-// 			coloring = color_at(w, ray);
-// 			write_pixel(image, x, y, coloring);
-// 			x++;
-// 		}
-// 		y++;
-// 	}
-// 	return (image);
-// }
-
-
-// PSEUDOCODE DO LIVRO DE REFERÊNCIA
-/*
-render(camera, world)
-
-image ← canvas(camera.hsize, camera.vsize)
-for y ← 0 to camera.vsize- 1
-	for x ← 0 to camera.hsize- 1
-		ray ← ray_for_pixel(camera, x, y)
-		color ← color_at(world, ray)
-		write_pixel(image, x, y, color)
-		end for
-	end for
-return image
-*/
+	image = create_canvas(c.hsize, c.vsize);
+	y = 0;
+	while (y < c.vsize)
+	{
+		x = 0;
+		while (x < c.hsize)
+		{
+			ray = ray_for_pixel(c, x, y);
+			coloring = color_at(w, ray);
+			write_pixel_to_canvas(&image, x, y, coloring);
+			x++;
+		}
+		y++;
+	}
+	return (image);
+}
