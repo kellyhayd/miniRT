@@ -164,6 +164,13 @@ typedef struct s_comps
 	int			inside;
 }	t_comps;
 
+typedef struct s_canvas
+{
+	int		width;
+	int		height;
+	t_color	*pixels;
+}	t_canvas;
+
 // -------------------------------------------------------------------------- //
 //                                   tuple                                    //
 // -------------------------------------------------------------------------- //
@@ -314,5 +321,10 @@ t_comps		prepare_computations(t_hit hit, t_ray ray);
 t_color		shade_hit(t_world world, t_comps comps);
 t_color		color_at(t_world w, t_ray r);
 t_matrix	view_transform(t_point from, t_point to, t_vector up);
+t_canvas	render(t_camera c, t_world w);
+t_canvas	create_canvas(int width, int height);
+void		write_pixel_to_canvas(t_canvas *canvas, int x, int y, t_color color);
+t_color		pixel_at(t_canvas canvas, int x, int y);
+t_color		pixel_at(t_canvas canvas, int x, int y);
 
 #endif

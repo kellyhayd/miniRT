@@ -407,6 +407,7 @@ tests_ray_intersection
 tests_transformation
 tests_tuples
 tests_world
+tests_camera
 
 # Object files
 *.o
