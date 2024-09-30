@@ -242,9 +242,11 @@ int	comps_compare_test(void *expected, void *result)
 	if (float_compare_test(&comps_expected->t, &comps_result->t)
 		&& shape_compare_test(&comps_expected->object, &comps_result->object)
 		&& tuple_compare_test(&comps_expected->point, &comps_result->point)
+		&& tuple_compare_test(&comps_expected->over_point, &comps_result->over_point)
 		&& tuple_compare_test(&comps_expected->sight.eye, &comps_result->sight.eye)
 		&& tuple_compare_test(&comps_expected->sight.normal, &comps_result->sight.normal)
-		&& tuple_compare_test(&comps_expected->over_point, &comps_result->over_point))
+		&& comps_expected->sight.in_shadow == comps_result->sight.in_shadow
+		&& int_compare_test(&comps_expected->inside, &comps_result->inside))
 		return (1);
 	return (0);
 }

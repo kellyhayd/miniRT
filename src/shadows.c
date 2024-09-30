@@ -18,12 +18,16 @@ bool	is_shadowed(t_world w, t_point position)
 	t_hit		*hit_list;
 	t_hit		*h;
 	double		distance;
+	int			result;
 
 	v = tuple_subtract(w.light->position, position);
 	distance = magnitude(v);
 	hit_list = intersect_world(w, ray(position, normalize(v)));
 	h = hit(hit_list);
 	if (h && h->t < distance)
-		return (true);
-	return (false);
+		result = true;
+	else
+		result = false;
+	hit_clear_list(&hit_list);
+	return (result);
 }

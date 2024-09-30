@@ -58,14 +58,17 @@ void	light_clear_list(t_light **light_list)
 	}
 }
 
-void	exposure_init(t_exposure e)
+t_exposure	exposure_init(void)
 {
+	t_exposure e;
+
 	e.effective_color = color(0, 0, 0);
 	e.lightv = vector(0, 0, 0);
 	e.reflectv = vector(0, 0, 0);
 	e.reflect_dot_eye = 0;
 	e.factor = 0;
 	e.light_dot_normal = 0;
+	return (e);
 }
 
 /**
@@ -91,7 +94,7 @@ t_color	lighting(t_material m, t_light light, t_point position, \
 
 	diffuse = color(0, 0, 0);
 	specular = color(0, 0, 0);
-	exposure_init(e);
+	e = exposure_init();
 	e.effective_color = color_hadamard(m.color, light.intensity);
 	e.lightv = normalize(tuple_subtract(light.position, position));
 	ambient = color_multiply(e.effective_color, m.ambient);

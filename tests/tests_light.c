@@ -224,6 +224,7 @@ void	test_lighting_with_the_eye_between_the_light_and_the_surface(int num_test)
 	t_point		position = point(0, 0, 0);
 	sight.eye = vector(0, 0, -1);
 	sight.normal = vector(0, 0, -1);
+	sight.in_shadow = false;
 
 	// ACT
 	result = lighting(m, light, position, sight);
@@ -245,7 +246,7 @@ void	test_lighting_with_the_eye_between_light_and_surface_eye_offset_45_degrees(
 	t_point		position = point(0, 0, 0);
 	sight.eye = vector(0, sqrt(2) / 2, -sqrt(2) / 2);
 	sight.normal = vector(0, 0, -1);
-
+	sight.in_shadow = false;
 
 	// ACT
 	result = lighting(m, light, position, sight);
@@ -267,6 +268,7 @@ void	test_lighting_with_eye_opposite_surface_light_offset_45_degrees(int num_tes
 	t_point		position = point(0, 0, 0);
 	sight.eye = vector(0, 0, -1);
 	sight.normal = vector(0, 0, -1);
+	sight.in_shadow = false;
 
 	// ACT
 	result = lighting(m, light, position, sight);
@@ -288,6 +290,7 @@ void	test_lighting_with_eye_in_the_path_of_the_reflection_vector(int num_test)
 	t_point		position = point(0, 0, 0);
 	sight.eye = vector(0, -sqrt(2) / 2, -sqrt(2) / 2);
 	sight.normal = vector(0, 0, -1);
+	sight.in_shadow = false;
 
 	// ACT
 	result = lighting(m, light, position, sight);

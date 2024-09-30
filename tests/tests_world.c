@@ -94,8 +94,11 @@ void	test_precomputing_state_of_an_intersection(int num_test)
 	expected.t = i.t;
 	expected.object = i.object;
 	expected.point = point(0, 0, -1);
+	expected.inside = false;
 	expected.sight.eye = vector(0, 0, -1);
 	expected.sight.normal = vector(0, 0, -1);
+	expected.sight.in_shadow = false;
+	expected.over_point = tuple_add(expected.point, tuple_multiply(expected.sight.normal, EPSILON));
 
 	// ACT
 	result = prepare_computations(i, r);

@@ -66,16 +66,18 @@ t_comps	prepare_computations(t_hit hit, t_ray ray)
 	comps.t = hit.t;
 	comps.object = hit.object;
 	comps.point = position(ray, comps.t);
+	comps.inside = false;
 	comps.sight.eye = tuple_negate(ray.direction);
 	comps.sight.normal = normal_at(comps.object, comps.point);
-	comps.inside = false;
+	comps.sight.in_shadow = 0;
 	if (dot(comps.sight.normal, comps.sight.eye) < 0)
 	{
 		comps.inside = true;
 		comps.sight.normal = tuple_negate(comps.sight.normal);
 	}
-	comps.over_point = tuple_add(comps.point, \
-			tuple_multiply(comps.sight.normal, EPSILON));
+	comps.over_point = tuple_add(comps.point,
+		tuple_multiply(comps.sight.normal, EPSILON)
+	);
 	return (comps);
 }
 
