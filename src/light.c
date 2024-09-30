@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:08:09 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/29 16:23:14 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/29 18:26:50 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,19 @@ void	light_clear_list(t_light **light_list)
 	}
 }
 
+t_exposure	exposure_init(void)
+{
+	t_exposure e;
+
+	e.effective_color = color(0, 0, 0);
+	e.lightv = vector(0, 0, 0);
+	e.reflectv = vector(0, 0, 0);
+	e.reflect_dot_eye = 0;
+	e.factor = 0;
+	e.light_dot_normal = 0;
+	return (e);
+}
+
 /**
  * @brief Calculates the lighting effect on a material at a given position.
  *
@@ -68,8 +81,7 @@ void	light_clear_list(t_light **light_list)
  * @param m The material properties of the object.
  * @param light The light source affecting the material.
  * @param position The position of the point being shaded.
- * @param eye The vector pointing towards the eye or camera.
- * @param normal The normal vector at the point being shaded.
+ * @param sight The sight structure containing the eye vector, normal vector, and shadow information.
  * @return The resulting color after applying the lighting effect.
  */
 t_color	lighting(t_material m, t_light light, t_point position, \
@@ -82,9 +94,12 @@ t_color	lighting(t_material m, t_light light, t_point position, \
 
 	diffuse = color(0, 0, 0);
 	specular = color(0, 0, 0);
+	e = exposure_init();
 	e.effective_color = color_hadamard(m.color, light.intensity);
 	e.lightv = normalize(tuple_subtract(light.position, position));
 	ambient = color_multiply(e.effective_color, m.ambient);
+	if (sight.in_shadow == true)
+		return (ambient);
 	e.light_dot_normal = dot(e.lightv, sight.normal);
 	if (e.light_dot_normal >= 0)
 	{
@@ -98,7 +113,5 @@ t_color	lighting(t_material m, t_light light, t_point position, \
 			specular = color_multiply(light.intensity, e.factor * m.specular);
 		}
 	}
-	if (sight.in_shadow)
-		return (ambient);
 	return (color_add(color_add(ambient, diffuse), specular));
 }

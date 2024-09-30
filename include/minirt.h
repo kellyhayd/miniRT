@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:01:38 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/29 14:45:11 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/29 18:06:42 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,7 @@ typedef struct s_comps
 	double		t;
 	t_shape		object;
 	t_point		point;
+	t_point		over_point;
 	t_sight		sight;
 	int			inside;
 }	t_comps;

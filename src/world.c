@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 08:14:46 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/26 22:05:26 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/09/29 18:19:15 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ t_comps	prepare_computations(t_hit hit, t_ray ray)
 	comps.t = hit.t;
 	comps.object = hit.object;
 	comps.point = position(ray, comps.t);
+	comps.inside = false;
 	comps.sight.eye = tuple_negate(ray.direction);
 	comps.sight.normal = normal_at(comps.object, comps.point);
 	comps.sight.in_shadow = false;
@@ -74,8 +75,9 @@ t_comps	prepare_computations(t_hit hit, t_ray ray)
 		comps.inside = true;
 		comps.sight.normal = tuple_negate(comps.sight.normal);
 	}
-	else
-		comps.inside = false;
+	comps.over_point = tuple_add(comps.point,
+		tuple_multiply(comps.sight.normal, EPSILON)
+	);
 	return (comps);
 }
 
@@ -88,6 +90,7 @@ t_color	shade_hit(t_world world, t_comps comps)
 	aux = world.light;
 	while (aux)
 	{
+		comps.sight.in_shadow = is_shadowed(world, comps.over_point);
 		color_shaded = color_add(
 			color_shaded,
 			lighting(
