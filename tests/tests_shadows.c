@@ -33,7 +33,7 @@ void	test_there_is_no_shadow_when_nothing_is_collinear_with_point_and_light(int 
 	t_point		p = point(0, 10, 0);
 
 	// ACT
-	result = is_shadowed(w, p);
+	result = is_shadowed(w, p, w.light);
 
 	// ASSERT
 	print_result(num_test, &expected, &result, int_compare_test, print_ko_int);
@@ -52,7 +52,7 @@ void	test_the_shadow_when_an_object_is_between_the_point_and_the_light(int num_t
 	t_point		p = point(10, -10, 10);
 
 	// ACT
-	result = is_shadowed(w, p);
+	result = is_shadowed(w, p, w.light);
 
 	// ASSERT
 	print_result(num_test, &expected, &result, int_compare_test, print_ko_int);
@@ -71,7 +71,7 @@ void	test_there_is_no_shadow_when_an_object_is_behind_the_light(int num_test)
 	t_point		p = point(-20, 20, -20);
 
 	// ACT
-	result = is_shadowed(w, p);
+	result = is_shadowed(w, p, w.light);
 
 	// ASSERT
 	print_result(num_test, &expected, &result, int_compare_test, print_ko_int);
@@ -90,7 +90,7 @@ void	test_there_is_no_shadow_when_an_object_is_behind_the_point(int num_test)
 	t_point	p = point(-2, 2, -2);
 
 	// ACT
-	result = is_shadowed(w, p);
+	result = is_shadowed(w, p, w.light);
 
 	// ASSERT
 	print_result(num_test, &expected, &result, int_compare_test, print_ko_int);
