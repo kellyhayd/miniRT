@@ -39,6 +39,14 @@
 # include "libft.h"
 # include "MLX42/MLX42.h"
 
+enum e_shapes
+{
+	SPHERE,
+	PLANE,
+	CYLINDER,
+	// TRIANGLE,
+};
+
 typedef struct s_tuple	t_tuple;
 typedef struct s_tuple	t_point;
 typedef struct s_tuple	t_vector;
@@ -47,6 +55,8 @@ typedef struct s_hit	t_hit;
 typedef struct s_shape	t_shape;
 // typedef struct s_sphere	t_sphere;
 typedef struct s_light	t_light;
+
+typedef enum e_shapes t_shapes;
 
 struct s_tuple
 {
@@ -82,6 +92,11 @@ typedef struct s_sphere
 	double	radius;
 }	t_sphere;
 
+typedef struct s_plane
+{
+	t_point	origin;
+}	t_plane;
+
 typedef struct s_material
 {
 	double	ambient;
@@ -96,13 +111,14 @@ struct s_shape
 	union
 	{
 		t_sphere	sphere_shape;
-		// t_plane		plane_shape;
+		t_plane		plane_shape;
 		// t_cylinder	cylinder_shape;
 	};
 	t_matrix	transform;
 	t_matrix	inverse;
 	t_matrix	transposed_inverse;
 	t_material	material;
+	t_shapes	shape_type;
 	t_shape		*next;
 };
 
@@ -329,5 +345,10 @@ void		write_pixel_to_canvas(t_canvas *canvas, int x, int y, t_color color);
 t_color		pixel_at(t_canvas canvas, int x, int y);
 t_color		pixel_at(t_canvas canvas, int x, int y);
 mlx_image_t	*canvas_to_image(t_canvas canvas, mlx_t *mlx);
+void		intersect_sphere(t_hit **hit_list, t_shape s, t_ray r);
+t_shape		plane(void);
+t_vector	normal_at_sphere(t_shape sphere, t_point obj_point);
+t_vector	normal_at_plane(t_shape plane, t_point obj_point);
+void		intersect_plane(t_hit **hit_list, t_shape s, t_ray r);
 
 #endif

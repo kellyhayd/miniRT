@@ -409,6 +409,8 @@ tests_tuples
 tests_world
 tests_shadows
 tests_camera
+tests_light
+tests_planes
 
 # Object files
 *.o

@@ -26,43 +26,12 @@ t_hit	intersection(double t, t_shape s)
 	return ((t_hit){.t = t, .object = s, .next = NULL});
 }
 
-/**
- * @brief Intersects a ray with a sphere and updates the hit list with
- * intersection points.
- *
- * This function calculates the intersection points between a given ray and a
- * sphere. If intersections are found, they are added to the hit list.
- *
- * @param hit_list A pointer to the list of hit points to be updated with
- * intersection points.
- * @param s The sphere shape to be intersected with the ray.
- * @param r The ray to be intersected with the sphere.
- */
-void	intersect_sphere(t_hit **hit_list, t_shape s, t_ray r)
+void	local_intersect(t_hit **hit_list, t_shape s, t_ray r)
 {
-	t_vector	sphere_to_ray;
-	double		discriminant;
-	double		coefficient[3];
-	double		two_times_a;
-	double		square_root;
-
-	sphere_to_ray = tuple_subtract(r.origin, s.sphere_shape.origin);
-	coefficient[0] = dot(r.direction, r.direction);
-	coefficient[1] = 2 * dot(r.direction, sphere_to_ray);
-	coefficient[2] = dot(sphere_to_ray, sphere_to_ray) - 1;
-	discriminant = pow(coefficient[1], 2)
-						- 4 * coefficient[0]
-						* coefficient[2];
-	if (discriminant < 0)
-		return ;
-	two_times_a = 2 * coefficient[0];
-	square_root = sqrt(discriminant);
-	add_intersection(hit_list,
-		intersection((-coefficient[1] - square_root) / (two_times_a),s)
-	);
-	add_intersection(hit_list,
-		intersection((-coefficient[1] + square_root) / (two_times_a), s)
-	);
+	if (s.shape_type == SPHERE)
+		intersect_sphere(hit_list, s, r);
+	else if (s.shape_type == PLANE)
+		intersect_plane(hit_list, s, r);
 }
 
 /**
@@ -81,7 +50,8 @@ void	intersect(t_hit **hit_list, t_shape s, t_ray r)
 	t_ray	new_ray;
 
 	new_ray = ray_transform(r, s.inverse);
-	intersect_sphere(hit_list, s, new_ray);
+	local_intersect(hit_list, s, new_ray);
+	// intersect_sphere(hit_list, s, new_ray);
 }
 
 /**

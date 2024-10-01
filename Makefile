@@ -64,7 +64,8 @@ TESTS 			=	tests_tuples \
 					tests_light \
 					tests_world \
 					tests_camera \
-					tests_shadows
+					tests_shadows \
+					tests_planes
 
 #----------------------------------------------- Rules
 all: $(NAME)
@@ -149,12 +150,17 @@ tests_shadows:
 	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_shadows.c $(LIBS) -o $@
 	@$(VALGRIND) ./$@
 
+tests_planes:
+	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_planes.c $(LIBS) -o $@
+	@$(VALGRIND) ./$@
+
 pit: all
 #	@$(CC) $(FLAGS) $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/projectiles.c $(LIBS) -o pit
 #	@$(CC) $(FLAGS) $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/parable.c $(LIBS) -o pit
 #	@$(CC) $(FLAGS) $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/silhouette.c $(LIBS) -o pit
 #	@$(CC) $(FLAGS) $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/sphere.c $(LIBS) -o pit
-	@$(CC) $(FLAGS) $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/many_spheres.c $(LIBS) -o pit
+#	@$(CC) $(FLAGS) $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/many_spheres.c $(LIBS) -o pit
+	@$(CC) $(FLAGS) $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/planes.c $(LIBS) -o pit
 	@./pit
 
 ifeq ($(PROF), 1)
