@@ -54,6 +54,27 @@ t_ray	ray_for_pixel(t_camera c, int x, int y)
 	return (ray(origin, direction));
 }
 
+// void	print_rendering_progress(int hsize, int vsize, int x, int y)
+// {
+// 	double	progress;
+// 
+// 	progress = (double)(y * hsize + x) / (double)(hsize * vsize) * 100;
+// 	printf("\r[");
+// 	for (int i = 0; i < 50; i++)
+// 	{
+// 		if (i < progress / 2)
+// 			printf("=");
+// 		else if (fabs(progress / 2 - i) < 1)
+// 			printf(">");
+// 		else if (i % 5 == 0)
+// 			printf("o");
+// 		else
+// 			printf(" ");
+// 	}
+// 	printf("] %.2f%%", progress);
+// 	// fflush(stdout);
+// }
+
 t_canvas	render(t_camera c, t_world w)
 {
 	t_canvas	image;
@@ -69,6 +90,7 @@ t_canvas	render(t_camera c, t_world w)
 		x = 0;
 		while (x < c.hsize)
 		{
+			// print_rendering_progress(c.hsize, c.vsize, x, y);
 			ray = ray_for_pixel(c, x, y);
 			coloring = color_at(w, ray);
 			write_pixel_to_canvas(&image, x, y, coloring);
