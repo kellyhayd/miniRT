@@ -12,7 +12,7 @@
 
 #include "minirt.h"
 
-bool	is_shadowed(t_world w, t_point position)
+bool	is_shadowed(t_world w, t_point position, t_light *light)
 {
 	t_vector	v;
 	t_hit		*hit_list;
@@ -20,7 +20,7 @@ bool	is_shadowed(t_world w, t_point position)
 	double		distance;
 	int			result;
 
-	v = tuple_subtract(w.light->position, position);
+	v = tuple_subtract(light->position, position);
 	distance = magnitude(v);
 	hit_list = intersect_world(w, ray(position, normalize(v)));
 	h = hit(hit_list);

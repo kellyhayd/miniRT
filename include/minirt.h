@@ -290,7 +290,7 @@ t_color		lighting(t_material m, t_light light, t_point position, t_sight sight);
 // -------------------------------------------------------------------------- //
 //                                  shadow                                    //
 // -------------------------------------------------------------------------- //
-bool		is_shadowed(t_world w, t_point position);
+bool		is_shadowed(t_world w, t_point position, t_light *light);
 
 // -------------------------------------------------------------------------- //
 //                                   world                                    //
@@ -327,5 +327,6 @@ t_canvas	create_canvas(int width, int height);
 void		write_pixel_to_canvas(t_canvas *canvas, int x, int y, t_color color);
 t_color		pixel_at(t_canvas canvas, int x, int y);
 t_color		pixel_at(t_canvas canvas, int x, int y);
+mlx_image_t	*canvas_to_image(t_canvas canvas, mlx_t *mlx);
 
 #endif
