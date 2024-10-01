@@ -69,7 +69,7 @@ mlx_image_t	*render_image(mlx_t *mlx)
 
 	// LIGHTS
 	t_light	light1 = point_light(point(-10, 10, -10), color(1, 1, 1));
-	t_light	light2 = point_light(point(10, 10, -10), color(1, 1, 1));
+	// t_light	light2 = point_light(point(10, 10, -10), color(1, 1, 1));
 	// t_light	light3 = point_light(point(10, -10, 10), color(1, 1, 1));
 
 	// CAMERA
@@ -90,7 +90,7 @@ mlx_image_t	*render_image(mlx_t *mlx)
 	add_shape(&world_to_render.shape, left);
 
 	add_light(&world_to_render.light, light1);
-	add_light(&world_to_render.light, light2);
+	// add_light(&world_to_render.light, light2);
 	// add_light(&world_to_render.light, light3);
 
 	world_to_render.mlx = mlx;

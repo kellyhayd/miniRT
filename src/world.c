@@ -90,7 +90,7 @@ t_color	shade_hit(t_world world, t_comps comps)
 	aux = world.light;
 	while (aux)
 	{
-		comps.sight.in_shadow = is_shadowed(world, comps.over_point);
+		comps.sight.in_shadow = is_shadowed(world, comps.over_point, aux);
 		color_shaded = color_add(
 			color_shaded,
 			lighting(
