@@ -1,11 +1,14 @@
 #include "minirt.h"
 
-mlx_image_t	*render_image(mlx_t *mlx)
+#define WIDTH 500
+#define HEIGHT 500
+
+t_canvas	render_image(void)
 {
 	// WALLS
 	t_shape	floor = sphere();
 	set_transformation(&floor, scaling(10, 0.01, 10));
-	floor.material.color = color(1, 0.9, 0.9);
+	floor.material.color = color(0.3, 0.3, 0.3);
 	floor.material.specular = 0;
 
 	t_shape	left_wall = sphere();
@@ -52,7 +55,7 @@ mlx_image_t	*render_image(mlx_t *mlx)
 			scaling(0.5, 0.5, 0.5)
 		)
 	);
-	right.material.color = color(0.5, 1, 0.1);
+	right.material.color = color(1, 1, 1);
 	right.material.diffuse = 0.7;
 	right.material.specular = 0.3;
 
@@ -63,22 +66,33 @@ mlx_image_t	*render_image(mlx_t *mlx)
 			scaling(0.33, 0.33, 0.33)
 		)
 	);
-	left.material.color = color(1, 0.8, 0.1);
+	left.material.color = color(1, 1, 1);
 	left.material.diffuse = 0.7;
 	left.material.specular = 0.3;
 
 	// LIGHTS
-	t_light	light1 = point_light(point(-10, 10, -10), color(1, 1, 1));
-	// t_light	light2 = point_light(point(10, 10, -10), color(1, 1, 1));
-	// t_light	light3 = point_light(point(10, -10, 10), color(1, 1, 1));
+	t_light	light1 = point_light(point(-10, 10, -10), color(1, 0, 0));
+
+	t_point	light_point = mx_multiply_tuple(
+		rotation_y(-(M_PI / 4)),
+		point(-10, 10, -10)
+	);
+	t_light	light2 = point_light(light_point, color(0, 1, 0));
+
+	light_point = mx_multiply_tuple(
+		rotation_y(-(M_PI / 4)),
+		light_point
+	);
+	t_light	light3 = point_light(light_point, color(0, 0, 1));
 
 	// CAMERA
-	t_camera	camera_view = camera(720, 720, M_PI / 3);
+	t_camera	camera_view = camera(WIDTH, HEIGHT, M_PI / 3);
 	camera_view.transform = view_transform(
 		point(0, 1.5, -5),
 		point(0, 1, 0),
 		vector(0, 1, 0)
 	);
+	camera_view.inverse = inverse(camera_view.transform);
 
 	t_world	world_to_render = world();
 
@@ -90,26 +104,55 @@ mlx_image_t	*render_image(mlx_t *mlx)
 	add_shape(&world_to_render.shape, left);
 
 	add_light(&world_to_render.light, light1);
-	// add_light(&world_to_render.light, light2);
-	// add_light(&world_to_render.light, light3);
-
-	world_to_render.mlx = mlx;
+	add_light(&world_to_render.light, light2);
+	add_light(&world_to_render.light, light3);
 
 	t_canvas	canvas = render(camera_view, world_to_render);
 
-	return (canvas_to_image(canvas, mlx));
+	return (canvas);
+}
+
+void	canvas_to_ppm(t_canvas canvas, char *filename)
+{
+	FILE	*file = fopen(filename, "w");
+
+	if (!file)
+	{
+		perror(filename);
+		return ;
+	}
+
+	fprintf(file, "P3\n%d %d\n255\n", canvas.width, canvas.height);
+	for (int y = 0; y < canvas.height; y++)
+	{
+		for (int x = 0; x < canvas.width; x++)
+		{
+			t_color	pixel = pixel_at(canvas, x, y);
+			int		r = (int)(pixel.r * 255);
+			int		g = (int)(pixel.g * 255);
+			int		b = (int)(pixel.b * 255);
+
+			fprintf(file, "%d %d %d\n", r, g, b);
+		}
+	}
 }
 
 int main(void)
 {
 	mlx_t		*mlx;
-	mlx_image_t	*image;
+	t_canvas	image;
+	mlx_image_t	*mlx_image;
 
-	mlx = mlx_init(720, 720, "sphere", false);
+	mlx = mlx_init(WIDTH, HEIGHT, "sphere", false);
+	image = render_image();
+	if (mlx)
+	{
+		mlx_image = canvas_to_image(image, mlx);
+		mlx_image_to_window(mlx, mlx_image, 0, 0);
+		mlx_loop(mlx);
+	}
 
-	image = render_image(mlx);
-	mlx_image_to_window(mlx, image, 0, 0);
+	canvas_to_ppm(image, "many_spheres.ppm");
 
-	mlx_loop(mlx);
 	return (0);
 }

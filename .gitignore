@@ -419,3 +419,4 @@ build
 gmon.out
 output.png
 prof
+*.ppm

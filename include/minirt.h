@@ -153,6 +153,7 @@ typedef struct s_camera
 	double		half_height;
 	double		pixel_size;
 	t_matrix	transform;
+	t_matrix	inverse;
 }	t_camera;
 
 typedef struct s_comps
