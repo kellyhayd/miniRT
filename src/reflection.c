@@ -12,6 +12,20 @@
 
 #include "minirt.h"
 
+t_vector	local_normal_at(t_shape s, t_point obj_point)
+{
+	t_vector	normal;
+
+	if (s.shape_type == SPHERE)
+		normal = normal_at_sphere(s, obj_point);
+	else if (s.shape_type == PLANE)
+		normal = normal_at_plane(s, obj_point);
+	// else								
+	// 	normal = (t_vector) {0};		// Não sei se precisa disso
+
+	return (normal);
+}
+
 /**
  * Computes the normal vector at a given point on the surface of a shape.
  *
@@ -26,7 +40,7 @@ t_vector	normal_at(t_shape s, t_point world_point)
 	t_vector	world_normal;
 
 	obj_point = mx_multiply_tuple(s.inverse, world_point);
-	obj_normal = tuple_subtract(obj_point, point(0, 0, 0));
+	obj_normal = local_normal_at(s, obj_point);
 	world_normal = mx_multiply_tuple(s.transposed_inverse, obj_normal);
 	world_normal.w = 0;
 	return (normalize(world_normal));
