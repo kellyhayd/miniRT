@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 07:33:10 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/29 12:05:26 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/01 15:01:59 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,13 @@ t_ray	ray_for_pixel(t_camera c, int x, int y)
 	t_point		pixel;
 	t_point		origin;
 	t_vector	direction;
-	t_matrix	inverse_transform;
 
 	x_offset = (x + 0.5) * c.pixel_size;
 	y_offset = (y + 0.5) * c.pixel_size;
 	world_x = c.half_width - x_offset;
 	world_y = c.half_height - y_offset;
-	inverse_transform = inverse(c.transform);
-	pixel = mx_multiply_tuple(inverse_transform, point(world_x, world_y, -1));
-	origin = mx_multiply_tuple(inverse_transform, point(0, 0, 0));
+	pixel = mx_multiply_tuple(c.inverse, point(world_x, world_y, -1));
+	origin = mx_multiply_tuple(c.inverse, point(0, 0, 0));
 	direction = normalize(tuple_subtract(pixel, origin));
 	return (ray(origin, direction));
 }
