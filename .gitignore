@@ -400,7 +400,6 @@ FodyWeavers.xsd
 # Executables
 miniRT
 pit
-tests_*
 tests_colors
 tests_light_and_shading
 tests_matrix
