@@ -35,6 +35,8 @@ void	local_intersect(t_hit **hit_list, t_shape s, t_ray r)
 		intersect_sphere(hit_list, s, new_ray);
 	else if (s.shape_type == PLANE)
 		intersect_plane(hit_list, s, new_ray);
+	else if (s.shape_type == CYLINDER)
+		intersect_cylinder(hit_list, s, new_ray);
 }
 
 /**

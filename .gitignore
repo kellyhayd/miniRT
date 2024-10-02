@@ -400,6 +400,7 @@ FodyWeavers.xsd
 # Executables
 miniRT
 pit
+tests_*
 tests_colors
 tests_light_and_shading
 tests_matrix
@@ -411,6 +412,7 @@ tests_shadows
 tests_camera
 tests_light
 tests_planes
+test_cylinder
 
 # Object files
 *.o

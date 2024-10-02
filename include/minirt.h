@@ -97,6 +97,14 @@ typedef struct s_plane
 	t_point	origin;
 }	t_plane;
 
+typedef struct s_cylinder
+{
+	t_point	origin;
+	double	radius;
+	double	minimum;
+	double	maximum;
+}	t_cylinder;
+
 typedef struct s_material
 {
 	double	ambient;
@@ -112,7 +120,7 @@ struct s_shape
 	{
 		t_sphere	sphere_shape;
 		t_plane		plane_shape;
-		// t_cylinder	cylinder_shape;
+		t_cylinder	cylinder_shape;
 	};
 	t_matrix	transform;
 	t_matrix	inverse;
@@ -351,5 +359,9 @@ t_vector	normal_at_sphere(t_shape sphere, t_point obj_point);
 t_vector	normal_at_plane(t_shape plane, t_point obj_point);
 void		intersect_plane(t_hit **hit_list, t_shape s, t_ray r);
 void		local_intersect(t_hit **hit_list, t_shape s, t_ray r);
+
+t_shape		cylinder(void);
+void		intersect_cylinder(t_hit **hit_list, t_shape s, t_ray r);
+t_vector	normal_at_cylinder(t_shape s, t_point obj_point);
 
 #endif
