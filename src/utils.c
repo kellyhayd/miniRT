@@ -69,3 +69,8 @@ void	ft_error(char *message)
 	ft_putstr_fd(RESET, 2);
 	exit(EXIT_FAILURE);
 }
+
+int	almost_zero(float num)
+{
+	return (num < EPSILON && num > -EPSILON);
+}

@@ -65,7 +65,8 @@ TESTS 			=	tests_tuples \
 					tests_world \
 					tests_camera \
 					tests_shadows \
-					tests_planes
+					tests_planes \
+					tests_cylinder
 
 #----------------------------------------------- Rules
 all: $(NAME)
@@ -102,6 +103,9 @@ fclean: clean
 	@rm -rf test
 	@rm -rf $(TESTS)
 	@rm -rf pit
+
+clear_tests:
+	@rm -rf $(TESTS)
 
 test: all \
 	tests_tuples \
@@ -154,7 +158,7 @@ tests_planes: all
 	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_planes.c $(LIBS) -o $@
 	@$(VALGRIND) ./$@
 
-test_cylinder: all
+tests_cylinder: all
 	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_cylinder.c $(LIBS) -o $@
 	@$(VALGRIND) ./$@
 
