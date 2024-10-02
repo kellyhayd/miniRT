@@ -28,6 +28,9 @@ t_hit	intersection(double t, t_shape s)
 
 void	local_intersect(t_hit **hit_list, t_shape s, t_ray r)
 {
+	t_ray	new_ray;
+
+	new_ray = ray_transform(r, s.inverse);
 	if (s.shape_type == SPHERE)
 		intersect_sphere(hit_list, s, r);
 	else if (s.shape_type == PLANE)
@@ -47,11 +50,7 @@ void	local_intersect(t_hit **hit_list, t_shape s, t_ray r)
  */
 void	intersect(t_hit **hit_list, t_shape s, t_ray r)
 {
-	t_ray	new_ray;
-
-	new_ray = ray_transform(r, s.inverse);
-	local_intersect(hit_list, s, new_ray);
-	// intersect_sphere(hit_list, s, new_ray);
+	local_intersect(hit_list, s, r);
 }
 
 /**

@@ -350,5 +350,6 @@ t_shape		plane(void);
 t_vector	normal_at_sphere(t_shape sphere, t_point obj_point);
 t_vector	normal_at_plane(t_shape plane, t_point obj_point);
 void		intersect_plane(t_hit **hit_list, t_shape s, t_ray r);
+void		local_intersect(t_hit **hit_list, t_shape s, t_ray r);
 
 #endif
