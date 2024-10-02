@@ -295,13 +295,13 @@ int	main(void)
 {
 	void	(*test_funcs[])(int) =
 	{
-		test_a_ray_misses_a_cylinder,
-		test_a_ray_strikes_a_cylinder,
-		test_normal_vector_on_a_cylinder,
-		test_the_default_minimum_and_maximum_for_a_cylinder,
-		test_intersecting_a_constrained_cylinder,
-		test_the_default_closed_value_for_a_cylinder,
-		test_intersecting_the_caps_of_a_closed_cylinder,
+		test_a_ray_misses_a_cylinder,							// 01
+		test_a_ray_strikes_a_cylinder,							// 02
+		test_normal_vector_on_a_cylinder,						// 03
+		test_the_default_minimum_and_maximum_for_a_cylinder,	// 04
+		test_intersecting_a_constrained_cylinder,				// 05
+		test_the_default_closed_value_for_a_cylinder,			// 06
+		test_intersecting_the_caps_of_a_closed_cylinder,		// 07
 	};
 
 	printf("\n%sTESTING CYLINDERS:%s\n", YELLOW, RESET);
