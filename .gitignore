@@ -411,8 +411,8 @@ tests_shadows
 tests_camera
 tests_light
 tests_planes
-test_cylinder
-test_cone
+tests_cylinder
+tests_cone
 
 # Object files
 *.o

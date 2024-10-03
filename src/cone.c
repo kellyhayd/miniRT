@@ -18,14 +18,13 @@ t_shape	cone(void)
 	return (new_cone);
 }
 
-static int		check_cap(t_ray r, double t, double cap_y_pos)
+static int	check_cap(t_ray r, double t, double cap_y_pos)
 {
 	double	x;
 	double	z;
 
 	x = r.origin.x + t * r.direction.x;
 	z = r.origin.z + t * r.direction.z;
-
 	return (pow(x, 2) + pow(z, 2) <= pow(cap_y_pos, 2));
 }
 
@@ -35,11 +34,9 @@ static void	intersect_caps(t_hit **hit_list, t_shape s, t_ray r)
 
 	if (s.cone_shape.closed == false || almost_zero(r.direction.y))
 		return ;
-
 	t = (s.cone_shape.minimum - r.origin.y) / r.direction.y;
 	if (check_cap(r, t, s.cone_shape.minimum))
 		add_intersection(hit_list, intersection(t, s));
-
 	t = (s.cone_shape.maximum - r.origin.y) / r.direction.y;
 	if (check_cap(r, t, s.cone_shape.maximum))
 		add_intersection(hit_list, intersection(t, s));
@@ -51,9 +48,8 @@ void	intersect_cone(t_hit **hit_list, t_shape s, t_ray r)
 	double	b;
 	double	c;
 	double	disc;
-	double	y0;
-	double	y1;
-	t_hit	hit0;
+	double	y[2];
+	t_hit	hits[2];
 
 	intersect_caps(hit_list, s, r);
 
@@ -80,19 +76,19 @@ void	intersect_cone(t_hit **hit_list, t_shape s, t_ray r)
 							//	Pra não fazer o mesmo cálculo de sqrt 2 vezes
 							//	coloquei na mesma variável para não precisar criar mais uma
 
-	hit0 = intersection((-b - disc) / (2.0 * a), s);
-	hit1 = intersection((-b + disc) / (2.0 * a), s);
+	hits[0] = intersection((-b - disc) / (2.0 * a), s);
+	hits[1] = intersection((-b + disc) / (2.0 * a), s);
 
-	if (hit0.t > hit1.t)
-		swap(&hit0.t, &hit1.t);
+	if (hits[0].t > hits[1].t)
+		swap(&hits[0].t, &hits[1].t);
 
-	y0 = r.origin.y + hit0.t * r.direction.y;
-	y1 = r.origin.y + hit1.t * r.direction.y;
+	y[0] = r.origin.y + hits[0].t * r.direction.y;
+	y[1] = r.origin.y + hits[1].t * r.direction.y;
 
-	if (s.cylinder_shape.minimum < y0 && y0 < s.cylinder_shape.maximum)
-		add_intersection(hit_list, hit0);
-	if (s.cylinder_shape.minimum < y1 && y1 < s.cylinder_shape.maximum)
-		add_intersection(hit_list, hit1);
+	if (s.cylinder_shape.minimum < y[0] && y[0] < s.cylinder_shape.maximum)
+		add_intersection(hit_list, hits[0]);
+	if (s.cylinder_shape.minimum < y[1] && y[1] < s.cylinder_shape.maximum)
+		add_intersection(hit_list, hits[1]);
 }
 
 t_vector	normal_at_cone(t_shape s, t_point obj_point)

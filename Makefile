@@ -67,7 +67,7 @@ TESTS 			=	tests_tuples \
 					tests_shadows \
 					tests_planes \
 					tests_cylinder \
-					test_cone
+					tests_cone
 
 #----------------------------------------------- Rules
 all: $(NAME)
@@ -166,7 +166,7 @@ tests_cylinder: all
 	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_cylinder.c $(LIBS) -o $@
 	@$(VALGRIND) ./$@
 
-test_cone: all
+tests_cone: all
 	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_cone.c $(LIBS) -o $@
 	@$(VALGRIND) ./$@
 
