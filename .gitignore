@@ -412,6 +412,7 @@ tests_camera
 tests_light
 tests_planes
 test_cylinder
+test_cone
 
 # Object files
 *.o

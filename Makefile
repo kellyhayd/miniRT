@@ -66,7 +66,8 @@ TESTS 			=	tests_tuples \
 					tests_camera \
 					tests_shadows \
 					tests_planes \
-					tests_cylinder
+					tests_cylinder \
+					test_cone
 
 #----------------------------------------------- Rules
 all: $(NAME)
@@ -116,7 +117,10 @@ test: all \
 	tests_light \
 	tests_world \
 	tests_camera \
-	tests_shadows
+	tests_shadows \
+	tests_planes \
+	tests_cylinder \
+	test_cone
 
 tests_tuples: all
 	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_tuples.c $(LIBS) -o $@
@@ -160,6 +164,10 @@ tests_planes: all
 
 tests_cylinder: all
 	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_cylinder.c $(LIBS) -o $@
+	@$(VALGRIND) ./$@
+
+test_cone: all
+	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_cone.c $(LIBS) -o $@
 	@$(VALGRIND) ./$@
 
 pit: all

@@ -44,6 +44,7 @@ enum e_shapes
 	SPHERE,
 	PLANE,
 	CYLINDER,
+	CONE,
 	// TRIANGLE,
 };
 
@@ -106,6 +107,15 @@ typedef struct s_cylinder
 	int		closed;
 }	t_cylinder;
 
+typedef struct s_cone
+{
+	t_point	origin;
+	double	radius;
+	double	minimum;
+	double	maximum;
+	int		closed;
+}	t_cone;
+
 typedef struct s_material
 {
 	double	ambient;
@@ -122,6 +132,7 @@ struct s_shape
 		t_sphere	sphere_shape;
 		t_plane		plane_shape;
 		t_cylinder	cylinder_shape;
+		t_cone		cone_shape;
 	};
 	t_matrix	transform;
 	t_matrix	inverse;
@@ -361,9 +372,14 @@ t_vector	normal_at_plane(t_shape plane, t_point obj_point);
 void		intersect_plane(t_hit **hit_list, t_shape s, t_ray r);
 void		local_intersect(t_hit **hit_list, t_shape s, t_ray r);
 int			almost_zero(float num);
+void	swap(double *a, double *b);
 
 t_shape		cylinder(void);
 void		intersect_cylinder(t_hit **hit_list, t_shape s, t_ray r);
 t_vector	normal_at_cylinder(t_shape s, t_point obj_point);
+
+t_shape		cone(void);
+void		intersect_cone(t_hit **hit_list, t_shape s, t_ray r);
+t_vector	normal_at_cone(t_shape s, t_point obj_point);
 
 #endif

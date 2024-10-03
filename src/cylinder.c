@@ -18,7 +18,7 @@ t_shape	cylinder(void)
 	return (new_cylinder);
 }
 
-int		check_cap(t_ray r, double t)
+static int		check_cap(t_ray r, double t)
 {
 	double	x;
 	double	z;
@@ -29,7 +29,7 @@ int		check_cap(t_ray r, double t)
 	return (pow(x, 2) + pow(z, 2) <= 1);
 }
 
-void	intersect_caps(t_hit **hit_list, t_shape s, t_ray r)
+static void	intersect_caps(t_hit **hit_list, t_shape s, t_ray r)
 {
 	double	t;
 
@@ -53,7 +53,6 @@ void	intersect_cylinder(t_hit **hit_list, t_shape s, t_ray r)
 	double	disc;
 	double	y0;
 	double	y1;
-	double	tmp;
 	t_hit	hit0;
 	t_hit	hit1;
 
@@ -79,12 +78,7 @@ void	intersect_cylinder(t_hit **hit_list, t_shape s, t_ray r)
 	hit1 = intersection((-b + disc) / (2.0 * a), s);
 
 	if (hit0.t > hit1.t)
-	{
-		// swap(&hit0.t, &hit1.t);
-		tmp = hit0.t;
-		hit0.t = hit1.t;
-		hit1.t = tmp;
-	}
+		swap(&hit0.t, &hit1.t);
 
 	y0 = r.origin.y + hit0.t * r.direction.y;
 	y1 = r.origin.y + hit1.t * r.direction.y;
