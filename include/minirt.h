@@ -44,6 +44,7 @@ enum e_shapes
 	SPHERE,
 	PLANE,
 	CYLINDER,
+	CONE,
 	// TRIANGLE,
 };
 
@@ -97,6 +98,24 @@ typedef struct s_plane
 	t_point	origin;
 }	t_plane;
 
+typedef struct s_cylinder
+{
+	t_point	origin;
+	double	radius;
+	double	minimum;
+	double	maximum;
+	int		closed;
+}	t_cylinder;
+
+typedef struct s_cone
+{
+	t_point	origin;
+	double	radius;
+	double	minimum;
+	double	maximum;
+	int		closed;
+}	t_cone;
+
 typedef struct s_material
 {
 	double	ambient;
@@ -112,7 +131,8 @@ struct s_shape
 	{
 		t_sphere	sphere_shape;
 		t_plane		plane_shape;
-		// t_cylinder	cylinder_shape;
+		t_cylinder	cylinder_shape;
+		t_cone		cone_shape;
 	};
 	t_matrix	transform;
 	t_matrix	inverse;
@@ -281,8 +301,10 @@ t_ray		ray_transform(t_ray ray, t_matrix matrix);
 //                                   shapes                                   //
 // -------------------------------------------------------------------------- //
 
+// spheres
 t_shape		sphere(void);
-void		set_transformation(t_shape *shape, t_matrix tranformation);
+void		intersect_sphere(t_hit **hit_list, t_shape s, t_ray r);
+t_vector	normal_at_sphere(t_shape sphere, t_point obj_point);
 
 // -------------------------------------------------------------------------- //
 //                                intersection                                //
@@ -328,28 +350,54 @@ t_ray		ray_for_pixel(t_camera c, int x, int y);
 
 int			float_compare(double d1, double d2);
 void		ft_error(char *message);
+int			almost_zero(float num);
+void		swap(double *a, double *b);
 
 // NÃO SEI ONDE POR
+// Funções de adicionar coisas a alguma lista, está relacionado ao t_world
 void		add_shape(t_shape **shape_list, t_shape shape);
-void		world_clear(t_world *world_to_clear);
-void		shape_clear_list(t_shape **shape_list);
 void		add_light(t_light **light_list, t_light light_to_add);
+
+// E essas são pra dar free nas listas
+void		shape_clear_list(t_shape **shape_list);
 void		light_clear_list(t_light **light_list);
+void		world_clear(t_world *world_to_clear);
+
+// Não sei categorizar, mas faz parte do world
 t_comps		prepare_computations(t_hit hit, t_ray ray);
 t_color		shade_hit(t_world world, t_comps comps);
 t_color		color_at(t_world w, t_ray r);
+
+// Coisas da camera
 t_matrix	view_transform(t_point from, t_point to, t_vector up);
 t_canvas	render(t_camera c, t_world w);
 t_canvas	create_canvas(int width, int height);
+
+// Coisas da mlx e coisas do canvas
 void		write_pixel_to_canvas(t_canvas *canvas, int x, int y, t_color color);
 t_color		pixel_at(t_canvas canvas, int x, int y);
 t_color		pixel_at(t_canvas canvas, int x, int y);
 mlx_image_t	*canvas_to_image(t_canvas canvas, mlx_t *mlx);
-void		intersect_sphere(t_hit **hit_list, t_shape s, t_ray r);
-t_shape		plane(void);
-t_vector	normal_at_sphere(t_shape sphere, t_point obj_point);
-t_vector	normal_at_plane(t_shape plane, t_point obj_point);
-void		intersect_plane(t_hit **hit_list, t_shape s, t_ray r);
+
+// Parte da refatoração para adequar vários shapes
 void		local_intersect(t_hit **hit_list, t_shape s, t_ray r);
+t_vector	local_normal_at(t_shape s, t_point obj_point);
+void		set_transformation(t_shape *shape, t_matrix tranformation);		// Tirei esse do luga para por num lugar melhor
+
+// NOVOS SHAPES - criação - intersect - normal
+// plane
+t_shape		plane(void);
+void		intersect_plane(t_hit **hit_list, t_shape s, t_ray r);
+t_vector	normal_at_plane(t_shape plane, t_point obj_point);
+
+// cylinder
+t_shape		cylinder(void);
+void		intersect_cylinder(t_hit **hit_list, t_shape s, t_ray r);
+t_vector	normal_at_cylinder(t_shape s, t_point obj_point);
+
+// plane
+t_shape		cone(void);
+void		intersect_cone(t_hit **hit_list, t_shape s, t_ray r);
+t_vector	normal_at_cone(t_shape s, t_point obj_point);
 
 #endif

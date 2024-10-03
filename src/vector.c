@@ -61,6 +61,8 @@ t_vector	normalize(t_vector vector1)
 	double		v_magnitude;
 
 	v_magnitude = magnitude(vector1);
+	if (v_magnitude == 0)
+		return (vector1);
 	new.x = vector1.x / v_magnitude;
 	new.y = vector1.y / v_magnitude;
 	new.z = vector1.z / v_magnitude;

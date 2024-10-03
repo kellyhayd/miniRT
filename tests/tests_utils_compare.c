@@ -17,7 +17,9 @@ int	float_compare_test(void *expected, void *result)
 	double	*expected_double = expected;
 	double	*result_double = result;
 
-	return (float_compare(*expected_double, *result_double));
+	return (float_compare(*expected_double, *result_double)
+		|| (*expected_double == INFINITY && *result_double == INFINITY)
+		|| (*expected_double == -INFINITY && *result_double == -INFINITY));
 }
 
 int	int_compare_test(void *expected, void *result)

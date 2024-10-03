@@ -20,8 +20,12 @@ t_vector	local_normal_at(t_shape s, t_point obj_point)
 		normal = normal_at_sphere(s, obj_point);
 	else if (s.shape_type == PLANE)
 		normal = normal_at_plane(s, obj_point);
-	// else								
-	// 	normal = (t_vector) {0};		// Não sei se precisa disso
+	else if (s.shape_type == CYLINDER)
+		normal = normal_at_cylinder(s, obj_point);
+	else if (s.shape_type == CONE)
+		normal = normal_at_cone(s, obj_point);
+	else
+		normal = (t_vector) {0};		// Não sei se precisa disso
 
 	return (normal);
 }

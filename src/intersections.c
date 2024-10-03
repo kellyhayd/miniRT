@@ -32,9 +32,13 @@ void	local_intersect(t_hit **hit_list, t_shape s, t_ray r)
 
 	new_ray = ray_transform(r, s.inverse);
 	if (s.shape_type == SPHERE)
-		intersect_sphere(hit_list, s, r);
+		intersect_sphere(hit_list, s, new_ray);
 	else if (s.shape_type == PLANE)
-		intersect_plane(hit_list, s, r);
+		intersect_plane(hit_list, s, new_ray);
+	else if (s.shape_type == CYLINDER)
+		intersect_cylinder(hit_list, s, new_ray);
+	else if (s.shape_type == CONE)
+		intersect_cone(hit_list, s, new_ray);
 }
 
 /**

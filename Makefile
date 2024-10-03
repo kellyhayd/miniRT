@@ -65,7 +65,9 @@ TESTS 			=	tests_tuples \
 					tests_world \
 					tests_camera \
 					tests_shadows \
-					tests_planes
+					tests_planes \
+					tests_cylinder \
+					tests_cone
 
 #----------------------------------------------- Rules
 all: $(NAME)
@@ -103,6 +105,9 @@ fclean: clean
 	@rm -rf $(TESTS)
 	@rm -rf pit
 
+clear_tests:
+	@rm -rf $(TESTS)
+
 test: all \
 	tests_tuples \
 	tests_colors \
@@ -112,46 +117,57 @@ test: all \
 	tests_light \
 	tests_world \
 	tests_camera \
-	tests_shadows
+	tests_shadows \
+	tests_planes \
+	tests_cylinder \
+	test_cone
 
-tests_tuples:
+tests_tuples: all
 	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_tuples.c $(LIBS) -o $@
 	@$(VALGRIND) ./$@
 
-tests_colors:
+tests_colors: all
 	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_colors.c $(LIBS) -o $@
 	@$(VALGRIND) ./$@
 
-tests_matrix:
+tests_matrix: all
 	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_matrix.c $(LIBS) -o $@
 	@$(VALGRIND) ./$@
 
-tests_transformation:
+tests_transformation: all
 	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_transformation.c $(LIBS) -o $@
 	@$(VALGRIND) ./$@
 
-tests_ray_intersection:
+tests_ray_intersection: all
 	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_ray_intersection.c $(LIBS) -o $@
 	@$(VALGRIND) ./$@
 
-tests_light:
+tests_light: all
 	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_light.c $(LIBS) -o $@
 	@$(VALGRIND) ./$@
 
-tests_world:
+tests_world: all
 	@$(CC) $(FLAGS) $(HEADERS) $(TEST_FILES) tests/tests_world.c $(LIBS) -o $@
 	@$(VALGRIND) ./$@
 
-tests_camera:
+tests_camera: all
 	@$(CC) $(FLAGS) $(HEADERS) $(TEST_FILES) tests/tests_camera.c $(LIBS) -o $@
 	@$(VALGRIND) ./$@
 
-tests_shadows:
+tests_shadows: all
 	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_shadows.c $(LIBS) -o $@
 	@$(VALGRIND) ./$@
 
-tests_planes:
+tests_planes: all
 	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_planes.c $(LIBS) -o $@
+	@$(VALGRIND) ./$@
+
+tests_cylinder: all
+	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_cylinder.c $(LIBS) -o $@
+	@$(VALGRIND) ./$@
+
+tests_cone: all
+	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_cone.c $(LIBS) -o $@
 	@$(VALGRIND) ./$@
 
 pit: all
