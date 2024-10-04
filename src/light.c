@@ -87,20 +87,29 @@ t_exposure	exposure_init(void)
 t_color	lighting(t_material m, t_light light, t_point position, \
 					t_sight sight)
 {
+	t_color		color_base;
 	t_color		ambient;
 	t_color		diffuse;
 	t_color		specular;
 	t_exposure	e;
 
+	color_base = m.color;
+	if (m.pattern.has_pattern)
+		color_base = stripe_at(m.pattern, position);
+
 	diffuse = color(0, 0, 0);
 	specular = color(0, 0, 0);
+
 	e = exposure_init();
-	e.effective_color = color_hadamard(m.color, light.intensity);
+	e.effective_color = color_hadamard(color_base, light.intensity);
 	e.lightv = normalize(tuple_subtract(light.position, position));
 	ambient = color_multiply(e.effective_color, m.ambient);
+
 	if (sight.in_shadow == true)
 		return (ambient);
+
 	e.light_dot_normal = dot(e.lightv, sight.normal);
+
 	if (e.light_dot_normal >= 0)
 	{
 		diffuse = color_multiply(e.effective_color, \

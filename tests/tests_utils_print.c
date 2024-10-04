@@ -209,9 +209,9 @@ void	print_ko_light(int num_test, void *expected, void *result)
 	);
 }
 
-void	print_ko_material(int num_test, void *expectet, void *result)
+void	print_ko_material(int num_test, void *expected, void *result)
 {
-	t_material	*material_expected = expectet;
+	t_material	*material_expected = expected;
 	t_material	*material_result = result;
 
 	printf(PURPLE "%2d" RESET " - " RED "[ ✗ ] " RESET
@@ -281,5 +281,23 @@ void	print_ko_comps(int num_test, void *expected, void *result)
 		comps_expected->object.sphere_shape.origin.x, comps_expected->object.sphere_shape.origin.y, comps_expected->object.sphere_shape.origin.z, comps_expected->object.sphere_shape.radius,
 		comps_result->t,
 		comps_result->object.sphere_shape.origin.x, comps_result->object.sphere_shape.origin.y, comps_result->object.sphere_shape.origin.z, comps_result->object.sphere_shape.radius
+	);
+}
+
+void	print_ko_pattern(int num_test, void *expected, void *result)
+{
+	t_pattern	*pattern_expected = expected;
+	t_pattern	*pattern_result = result;
+
+	printf(PURPLE "%2d" RESET " - " RED "[ ✗ ] " RESET
+		"Expected: has_pattern (%d) color_a (%.2lf, %.2lf, %.2lf) color_b (%.2lf, %.2lf, %.2lf)\n"
+		"\t\tResult: has_pattern (%d) color_a (%.2lf, %.2lf, %.2lf) color_b (%.2lf, %.2lf, %.2lf)\n",
+		num_test,
+		pattern_expected->has_pattern,
+		pattern_expected->color_a.r, pattern_expected->color_a.g, pattern_expected->color_a.b,
+		pattern_expected->color_b.r, pattern_expected->color_b.g, pattern_expected->color_b.b,
+		pattern_result->has_pattern,
+		pattern_result->color_a.r, pattern_result->color_a.g, pattern_result->color_a.b,
+		pattern_result->color_b.r, pattern_result->color_b.g, pattern_result->color_b.b
 	);
 }

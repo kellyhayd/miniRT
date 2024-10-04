@@ -116,13 +116,21 @@ typedef struct s_cone
 	int		closed;
 }	t_cone;
 
+typedef struct s_pattern
+{
+	int		has_pattern;
+	t_color	color_a;
+	t_color	color_b;
+}	t_pattern;
+
 typedef struct s_material
 {
-	double	ambient;
-	double	diffuse;
-	double	specular;
-	double	shininess;
-	t_color	color;
+	double		ambient;
+	double		diffuse;
+	double		specular;
+	double		shininess;
+	t_color		color;
+	t_pattern	pattern;
 }	t_material;
 
 struct s_shape
@@ -399,5 +407,9 @@ t_vector	normal_at_cylinder(t_shape s, t_point obj_point);
 t_shape		cone(void);
 void		intersect_cone(t_hit **hit_list, t_shape s, t_ray r);
 t_vector	normal_at_cone(t_shape s, t_point obj_point);
+
+// Patterns
+t_pattern 	stripe_pattern(t_color color_a, t_color color_b);
+t_color		stripe_at(t_pattern pattern, t_point pattern_point);
 
 #endif

@@ -67,7 +67,8 @@ TESTS 			=	tests_tuples \
 					tests_shadows \
 					tests_planes \
 					tests_cylinder \
-					tests_cone
+					tests_cone \
+					tests_patterns
 
 #----------------------------------------------- Rules
 all: $(NAME)
@@ -108,19 +109,7 @@ fclean: clean
 clear_tests:
 	@rm -rf $(TESTS)
 
-test: all \
-	tests_tuples \
-	tests_colors \
-	tests_matrix \
-	tests_transformation \
-	tests_ray_intersection \
-	tests_light \
-	tests_world \
-	tests_camera \
-	tests_shadows \
-	tests_planes \
-	tests_cylinder \
-	test_cone
+test: all $(TESTS)
 
 tests_tuples: all
 	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_tuples.c $(LIBS) -o $@
@@ -168,6 +157,10 @@ tests_cylinder: all
 
 tests_cone: all
 	@$(CC) -g3 $(HEADERS) $(TEST_FILES) tests/tests_cone.c $(LIBS) -o $@
+	@$(VALGRIND) ./$@
+
+tests_patterns: all
+	@$(CC) $(FLAGS) $(HEADERS) $(TEST_FILES) tests/tests_patterns.c $(LIBS) -o $@
 	@$(VALGRIND) ./$@
 
 pit: all
