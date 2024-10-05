@@ -35,6 +35,24 @@ t_color	stripe_at(t_pattern pattern, t_point pattern_point)
 		new_color = pattern.color_a;
 	else
 		new_color = pattern.color_b;
-	// printf("%f %f\n", pattern_point.x, fmod(pattern_point.x, 2));
 	return (new_color);
+}
+
+t_color	stripe_at_object(t_pattern pattern, t_shape object, t_point world_point)
+{
+	t_point	object_point;
+	t_point	pattern_point;
+	t_color	color_stripe;
+
+	object_point = mx_multiply_tuple(object.inverse, world_point);
+	pattern_point = mx_multiply_tuple(pattern.inverse, object_point);
+	color_stripe = stripe_at(pattern, pattern_point);
+
+	return (color_stripe);
+}
+
+void	set_pattern_transformation(t_pattern *pattern, t_matrix transformation)
+{
+	pattern->transform = transformation;
+	pattern->inverse = inverse(transformation);
 }

@@ -84,8 +84,7 @@ t_exposure	exposure_init(void)
  * @param sight The sight structure containing the eye vector, normal vector, and shadow information.
  * @return The resulting color after applying the lighting effect.
  */
-t_color	lighting(t_material m, t_light light, t_point position, \
-					t_sight sight)
+t_color	lighting(t_shape object, t_light light, t_point position, t_sight sight)
 {
 	t_color		color_base;
 	t_color		ambient;
@@ -93,9 +92,9 @@ t_color	lighting(t_material m, t_light light, t_point position, \
 	t_color		specular;
 	t_exposure	e;
 
-	color_base = m.color;
-	if (m.pattern.has_pattern)
-		color_base = stripe_at(m.pattern, position);
+	color_base = object.material.color;
+	if (object.material.pattern.has_pattern)
+		color_base = stripe_at_object(object.material.pattern, object, position);
 
 	diffuse = color(0, 0, 0);
 	specular = color(0, 0, 0);
@@ -103,7 +102,7 @@ t_color	lighting(t_material m, t_light light, t_point position, \
 	e = exposure_init();
 	e.effective_color = color_hadamard(color_base, light.intensity);
 	e.lightv = normalize(tuple_subtract(light.position, position));
-	ambient = color_multiply(e.effective_color, m.ambient);
+	ambient = color_multiply(e.effective_color, object.material.ambient);
 
 	if (sight.in_shadow == true)
 		return (ambient);
@@ -112,14 +111,13 @@ t_color	lighting(t_material m, t_light light, t_point position, \
 
 	if (e.light_dot_normal >= 0)
 	{
-		diffuse = color_multiply(e.effective_color, \
-									m.diffuse * e.light_dot_normal);
+		diffuse = color_multiply(e.effective_color, object.material.diffuse * e.light_dot_normal);
 		e.reflectv = reflect(tuple_negate(e.lightv), sight.normal);
 		e.reflect_dot_eye = dot(e.reflectv, sight.eye);
 		if (e.reflect_dot_eye > 0)
 		{
-			e.factor = pow(e.reflect_dot_eye, m.shininess);
-			specular = color_multiply(light.intensity, e.factor * m.specular);
+			e.factor = pow(e.reflect_dot_eye, object.material.shininess);
+			specular = color_multiply(light.intensity, e.factor * object.material.specular);
 		}
 	}
 	return (color_add(color_add(ambient, diffuse), specular));

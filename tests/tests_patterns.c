@@ -86,6 +86,7 @@ void	test_the_stripe_pattern_alternates_in_x(int num_test)
 	print_result(num_test, &expected[5], &result[5], color_compare_test, print_ko_color);
 }
 
+// TEST 05
 void	test_lighting_with_a_pattern_applied(int num_test)
 {
 	// ARRANGE
@@ -120,6 +121,71 @@ void	test_lighting_with_a_pattern_applied(int num_test)
 	print_result(num_test, &color_expected[1], &color_result[1], color_compare_test, print_ko_color);
 }
 
+// TEST 06
+void	test_stripes_with_an_object_transformation(int num_test)
+{
+	// ARRANGE
+	t_color		black = color(0, 0, 0);
+	t_color		white = color(1, 1, 1);
+
+	t_shape		sphere1 = sphere();
+	set_transformation(&sphere1, scaling(2, 2, 2));
+
+	t_pattern	pattern = stripe_pattern(white, black);
+	t_color		result;
+	t_color		expected = white;
+
+	// ACT
+	result = stripe_at_object(pattern, sphere1, point(1.5, 0, 0));
+
+	// ASSERT
+	print_result(num_test, &expected, &result, color_compare_test, print_ko_color);
+}
+
+// TEST 07
+void	test_stripes_with_a_pattern_transformation(int num_test)
+{
+	// ARRANGE
+	t_color		black = color(0, 0, 0);
+	t_color		white = color(1, 1, 1);
+
+	t_shape		sphere1 = sphere();
+	t_pattern	pattern = stripe_pattern(white, black);
+	set_pattern_transformation(&pattern, scaling(2, 2, 2));
+
+	t_color		result;
+	t_color		expected = white;
+
+	// ACT
+	result = stripe_at_object(pattern, sphere1, point(1.5, 0, 0));
+
+	// ASSERT
+	print_result(num_test, &expected, &result, color_compare_test, print_ko_color);
+}
+
+// TEST 08
+void	test_stripes_with_both_an_object_and_a_pattern_transformation(int num_test)
+{
+	// ARRANGE
+	t_color		black = color(0, 0, 0);
+	t_color		white = color(1, 1, 1);
+
+	t_shape		sphere1 = sphere();
+	set_transformation(&sphere1, scaling(2, 2, 2));
+
+	t_pattern	pattern = stripe_pattern(white, black);
+	set_pattern_transformation(&pattern, translation(0.5, 0, 0));
+
+	t_color		result;
+	t_color		expected = white;
+
+	// ACT
+	result = stripe_at_object(pattern, sphere1, point(2.5, 0, 0));
+
+	// ASSERT
+	print_result(num_test, &expected, &result, color_compare_test, print_ko_color);
+}
+
 int main(void)
 {
 	void	(*test_funcs[])(int) =
@@ -129,6 +195,9 @@ int main(void)
 		test_the_stripe_pattern_is_constant_in_z,
 		test_the_stripe_pattern_alternates_in_x,
 		test_lighting_with_a_pattern_applied,
+		test_stripes_with_an_object_transformation,
+		test_stripes_with_a_pattern_transformation,
+		test_stripes_with_both_an_object_and_a_pattern_transformation,
 	};
 
 	printf("\n%sTESTING PATTERNS:%s\n", YELLOW, RESET);

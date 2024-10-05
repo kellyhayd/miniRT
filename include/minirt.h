@@ -118,9 +118,11 @@ typedef struct s_cone
 
 typedef struct s_pattern
 {
-	int		has_pattern;
-	t_color	color_a;
-	t_color	color_b;
+	int			has_pattern;
+	t_color		color_a;
+	t_color		color_b;
+	t_matrix	transform;
+	t_matrix	inverse;
 }	t_pattern;
 
 typedef struct s_material
@@ -332,7 +334,7 @@ t_vector	normal_at(t_shape shape, t_point world_point);
 t_vector	reflect(t_vector in, t_vector normal);
 t_light		point_light(t_point position, t_color intensity);
 t_material	material(void);
-t_color		lighting(t_material m, t_light light, t_point position, t_sight sight);
+t_color		lighting(t_shape object, t_light light, t_point position, t_sight sight);
 
 // -------------------------------------------------------------------------- //
 //                                  shadow                                    //
@@ -411,5 +413,7 @@ t_vector	normal_at_cone(t_shape s, t_point obj_point);
 // Patterns
 t_pattern 	stripe_pattern(t_color color_a, t_color color_b);
 t_color		stripe_at(t_pattern pattern, t_point pattern_point);
+void		set_pattern_transformation(t_pattern *pattern, t_matrix transformation);
+t_color		stripe_at_object(t_pattern pattern, t_shape object, t_point world_point);
 
 #endif

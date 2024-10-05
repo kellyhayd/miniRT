@@ -94,7 +94,7 @@ t_color	shade_hit(t_world world, t_comps comps)
 		color_shaded = color_add(
 			color_shaded,
 			lighting(
-				comps.object.material,
+				comps.object,
 				*aux,
 				comps.point,
 				comps.sight
