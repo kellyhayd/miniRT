@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cylinder.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/05 08:50:59 by krocha-h          #+#    #+#             */
+/*   Updated: 2024/10/05 08:51:35 by krocha-h         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 t_shape	cylinder(void)
@@ -18,7 +30,7 @@ t_shape	cylinder(void)
 	return (new_cylinder);
 }
 
-static int		check_cap(t_ray r, double t)
+static int	check_cap(t_ray r, double t)
 {
 	double	x;
 	double	z;
@@ -52,32 +64,23 @@ void	intersect_cylinder(t_hit **hit_list, t_shape s, t_ray r)
 	t_hit	hits[2];
 
 	intersect_caps(hit_list, s, r);
-
 	a = pow(r.direction.x, 2) + pow(r.direction.z, 2);
-
 	if (almost_zero(a))
 		return ;
-
 	b = (2 * r.origin.x * r.direction.x) + (2 * r.origin.z * r.direction.z);
 	c = pow(r.origin.x, 2) + pow(r.origin.z, 2) - 1.0;
 	disc = pow(b, 2) - 4.0 * a * c;
-
 	if (disc < 0)
 		return ;
-
 	disc = sqrt(disc);		// Otimização:
 							//	Pra não fazer o mesmo cálculo de sqrt 2 vezes
 							//	coloquei na mesma variável para não precisar criar mais uma
-
 	hits[0] = intersection((-b - disc) / (2.0 * a), s);
 	hits[1] = intersection((-b + disc) / (2.0 * a), s);
-
 	if (hits[0].t > hits[1].t)
 		swap(&hits[0].t, &hits[1].t);
-
 	y[0] = r.origin.y + hits[0].t * r.direction.y;
 	y[1] = r.origin.y + hits[1].t * r.direction.y;
-
 	if (s.cylinder_shape.minimum < y[0] && y[0] < s.cylinder_shape.maximum)
 		add_intersection(hit_list, hits[0]);
 	if (s.cylinder_shape.minimum < y[1] && y[1] < s.cylinder_shape.maximum)

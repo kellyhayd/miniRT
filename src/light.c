@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:08:09 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/29 18:26:50 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/05 08:54:05 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 /**
  * @brief Creates a point light source.
  *
- * This function initializes a point light source with a given position and intensity.
+ * This function initializes a point light source with
+ * a given position and intensity.
  *
  * @param position The position of the point light in the scene.
- * @param intensity The intensity (color) of the light emitted by the point light.
+ * @param intensity The intensity (color) of the light emitted by the
+ * point light.
  * @return A t_light structure representing the point light source.
  */
 t_light	point_light(t_point position, t_color intensity)
@@ -60,7 +62,7 @@ void	light_clear_list(t_light **light_list)
 
 t_exposure	exposure_init(void)
 {
-	t_exposure e;
+	t_exposure	e;
 
 	e.effective_color = color(0, 0, 0);
 	e.lightv = vector(0, 0, 0);
@@ -74,14 +76,15 @@ t_exposure	exposure_init(void)
 /**
  * @brief Calculates the lighting effect on a material at a given position.
  *
- * This function computes the color resulting from the lighting effect on a material
- * based on the light source, the position of the point being shaded, the eye vector,
- * and the normal vector at that point.
+ * This function computes the color resulting from the lighting effect on a
+ * material based on the light source, the position of the point being shaded,
+ * the eye vector, and the normal vector at that point.
  *
  * @param m The material properties of the object.
  * @param light The light source affecting the material.
  * @param position The position of the point being shaded.
- * @param sight The sight structure containing the eye vector, normal vector, and shadow information.
+ * @param sight The sight structure containing the eye vector, normal vector,
+ * and shadow information.
  * @return The resulting color after applying the lighting effect.
  */
 t_color	lighting(t_material m, t_light light, t_point position, \
