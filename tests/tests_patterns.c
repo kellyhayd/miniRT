@@ -292,6 +292,32 @@ void	test_gradient_with_smooth_transition_with_negative_values(int num_test)
 		print_result(num_test, &expected[i], &result[i], color_compare_test, print_ko_color);
 }
 
+void	test_a_ring_should_extend_in_both_x_and_z(int num_test)
+{
+	// ASSERT
+	t_color		white = color(1, 1, 1);
+	t_color		black = color(0, 0, 0);
+	t_shape		sphere1 = sphere();
+	t_pattern	pattern = ring_pattern(white, black);
+	t_color		result[4];
+	t_color		expected[4] = {
+		white,
+		black,
+		black,
+		black
+	};
+
+	// ACT
+	result[0] = pattern_at_shape(pattern, sphere1, point(0, 0, 0));
+	result[1] = pattern_at_shape(pattern, sphere1, point(1, 0, 0));
+	result[2] = pattern_at_shape(pattern, sphere1, point(0, 0, 1));
+	result[3] = pattern_at_shape(pattern, sphere1, point(0.708, 0, 0.708));
+
+	// ASSERT
+	for (int i = 0; i < 4; i++)
+		print_result(num_test, &expected[i], &result[i], color_compare_test, print_ko_color);
+}
+
 int main(void)
 {
 	void	(*test_funcs[])(int) =
@@ -306,7 +332,8 @@ int main(void)
 		test_stripes_with_both_an_object_and_a_pattern_transformation,
 		test_a_gradient_linearly_interpolates_between_colors,
 		test_gradient_with_smooth_transition_with_positive_values,
-		test_gradient_with_smooth_transition_with_negative_values
+		test_gradient_with_smooth_transition_with_negative_values,
+		test_a_ring_should_extend_in_both_x_and_z
 	};
 
 	printf("\n%sTESTING PATTERNS:%s\n", YELLOW, RESET);

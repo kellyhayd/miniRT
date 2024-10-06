@@ -7,7 +7,7 @@ t_canvas	render_image(void)
 {
 	// WALLS
 	t_shape	floor = plane();
-	floor.material.pattern = gradient_pattern(color(1, 1, 0), color(0, 1, 1));
+	floor.material.pattern = ring_pattern(color(1, 1, 0), color(0, 1, 1));
 	set_pattern_transformation(&floor.material.pattern, mx_multiply(scaling(2, 2, 2), rotation_y(30 * M_PI / 180)));
 	floor.material.color = color(0.3, 0.3, 0.3);
 
@@ -16,7 +16,9 @@ t_canvas	render_image(void)
 	middle.material.color = color(0.1, 1, 0.5);
 	middle.material.diffuse = 0.7;
 	middle.material.specular = 0.3;
-	middle.material.pattern = gradient_pattern(color(1, 1, 0), color(1, 0, 0));
+	middle.material.pattern = ring_pattern(color(1, 1, 0), color(1, 0, 0));
+	// set_transformation(&middle, translation(0, 1, 1));
+	// set_pattern_transformation(&middle.material.pattern, scaling(0.2, 0.2, 0.2));
 
 	t_shape	spheres[5] = {
 		middle,
@@ -26,10 +28,12 @@ t_canvas	render_image(void)
 		middle
 	};
 
+	double	factor = 0.05;
 	for (int i = 0; i < 5; i++)
 	{
+		// set_transformation(&spheres[i], mx_multiply(translation(-2 + i, 1, 0), scaling(0.5, 0.5, 0.5)));
 		set_transformation(&spheres[i], mx_multiply(translation(-2 + i, 1, 0), scaling(0.5, 0.5, 0.5)));
-		set_pattern_transformation(&spheres[i].material.pattern, mx_multiply(translation(abs(i) * 0.1, 0, 0), scaling(1.5, 1.5, 1.5)));
+		set_pattern_transformation(&spheres[i].material.pattern, mx_multiply(scaling(factor + factor * i, factor + factor * i, factor + factor * i), rotation_x(-60 * M_PI / 180)));
 	}
 
 	// LIGHTS
@@ -47,6 +51,8 @@ t_canvas	render_image(void)
 	t_world	world_to_render = world();
 
 	add_shape(&world_to_render.shape, floor);
+
+	// add_shape(&world_to_render.shape, middle);
 
 	for (int i = 0; i < 5; i++)
 		add_shape(&world_to_render.shape, spheres[i]);
