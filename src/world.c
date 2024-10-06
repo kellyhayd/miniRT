@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 08:14:46 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/29 18:19:15 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/05 08:44:06 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,8 @@ t_comps	prepare_computations(t_hit hit, t_ray ray)
 		comps.sight.normal = tuple_negate(comps.sight.normal);
 	}
 	comps.over_point = tuple_add(comps.point,
-		tuple_multiply(comps.sight.normal, EPSILON)
-	);
+			tuple_multiply(comps.sight.normal, EPSILON)
+			);
 	return (comps);
 }
 
@@ -146,8 +146,8 @@ t_matrix	view_transform(t_point from, t_point to, t_vector up)
 	mx_set(&orientation, 2, 1, -forward.y);
 	mx_set(&orientation, 2, 2, -forward.z);
 	view_matrix = mx_multiply(
-		orientation,
-		translation(-from.x, -from.y, -from.z)
-	);
+			orientation,
+			translation(-from.x, -from.y, -from.z)
+			);
 	return (view_matrix);
 }

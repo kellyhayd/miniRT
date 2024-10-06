@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 07:33:10 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/01 15:01:59 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/10/05 08:41:59 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 t_camera camera(double hsize, double vsize, double field_of_view)
 {
-	t_camera c;
-	double	half_view;
-	double	aspect;
+	t_camera	c;
+	double		half_view;
+	double		aspect;
 
 	c.hsize = hsize;
 	c.vsize = vsize;
@@ -57,7 +57,7 @@ t_ray	ray_for_pixel(t_camera c, int x, int y)
 // void	print_rendering_progress(int hsize, int vsize, int x, int y)
 // {
 // 	double	progress;
-// 
+//
 // 	progress = (double)(y * hsize + x) / (double)(hsize * vsize) * 100;
 // 	printf("\r[");
 // 	for (int i = 0; i < 50; i++)

@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 18:18:33 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/26 22:17:04 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/05 08:47:55 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ static int	convert(double color_value)
  */
 int	color_to_int(t_color color)
 {
-	int color_int;
+	int	color_int;
 
 	color_int = convert(color.r) << 24
-				| convert(color.g) << 16
-				| convert(color.b) << 8
-				| 0xFF;
+		| convert(color.g) << 16
+		| convert(color.b) << 8
+		| 0xFF;
 	return (color_int);
 }
 

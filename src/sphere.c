@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 22:28:43 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/26 14:57:29 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/05 08:46:17 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,18 +59,18 @@ void	intersect_sphere(t_hit **hit_list, t_shape s, t_ray r)
 	coefficient[1] = 2 * dot(r.direction, sphere_to_ray);
 	coefficient[2] = dot(sphere_to_ray, sphere_to_ray) - 1;
 	discriminant = pow(coefficient[1], 2)
-						- 4 * coefficient[0]
-						* coefficient[2];
+		- 4 * coefficient[0]
+		* coefficient[2];
 	if (discriminant < 0)
 		return ;
 	two_times_a = 2 * coefficient[0];
 	square_root = sqrt(discriminant);
 	add_intersection(hit_list,
-		intersection((-coefficient[1] - square_root) / (two_times_a),s)
-	);
+		intersection((-coefficient[1] - square_root) / (two_times_a), s)
+		);
 	add_intersection(hit_list,
 		intersection((-coefficient[1] + square_root) / (two_times_a), s)
-	);
+		);
 }
 
 t_vector	normal_at_sphere(t_shape sphere, t_point obj_point)
