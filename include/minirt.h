@@ -48,6 +48,11 @@ enum e_shapes
 	// TRIANGLE,
 };
 
+enum e_patterns
+{
+	STRIPE,
+};
+
 typedef struct s_tuple	t_tuple;
 typedef struct s_tuple	t_point;
 typedef struct s_tuple	t_vector;
@@ -58,6 +63,7 @@ typedef struct s_shape	t_shape;
 typedef struct s_light	t_light;
 
 typedef enum e_shapes t_shapes;
+typedef enum e_patterns t_patterns;
 
 struct s_tuple
 {
@@ -118,6 +124,7 @@ typedef struct s_cone
 
 typedef struct s_pattern
 {
+	t_patterns	pattern_type;
 	int			has_pattern;
 	t_color		color_a;
 	t_color		color_b;
@@ -410,10 +417,12 @@ t_shape		cone(void);
 void		intersect_cone(t_hit **hit_list, t_shape s, t_ray r);
 t_vector	normal_at_cone(t_shape s, t_point obj_point);
 
-// Patterns
+// patterns
+void		set_pattern_transformation(t_pattern *pattern, t_matrix transformation);
+t_color		pattern_at_shape(t_pattern pattern, t_shape object, t_point world_point);
+
+// stripe
 t_pattern 	stripe_pattern(t_color color_a, t_color color_b);
 t_color		stripe_at(t_pattern pattern, t_point pattern_point);
-void		set_pattern_transformation(t_pattern *pattern, t_matrix transformation);
-t_color		stripe_at_object(t_pattern pattern, t_shape object, t_point world_point);
 
 #endif

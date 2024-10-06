@@ -25,11 +25,11 @@ RESET	= \033[0m
 
 #----------------------------------------------- Compilation
 CC		:= cc
-# FLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast -g3
+
 ifeq ($(PROF), 1)
 	FLAGS	:= -pg
 else
-	FLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast -g3
+	FLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -O2 -g3
 endif
 
 VALGRIND	:= valgrind -q --leak-check=full --show-leak-kinds=all --track-origins=yes
@@ -87,6 +87,7 @@ $(BUILD):
 
 $(BUILD)/%.o: $(SRC_PATH)/%.c include/minirt.h
 	@echo "$(CYAN)Compiling $(GREEN)$(notdir $<)$(RESET)"
+	@mkdir -p $(dir $@)
 	@$(CC) $(FLAGS) $(HEADERS) -c $< -o $@
 
 $(NAME): $(LIBFT) $(LIBMLX) $(BUILD) $(OBJ)
@@ -169,8 +170,9 @@ pit: all
 #	@$(CC) $(FLAGS) $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/silhouette.c $(LIBS) -o pit
 #	@$(CC) $(FLAGS) $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/sphere.c $(LIBS) -o pit
 #	@$(CC) $(FLAGS) $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/many_spheres.c $(LIBS) -o pit
-	@$(CC) $(FLAGS) $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/planes.c $(LIBS) -o pit
-	@./pit
+#	@$(CC) $(FLAGS) $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/planes.c $(LIBS) -o pit
+	@$(CC) $(FLAGS) $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/patterns.c $(LIBS) -o pit
+#	@./pit
 
 ifeq ($(PROF), 1)
 	@gprof pit gmon.out > prof

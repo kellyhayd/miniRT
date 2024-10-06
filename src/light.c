@@ -94,7 +94,7 @@ t_color	lighting(t_shape object, t_light light, t_point position, t_sight sight)
 
 	color_base = object.material.color;
 	if (object.material.pattern.has_pattern)
-		color_base = stripe_at_object(object.material.pattern, object, position);
+		color_base = pattern_at_shape(object.material.pattern, object, position);
 
 	diffuse = color(0, 0, 0);
 	specular = color(0, 0, 0);

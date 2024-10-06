@@ -99,6 +99,9 @@ void	test_lighting_with_a_pattern_applied(int num_test)
 	m.diffuse = 0;
 	m.specular = 0;
 
+	t_shape	sphere1 = sphere();
+	sphere1.material = m;
+
 	t_sight	sight = {
 		.eye = vector(0, 0, -1),
 		.normal = vector(0, 0, -1),
@@ -113,8 +116,8 @@ void	test_lighting_with_a_pattern_applied(int num_test)
 	t_color	color_expected[2] = {color1, color2};
 
 	// ACT
-	color_result[0] = lighting(m, light, point1, sight);
-	color_result[1] = lighting(m, light, point2, sight);
+	color_result[0] = lighting(sphere1, light, point1, sight);
+	color_result[1] = lighting(sphere1, light, point2, sight);
 
 	// ASSERT
 	print_result(num_test, &color_expected[0], &color_result[0], color_compare_test, print_ko_color);
@@ -136,7 +139,7 @@ void	test_stripes_with_an_object_transformation(int num_test)
 	t_color		expected = white;
 
 	// ACT
-	result = stripe_at_object(pattern, sphere1, point(1.5, 0, 0));
+	result = pattern_at_shape(pattern, sphere1, point(1.5, 0, 0));
 
 	// ASSERT
 	print_result(num_test, &expected, &result, color_compare_test, print_ko_color);
@@ -157,7 +160,7 @@ void	test_stripes_with_a_pattern_transformation(int num_test)
 	t_color		expected = white;
 
 	// ACT
-	result = stripe_at_object(pattern, sphere1, point(1.5, 0, 0));
+	result = pattern_at_shape(pattern, sphere1, point(1.5, 0, 0));
 
 	// ASSERT
 	print_result(num_test, &expected, &result, color_compare_test, print_ko_color);
@@ -180,7 +183,7 @@ void	test_stripes_with_both_an_object_and_a_pattern_transformation(int num_test)
 	t_color		expected = white;
 
 	// ACT
-	result = stripe_at_object(pattern, sphere1, point(2.5, 0, 0));
+	result = pattern_at_shape(pattern, sphere1, point(2.5, 0, 0));
 
 	// ASSERT
 	print_result(num_test, &expected, &result, color_compare_test, print_ko_color);
