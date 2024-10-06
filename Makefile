@@ -172,7 +172,7 @@ pit: all
 #	@$(CC) $(FLAGS) $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/many_spheres.c $(LIBS) -o pit
 #	@$(CC) $(FLAGS) $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/planes.c $(LIBS) -o pit
 	@$(CC) $(FLAGS) $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/patterns.c $(LIBS) -o pit
-#	@./pit
+	@./pit
 
 ifeq ($(PROF), 1)
 	@gprof pit gmon.out > prof
