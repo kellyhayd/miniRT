@@ -17,6 +17,8 @@ t_color	pattern_at_shape(t_pattern pattern, t_shape object, t_point world_point)
 
 	if (pattern.pattern_type == STRIPE)
 		color_pattern = stripe_at(pattern, pattern_point);
+	else if (pattern.pattern_type == GRADIENT)
+		color_pattern = gradient_at(pattern, pattern_point);
 	else
 		color_pattern = pattern.color_a;
 

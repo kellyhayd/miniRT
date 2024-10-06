@@ -51,6 +51,7 @@ enum e_shapes
 enum e_patterns
 {
 	STRIPE,
+	GRADIENT,
 };
 
 typedef struct s_tuple	t_tuple;
@@ -424,5 +425,9 @@ t_color		pattern_at_shape(t_pattern pattern, t_shape object, t_point world_point
 // stripe
 t_pattern 	stripe_pattern(t_color color_a, t_color color_b);
 t_color		stripe_at(t_pattern pattern, t_point pattern_point);
+
+// gradient
+t_pattern	gradient_pattern(t_color color_a, t_color color_b);
+t_color		gradient_at(t_pattern pattern, t_point pattern_point);
 
 #endif
