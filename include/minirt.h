@@ -53,6 +53,7 @@ enum e_patterns
 	STRIPE,
 	GRADIENT,
 	RING,
+	CHECKERS,
 };
 
 typedef struct s_tuple	t_tuple;
@@ -434,5 +435,9 @@ t_color		gradient_at(t_pattern pattern, t_point pattern_point);
 // ring
 t_pattern	ring_pattern(t_color color_a, t_color color_b);
 t_color		ring_at(t_pattern pattern, t_point point);
+
+// Checkers
+t_pattern	checkers_pattern(t_color color_a, t_color color_b);
+t_color		checkers_at(t_pattern pattern, t_point pattern_point);
 
 #endif

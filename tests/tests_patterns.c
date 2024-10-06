@@ -292,6 +292,7 @@ void	test_gradient_with_smooth_transition_with_negative_values(int num_test)
 		print_result(num_test, &expected[i], &result[i], color_compare_test, print_ko_color);
 }
 
+// TEST 12
 void	test_a_ring_should_extend_in_both_x_and_z(int num_test)
 {
 	// ASSERT
@@ -318,22 +319,99 @@ void	test_a_ring_should_extend_in_both_x_and_z(int num_test)
 		print_result(num_test, &expected[i], &result[i], color_compare_test, print_ko_color);
 }
 
+// TEST 13
+void	test_checkers_should_repeat_in_x(int num_test)
+{
+	// ASSERT
+	t_color		white = color(1, 1, 1);
+	t_color		black = color(0, 0, 0);
+	t_shape		sphere1 = sphere();
+	t_pattern	pattern = checkers_pattern(white, black);
+	t_color		result[3];
+	t_color		expected[3] = {
+		white,
+		white,
+		black
+	};
+
+	// ACT
+	result[0] = pattern_at_shape(pattern, sphere1, point(0, 0, 0));
+	result[1] = pattern_at_shape(pattern, sphere1, point(0.99, 0, 0));
+	result[2] = pattern_at_shape(pattern, sphere1, point(1.01, 0, 0));
+
+	// ASSERT
+	for (int i = 0; i < 3; i++)
+		print_result(num_test, &expected[i], &result[i], color_compare_test, print_ko_color);
+}
+
+// TEST 14
+void	test_checkers_should_repeat_in_y(int num_test)
+{
+	// ASSERT
+	t_color		white = color(1, 1, 1);
+	t_color		black = color(0, 0, 0);
+	t_shape		sphere1 = sphere();
+	t_pattern	pattern = checkers_pattern(white, black);
+	t_color		result[3];
+	t_color		expected[3] = {
+		white,
+		white,
+		black
+	};
+
+	// ACT
+	result[0] = pattern_at_shape(pattern, sphere1, point(0, 0, 0));
+	result[1] = pattern_at_shape(pattern, sphere1, point(0, 0.99, 0));
+	result[2] = pattern_at_shape(pattern, sphere1, point(0, 1.01, 0));
+
+	// ASSERT
+	for (int i = 0; i < 3; i++)
+		print_result(num_test, &expected[i], &result[i], color_compare_test, print_ko_color);
+}
+
+void	int_checkers_should_repeat_in_z(int num_test)
+{
+	// ASSERT
+	t_color		white = color(1, 1, 1);
+	t_color		black = color(0, 0, 0);
+	t_shape		sphere1 = sphere();
+	t_pattern	pattern = checkers_pattern(white, black);
+	t_color		result[3];
+	t_color		expected[3] = {
+		white,
+		white,
+		black
+	};
+
+	// ACT
+	result[0] = pattern_at_shape(pattern, sphere1, point(0, 0, 0));
+	result[1] = pattern_at_shape(pattern, sphere1, point(0, 0, 0.99));
+	result[2] = pattern_at_shape(pattern, sphere1, point(0, 0, 1.01));
+
+	// ASSERT
+	for (int i = 0; i < 3; i++)
+		print_result(num_test, &expected[i], &result[i], color_compare_test, print_ko_color);
+}
+
 int main(void)
 {
 	void	(*test_funcs[])(int) =
 	{
-		test_creating_a_stripe_pattern,
-		test_the_stripe_pattern_is_constant_in_y,
-		test_the_stripe_pattern_is_constant_in_z,
-		test_the_stripe_pattern_alternates_in_x,
-		test_lighting_with_a_pattern_applied,
-		test_stripes_with_an_object_transformation,
-		test_stripes_with_a_pattern_transformation,
-		test_stripes_with_both_an_object_and_a_pattern_transformation,
-		test_a_gradient_linearly_interpolates_between_colors,
-		test_gradient_with_smooth_transition_with_positive_values,
-		test_gradient_with_smooth_transition_with_negative_values,
-		test_a_ring_should_extend_in_both_x_and_z
+		test_creating_a_stripe_pattern,									// 01
+		test_the_stripe_pattern_is_constant_in_y,						// 02
+		test_the_stripe_pattern_is_constant_in_z,						// 03
+		test_the_stripe_pattern_alternates_in_x,						// 04
+		test_lighting_with_a_pattern_applied,							// 05
+		test_stripes_with_an_object_transformation,						// 06
+		test_stripes_with_a_pattern_transformation,						// 07
+		test_stripes_with_both_an_object_and_a_pattern_transformation,	// 08
+		test_a_gradient_linearly_interpolates_between_colors,			// 09
+		test_gradient_with_smooth_transition_with_positive_values,		// 10
+		test_gradient_with_smooth_transition_with_negative_values,		// 11
+		test_a_ring_should_extend_in_both_x_and_z,						// 12
+		test_checkers_should_repeat_in_x,								// 13
+		test_checkers_should_repeat_in_y,								// 14
+		int_checkers_should_repeat_in_z,								// 15
 	};
 
 	printf("\n%sTESTING PATTERNS:%s\n", YELLOW, RESET);

@@ -33,11 +33,21 @@ t_canvas	render_image(void)
 	{
 		// set_transformation(&spheres[i], mx_multiply(translation(-2 + i, 1, 0), scaling(0.5, 0.5, 0.5)));
 		set_transformation(&spheres[i], mx_multiply(translation(-2 + i, 1, 0), scaling(0.5, 0.5, 0.5)));
-		set_pattern_transformation(&spheres[i].material.pattern, mx_multiply(scaling(factor + factor * i, factor + factor * i, factor + factor * i), rotation_x(-60 * M_PI / 180)));
+		set_pattern_transformation(
+			&spheres[i].material.pattern,
+			mx_multiply(
+				scaling(factor + factor * i, factor + factor * i, factor + factor * i),
+				rotation_x(-60 * M_PI / 180)
+			)
+		);
 	}
 
+	set_transformation(&middle, translation(0, 3, 1));
+	middle.material.pattern = checkers_pattern(color(1, 1, 1), color(0, 0, 0));
+	set_pattern_transformation(&middle.material.pattern, scaling(0.5, 0.5, 0.5));
+
 	// LIGHTS
-	t_light	light1 = point_light(point(-10, 10, -10), color(1, 1, 1));
+	t_light	light1 = point_light(point(0, 10, -10), color(1, 1, 1));
 
 	// CAMERA
 	t_camera	camera_view = camera(WIDTH, HEIGHT, M_PI / 3);
@@ -52,7 +62,7 @@ t_canvas	render_image(void)
 
 	add_shape(&world_to_render.shape, floor);
 
-	// add_shape(&world_to_render.shape, middle);
+	add_shape(&world_to_render.shape, middle);
 
 	for (int i = 0; i < 5; i++)
 		add_shape(&world_to_render.shape, spheres[i]);

@@ -21,6 +21,8 @@ t_color	pattern_at_shape(t_pattern pattern, t_shape object, t_point world_point)
 		color_pattern = gradient_at(pattern, pattern_point);
 	else if (pattern.pattern_type == RING)
 		color_pattern = ring_at(pattern, pattern_point);
+	else if (pattern.pattern_type == CHECKERS)
+		color_pattern = checkers_at(pattern, pattern_point);
 	else
 		color_pattern = pattern.color_a;
 
