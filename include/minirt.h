@@ -48,6 +48,14 @@ enum e_shapes
 	// TRIANGLE,
 };
 
+enum e_patterns
+{
+	STRIPE,
+	GRADIENT,
+	RING,
+	CHECKERS,
+};
+
 typedef struct s_tuple	t_tuple;
 typedef struct s_tuple	t_point;
 typedef struct s_tuple	t_vector;
@@ -58,6 +66,7 @@ typedef struct s_shape	t_shape;
 typedef struct s_light	t_light;
 
 typedef enum e_shapes t_shapes;
+typedef enum e_patterns t_patterns;
 
 struct s_tuple
 {
@@ -116,13 +125,24 @@ typedef struct s_cone
 	int		closed;
 }	t_cone;
 
+typedef struct s_pattern
+{
+	t_patterns	pattern_type;
+	int			has_pattern;
+	t_color		color_a;
+	t_color		color_b;
+	t_matrix	transform;
+	t_matrix	inverse;
+}	t_pattern;
+
 typedef struct s_material
 {
-	double	ambient;
-	double	diffuse;
-	double	specular;
-	double	shininess;
-	t_color	color;
+	double		ambient;
+	double		diffuse;
+	double		specular;
+	double		shininess;
+	t_color		color;
+	t_pattern	pattern;
 }	t_material;
 
 struct s_shape
@@ -324,7 +344,7 @@ t_vector	normal_at(t_shape shape, t_point world_point);
 t_vector	reflect(t_vector in, t_vector normal);
 t_light		point_light(t_point position, t_color intensity);
 t_material	material(void);
-t_color		lighting(t_material m, t_light light, t_point position, t_sight sight);
+t_color		lighting(t_shape object, t_light light, t_point position, t_sight sight);
 
 // -------------------------------------------------------------------------- //
 //                                  shadow                                    //
@@ -399,5 +419,25 @@ t_vector	normal_at_cylinder(t_shape s, t_point obj_point);
 t_shape		cone(void);
 void		intersect_cone(t_hit **hit_list, t_shape s, t_ray r);
 t_vector	normal_at_cone(t_shape s, t_point obj_point);
+
+// patterns
+void		set_pattern_transformation(t_pattern *pattern, t_matrix transformation);
+t_color		pattern_at_shape(t_pattern pattern, t_shape object, t_point world_point);
+
+// stripe
+t_pattern 	stripe_pattern(t_color color_a, t_color color_b);
+t_color		stripe_at(t_pattern pattern, t_point pattern_point);
+
+// gradient
+t_pattern	gradient_pattern(t_color color_a, t_color color_b);
+t_color		gradient_at(t_pattern pattern, t_point pattern_point);
+
+// ring
+t_pattern	ring_pattern(t_color color_a, t_color color_b);
+t_color		ring_at(t_pattern pattern, t_point point);
+
+// Checkers
+t_pattern	checkers_pattern(t_color color_a, t_color color_b);
+t_color		checkers_at(t_pattern pattern, t_point pattern_point);
 
 #endif

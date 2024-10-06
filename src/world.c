@@ -92,14 +92,14 @@ t_color	shade_hit(t_world world, t_comps comps)
 	{
 		comps.sight.in_shadow = is_shadowed(world, comps.over_point, aux);
 		color_shaded = color_add(
-				color_shaded,
-				lighting(
-					comps.object.material,
-					*aux,
-					comps.point,
-					comps.sight
-					)
-				);
+			color_shaded,
+			lighting(
+				comps.object,
+				*aux,
+				comps.point,
+				comps.sight
+			)
+		);
 		aux = aux->next;
 	}
 	return (color_shaded);

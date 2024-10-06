@@ -252,3 +252,15 @@ int	comps_compare_test(void *expected, void *result)
 		return (1);
 	return (0);
 }
+
+int	pattern_compare_test(void *expected, void *result)
+{
+	t_pattern	*pattern_expected = expected;
+	t_pattern	*pattern_result = result;
+
+	if (int_compare_test(&pattern_expected->has_pattern, &pattern_result->has_pattern)
+		&& color_compare_test(&pattern_expected->color_a, &pattern_result->color_a)
+		&& color_compare_test(&pattern_expected->color_b, &pattern_result->color_b))
+		return (1);
+	return (0);
+}
