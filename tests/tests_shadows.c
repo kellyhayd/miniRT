@@ -4,6 +4,7 @@
 void	test_lighting_with_the_surface_in_shadow(int num_test)
 {
 	// ARRANGE
+	t_shape		sphere1 = sphere();
 	t_color		result;
 	t_sight		sight;
 	t_color		expected = color(0.1, 0.1, 0.1);
@@ -11,13 +12,14 @@ void	test_lighting_with_the_surface_in_shadow(int num_test)
 	t_light		light = point_light(point(0, 0, -10), color(1, 1, 1));
 	t_material	m = material();
 	t_point		position = point(0, 0, 0);
+	sphere1.material = m;
 
 	sight.eye = vector(0, 0, -1);
 	sight.normal = vector(0, 0, -1);
 	sight.in_shadow = true;
 
 	// ACT
-	result = lighting(m, light, position, sight);
+	result = lighting(sphere1, light, position, sight);
 
 	// ASSERT
 	print_result(num_test, &expected, &result, color_compare_test, print_ko_color);

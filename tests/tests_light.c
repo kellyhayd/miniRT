@@ -168,6 +168,7 @@ void	test_the_default_material(int num_test)
 	expected.diffuse = 0.9;
 	expected.specular = 0.9;
 	expected.shininess = 200.0;
+	expected.pattern = stripe_pattern(color(1, 1, 1), color(0, 0, 0));
 
 	// ACT
 	result = material();
@@ -215,6 +216,7 @@ void	test_a_sphere_may_be_assigned_a_material(int num_test)
 void	test_lighting_with_the_eye_between_the_light_and_the_surface(int num_test)
 {
 	// ARRANGE
+	t_shape		sphere1 = sphere();
 	t_color		result;
 	t_sight		sight;
 	t_color		expected = color(1.9, 1.9, 1.9);
@@ -225,9 +227,10 @@ void	test_lighting_with_the_eye_between_the_light_and_the_surface(int num_test)
 	sight.eye = vector(0, 0, -1);
 	sight.normal = vector(0, 0, -1);
 	sight.in_shadow = false;
+	sphere1.material = m;
 
 	// ACT
-	result = lighting(m, light, position, sight);
+	result = lighting(sphere1, light, position, sight);
 
 	// ASSERT
 	print_result(num_test, &expected, &result, color_compare_test, print_ko_color);
@@ -237,6 +240,7 @@ void	test_lighting_with_the_eye_between_the_light_and_the_surface(int num_test)
 void	test_lighting_with_the_eye_between_light_and_surface_eye_offset_45_degrees(int num_test)
 {
 	// ARRANGE
+	t_shape		sphere1 = sphere();
 	t_color		result;
 	t_sight		sight;
 	t_color		expected = color(1.0, 1.0, 1.0);
@@ -247,9 +251,10 @@ void	test_lighting_with_the_eye_between_light_and_surface_eye_offset_45_degrees(
 	sight.eye = vector(0, sqrt(2) / 2, -sqrt(2) / 2);
 	sight.normal = vector(0, 0, -1);
 	sight.in_shadow = false;
+	sphere1.material = m;
 
 	// ACT
-	result = lighting(m, light, position, sight);
+	result = lighting(sphere1, light, position, sight);
 
 	// ASSERT
 	print_result(num_test, &expected, &result, color_compare_test, print_ko_color);
@@ -259,6 +264,7 @@ void	test_lighting_with_the_eye_between_light_and_surface_eye_offset_45_degrees(
 void	test_lighting_with_eye_opposite_surface_light_offset_45_degrees(int num_test)
 {
 	// ARRANGE
+	t_shape		sphere1 = sphere();
 	t_color		result;
 	t_sight		sight;
 	t_color		expected = color(0.7364, 0.7364, 0.7364);
@@ -269,9 +275,10 @@ void	test_lighting_with_eye_opposite_surface_light_offset_45_degrees(int num_tes
 	sight.eye = vector(0, 0, -1);
 	sight.normal = vector(0, 0, -1);
 	sight.in_shadow = false;
+	sphere1.material = m;
 
 	// ACT
-	result = lighting(m, light, position, sight);
+	result = lighting(sphere1, light, position, sight);
 
 	// ASSERT
 	print_result(num_test, &expected, &result, color_compare_test, print_ko_color);
@@ -281,6 +288,7 @@ void	test_lighting_with_eye_opposite_surface_light_offset_45_degrees(int num_tes
 void	test_lighting_with_eye_in_the_path_of_the_reflection_vector(int num_test)
 {
 	// ARRANGE
+	t_shape		sphere1 = sphere();
 	t_color		result;
 	t_sight		sight;
 	t_color		expected = color(1.6364, 1.6364, 1.6364);
@@ -291,9 +299,10 @@ void	test_lighting_with_eye_in_the_path_of_the_reflection_vector(int num_test)
 	sight.eye = vector(0, -sqrt(2) / 2, -sqrt(2) / 2);
 	sight.normal = vector(0, 0, -1);
 	sight.in_shadow = false;
+	sphere1.material = m;
 
 	// ACT
-	result = lighting(m, light, position, sight);
+	result = lighting(sphere1, light, position, sight);
 
 	// ASSERT
 	print_result(num_test, &expected, &result, color_compare_test, print_ko_color);
@@ -303,6 +312,7 @@ void	test_lighting_with_eye_in_the_path_of_the_reflection_vector(int num_test)
 void	test_lighting_with_light_behind_the_surface(int num_test)
 {
 	// ARRANGE
+	t_shape		sphere1 = sphere();
 	t_color		result;
 	t_sight		sight;
 	t_color		expected = color(0.1, 0.1, 0.1);
@@ -312,9 +322,10 @@ void	test_lighting_with_light_behind_the_surface(int num_test)
 	t_point		position = point(0, 0, 0);
 	sight.eye = vector(0, 0, -1);
 	sight.normal = vector(0, 0, -1);
+	sphere1.material = m;
 
 	// ACT
-	result = lighting(m, light, position, sight);
+	result = lighting(sphere1, light, position, sight);
 
 	// ASSERT
 	print_result(num_test, &expected, &result, color_compare_test, print_ko_color);

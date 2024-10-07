@@ -7,7 +7,14 @@ void	test_creating_a_stripe_pattern(int num_test)
 	t_color		black = color(0, 0, 0);
 	t_color		white = color(1, 1, 1);
 
-	t_pattern	expected = {.has_pattern = true, .color_a = white, .color_b = black};
+	t_pattern	expected = {
+		.pattern_type = STRIPE,
+		.has_pattern = true,
+		.color_a = white,
+		.color_b = black,
+		.transform = identity(),
+		.inverse = identity()
+	};
 	t_pattern	result;
 
 	// ACT

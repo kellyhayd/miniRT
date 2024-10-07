@@ -80,19 +80,51 @@ int	ray_compare_test(void *expected, void *result)
 	return (0);
 }
 
+static int	compare_shape(t_shape *shape_expected, t_shape *shape_result)
+{
+	if (shape_expected->shape_type == SPHERE)
+	{
+		if (tuple_compare_test(&shape_expected->sphere_shape.origin, &shape_result->sphere_shape.origin)
+			&& float_compare_test(&shape_expected->sphere_shape.radius, &shape_result->sphere_shape.radius))
+			return (1);
+	}
+	else if (shape_expected->shape_type == PLANE)
+	{
+		if (tuple_compare_test(&shape_expected->plane_shape.origin, &shape_result->plane_shape.origin))
+			return (1);
+	}
+	else if (shape_expected->shape_type == CYLINDER)
+	{
+		if (tuple_compare_test(&shape_expected->cylinder_shape.origin, &shape_result->cylinder_shape.origin)
+			&& float_compare_test(&shape_expected->cylinder_shape.radius, &shape_result->cylinder_shape.radius)
+			&& float_compare_test(&shape_expected->cylinder_shape.minimum, &shape_result->cylinder_shape.minimum)
+			&& float_compare_test(&shape_expected->cylinder_shape.maximum, &shape_result->cylinder_shape.maximum)
+			&& int_compare_test(&shape_expected->cylinder_shape.closed, &shape_result->cylinder_shape.closed))
+			return (1);
+	}
+	else if (shape_expected->shape_type == CONE)
+	{
+		if (tuple_compare_test(&shape_expected->cone_shape.origin, &shape_result->cone_shape.origin)
+			&& float_compare_test(&shape_expected->cone_shape.radius, &shape_result->cone_shape.radius)
+			&& float_compare_test(&shape_expected->cone_shape.minimum, &shape_result->cone_shape.minimum)
+			&& float_compare_test(&shape_expected->cone_shape.maximum, &shape_result->cone_shape.maximum)
+			&& int_compare_test(&shape_expected->cone_shape.closed, &shape_result->cone_shape.closed))
+			return (1);
+	}
+	return (0);
+}
+
 int	shape_compare_test(void *expected, void *result)
 {
 	t_shape	*shape_expected = expected;
 	t_shape	*shape_result = result;
 
-	if (float_compare_test(&shape_expected->sphere_shape.origin.x, &shape_result->sphere_shape.origin.x)
-		&& float_compare_test(&shape_expected->sphere_shape.origin.y, &shape_result->sphere_shape.origin.y)
-		&& float_compare_test(&shape_expected->sphere_shape.origin.z, &shape_result->sphere_shape.origin.z)
-		&& float_compare_test(&shape_expected->sphere_shape.radius, &shape_result->sphere_shape.radius)
+	if (shape_expected->shape_type == shape_result->shape_type
+		&& compare_shape(shape_expected, shape_result)
 		&& matrix_compare_test(&shape_expected->transform, &shape_result->transform)
+		&& matrix_compare_test(&shape_expected->inverse, &shape_result->inverse)
+		&& matrix_compare_test(&shape_expected->transposed_inverse, &shape_result->transposed_inverse)
 		&& material_compare_test(&shape_expected->material, &shape_result->material))
-		// if (shape_expected->shape_type == SPHERE)
-			// return (sphere_compare_test(shape_expected, shape_result));
 		return (1);
 	return (0);
 }
@@ -105,8 +137,7 @@ int	hit_compare_test(void *expected, void *result)
 	if (!hit_expected || !hit_result)
 		return (hit_expected == hit_result);
 
-	if (float_compare_test(&hit_expected->t, &hit_result->t)
-		&& shape_compare_test(&hit_expected->object, &hit_result->object))
+	if (float_compare_test(&hit_expected->t, &hit_result->t))
 		return (1);
 	return (0);
 }
@@ -123,7 +154,7 @@ int	hit_list_compare_test(void *expected, void *result)
 
 	aux_expected = hit_expected;
 	aux_result = hit_result;
-	while (aux_expected && aux_result && float_compare_test(&aux_expected->t, &aux_result->t))
+	while (aux_expected && aux_result && hit_compare_test(&aux_expected, &aux_result))
 	{
 		aux_expected = aux_expected->next;
 		aux_result = aux_result->next;
@@ -152,7 +183,8 @@ int	material_compare_test(void *expected, void *result)
 		&& float_compare_test(&material_expected->diffuse, &material_result->diffuse)
 		&& float_compare_test(&material_expected->specular, &material_result->specular)
 		&& float_compare_test(&material_expected->shininess, &material_result->shininess)
-		&& color_compare_test(&material_expected->color, &material_result->color))
+		&& color_compare_test(&material_expected->color, &material_result->color)
+		&& pattern_compare_test(&material_expected->pattern, &material_result->pattern))
 		return (1);
 	return (0);
 }
@@ -203,23 +235,10 @@ int	world_compare_test(void *expected, void *result)
 {
 	t_world	*w_expected = expected;
 	t_world	*w_result = result;
-	// int		i = 0;
-
-	// if (tuple_compare_test(&w_expected->light.position, &w_result->light.position)
-	// 	&& color_compare_test(&w_expected->light.intensity, &w_result->light.intensity)
-	// 	&& int_compare_test(&w_expected->shape_nb, &w_result->shape_nb))
 
 	if (shape_list_compare_test(w_expected->shape, w_result->shape)
 		&& light_list_compare_test(w_result->light, w_expected->light))
-	{
-		// while (i < w_expected->shape_nb)
-		// {
-		// 	if (!shape_compare_test(&w_expected->shape[i], &w_result->shape[i]))
-		// 		return (0);
-		// 	i++;
-		// }
 		return (1);
-	}
 	return (0);
 }
 
@@ -231,7 +250,11 @@ int	camera_compare_test(void *expected, void *result)
 	if (int_compare_test(&camera_expected->hsize, &camera_result->hsize)
 		&& int_compare_test(&camera_expected->vsize, &camera_result->vsize)
 		&& float_compare_test(&camera_expected->field_of_view, &camera_result->field_of_view)
-		&& matrix_compare_test(&camera_expected->transform, &camera_result->transform))
+		&& float_compare_test(&camera_expected->half_width, &camera_result->half_width)
+		&& float_compare_test(&camera_expected->half_height, &camera_result->half_height)
+		&& float_compare_test(&camera_expected->pixel_size, &camera_result->pixel_size)
+		&& matrix_compare_test(&camera_expected->transform, &camera_result->transform)
+		&& matrix_compare_test(&camera_expected->inverse, &camera_result->inverse))
 		return (1);
 	return (0);
 }
@@ -258,9 +281,12 @@ int	pattern_compare_test(void *expected, void *result)
 	t_pattern	*pattern_expected = expected;
 	t_pattern	*pattern_result = result;
 
-	if (int_compare_test(&pattern_expected->has_pattern, &pattern_result->has_pattern)
+	if (pattern_expected->pattern_type == pattern_result->pattern_type
+		&& pattern_expected->has_pattern == pattern_result->has_pattern
 		&& color_compare_test(&pattern_expected->color_a, &pattern_result->color_a)
-		&& color_compare_test(&pattern_expected->color_b, &pattern_result->color_b))
+		&& color_compare_test(&pattern_expected->color_b, &pattern_result->color_b)
+		&& matrix_compare_test(&pattern_expected->transform, &pattern_result->transform)
+		&& matrix_compare_test(&pattern_expected->inverse, &pattern_result->inverse))
 		return (1);
 	return (0);
 }

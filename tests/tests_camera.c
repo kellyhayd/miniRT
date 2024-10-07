@@ -11,6 +11,9 @@ void	test_constructing_a_camera(int num_test)
 	expected.vsize = 120;
 	expected.field_of_view = M_PI_2;
 	expected.transform = identity();
+	expected.half_width = 1;
+	expected.half_height = 0.75;
+	expected.pixel_size = 0.01;
 
 	// ACT
 	result = camera(160, 120, M_PI_2);

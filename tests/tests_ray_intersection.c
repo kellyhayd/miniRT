@@ -12,6 +12,7 @@
 
 #include "tests.h"
 
+// TEST 01
 void	test_creating_and_querying_a_ray(int num_test)
 {
 	// ARRANGE
@@ -27,6 +28,7 @@ void	test_creating_and_querying_a_ray(int num_test)
 	print_result(num_test, &expected, &result, ray_compare_test, print_ko_ray);
 }
 
+// TEST 02
 void	test_computing_a_point_from_a_distance(int num_test)
 {
 	// ARRANGE
@@ -52,6 +54,7 @@ void	test_computing_a_point_from_a_distance(int num_test)
 	print_result(num_test, &expected[3], &result[3], tuple_compare_test, print_ko_tuple);
 }
 
+// TEST 03
 void	test_a_ray_intersects_a_sphere_at_two_points(int num_test)
 {
 	// ARRANGE
@@ -68,6 +71,7 @@ void	test_a_ray_intersects_a_sphere_at_two_points(int num_test)
 
 	expected->next = malloc(sizeof(t_hit));
 	expected->next->t = 6.0;
+	expected->next->object = s;
 	expected->next->next = NULL;
 
 	// ACT
@@ -83,6 +87,7 @@ void	test_a_ray_intersects_a_sphere_at_two_points(int num_test)
 	hit_clear_list(&result);
 }
 
+// TEST 04
 void	test_a_ray_intersects_a_sphere_at_a_tangent(int num_test)
 {
 	// ARRANGE
@@ -115,6 +120,7 @@ void	test_a_ray_intersects_a_sphere_at_a_tangent(int num_test)
 	hit_clear_list(&result);
 }
 
+// TEST 05
 void	test_a_ray_misses_a_sphere(int num_test)
 {
 	// ARRANGE
@@ -138,6 +144,7 @@ void	test_a_ray_misses_a_sphere(int num_test)
 	hit_clear_list(&result);
 }
 
+// TEST 06
 void	test_a_ray_originates_inside_a_sphere(int num_test)
 {
 	// ARRANGE
@@ -170,6 +177,7 @@ void	test_a_ray_originates_inside_a_sphere(int num_test)
 	hit_clear_list(&result);
 }
 
+// TEST 07
 void	test_a_sphere_is_behind_a_ray(int num_test)
 {
 	// ARRANGE
@@ -202,6 +210,7 @@ void	test_a_sphere_is_behind_a_ray(int num_test)
 	hit_clear_list(&result);
 }
 
+// TEST 08
 void	test_an_intersection_encapsulates_t_and_object(int num_test)
 {
 	// ARRANGE
@@ -216,6 +225,7 @@ void	test_an_intersection_encapsulates_t_and_object(int num_test)
 	print_result(num_test, &expected, &result, hit_compare_test, print_ko_hit);
 }
 
+// TEST 09
 void	test_aggregating_intersections(int num_test)
 {
 	// ARRANGE
@@ -247,6 +257,7 @@ void	test_aggregating_intersections(int num_test)
 	hit_clear_list(&result);
 }
 
+// TEST 10
 void	test_intersect_sets_the_object_on_the_intersection(int num_test)
 {
 	// ARRANGE
@@ -279,6 +290,7 @@ void	test_intersect_sets_the_object_on_the_intersection(int num_test)
 	hit_clear_list(&result);
 }
 
+// TEST 11
 void	test_the_hit_when_all_intersections_have_positive_t(int num_test)
 {
 	// ARRANGE
@@ -307,6 +319,7 @@ void	test_the_hit_when_all_intersections_have_positive_t(int num_test)
 	hit_clear_list(&hit_list);
 }
 
+// TEST 12
 void	test_the_hit_when_some_intersections_have_negative_t(int num_test)
 {
 	// ARRANGE
@@ -335,6 +348,7 @@ void	test_the_hit_when_some_intersections_have_negative_t(int num_test)
 	hit_clear_list(&hit_list);
 }
 
+// TEST 13
 void	test_the_hit_when_all_intersections_have_negative_t(int num_test)
 {
 	// ARRANGE
@@ -364,6 +378,7 @@ void	test_the_hit_when_all_intersections_have_negative_t(int num_test)
 	hit_clear_list(&hit_list);
 }
 
+// TEST 14
 void	test_the_hit_is_always_the_lowest_nonnegative_intersection(int num_test)
 {
 	// ARRANGE
@@ -401,6 +416,7 @@ void	test_the_hit_is_always_the_lowest_nonnegative_intersection(int num_test)
 	hit_clear_list(&hit_list);
 }
 
+// TEST 15
 void	test_translating_a_ray(int num_test)
 {
 	// ARRANGE
@@ -416,6 +432,7 @@ void	test_translating_a_ray(int num_test)
 	print_result(num_test, &expected, &result, ray_compare_test, print_ko_ray);
 }
 
+// TEST 16
 void test_scaling_a_ray(int num_test)
 {
 	// ARRANGE
@@ -431,6 +448,7 @@ void test_scaling_a_ray(int num_test)
 	print_result(num_test, &expected, &result, ray_compare_test, print_ko_ray);
 }
 
+// TEST 17
 void	test_a_sphere_default_transformation(int num_test)
 {
 	// ARRANGE
@@ -445,6 +463,7 @@ void	test_a_sphere_default_transformation(int num_test)
 	print_result(num_test, &expected, &result, matrix_compare_test, print_ko_matrix);
 }
 
+// TEST 18
 void	test_changing_a_sphere_transformation(int num_test)
 {
 	// ARRANGE
@@ -461,6 +480,7 @@ void	test_changing_a_sphere_transformation(int num_test)
 	print_result(num_test, &expected, &result, matrix_compare_test, print_ko_matrix);
 }
 
+// TEST 19
 void	test_intersecting_a_scaled_sphere_with_a_ray(int num_test)
 {
 	// ARRANGE
@@ -495,6 +515,7 @@ void	test_intersecting_a_scaled_sphere_with_a_ray(int num_test)
 	hit_clear_list(&result);
 }
 
+// TEST 20
 void	test_intersecting_a_translated_sphere_with_a_ray(int num_test)
 {
 	// ARRANGE

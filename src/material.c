@@ -28,6 +28,6 @@ t_material	material(void)
 		.diffuse = 0.9,
 		.specular = 0.9,
 		.shininess = 200,
-		.pattern.has_pattern = false
+		.pattern = stripe_pattern(color(1, 1, 1), color(0, 0, 0))
 	});
 }
