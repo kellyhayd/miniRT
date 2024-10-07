@@ -14,7 +14,11 @@
 
 t_world	world(void)
 {
-	return ((t_world){0});
+	return ((t_world){
+		.light = NULL,
+		.shape = NULL,
+		.pixel_sampling = 1
+	});
 }
 
 void	world_clear(t_world *world_to_clear)

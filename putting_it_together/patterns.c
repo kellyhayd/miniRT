@@ -69,6 +69,8 @@ t_canvas	render_image(void)
 
 	add_light(&world_to_render.light, light1);
 
+	world_to_render.pixel_sampling = 2;
+
 	t_canvas	canvas = render(camera_view, world_to_render);
 
 	return (canvas);

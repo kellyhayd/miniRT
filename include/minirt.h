@@ -180,7 +180,8 @@ typedef struct s_world
 {
 	t_shape	*shape;
 	t_light	*light;
-	mlx_t	*mlx;
+	// mlx_t	*mlx;
+	int		pixel_sampling;
 }	t_world;
 
 typedef struct s_exposure
@@ -362,7 +363,7 @@ t_hit		*intersect_world(t_world w, t_ray ray);
 //                                  camera                                    //
 // -------------------------------------------------------------------------- //
 t_camera	camera(double hsize, double vsize, double field_of_view);
-t_ray		ray_for_pixel(t_camera c, int x, int y);
+// t_ray		ray_for_pixel(t_camera c, int x, int y);
 
 // -------------------------------------------------------------------------- //
 //                                   utils                                    //
@@ -395,7 +396,6 @@ t_canvas	create_canvas(int width, int height);
 
 // Coisas da mlx e coisas do canvas
 void		write_pixel_to_canvas(t_canvas *canvas, int x, int y, t_color color);
-t_color		pixel_at(t_canvas canvas, int x, int y);
 t_color		pixel_at(t_canvas canvas, int x, int y);
 mlx_image_t	*canvas_to_image(t_canvas canvas, mlx_t *mlx);
 
