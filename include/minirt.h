@@ -230,6 +230,13 @@ typedef struct s_canvas
 	t_color	*pixels;
 }	t_canvas;
 
+typedef struct s_anti_aliasing
+{
+	double	pixel_sampling;
+	double	sample_x;
+	double	sample_y;
+}	t_anti_aliasing;
+
 // -------------------------------------------------------------------------- //
 //                                   tuple                                    //
 // -------------------------------------------------------------------------- //
@@ -439,5 +446,9 @@ t_color		ring_at(t_pattern pattern, t_point point);
 // Checkers
 t_pattern	checkers_pattern(t_color color_a, t_color color_b);
 t_color		checkers_at(t_pattern pattern, t_point pattern_point);
+
+// Relacionado a camera
+void		print_rendering_progress(int hsize, int vsize, int x, int y);
+t_color		color_average(t_color *colors, int size);
 
 #endif
