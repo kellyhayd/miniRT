@@ -83,27 +83,48 @@ static t_color	render_pixel(t_camera c, t_world w, int x, int y)
 	return (color_average_result);
 }
 
+void	*render_line(void *param)
+{
+	int			x;
+	t_color		coloring;
+	t_thread	data;
+
+	data = (*(t_thread *)param);
+	x = 0;
+	while (x < data.line_size)
+	{
+		coloring = render_pixel(data.camera, data.world, x, data.line);
+		write_pixel_to_canvas(data.canvas, x, data.line, coloring);
+		x++;
+	}
+	return (NULL);
+}
+
 t_canvas	render(t_camera c, t_world w)
 {
 	t_canvas	image;
-	t_color		coloring;
-	int			x;
 	int			y;
+	pthread_t	threads[NUM_THREADS];
+	t_thread	threads_data[NUM_THREADS];
+	int			thread_count;
 
 	image = create_canvas(c.hsize, c.vsize);
 	y = 0;
 	print_rendering_progress(c.hsize, c.vsize, 0, 0);
 	while (y < c.vsize)
 	{
-		x = 0;
-		while (x < c.hsize)
+		thread_count = 0;
+		while (thread_count < NUM_THREADS)
 		{
-			coloring = render_pixel(c, w, x, y);
-			write_pixel_to_canvas(&image, x, y, coloring);
-			x++;
+			threads_data[thread_count] = (t_thread){.line = y, \
+		.line_size = c.hsize, .canvas = &image, .world = w, .camera = c};
+			pthread_create(&threads[thread_count], NULL,
+				render_line, &threads_data[thread_count]);
+			thread_count++;
+			y++;
 		}
-		y++;
-		print_rendering_progress(c.hsize, c.vsize, x, y);
+		join_threads(threads, NUM_THREADS);
+		print_rendering_progress(c.hsize, c.vsize, 0, y);
 	}
 	return (image);
 }

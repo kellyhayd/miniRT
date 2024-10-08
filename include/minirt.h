@@ -30,11 +30,13 @@
 # define REVERSE "\001\033[7m\002"
 
 # define EPSILON 0.00001
+# define NUM_THREADS 4
 
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <math.h>
+# include <pthread.h>
 
 # include "libft.h"
 # include "MLX42/MLX42.h"
@@ -237,6 +239,15 @@ typedef struct s_anti_aliasing
 	double	sample_y;
 }	t_anti_aliasing;
 
+typedef struct s_thread
+{
+	int			line;
+	int			line_size;
+	t_canvas	*canvas;
+	t_world		world;
+	t_camera	camera;
+}	t_thread;
+
 // -------------------------------------------------------------------------- //
 //                                   tuple                                    //
 // -------------------------------------------------------------------------- //
@@ -380,6 +391,7 @@ int			float_compare(double d1, double d2);
 void		ft_error(char *message);
 int			almost_zero(float num);
 void		swap(double *a, double *b);
+void		join_threads(pthread_t *threads, int thread_count);
 
 // NÃO SEI ONDE POR
 // Funções de adicionar coisas a alguma lista, está relacionado ao t_world
