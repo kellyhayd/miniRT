@@ -12,7 +12,7 @@
 
 #include "minirt.h"
 
-t_camera camera(double hsize, double vsize, double field_of_view)
+t_camera	camera(double hsize, double vsize, double field_of_view)
 {
 	t_camera	c;
 	double		half_view;
@@ -34,69 +34,76 @@ t_camera camera(double hsize, double vsize, double field_of_view)
 	return (c);
 }
 
-t_ray	ray_for_pixel(t_camera c, int x, int y)
+t_ray	ray_for_pixel(t_camera c, int x, int y, t_anti_aliasing aa_data)
 {
 	double		x_offset;
 	double		y_offset;
 	double		world_x;
 	double		world_y;
-	t_point		pixel;
 	t_point		origin;
-	t_vector	direction;
 
-	x_offset = (x + 0.5) * c.pixel_size;
-	y_offset = (y + 0.5) * c.pixel_size;
+	x_offset = (x + (1.0 / pow(aa_data.pixel_sampling, 2)) + aa_data.sample_x
+			* (1.0 / aa_data.pixel_sampling)) * c.pixel_size;
+	y_offset = (y + (1.0 / pow(aa_data.pixel_sampling, 2)) + aa_data.sample_y
+			* (1.0 / aa_data.pixel_sampling)) * c.pixel_size;
 	world_x = c.half_width - x_offset;
 	world_y = c.half_height - y_offset;
-	pixel = mx_multiply_tuple(c.inverse, point(world_x, world_y, -1));
 	origin = mx_multiply_tuple(c.inverse, point(0, 0, 0));
-	direction = normalize(tuple_subtract(pixel, origin));
-	return (ray(origin, direction));
+	return (ray(origin, normalize(tuple_subtract(
+					mx_multiply_tuple(c.inverse, point(world_x, world_y, -1)),
+					origin
+				)))
+	);
 }
 
-// void	print_rendering_progress(int hsize, int vsize, int x, int y)
-// {
-// 	double	progress;
-//
-// 	progress = (double)(y * hsize + x) / (double)(hsize * vsize) * 100;
-// 	printf("\r[");
-// 	for (int i = 0; i < 50; i++)
-// 	{
-// 		if (i < progress / 2)
-// 			printf("=");
-// 		else if (fabs(progress / 2 - i) < 1)
-// 			printf(">");
-// 		else if (i % 5 == 0)
-// 			printf("o");
-// 		else
-// 			printf(" ");
-// 	}
-// 	printf("] %.2f%%", progress);
-// 	// fflush(stdout);
-// }
+static t_color	render_pixel(t_camera c, t_world w, int x, int y)
+{
+	t_anti_aliasing	aa_data;
+	t_color			color_average_result;
+	t_ray			ray;
+	t_color			*colors;
+
+	colors = malloc(sizeof(t_color) * pow(w.pixel_sampling, 2));
+	aa_data.pixel_sampling = w.pixel_sampling;
+	aa_data.sample_y = 0;
+	while (aa_data.sample_y < w.pixel_sampling)
+	{
+		aa_data.sample_x = 0;
+		while (aa_data.sample_x < w.pixel_sampling)
+		{
+			ray = ray_for_pixel(c, x, y, aa_data);
+			colors[(int) aa_data.sample_x + (int)(aa_data.sample_y
+					* w.pixel_sampling)] = color_at(w, ray);
+			aa_data.sample_x++;
+		}
+		aa_data.sample_y++;
+	}
+	color_average_result = color_average(colors, pow(w.pixel_sampling, 2));
+	free(colors);
+	return (color_average_result);
+}
 
 t_canvas	render(t_camera c, t_world w)
 {
 	t_canvas	image;
-	t_ray		ray;
 	t_color		coloring;
 	int			x;
 	int			y;
 
 	image = create_canvas(c.hsize, c.vsize);
 	y = 0;
+	print_rendering_progress(c.hsize, c.vsize, 0, 0);
 	while (y < c.vsize)
 	{
 		x = 0;
 		while (x < c.hsize)
 		{
-			// print_rendering_progress(c.hsize, c.vsize, x, y);
-			ray = ray_for_pixel(c, x, y);
-			coloring = color_at(w, ray);
+			coloring = render_pixel(c, w, x, y);
 			write_pixel_to_canvas(&image, x, y, coloring);
 			x++;
 		}
 		y++;
+		print_rendering_progress(c.hsize, c.vsize, x, y);
 	}
 	return (image);
 }

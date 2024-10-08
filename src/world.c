@@ -14,7 +14,11 @@
 
 t_world	world(void)
 {
-	return ((t_world){0});
+	return ((t_world){
+		.light = NULL,
+		.shape = NULL,
+		.pixel_sampling = 1
+	});
 }
 
 void	world_clear(t_world *world_to_clear)
@@ -119,8 +123,8 @@ t_color	color_at(t_world w, t_ray r)
 	{
 		comps = prepare_computations(*nearest_hit, r);
 		color_at_hit = shade_hit(w, comps);
-		hit_clear_list(&hits);
 	}
+	hit_clear_list(&hits);
 	return (color_at_hit);
 }
 
