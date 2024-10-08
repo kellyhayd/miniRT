@@ -123,8 +123,8 @@ t_color	color_at(t_world w, t_ray r)
 	{
 		comps = prepare_computations(*nearest_hit, r);
 		color_at_hit = shade_hit(w, comps);
-		hit_clear_list(&hits);
 	}
+	hit_clear_list(&hits);
 	return (color_at_hit);
 }
 

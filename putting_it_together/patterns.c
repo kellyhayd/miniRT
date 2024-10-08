@@ -73,6 +73,8 @@ t_canvas	render_image(void)
 
 	t_canvas	canvas = render(camera_view, world_to_render);
 
+	world_clear(&world_to_render);
+
 	return (canvas);
 }
 
@@ -99,6 +101,7 @@ void	canvas_to_ppm(t_canvas canvas, char *filename)
 			fprintf(file, "%d %d %d\n", r, g, b);
 		}
 	}
+	fclose(file);
 }
 
 int main(void)
@@ -107,7 +110,8 @@ int main(void)
 	t_canvas	image;
 	mlx_image_t	*mlx_image;
 
-	mlx = mlx_init(WIDTH, HEIGHT, "patterns", false);
+	// mlx = mlx_init(WIDTH, HEIGHT, "patterns", false);
+	mlx = NULL;
 	image = render_image();
 	if (mlx)
 	{
@@ -117,6 +121,7 @@ int main(void)
 	}
 
 	canvas_to_ppm(image, "patterns.ppm");
+	free(image.pixels);
 
 	return (0);
 }
