@@ -58,3 +58,25 @@ t_color	color_average(t_color *colors, int size)
 	average = color(r / size, g / size, b / size);
 	return (average);
 }
+
+void	join_threads(pthread_t *threads, int thread_count)
+{
+	int	i;
+
+	i = 0;
+	while (i < thread_count)
+	{
+		pthread_join(threads[i], NULL);
+		i++;
+	}
+}
+
+int	reset_threads(pthread_t *threads, int thread_count)
+{
+	if (thread_count >= NUM_THREADS)
+	{
+		join_threads(threads, NUM_THREADS);
+		return (0);
+	}
+	return (thread_count);
+}
