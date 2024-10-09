@@ -462,5 +462,6 @@ t_color		checkers_at(t_pattern pattern, t_point pattern_point);
 // Relacionado a camera
 void		print_rendering_progress(int hsize, int vsize, int x, int y);
 t_color		color_average(t_color *colors, int size);
+int			reset_threads(pthread_t *threads, int thread_count);
 
 #endif

@@ -102,29 +102,29 @@ void	*render_line(void *param)
 
 t_canvas	render(t_camera c, t_world w)
 {
-	t_canvas	image;
 	int			y;
-	pthread_t	threads[NUM_THREADS];
-	t_thread	threads_data[NUM_THREADS];
 	int			thread_count;
+	t_canvas	image;
+	t_thread	threads_data[NUM_THREADS];
+	pthread_t	threads[NUM_THREADS];
 
+	y = -1;
+	thread_count = 0;
 	image = create_canvas(c.hsize, c.vsize);
-	y = 0;
 	print_rendering_progress(c.hsize, c.vsize, 0, 0);
-	while (y < c.vsize)
+	while (++y < c.vsize)
 	{
-		thread_count = 0;
-		while (thread_count < NUM_THREADS)
+		if (thread_count < NUM_THREADS)
 		{
 			threads_data[thread_count] = (t_thread){.line = y, \
 		.line_size = c.hsize, .canvas = &image, .world = w, .camera = c};
 			pthread_create(&threads[thread_count], NULL,
 				render_line, &threads_data[thread_count]);
 			thread_count++;
-			y++;
 		}
-		join_threads(threads, NUM_THREADS);
+		thread_count = reset_threads(threads, thread_count);	// Uma pequena gambiarra
 		print_rendering_progress(c.hsize, c.vsize, 0, y);
 	}
+	join_threads(threads, thread_count);
 	return (image);
 }
