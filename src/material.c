@@ -12,6 +12,18 @@
 
 #include "minirt.h"
 
+t_pattern	default_pattern(void)
+{
+	return ((t_pattern){
+		.pattern_type = STRIPE,
+		.has_pattern = false,
+		.color_a = color(0, 0, 0),
+		.color_b = color(0, 0, 0),
+		.transform = identity(),
+		.inverse = identity()
+	});
+}
+
 /**
  * @brief Creates and returns a default material.
  *
@@ -28,6 +40,6 @@ t_material	material(void)
 		.diffuse = 0.9,
 		.specular = 0.9,
 		.shininess = 200,
-		.pattern = stripe_pattern(color(1, 1, 1), color(0, 0, 0))
+		.pattern = default_pattern()
 	});
 }

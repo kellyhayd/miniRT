@@ -442,6 +442,7 @@ t_vector	normal_at_cone(t_shape s, t_point obj_point);
 // patterns
 void		set_pattern_transformation(t_pattern *pattern, t_matrix transformation);
 t_color		pattern_at_shape(t_pattern pattern, t_shape object, t_point world_point);
+t_pattern	default_pattern(void);
 
 // stripe
 t_pattern 	stripe_pattern(t_color color_a, t_color color_b);

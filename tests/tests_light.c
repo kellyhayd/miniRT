@@ -168,7 +168,7 @@ void	test_the_default_material(int num_test)
 	expected.diffuse = 0.9;
 	expected.specular = 0.9;
 	expected.shininess = 200.0;
-	expected.pattern = stripe_pattern(color(1, 1, 1), color(0, 0, 0));
+	expected.pattern = default_pattern();
 
 	// ACT
 	result = material();
