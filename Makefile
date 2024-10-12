@@ -11,7 +11,12 @@ NAME			= miniRT
 				tests_light \
 				tests_world \
 				tests_camera \
-				tests_shadows
+				tests_shadows \
+				tests_planes \
+				tests_cylinder \
+				tests_cone \
+				tests_patterns \
+				tests_reflection
 # .SILENT:
 
 #----------------------------------------------- Colors
@@ -68,7 +73,8 @@ TESTS 			=	tests_tuples \
 					tests_planes \
 					tests_cylinder \
 					tests_cone \
-					tests_patterns
+					tests_patterns \
+					tests_reflection
 
 #----------------------------------------------- Rules
 all: $(NAME)
@@ -162,6 +168,10 @@ tests_cone: all
 
 tests_patterns: all
 	@$(CC) $(FLAGS) $(HEADERS) $(TEST_FILES) tests/tests_patterns.c $(LIBS) -o $@
+	@$(VALGRIND) ./$@
+
+tests_reflection: all
+	@$(CC) $(FLAGS) $(HEADERS) $(TEST_FILES) tests/tests_reflection.c $(LIBS) -o $@
 	@$(VALGRIND) ./$@
 
 pit: all

@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:18:05 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/29 17:06:34 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/12 08:27:41 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,6 +183,7 @@ int	material_compare_test(void *expected, void *result)
 		&& float_compare_test(&material_expected->diffuse, &material_result->diffuse)
 		&& float_compare_test(&material_expected->specular, &material_result->specular)
 		&& float_compare_test(&material_expected->shininess, &material_result->shininess)
+		&& float_compare_test(&material_expected->reflective, &material_result->reflective)
 		&& color_compare_test(&material_expected->color, &material_result->color)
 		&& pattern_compare_test(&material_expected->pattern, &material_result->pattern))
 		return (1);

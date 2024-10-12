@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 08:41:10 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/05 08:41:11 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/12 08:23:37 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ t_material	material(void)
 		.diffuse = 0.9,
 		.specular = 0.9,
 		.shininess = 200,
+		.reflective = 0.0,
 		.pattern = default_pattern()
 	});
 }

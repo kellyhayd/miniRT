@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 21:41:13 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/29 07:45:20 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/12 08:28:40 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,15 +243,15 @@ void	print_ko_material(int num_test, void *expected, void *result)
 	t_material	*material_result = result;
 
 	printf(PURPLE "%2d" RESET " - " RED "[ ✗ ] " RESET
-		"Expected: ambient (%.2lf) diffuse (%.2lf) specular (%.2lf) shininess (%.2lf) color (%.2lf, %.2lf, %.2lf)\n"
-		"\t\tResult: ambient (%.2lf) diffuse (%.2lf) specular (%.2lf) shininess (%.2lf) color (%.2lf, %.2lf, %.2lf)\n",
+		"Expected: ambient (%.2lf) diffuse (%.2lf) specular (%.2lf) shininess (%.2lf) reflective (%.2lf) color (%.2lf, %.2lf, %.2lf)\n"
+		"\t\tResult: ambient (%.2lf) diffuse (%.2lf) specular (%.2lf) shininess (%.2lf) reflective (%.2lf) color (%.2lf, %.2lf, %.2lf)\n",
 		num_test,
 
 		material_expected->ambient, material_expected->diffuse, material_expected->specular, material_expected->shininess,
-		material_expected->color.r, material_expected->color.g, material_expected->color.b,
+		material_expected->reflective, material_expected->color.r, material_expected->color.g, material_expected->color.b,
 
 		material_result->ambient, material_result->diffuse, material_result->specular, material_result->shininess,
-		material_result->color.r, material_result->color.g, material_result->color.b
+		material_result->reflective, material_result->color.r, material_result->color.g, material_result->color.b
 	);
 }
 

@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:01:38 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/29 18:06:42 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/12 08:23:15 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,7 @@ typedef struct s_material
 	double		diffuse;
 	double		specular;
 	double		shininess;
+	double		reflective;
 	t_color		color;
 	t_pattern	pattern;
 }	t_material;
