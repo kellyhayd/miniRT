@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 21:41:13 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/10/12 08:42:12 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/12 09:37:40 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,8 @@ void	print_ko_color(int num_test, void *expected, void *result)
 	t_color	*result_color = result;
 
 	printf(PURPLE "%2d" RESET " - " RED "[ ✗ ] " RESET
-		"Expected: (%.2lf, %.2lf, %.2lf) "
-		"Result: (%.2lf, %.2lf, %.2lf)\n",
+		"Expected: (%.5lf, %.5lf, %.5lf) "
+		"Result: (%.5lf, %.5lf, %.5lf)\n",
 		num_test,
 		expected_color->r, expected_color->g, expected_color->b,
 		result_color->r, result_color->g, result_color->b

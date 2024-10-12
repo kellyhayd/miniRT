@@ -66,10 +66,76 @@ void	test_the_reflected_color_for_a_nonreflective_material(int num_test)
 	// ASSERT
 	print_result(num_test, &expected, &result, color_compare_test, print_ko_color);
 
-	light_clear_list(&w.light);
-	shape_clear_list(&w.shape);
+	world_clear(&w);
 }
 
+void	test_the_reflected_color_for_a_reflective_material(int num_test)
+{
+	// ARRANGE
+	t_world	w;
+	t_ray	r;
+	t_shape	shape;
+	t_hit	i;
+	t_comps	comps;
+	t_color	expected;
+	t_color	result;
+
+	w = default_world();
+	shape = plane();
+	shape.material.reflective = 0.5;
+	set_transformation(&shape, translation(0, -1, 0));
+	add_shape(&w.shape, shape);
+	r = ray(point(0, 0, -3), vector(0, -sqrt(2) / 2, sqrt(2) / 2));
+	i = intersection(sqrt(2), shape);
+	comps = prepare_computations(i, r);
+
+	// TODO: there's a difference in the 5th decimal place
+	expected = color(0.19032, 0.2379, 0.14274);
+
+	// ACT
+	result = reflected_color(w, comps);
+
+	// ASSERT
+	print_result(num_test, &expected, &result, color_compare_test, print_ko_color);
+
+	// free(shape);
+	world_clear(&w);
+}
+
+// TEST 05
+void	test_shade_hit_with_a_reflective_material(int num_test)
+{
+	// ARRANGE
+	t_world	w;
+	t_ray	r;
+	t_shape	*shape;
+	t_hit	i;
+	t_comps	comps;
+	t_color	expected;
+	t_color	result;
+
+	w = default_world();
+	shape = malloc(sizeof(t_shape));
+	*shape = plane();
+	shape->material.reflective = 0.5;
+	set_transformation(shape, translation(0, -1, 0));
+	add_shape(&w.shape, *shape);
+	r = ray(point(0, 0, -3), vector(0, -sqrt(2) / 2, sqrt(2) / 2));
+	i = intersection(sqrt(2), *shape);
+	comps = prepare_computations(i, r);
+
+	// TODO: there's a difference in the 5th decimal place
+	expected = color(0.87677, 0.92436, 0.82918);
+
+	// ACT
+	result = shade_hit(w, comps);
+
+	// ASSERT
+	print_result(num_test, &expected, &result, color_compare_test, print_ko_color);
+
+	free(shape);
+	world_clear(&w);
+}
 
 int	main(void)
 {
@@ -78,6 +144,8 @@ int	main(void)
 		test_reflectivity_for_the_default_material,				// 01
 		test_precomputing_the_reflection_vector,				// 02
 		test_the_reflected_color_for_a_nonreflective_material,	// 03
+		test_the_reflected_color_for_a_reflective_material,		// 04
+		test_shade_hit_with_a_reflective_material,				// 05
 	};
 
 	printf("\n%sTESTING REFLECTIONS:%s\n", YELLOW, RESET);
