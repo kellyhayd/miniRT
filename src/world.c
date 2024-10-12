@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 08:14:46 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/05 08:44:06 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/12 08:38:13 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ t_comps	prepare_computations(t_hit hit, t_ray ray)
 	comps.sight.eye = tuple_negate(ray.direction);
 	comps.sight.normal = normal_at(comps.object, comps.point);
 	comps.sight.in_shadow = false;
+	comps.reflectv = reflect(ray.direction, comps.sight.normal);
 	if (dot(comps.sight.normal, comps.sight.eye) < 0)
 	{
 		comps.inside = true;

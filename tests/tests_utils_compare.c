@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:18:05 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/12 08:27:41 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/12 08:40:31 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -272,6 +272,7 @@ int	comps_compare_test(void *expected, void *result)
 		&& tuple_compare_test(&comps_expected->sight.eye, &comps_result->sight.eye)
 		&& tuple_compare_test(&comps_expected->sight.normal, &comps_result->sight.normal)
 		&& comps_expected->sight.in_shadow == comps_result->sight.in_shadow
+		&& tuple_compare_test(&comps_expected->reflectv, &comps_result->reflectv)
 		&& int_compare_test(&comps_expected->inside, &comps_result->inside))
 		return (1);
 	return (0);

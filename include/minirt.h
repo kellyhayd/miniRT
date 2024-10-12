@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:01:38 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/10/12 08:23:15 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/12 08:36:50 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,6 +223,7 @@ typedef struct s_comps
 	t_point		point;
 	t_point		over_point;
 	t_sight		sight;
+	t_vector	reflectv;
 	int			inside;
 }	t_comps;
 

@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 21:41:13 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/10/12 08:28:40 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/12 08:42:12 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -296,10 +296,10 @@ void	print_ko_comps(int num_test, void *expected, void *result)
 
 	printf(PURPLE "%2d" RESET " - " RED "[ ✗ ] " RESET
 		"Expected: t (%.2lf) shape_type (%s) point (%.2lf, %.2lf, %.2lf) over_point (%.2lf, %.2lf, %.2lf)"
-		"eye (%.2lf, %.2lf, %.2lf) normal (%.2lf, %.2lf, %.2lf) in_shadow (%d) inside (%d)\n"
+		"eye (%.2lf, %.2lf, %.2lf) normal (%.2lf, %.2lf, %.2lf) in_shadow (%d) reflectv(%.2lf, %.2lf, %.2lf) inside (%d)\n"
 
 		"\t\tResult: t (%.2lf) shape_type (%s) point (%.2lf, %.2lf, %.2lf) over_point (%.2lf, %.2lf, %.2lf)"
-		"eye (%.2lf, %.2lf, %.2lf) normal (%.2lf, %.2lf, %.2lf) in_shadow (%d) inside (%d)\n",
+		"eye (%.2lf, %.2lf, %.2lf) normal (%.2lf, %.2lf, %.2lf) in_shadow (%d) reflectv(%.2lf, %.2lf, %.2lf) inside (%d)\n",
 		num_test,
 
 		comps_expected->t, get_shape_type(comps_expected->object.shape_type),
@@ -307,14 +307,18 @@ void	print_ko_comps(int num_test, void *expected, void *result)
 		comps_expected->over_point.x, comps_expected->over_point.y, comps_expected->over_point.z,
 		comps_expected->sight.eye.x, comps_expected->sight.eye.y, comps_expected->sight.eye.z,
 		comps_expected->sight.normal.x, comps_expected->sight.normal.y, comps_expected->sight.normal.z,
-		comps_expected->sight.in_shadow, comps_expected->inside,
+		comps_expected->sight.in_shadow,
+		comps_expected->reflectv.x, comps_expected->reflectv.y, comps_expected->reflectv.z,
+		comps_expected->inside,
 
 		comps_result->t, get_shape_type(comps_result->object.shape_type),
 		comps_result->point.x, comps_result->point.y, comps_result->point.z,
 		comps_result->over_point.x, comps_result->over_point.y, comps_result->over_point.z,
 		comps_result->sight.eye.x, comps_result->sight.eye.y, comps_result->sight.eye.z,
 		comps_result->sight.normal.x, comps_result->sight.normal.y, comps_result->sight.normal.z,
-		comps_result->sight.in_shadow, comps_result->inside
+		comps_result->sight.in_shadow,
+		comps_result->reflectv.x, comps_result->reflectv.y, comps_result->reflectv.z,
+		comps_result->inside
 	);
 }
 
