@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 07:33:10 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/05 08:41:59 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/12 14:17:40 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,9 @@ static t_color	render_pixel(t_camera c, t_world w, int x, int y)
 		{
 			ray = ray_for_pixel(c, x, y, aa_data);
 			colors[(int) aa_data.sample_x + (int)(aa_data.sample_y
-					* w.pixel_sampling)] = color_at(w, ray);
+					* w.pixel_sampling)] = color_at(w, ray, 4); // color_at ganhou novo argumento (depth),
+																// precisa verificar como preencher aqui
+																// setei 4 por recomendação do livro (default)
 			aa_data.sample_x++;
 		}
 		aa_data.sample_y++;

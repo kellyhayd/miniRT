@@ -425,3 +425,4 @@ gmon.out
 output.png
 prof
 *.ppm
+tests_reflection

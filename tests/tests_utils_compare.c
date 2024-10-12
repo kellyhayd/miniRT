@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:18:05 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/29 17:06:34 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/12 08:40:31 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,6 +183,7 @@ int	material_compare_test(void *expected, void *result)
 		&& float_compare_test(&material_expected->diffuse, &material_result->diffuse)
 		&& float_compare_test(&material_expected->specular, &material_result->specular)
 		&& float_compare_test(&material_expected->shininess, &material_result->shininess)
+		&& float_compare_test(&material_expected->reflective, &material_result->reflective)
 		&& color_compare_test(&material_expected->color, &material_result->color)
 		&& pattern_compare_test(&material_expected->pattern, &material_result->pattern))
 		return (1);
@@ -271,6 +272,7 @@ int	comps_compare_test(void *expected, void *result)
 		&& tuple_compare_test(&comps_expected->sight.eye, &comps_result->sight.eye)
 		&& tuple_compare_test(&comps_expected->sight.normal, &comps_result->sight.normal)
 		&& comps_expected->sight.in_shadow == comps_result->sight.in_shadow
+		&& tuple_compare_test(&comps_expected->reflectv, &comps_result->reflectv)
 		&& int_compare_test(&comps_expected->inside, &comps_result->inside))
 		return (1);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 08:14:46 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/05 08:44:06 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/12 14:11:57 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,16 +79,18 @@ t_comps	prepare_computations(t_hit hit, t_ray ray)
 		comps.inside = true;
 		comps.sight.normal = tuple_negate(comps.sight.normal);
 	}
+	comps.reflectv = reflect(ray.direction, comps.sight.normal);
 	comps.over_point = tuple_add(comps.point,
 			tuple_multiply(comps.sight.normal, EPSILON)
 			);
 	return (comps);
 }
 
-t_color	shade_hit(t_world world, t_comps comps)
+t_color	shade_hit(t_world world, t_comps comps, int depth)
 {
 	t_color	color_shaded;
 	t_light	*aux;
+	t_color	color_reflected;
 
 	color_shaded = color(0, 0, 0);
 	aux = world.light;
@@ -106,10 +108,11 @@ t_color	shade_hit(t_world world, t_comps comps)
 		);
 		aux = aux->next;
 	}
-	return (color_shaded);
+	color_reflected = reflected_color(world, comps, depth);
+	return (color_add(color_shaded, color_reflected));
 }
 
-t_color	color_at(t_world w, t_ray r)
+t_color	color_at(t_world w, t_ray r, int depth)
 {
 	t_color	color_at_hit;
 	t_comps	comps;
@@ -122,7 +125,7 @@ t_color	color_at(t_world w, t_ray r)
 	if (nearest_hit)
 	{
 		comps = prepare_computations(*nearest_hit, r);
-		color_at_hit = shade_hit(w, comps);
+		color_at_hit = shade_hit(w, comps, depth);
 	}
 	hit_clear_list(&hits);
 	return (color_at_hit);

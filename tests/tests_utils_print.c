@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 21:41:13 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/29 07:45:20 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/12 09:37:40 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,8 @@ void	print_ko_color(int num_test, void *expected, void *result)
 	t_color	*result_color = result;
 
 	printf(PURPLE "%2d" RESET " - " RED "[ ✗ ] " RESET
-		"Expected: (%.2lf, %.2lf, %.2lf) "
-		"Result: (%.2lf, %.2lf, %.2lf)\n",
+		"Expected: (%.5lf, %.5lf, %.5lf) "
+		"Result: (%.5lf, %.5lf, %.5lf)\n",
 		num_test,
 		expected_color->r, expected_color->g, expected_color->b,
 		result_color->r, result_color->g, result_color->b
@@ -243,15 +243,15 @@ void	print_ko_material(int num_test, void *expected, void *result)
 	t_material	*material_result = result;
 
 	printf(PURPLE "%2d" RESET " - " RED "[ ✗ ] " RESET
-		"Expected: ambient (%.2lf) diffuse (%.2lf) specular (%.2lf) shininess (%.2lf) color (%.2lf, %.2lf, %.2lf)\n"
-		"\t\tResult: ambient (%.2lf) diffuse (%.2lf) specular (%.2lf) shininess (%.2lf) color (%.2lf, %.2lf, %.2lf)\n",
+		"Expected: ambient (%.2lf) diffuse (%.2lf) specular (%.2lf) shininess (%.2lf) reflective (%.2lf) color (%.2lf, %.2lf, %.2lf)\n"
+		"\t\tResult: ambient (%.2lf) diffuse (%.2lf) specular (%.2lf) shininess (%.2lf) reflective (%.2lf) color (%.2lf, %.2lf, %.2lf)\n",
 		num_test,
 
 		material_expected->ambient, material_expected->diffuse, material_expected->specular, material_expected->shininess,
-		material_expected->color.r, material_expected->color.g, material_expected->color.b,
+		material_expected->reflective, material_expected->color.r, material_expected->color.g, material_expected->color.b,
 
 		material_result->ambient, material_result->diffuse, material_result->specular, material_result->shininess,
-		material_result->color.r, material_result->color.g, material_result->color.b
+		material_result->reflective, material_result->color.r, material_result->color.g, material_result->color.b
 	);
 }
 
@@ -296,10 +296,10 @@ void	print_ko_comps(int num_test, void *expected, void *result)
 
 	printf(PURPLE "%2d" RESET " - " RED "[ ✗ ] " RESET
 		"Expected: t (%.2lf) shape_type (%s) point (%.2lf, %.2lf, %.2lf) over_point (%.2lf, %.2lf, %.2lf)"
-		"eye (%.2lf, %.2lf, %.2lf) normal (%.2lf, %.2lf, %.2lf) in_shadow (%d) inside (%d)\n"
+		"eye (%.2lf, %.2lf, %.2lf) normal (%.2lf, %.2lf, %.2lf) in_shadow (%d) reflectv(%.2lf, %.2lf, %.2lf) inside (%d)\n"
 
 		"\t\tResult: t (%.2lf) shape_type (%s) point (%.2lf, %.2lf, %.2lf) over_point (%.2lf, %.2lf, %.2lf)"
-		"eye (%.2lf, %.2lf, %.2lf) normal (%.2lf, %.2lf, %.2lf) in_shadow (%d) inside (%d)\n",
+		"eye (%.2lf, %.2lf, %.2lf) normal (%.2lf, %.2lf, %.2lf) in_shadow (%d) reflectv(%.2lf, %.2lf, %.2lf) inside (%d)\n",
 		num_test,
 
 		comps_expected->t, get_shape_type(comps_expected->object.shape_type),
@@ -307,14 +307,18 @@ void	print_ko_comps(int num_test, void *expected, void *result)
 		comps_expected->over_point.x, comps_expected->over_point.y, comps_expected->over_point.z,
 		comps_expected->sight.eye.x, comps_expected->sight.eye.y, comps_expected->sight.eye.z,
 		comps_expected->sight.normal.x, comps_expected->sight.normal.y, comps_expected->sight.normal.z,
-		comps_expected->sight.in_shadow, comps_expected->inside,
+		comps_expected->sight.in_shadow,
+		comps_expected->reflectv.x, comps_expected->reflectv.y, comps_expected->reflectv.z,
+		comps_expected->inside,
 
 		comps_result->t, get_shape_type(comps_result->object.shape_type),
 		comps_result->point.x, comps_result->point.y, comps_result->point.z,
 		comps_result->over_point.x, comps_result->over_point.y, comps_result->over_point.z,
 		comps_result->sight.eye.x, comps_result->sight.eye.y, comps_result->sight.eye.z,
 		comps_result->sight.normal.x, comps_result->sight.normal.y, comps_result->sight.normal.z,
-		comps_result->sight.in_shadow, comps_result->inside
+		comps_result->sight.in_shadow,
+		comps_result->reflectv.x, comps_result->reflectv.y, comps_result->reflectv.z,
+		comps_result->inside
 	);
 }
 

@@ -6,11 +6,23 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 15:49:48 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/05 08:55:17 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/12 14:12:49 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+t_color	reflected_color(t_world world, t_comps comps, int depth)
+{
+	t_ray	reflective_ray;
+	t_color	reflective_color;
+
+	if (comps.object.material.reflective == 0 || depth < 1)
+		return (color(0, 0, 0));
+	reflective_ray = ray(comps.over_point, comps.reflectv);
+	reflective_color = color_at(world, reflective_ray, depth - 1);
+	return (color_multiply(reflective_color, comps.object.material.reflective));
+}
 
 t_vector	local_normal_at(t_shape s, t_point obj_point)
 {
@@ -25,7 +37,7 @@ t_vector	local_normal_at(t_shape s, t_point obj_point)
 	else if (s.shape_type == CONE)
 		normal = normal_at_cone(s, obj_point);
 	else
-		normal = (t_vector) {0};		// Não sei se precisa disso
+		normal = (t_vector) {0, 0, 0, 0};
 	return (normal);
 }
 

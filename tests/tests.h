@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 23:44:58 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/29 07:46:15 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/12 14:23:02 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	pattern_compare_test(void *expected, void *result);
 
 // Prints
 
+void	print_ok(int num_test);
 void	print_result(int num_test, void *expected, void *result,
 						int (*compare)(void *, void *),
 						void (*print_ko)(int, void *, void *));
