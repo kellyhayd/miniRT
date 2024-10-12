@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 08:14:46 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/12 11:03:55 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/12 14:11:57 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ t_comps	prepare_computations(t_hit hit, t_ray ray)
 	return (comps);
 }
 
-t_color	shade_hit(t_world world, t_comps comps)
+t_color	shade_hit(t_world world, t_comps comps, int depth)
 {
 	t_color	color_shaded;
 	t_light	*aux;
@@ -108,11 +108,11 @@ t_color	shade_hit(t_world world, t_comps comps)
 		);
 		aux = aux->next;
 	}
-	color_reflected = reflected_color(world, comps);
+	color_reflected = reflected_color(world, comps, depth);
 	return (color_add(color_shaded, color_reflected));
 }
 
-t_color	color_at(t_world w, t_ray r)
+t_color	color_at(t_world w, t_ray r, int depth)
 {
 	t_color	color_at_hit;
 	t_comps	comps;
@@ -125,7 +125,7 @@ t_color	color_at(t_world w, t_ray r)
 	if (nearest_hit)
 	{
 		comps = prepare_computations(*nearest_hit, r);
-		color_at_hit = shade_hit(w, comps);
+		color_at_hit = shade_hit(w, comps, depth);
 	}
 	hit_clear_list(&hits);
 	return (color_at_hit);

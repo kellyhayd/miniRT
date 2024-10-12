@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:01:38 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/10/12 09:02:24 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/12 14:13:36 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -389,7 +389,7 @@ t_camera	camera(double hsize, double vsize, double field_of_view);
 //                                 reflection                                 //
 // -------------------------------------------------------------------------- //
 
-t_color		reflected_color(t_world world, t_comps comps);
+t_color		reflected_color(t_world world, t_comps comps, int depth);
 
 // -------------------------------------------------------------------------- //
 //                                   utils                                    //
@@ -413,8 +413,8 @@ void		world_clear(t_world *world_to_clear);
 
 // Não sei categorizar, mas faz parte do world
 t_comps		prepare_computations(t_hit hit, t_ray ray);
-t_color		shade_hit(t_world world, t_comps comps);
-t_color		color_at(t_world w, t_ray r);
+t_color		shade_hit(t_world world, t_comps comps, int depth);
+t_color		color_at(t_world w, t_ray r, int depth);
 
 // Coisas da camera
 t_matrix	view_transform(t_point from, t_point to, t_vector up);
