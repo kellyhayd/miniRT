@@ -76,6 +76,7 @@ static t_color	render_pixel(t_camera c, t_world w, int x, int y)
 					* w.pixel_sampling)] = color_at(w, ray, 4); // color_at ganhou novo argumento (depth),
 																// precisa verificar como preencher aqui
 																// setei 4 por recomendação do livro (default)
+																// Dá pra colocar em uma variável no t_world
 			aa_data.sample_x++;
 		}
 		aa_data.sample_y++;

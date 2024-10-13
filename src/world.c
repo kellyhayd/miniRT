@@ -81,8 +81,7 @@ t_comps	prepare_computations(t_hit hit, t_ray ray)
 	}
 	comps.reflectv = reflect(ray.direction, comps.sight.normal);
 	comps.over_point = tuple_add(comps.point,
-			tuple_multiply(comps.sight.normal, EPSILON)
-			);
+			tuple_multiply(comps.sight.normal, EPSILON));
 	return (comps);
 }
 

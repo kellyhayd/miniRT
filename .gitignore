@@ -414,15 +414,15 @@ tests_planes
 tests_cylinder
 tests_cone
 tests_patterns
+tests_reflection
 
 # Object files
 *.o
 *.a
 build
+*.ppm
 
 # Profiling files
 gmon.out
 output.png
 prof
-*.ppm
-tests_reflection

@@ -10,6 +10,7 @@ t_canvas	render_image(void)
 	floor.material.pattern = ring_pattern(color(1, 1, 0), color(0, 1, 1));
 	set_pattern_transformation(&floor.material.pattern, mx_multiply(scaling(2, 2, 2), rotation_y(30 * M_PI / 180)));
 	floor.material.color = color(0.3, 0.3, 0.3);
+	floor.material.reflective = 0.5;
 
 	// SPHERES
 	t_shape	middle = sphere();
@@ -69,7 +70,7 @@ t_canvas	render_image(void)
 
 	add_light(&world_to_render.light, light1);
 
-	world_to_render.pixel_sampling = 4;
+	world_to_render.pixel_sampling = 1;
 
 	t_canvas	canvas = render(camera_view, world_to_render);
 

@@ -4,40 +4,39 @@
 void	test_reflectivity_for_the_default_material(int num_test)
 {
 	// ARRANGE
-	t_material	expected;
-	t_material	result;
-
-	expected = material();
-	expected.reflective = 0.0;
+	t_material	default_material = material();
+	double		expected_reflective = 0.0;
+	double		result_reflective = 0.0;
 
 	// ACT
-	result = material();
+	result_reflective = default_material.reflective;
 
 	// ASSERT
-	print_result(num_test, &expected, &result, material_compare_test, print_ko_material);
+	print_result(num_test, &expected_reflective, &result_reflective, float_compare_test, print_ko_float);
 }
 
 // TEST 02
 void	test_precomputing_the_reflection_vector(int num)
 {
 	// ARRANGE
-	t_ray	r;
-	t_hit	i;
-	t_shape	shape;
-	t_comps	expected;
-	t_comps	result;
+	t_ray		r;
+	t_hit		i;
+	t_shape		shape;
+	t_comps		comps;
+	t_vector	expected_reflectv;
+	t_vector	result_reflectv;
 
 	shape = plane();
 	r = ray(point(0, 1, -1), vector(0, -sqrt(2) / 2, sqrt(2) / 2));
 	i = intersection(sqrt(2), shape);
-	expected = prepare_computations(i, r);
-	expected.reflectv = vector(0, sqrt(2) / 2, sqrt(2) / 2);
+	expected_reflectv = vector(0, sqrt(2) / 2, sqrt(2) / 2);
 
 	// ACT
-	result = prepare_computations(i, r);
+	comps = prepare_computations(i, r);
+	result_reflectv = comps.reflectv;
 
 	// ASSERT
-	print_result(num, &expected, &result, comps_compare_test, print_ko_comps);
+	print_result(num, &expected_reflectv, &result_reflectv, tuple_compare_test, print_ko_tuple);
 }
 
 // TEST 03
@@ -46,25 +45,26 @@ void	test_the_reflected_color_for_a_nonreflective_material(int num_test)
 	// ARRANGE
 	t_world	w;
 	t_ray	r;
-	t_shape	*shape;
 	t_hit	i;
+	t_shape	shape;
 	t_comps	comps;
-	t_color	expected;
-	t_color	result;
+	t_color	expected_color;
+	t_color	result_result;
 
 	w = default_world();
 	r = ray(point(0, 0, 0), vector(0, 0, 1));
-	shape = w.shape->next;
-	shape->material.ambient = 1;
-	i = intersection(1, *shape);
+	shape = *w.shape->next;
+	shape.material.ambient = 1;
+
+	i = intersection(1, shape);
 	comps = prepare_computations(i, r);
-	expected = color(0, 0, 0);
+	expected_color = color(0, 0, 0);
 
 	// ACT
-	result = reflected_color(w, comps, 4);
+	result_result = reflected_color(w, comps, 1);
 
 	// ASSERT
-	print_result(num_test, &expected, &result, color_compare_test, print_ko_color);
+	print_result(num_test, &expected_color, &result_result, color_compare_test, print_ko_color);
 
 	world_clear(&w);
 }
@@ -91,14 +91,15 @@ void	test_the_reflected_color_for_a_reflective_material(int num_test)
 
 	// TODO: there's a difference in the 5th decimal place
 	expected = color(0.19032, 0.2379, 0.14274);
+	// expected = color(0.19033, 0.23792, 0.14274);
 
 	// ACT
-	result = reflected_color(w, comps, 4);
+	result = reflected_color(w, comps, 1);
 
 	// ASSERT
 	print_result(num_test, &expected, &result, color_compare_test, print_ko_color);
 
-	// free(shape);
+	// CLEAR
 	world_clear(&w);
 }
 
@@ -108,32 +109,31 @@ void	test_shade_hit_with_a_reflective_material(int num_test)
 	// ARRANGE
 	t_world	w;
 	t_ray	r;
-	t_shape	*shape;
+	t_shape	shape;
 	t_hit	i;
 	t_comps	comps;
 	t_color	expected;
 	t_color	result;
 
 	w = default_world();
-	shape = malloc(sizeof(t_shape));
-	*shape = plane();
-	shape->material.reflective = 0.5;
-	set_transformation(shape, translation(0, -1, 0));
-	add_shape(&w.shape, *shape);
+	shape = plane();
+	shape.material.reflective = 0.5;
+	set_transformation(&shape, translation(0, -1, 0));
+	add_shape(&w.shape, shape);
 	r = ray(point(0, 0, -3), vector(0, -sqrt(2) / 2, sqrt(2) / 2));
-	i = intersection(sqrt(2), *shape);
+	i = intersection(sqrt(2), shape);
 	comps = prepare_computations(i, r);
 
 	// TODO: there's a difference in the 5th decimal place
 	expected = color(0.87677, 0.92436, 0.82918);
 
 	// ACT
-	result = shade_hit(w, comps, 4);
+	result = shade_hit(w, comps, 1);
 
 	// ASSERT
 	print_result(num_test, &expected, &result, color_compare_test, print_ko_color);
 
-	free(shape);
+	// CLEAR
 	world_clear(&w);
 }
 
@@ -168,6 +168,7 @@ void	test_color_at_with_mutually_reflective_surfaces(int num_test)
 	// ASSERT
 	print_result(num_test, &expected, &result, color_compare_test, print_ko_color);
 
+	// CLEAR
 	world_clear(&w);
 }
 
@@ -200,6 +201,7 @@ void	test_the_reflected_color_at_the_maximum_recursive_depth(int num_test)
 	// ASSERT
 	print_result(num_test, &expected, &result, color_compare_test, print_ko_color);
 
+	// CLEAR
 	world_clear(&w);
 }
 
