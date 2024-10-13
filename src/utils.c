@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 21:45:10 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/29 10:25:07 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/13 14:23:54 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,9 @@ void	mx_set(t_matrix *matrix1, int y, int x, double value)
 void	ft_error(char *message)
 {
 	ft_putstr_fd(RED, 2);
-	ft_putstr_fd("Error\n", 2);
+	ft_putstr_fd("Error: ", 2);
+	ft_putstr_fd(RESET, 2);
+	ft_putstr_fd(ORANGE, 2);
 	ft_putstr_fd(message, 2);
 	ft_putstr_fd(RESET, 2);
 	exit(EXIT_FAILURE);
