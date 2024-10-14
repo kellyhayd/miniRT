@@ -6,7 +6,7 @@
 #    By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/10 19:29:07 by danbarbo          #+#    #+#              #
-#    Updated: 2024/10/13 21:11:04 by krocha-h         ###   ########.fr        #
+#    Updated: 2024/10/13 21:42:52 by krocha-h         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ RESET	= \033[0m
 
 SRC	= ${addprefix src/, \
 			ft_array_size.c \
+			ft_atof.c \
 			ft_atoi.c \
 			ft_bzero.c \
 			ft_calloc.c \

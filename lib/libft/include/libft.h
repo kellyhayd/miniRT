@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 13:36:57 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/10/13 21:14:14 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/13 23:34:47 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int		ft_isascii(int c);
 int		ft_isprint(int c);
 int		ft_toupper(int c);
 int		ft_tolower(int c);
+int		ft_isspace(char c);
 
 /* allocation and manipulation */
 /* string */
@@ -46,6 +47,7 @@ char	*ft_strrchr(const char *s, int c);
 char	*ft_strnstr(const char *str, const char *to_find, size_t n);
 char	*ft_strdup(const char *s);
 size_t	ft_array_size(char **array);
+double	ft_atof(const char *str);
 
 /* memory */
 
