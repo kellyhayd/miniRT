@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:01:38 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/10/12 14:13:36 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/13 22:33:39 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,21 @@
 # include <unistd.h>
 # include <math.h>
 # include <pthread.h>
+# include <fcntl.h>
 
 # include "libft.h"
+# include "get_next_line.h"
 # include "MLX42/MLX42.h"
 
-enum e_shapes
+enum e_tokens
 {
+	AMBIENT,
+	CAMERA,
+	LIGHT,
 	SPHERE,
 	PLANE,
 	CYLINDER,
-	CONE,
-	// TRIANGLE,
+	CONE
 };
 
 enum e_patterns
@@ -67,7 +71,7 @@ typedef struct s_shape	t_shape;
 // typedef struct s_sphere	t_sphere;
 typedef struct s_light	t_light;
 
-typedef enum e_shapes t_shapes;
+typedef enum e_tokens t_tokens;
 typedef enum e_patterns t_patterns;
 
 struct s_tuple
@@ -161,7 +165,7 @@ struct s_shape
 	t_matrix	inverse;
 	t_matrix	transposed_inverse;
 	t_material	material;
-	t_shapes	shape_type;
+	t_tokens	shape_type;
 	t_shape		*next;
 };
 
@@ -390,6 +394,14 @@ t_camera	camera(double hsize, double vsize, double field_of_view);
 // -------------------------------------------------------------------------- //
 
 t_color		reflected_color(t_world world, t_comps comps, int depth);
+
+// -------------------------------------------------------------------------- //
+//                                  parsing                                   //
+// -------------------------------------------------------------------------- //
+bool		parse(int fd, t_world *new_world);
+bool		parse_line(char *line, t_world *world);
+int			get_token(char *line);
+bool		parse_light(char *line, t_world *world);
 
 // -------------------------------------------------------------------------- //
 //                                   utils                                    //

@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:28:32 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/10/13 14:31:07 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/13 23:54:59 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,15 @@ void	check_extension(char *filename)
 
 int	main(int argc, char **argv)
 {
+	int		fd;
+	t_world	new_world;
+
 	if (argc != 2)
 		ft_error("Usage: ./miniRT [scene.rt]\n");
 	check_extension(argv[1]);
+	// new_world = world();
+	// fd = open(argv[1], O_RDONLY);
+	// parse(fd, &new_world);
 
 	return (0);
 }
