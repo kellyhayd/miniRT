@@ -14,17 +14,17 @@
 
 void	print_rendering_progress(int hsize, int vsize, int x, int y)
 {
-	int		i;
-	double	progress;
+	int	i;
+	int	progress;
 
-	progress = ((double)(y * hsize + x)) / ((double)(hsize * vsize)) * 100;
-	printf("\r[");
+	progress = (((y + 1) * hsize * 100) / (hsize * vsize));
+	printf("\033[uProgress: [");
 	i = 0;
 	while (i < 50)
 	{
 		if (i < progress / 2)
 			printf("=");
-		else if (fabs(progress / 2 - i) < 1)
+		else if (abs((progress / 2) - i) < 1)
 			printf(">");
 		else if (i % 5 == 0)
 			printf("o");
@@ -32,8 +32,8 @@ void	print_rendering_progress(int hsize, int vsize, int x, int y)
 			printf(" ");
 		i++;
 	}
-	printf("] %.2f%%", progress);
-	// fflush(stdout);
+	printf("] %d%%", progress);
+	fflush(stdout);
 }
 
 t_color	color_average(t_color *colors, int size)
