@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 20:15:43 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/13 23:54:40 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/15 20:37:28 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ bool	is_all_numbers(char **split)
 		j = 0;
 		if (split[i][j] == '-')
 			j++;
-		while (split[i][j])
+		while (split[i][j] != '\0' && split[i][j] != '\n')
 		{
 			if (!ft_isdigit(split[i][j]) && split[i][j] != '.')
 				return (false);
@@ -122,7 +122,6 @@ bool	parse_light(char *line, t_world *world)
 			ft_free_split(splitted);
 			return (false);
 		}
-	printf("position: %f, %f, %f\n", position.x, position.y, position.z);
 	add_light(&world->light, point_light(position, color_multiply(new_color, bright)));
 	ft_free_split(splitted);
 	return (true);
