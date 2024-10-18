@@ -228,6 +228,7 @@ typedef struct s_comps
 	t_shape		object;
 	t_point		point;
 	t_point		over_point;
+	t_point		under_point;
 	t_sight		sight;
 	t_vector	reflectv;
 }	t_comps;

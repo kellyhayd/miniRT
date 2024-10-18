@@ -315,6 +315,32 @@ void	test_finding_n1_and_n2_at_various_intersections(int num_test)
 	hit_clear_list(&xs);
 }
 
+void	test_under_point_is_offset_below_the_surface(int num_test)
+{
+	// ARRANGE
+	t_ray	r = ray(point(0, 0, -5), vector(0, 0, 1));
+
+	t_shape	shape = glass_sphere();
+	set_transformation(&shape, translation(0, 0, 1));
+
+	t_hit	i = intersection(5, shape);
+	t_hit	*hit_list = NULL;
+	add_intersection(&hit_list, i);
+
+	t_comps	comps = prepare_computations(i, r, hit_list);
+	int		expected = 1;
+	int		result;
+
+	// ACT
+	result = comps.under_point.z > EPSILON / 2;
+
+	// ASSERT
+	print_result(num_test, &expected, &result, int_compare_test, print_ko_int);
+
+	// CLEAR
+	hit_clear_list(&hit_list);
+}
+
 int	main(void)
 {
 	void	(*tests[])(int) =
@@ -329,6 +355,7 @@ int	main(void)
 		test_transparency_and_refractive_index_for_the_default_material,	// 08
 		test_a_helper_for_producing_a_sphere_with_a_glassy_material,		// 09
 		test_finding_n1_and_n2_at_various_intersections,					// 10
+		test_under_point_is_offset_below_the_surface,						// 11
 	};
 
 	printf("\n%sTESTING REFLECTIONS:%s\n", YELLOW, RESET);

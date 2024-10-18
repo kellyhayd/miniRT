@@ -17,7 +17,7 @@ t_hit	*hit_list_copy(t_hit *hit_list)
 
 t_comps	prepare_computations(t_hit hit, t_ray ray, t_hit *hit_list)
 {
-	t_comps	comps = {0};
+	t_comps	comps;
 
 	comps.t = hit.t;
 	comps.object = hit.object;
@@ -33,6 +33,8 @@ t_comps	prepare_computations(t_hit hit, t_ray ray, t_hit *hit_list)
 	}
 	comps.reflectv = reflect(ray.direction, comps.sight.normal);
 	comps.over_point = tuple_add(comps.point,
+			tuple_multiply(comps.sight.normal, EPSILON));
+	comps.under_point = tuple_subtract(comps.point,
 			tuple_multiply(comps.sight.normal, EPSILON));
 	calculate_refractive_indexes(&comps, hit_list);
 
