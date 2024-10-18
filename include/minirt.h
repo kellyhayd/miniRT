@@ -144,12 +144,15 @@ typedef struct s_material
 	double		specular;
 	double		shininess;
 	double		reflective;
+	double		transparency;
+	double		refractive_index;
 	t_color		color;
 	t_pattern	pattern;
 }	t_material;
 
 struct s_shape
 {
+	int			id;
 	union
 	{
 		t_sphere	sphere_shape;
@@ -219,12 +222,14 @@ typedef struct s_camera
 typedef struct s_comps
 {
 	double		t;
+	double		n1;
+	double		n2;
+	int			inside;
 	t_shape		object;
 	t_point		point;
 	t_point		over_point;
 	t_sight		sight;
 	t_vector	reflectv;
-	int			inside;
 }	t_comps;
 
 typedef struct s_canvas
@@ -342,6 +347,9 @@ t_ray		ray_transform(t_ray ray, t_matrix matrix);
 //                                   shapes                                   //
 // -------------------------------------------------------------------------- //
 
+// criação dos shapes
+t_shape	new_shape(void);
+
 // spheres
 t_shape		sphere(void);
 void		intersect_sphere(t_hit **hit_list, t_shape s, t_ray r);
@@ -376,7 +384,6 @@ bool		is_shadowed(t_world w, t_point position, t_light *light);
 //                                   world                                    //
 // -------------------------------------------------------------------------- //
 t_world		world(void);
-t_world		default_world(void);
 t_hit		*intersect_world(t_world w, t_ray ray);
 
 // -------------------------------------------------------------------------- //
@@ -400,6 +407,7 @@ void		ft_error(char *message);
 int			almost_zero(float num);
 void		swap(double *a, double *b);
 void		join_threads(pthread_t *threads, int thread_count);
+float		fternary(int condition, float if_true, float if_false);
 
 // NÃO SEI ONDE POR
 // Funções de adicionar coisas a alguma lista, está relacionado ao t_world
@@ -412,7 +420,7 @@ void		light_clear_list(t_light **light_list);
 void		world_clear(t_world *world_to_clear);
 
 // Não sei categorizar, mas faz parte do world
-t_comps		prepare_computations(t_hit hit, t_ray ray);
+t_comps		prepare_computations(t_hit hit, t_ray ray, t_hit *hit_list);
 t_color		shade_hit(t_world world, t_comps comps, int depth);
 t_color		color_at(t_world w, t_ray r, int depth);
 
@@ -469,8 +477,16 @@ t_pattern	checkers_pattern(t_color color_a, t_color color_b);
 t_color		checkers_at(t_pattern pattern, t_point pattern_point);
 
 // Relacionado a camera
-void		print_rendering_progress(int hsize, int vsize, int x, int y);
+void		print_rendering_progress(int hsize, int vsize, int y);
 t_color		color_average(t_color *colors, int size);
 int			reset_threads(pthread_t *threads, int thread_count);
+
+// Funções usadas apenas em testes
+t_world		default_world(void);
+t_shape		glass_sphere(void);
+t_hit		*hit_index(t_hit *hit_list, int index);
+
+// Refraction
+void		calculate_refractive_indexes(t_comps *comps, t_hit *hit_list);
 
 #endif
