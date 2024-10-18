@@ -4,16 +4,24 @@ t_color	refracted_color(t_world w, t_comps comps, int depth)
 {
 	double	n_ratio;
 	double	cos_i;
+	double	cos_t;
 	double	sin2_t;
-	t_color	ref_color;
+	t_ray	refract_ray;
 
-	(void) w;
 	n_ratio = comps.n1 / comps.n2;
 	cos_i = dot(comps.sight.eye, comps.sight.normal);
 	sin2_t = pow(n_ratio, 2) * (1 - pow(cos_i, 2));
 	if (comps.object.material.transparency == 0 || depth == 0 || sin2_t > 1)
-		ref_color = color(0, 0, 0);
-	else
-		ref_color = color(1, 1, 1);
-	return (ref_color);
+		return (color(0, 0, 0));
+	cos_t = sqrt(1.0 - sin2_t);
+	refract_ray = ray(comps.under_point,
+		tuple_subtract(
+			tuple_multiply(comps.sight.normal, (n_ratio * cos_i) - cos_t),
+			tuple_multiply(comps.sight.eye, n_ratio)
+		)
+	);
+	return (color_multiply(
+		color_at(w, refract_ray, depth - 1),
+		comps.object.material.transparency)
+	);
 }

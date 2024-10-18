@@ -1,20 +1,5 @@
 #include "minirt.h"
 
-t_hit	*hit_list_copy(t_hit *hit_list)
-{
-	t_hit	*copy;
-	t_hit	*aux;
-
-	copy = NULL;
-	aux = hit_list;
-	while (aux)
-	{
-		add_intersection(&copy, intersection(aux->t, aux->object));
-		aux = aux->next;
-	}
-	return (copy);
-}
-
 t_comps	prepare_computations(t_hit hit, t_ray ray, t_hit *hit_list)
 {
 	t_comps	comps;
@@ -37,6 +22,5 @@ t_comps	prepare_computations(t_hit hit, t_ray ray, t_hit *hit_list)
 	comps.under_point = tuple_subtract(comps.point,
 			tuple_multiply(comps.sight.normal, EPSILON));
 	calculate_refractive_indexes(&comps, hit_list);
-
 	return (comps);
 }
