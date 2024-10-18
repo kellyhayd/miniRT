@@ -114,7 +114,7 @@ t_canvas	render(t_camera c, t_world w)
 	y = -1;
 	thread_count = 0;
 	image = create_canvas(c.hsize, c.vsize);
-	print_rendering_progress(c.hsize, c.vsize, 0, 0);
+	print_rendering_progress(c.hsize, c.vsize, 0);
 	while (++y < c.vsize)
 	{
 		if (thread_count < NUM_THREADS)
@@ -126,7 +126,7 @@ t_canvas	render(t_camera c, t_world w)
 			thread_count++;
 		}
 		thread_count = reset_threads(threads, thread_count);	// Uma pequena gambiarra
-		print_rendering_progress(c.hsize, c.vsize, 0, y);
+		print_rendering_progress(c.hsize, c.vsize, y);
 	}
 	join_threads(threads, thread_count);
 	return (image);
