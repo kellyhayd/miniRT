@@ -369,6 +369,37 @@ void	test_the_refracted_color_with_an_opaque_surface(int num_test)
 	world_clear(&w);
 }
 
+// TEST 13
+void	test_the_refracted_color_at_the_maximum_recursive_depth(int num_test)
+{
+	// ARRANGE
+	t_world	w = default_world();
+
+	t_shape	*shape = w.shape->next;
+	shape->material.transparency = 1.0;
+	shape->material.refractive_index = 1.5;
+
+	t_ray	r = ray(point(0, 0, -5), vector(0, 0, 1));
+
+	t_hit	*hit_list = NULL;
+	add_intersection(&hit_list, intersection(4, *shape));
+	add_intersection(&hit_list, intersection(6, *shape));
+
+	t_comps	comps = prepare_computations(*hit_list, r, hit_list);
+	t_color	expected = color(0, 0, 0);
+	t_color	result;
+
+	// ACT
+	result = refracted_color(w, comps, 0);
+
+	// ASSERT
+	print_result(num_test, &expected, &result, color_compare_test, print_ko_color);
+
+	// CLEAR
+	hit_clear_list(&hit_list);
+	world_clear(&w);
+}
+
 int	main(void)
 {
 	void	(*tests[])(int) =
@@ -384,6 +415,8 @@ int	main(void)
 		test_a_helper_for_producing_a_sphere_with_a_glassy_material,		// 09
 		test_finding_n1_and_n2_at_various_intersections,					// 10
 		test_under_point_is_offset_below_the_surface,						// 11
+		test_the_refracted_color_with_an_opaque_surface,					// 12
+		test_the_refracted_color_at_the_maximum_recursive_depth,			// 13
 	};
 
 	printf("\n%sTESTING REFLECTIONS:%s\n", YELLOW, RESET);
