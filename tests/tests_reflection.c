@@ -315,6 +315,7 @@ void	test_finding_n1_and_n2_at_various_intersections(int num_test)
 	hit_clear_list(&xs);
 }
 
+// TEST 11
 void	test_under_point_is_offset_below_the_surface(int num_test)
 {
 	// ARRANGE
@@ -339,6 +340,33 @@ void	test_under_point_is_offset_below_the_surface(int num_test)
 
 	// CLEAR
 	hit_clear_list(&hit_list);
+}
+
+// TEST 12
+void	test_the_refracted_color_with_an_opaque_surface(int num_test)
+{
+	// ARRANGE
+	t_world	w = default_world();
+	t_shape	shape = *w.shape->next;
+	t_ray	r = ray(point(0, 0, -5), vector(0, 0, 1));
+
+	t_hit	*hit_list = NULL;
+	add_intersection(&hit_list, intersection(4, shape));
+	add_intersection(&hit_list, intersection(6, shape));
+
+	t_comps	comps = prepare_computations(*hit_list, r, hit_list);
+	t_color	expected = color(0, 0, 0);
+	t_color	result;
+
+	// ACT
+	result = refracted_color(w, comps, 5);
+
+	// ASSERT
+	print_result(num_test, &expected, &result, color_compare_test, print_ko_color);
+
+	// CLEAR
+	hit_clear_list(&hit_list);
+	world_clear(&w);
 }
 
 int	main(void)

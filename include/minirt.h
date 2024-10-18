@@ -489,5 +489,6 @@ t_hit		*hit_index(t_hit *hit_list, int index);
 
 // Refraction
 void		calculate_refractive_indexes(t_comps *comps, t_hit *hit_list);
+t_color		refracted_color(t_world w, t_comps comps, int depth);
 
 #endif
