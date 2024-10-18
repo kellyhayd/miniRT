@@ -400,6 +400,7 @@ void	test_the_refracted_color_at_the_maximum_recursive_depth(int num_test)
 	world_clear(&w);
 }
 
+// TEST 14
 void	test_the_refracted_color_under_total_internal_reflection(int num_test)
 {
 	// ARRANGE
@@ -430,6 +431,44 @@ void	test_the_refracted_color_under_total_internal_reflection(int num_test)
 	world_clear(&w);
 }
 
+// TEST 15
+void	test_shade_hit_with_a_transparent_material(int num_test)
+{
+	// ARRANGE
+	t_world	w = default_world();
+
+	t_shape	floor = plane();
+	set_transformation(&floor, translation(0, -1, 0));
+	floor.material.transparency = 0.5;
+	floor.material.refractive_index = 1.5;
+	add_shape(&w.shape, floor);
+
+	t_shape	ball = sphere();
+	set_transformation(&ball, translation(0, -3.5, -0.5));
+	ball.material.color = color(1, 0, 0);
+	ball.material.ambient = 0.5;
+	add_shape(&w.shape, ball);
+
+	t_ray	r = ray(point(0, 0, -3), vector(0, -sqrt(2) / 2, sqrt(2) / 2));
+
+	t_hit	*hit_list = NULL;
+	add_intersection(&hit_list, intersection(sqrt(2), floor));
+
+	t_comps	comps = prepare_computations(*hit_list, r, hit_list);
+	t_color	expected = color(0.93642, 0.68642, 0.68642);
+	t_color	result;
+
+	// ACT
+	result = shade_hit(w, comps, 5);
+
+	// ASSERT
+	print_result(num_test, &expected, &result, color_compare_test, print_ko_color);
+
+	// CLEAR
+	hit_clear_list(&hit_list);
+	world_clear(&w);
+}
+
 int	main(void)
 {
 	void	(*tests[])(int) =
@@ -448,6 +487,7 @@ int	main(void)
 		test_the_refracted_color_with_an_opaque_surface,					// 12
 		test_the_refracted_color_at_the_maximum_recursive_depth,			// 13
 		test_the_refracted_color_under_total_internal_reflection,			// 14
+		test_shade_hit_with_a_transparent_material,							// 15
 	};
 
 	printf("\n%sTESTING REFLECTIONS:%s\n", YELLOW, RESET);

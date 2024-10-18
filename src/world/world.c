@@ -69,8 +69,9 @@ t_hit	*intersect_world(t_world w, t_ray ray)
 t_color	shade_hit(t_world world, t_comps comps, int depth)
 {
 	t_color	color_shaded;
-	t_light	*aux;
 	t_color	color_reflected;
+	t_color	color_refracted;
+	t_light	*aux;
 
 	color_shaded = color(0, 0, 0);
 	aux = world.light;
@@ -89,7 +90,9 @@ t_color	shade_hit(t_world world, t_comps comps, int depth)
 		aux = aux->next;
 	}
 	color_reflected = reflected_color(world, comps, depth);
-	return (color_add(color_shaded, color_reflected));
+	color_refracted = refracted_color(world, comps, depth);
+	return (color_add(
+		color_add(color_shaded, color_reflected), color_refracted));
 }
 
 t_color	color_at(t_world w, t_ray r, int depth)
