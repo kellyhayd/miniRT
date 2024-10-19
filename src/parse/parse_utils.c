@@ -6,12 +6,23 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 10:03:33 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/19 10:03:58 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/19 10:37:04 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+/**
+ * @brief Checks if all strings in the given array are composed entirely of
+ * digits.
+ *
+ * This function iterates through each string in the provided array and
+ * verifies whether each string consists solely of numeric characters (0-9).
+ * It returns true if all strings are numeric, and false otherwise.
+ *
+ * @param split An array of strings to be checked.
+ * @return true if all strings in the array are numeric, false otherwise.
+ */
 bool	is_all_numbers(char **split)
 {
 	int	i;
@@ -34,6 +45,18 @@ bool	is_all_numbers(char **split)
 	return (true);
 }
 
+/**
+ * @brief Validates the number of elements in a split string array.
+ *
+ * This function checks if the number of elements in the provided split
+ * string array matches the expected count.
+ *
+ * @param split A pointer to an array of strings (char **), typically the
+ *              result of splitting a string.
+ * @param count The expected number of elements in the split array.
+ * @return true if the number of elements matches the expected count, false
+ *         otherwise.
+ */
 bool	validate_count(char **split, int count)
 {
 	int	i;
@@ -46,6 +69,16 @@ bool	validate_count(char **split, int count)
 	return (true);
 }
 
+/**
+ * @brief Validates if all elements in the given array of strings represent
+ *        valid color values.
+ *
+ * This function checks if each string in the provided array represents a
+ * valid color value. A valid color value is an integer between 0 and 255.
+ *
+ * @param str An array of strings to be checked.
+ * @return true if all strings represent valid color values, false otherwise.
+ */
 bool	validate_color_range(char **str)
 {
 	int	i;

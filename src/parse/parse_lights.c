@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 20:15:43 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/19 10:06:09 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/19 10:35:20 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,12 @@ bool	parse_light(char *line, t_world *world)
 		|| !parse_coordinates(splitted[1], &position) \
 		|| !parse_brightness(splitted[2], &bright) \
 		|| !parse_color(splitted[3], &new_color))
-		{
-			ft_free_split(splitted);
-			return (false);
-		}
-	add_light(&world->light, point_light(position, color_multiply(new_color, bright)));
+	{
+		ft_free_split(splitted);
+		return (false);
+	}
+	add_light(&world->light, \
+			point_light(position, color_multiply(new_color, bright)));
 	ft_free_split(splitted);
 	return (true);
 }

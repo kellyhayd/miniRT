@@ -6,12 +6,26 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 20:42:43 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/19 10:04:25 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/19 10:37:39 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+/**
+ * @brief Parses a line to extract sphere data and adds it to the world.
+ *
+ * This function takes a line of text that describes a sphere and parses it to
+ * extract the relevant sphere data. The extracted data is then added to the
+ * world structure.
+ *
+ * @param line A string containing the sphere description.
+ * @param world A pointer to the world structure where the sphere data will be
+ *              added.
+ *
+ * @return Returns true if the sphere was successfully parsed and added to the
+ *         world, false otherwise.
+ */
 bool	parse_sphere(char *line, t_world *world)
 {
 	t_point	position;
@@ -23,10 +37,10 @@ bool	parse_sphere(char *line, t_world *world)
 	if (!validate_count(splitted, 4) \
 		|| !parse_coordinates(splitted[1], &position) \
 		|| !parse_color(splitted[3], &new_color))
-		{
-			ft_free_split(splitted);
-			return (false);
-		}
+	{
+		ft_free_split(splitted);
+		return (false);
+	}
 	new_sphere = sphere();
 	new_sphere.sphere_shape.origin = position;
 	new_sphere.sphere_shape.radius = ft_atof(splitted[2]);

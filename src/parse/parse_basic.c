@@ -6,12 +6,25 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 10:02:47 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/19 10:03:15 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/19 10:34:46 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+/**
+ * @brief Parses a color from a string and stores it in a t_color structure.
+ *
+ * This function takes a string representing a color and parses it into a
+ * t_color structure. The string should be in a format that can be correctly
+ * interpreted as a color.
+ *
+ * @param splitted The string containing the color information to be parsed.
+ * @param new_color A pointer to the t_color structure where the parsed color
+ *                  will be stored.
+ * @return true if the color was successfully parsed and stored, false
+ *         otherwise.
+ */
 bool	parse_color(char *splitted, t_color *new_color)
 {
 	char	**colors;
@@ -31,6 +44,18 @@ bool	parse_color(char *splitted, t_color *new_color)
 	return (true);
 }
 
+/**
+ * @brief Parses the brightness value from a given string.
+ *
+ * This function takes a string representing the brightness value and parses
+ * it into a double. The parsed brightness value is then stored in the
+ * provided double pointer.
+ *
+ * @param splitted A string containing the brightness value to be parsed.
+ * @param brightness A pointer to a double where the parsed brightness value
+ *                   will be stored.
+ * @return true if the parsing is successful, false otherwise.
+ */
 bool	parse_brightness(char *splitted, double *brightness)
 {
 	*brightness = ft_atof(splitted);
@@ -39,6 +64,19 @@ bool	parse_brightness(char *splitted, double *brightness)
 	return (true);
 }
 
+/**
+ * @brief Parses a string containing coordinates and stores the result in a
+ * t_point structure.
+ *
+ * This function takes a string of coordinates, splits it, and converts the
+ * values into a t_point structure representing a position in 3D space.
+ *
+ * @param splitted A string containing the coordinates to be parsed.
+ * @param position A pointer to a t_point structure where the parsed coordinates
+ * will be stored.
+ * @return true if the coordinates were successfully parsed and stored, false
+ * otherwise.
+ */
 bool	parse_coordinates(char *splitted, t_point *position)
 {
 	char	**coordinates;
@@ -46,10 +84,10 @@ bool	parse_coordinates(char *splitted, t_point *position)
 	*position = point(0, 0, 0);
 	coordinates = ft_split(splitted, ',');
 	if (!validate_count(coordinates, 3) || !is_all_numbers(coordinates))
-		{
-			ft_free_split(coordinates);
-			return (false);
-		}
+	{
+		ft_free_split(coordinates);
+		return (false);
+	}
 	position->x = ft_atof(coordinates[0]);
 	position->y = ft_atof(coordinates[1]);
 	position->z = ft_atof(coordinates[2]);

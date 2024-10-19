@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:28:32 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/10/15 20:19:57 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/19 10:39:08 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int	main(int argc, char **argv)
 
 
 /*
-
 # The Basic Shapes 01
 
 # Ambient Light
@@ -67,4 +66,5 @@ L   10,12,-5             1               255,0,0
 
 # Sphere
 # <coordinates: x,y,z> <diameter> <color:red,green,blue>
-sp  0,0,0                1               255,51,255*/
+sp  0,0,0                1               255,51,255
+*/
