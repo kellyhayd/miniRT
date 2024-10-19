@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 10:03:33 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/19 10:37:04 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/19 10:56:42 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,20 @@ bool	validate_color_range(char **str)
 	while (str[i])
 	{
 		if (ft_atoi(str[i]) < 0 || ft_atoi(str[i]) > 255)
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
+bool	validate_normal_range(char **str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (ft_atof(str[i]) < -1 || ft_atof(str[i]) > 1)
 			return (false);
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:28:32 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/10/19 10:39:08 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/19 10:46:36 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,20 +51,28 @@ int	main(int argc, char **argv)
 
 # Ambient Light
 # <intensity: 0-1> <color: red, green, blue>
-A   0.1                  255,255,255
-
+A   0.2                     255,255,255
 # Camera
 # <coordinates of camera position: x,y,z> <camera view: x,y,z> <pov:x,y,z>
-C   0,15,-5              1,0,0           10
+C            -50,0,20                         0,0,0                70
 
-# Error
-# K    -40,0,30                  0.7           255,255,255
+## Error
+## K    -40,0,30                  0.7           255,255,255
 
 # Light
 # <coordinates: x,y,z> <brightness: 0-1> <color:red,green,blue>
-L   10,12,-5             1               255,0,0
+L     -40,0,30              0.7                255,255,255
+
+# Plane
+# <coordinates: x,y,z> <normal: x,y,z> <color:red,green,blue>
+pl  0,0,0                0,1.0,0           255,0,225
 
 # Sphere
 # <coordinates: x,y,z> <diameter> <color:red,green,blue>
-sp  0,0,0                1               255,51,255
+sp  0,0,20                20             255,0,0
+
+#Cylinder
+# <coordinates: x,y,z> <normal: x,y,z> <diameter> <height> <color:red,green,blue>
+cy  50.0,0.0,20.6         0,0,1.0        14.2       21.42          10,0,255
+
 */
