@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 10:40:14 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/19 11:04:50 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/19 11:11:02 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ bool	parse_plane(char *line, t_world *world)
 	new_plane.material = material();
 	new_plane.material.color = new_color;
 	add_shape(&world->shape, new_plane);
-	ft_free_split(splitted);
-	return (true);
+	return (ft_free_split(splitted), true);
 }
 
 // onde colocar a normal do plano? adicionar um campo no struct plane_shape?

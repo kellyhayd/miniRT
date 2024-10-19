@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 20:42:43 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/19 11:01:36 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/19 11:11:14 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,7 @@ bool	parse_sphere(char *line, t_world *world)
 	new_sphere.material = material();
 	new_sphere.material.color = new_color;
 	add_shape(&world->shape, new_sphere);
-	ft_free_split(splitted);
-	return (true);
+	return (ft_free_split(splitted), true);
 }
 
 /*
