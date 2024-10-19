@@ -62,15 +62,17 @@ void	intersect_sphere(t_hit **hit_list, t_shape s, t_ray r)
 	two_times_a = 2 * coefficient[0];
 	square_root = sqrt(discriminant);
 	add_intersection(hit_list,
-		intersection((-coefficient[1] - square_root) / (two_times_a), s)
-		);
+		intersection((-coefficient[1] - square_root) / (two_times_a), s));
 	add_intersection(hit_list,
-		intersection((-coefficient[1] + square_root) / (two_times_a), s)
-		);
+		intersection((-coefficient[1] + square_root) / (two_times_a), s));
 }
 
 t_vector	normal_at_sphere(t_shape sphere, t_point obj_point)
 {
+	t_vector	obj_normal;
+
 	(void) sphere;
-	return (tuple_subtract(obj_point, point(0, 0, 0)));
+	obj_normal = tuple_subtract(obj_point, point(0, 0, 0));
+	obj_normal.w = 0;
+	return (normalize(obj_normal));
 }

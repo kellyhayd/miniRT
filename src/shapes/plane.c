@@ -24,12 +24,12 @@ t_shape	plane(void)
 
 void	intersect_plane(t_hit **hit_list, t_shape s, t_ray r)
 {
+	double	t;
+
 	if (fabs(r.direction.y) < EPSILON)
 		return ;
-	add_intersection(
-		hit_list,
-		intersection(-r.origin.y / r.direction.y, s)
-		);
+	t = -r.origin.y / r.direction.y;
+	add_intersection(hit_list, intersection(t, s));
 }
 
 t_vector	normal_at_plane(t_shape plane, t_point obj_point)
