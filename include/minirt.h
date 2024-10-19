@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:01:38 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/10/13 22:33:39 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/18 17:35:46 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -402,6 +402,10 @@ bool		parse(int fd, t_world *new_world);
 bool		parse_line(char *line, t_world *world);
 int			get_token(char *line);
 bool		parse_light(char *line, t_world *world);
+bool		parse_coordinates(char *splitted, t_point *position);
+bool		parse_brightness(char *splitted, double *brightness);
+bool		parse_color(char *splitted, t_color *new_color);
+bool		parse_sphere(char *line, t_world *world);
 
 // -------------------------------------------------------------------------- //
 //                                   utils                                    //
@@ -412,6 +416,9 @@ void		ft_error(char *message);
 int			almost_zero(float num);
 void		swap(double *a, double *b);
 void		join_threads(pthread_t *threads, int thread_count);
+bool		is_all_numbers(char **split);
+bool		validate_count(char **split, int count);
+bool		validate_color_range(char **str);
 
 // NÃO SEI ONDE POR
 // Funções de adicionar coisas a alguma lista, está relacionado ao t_world

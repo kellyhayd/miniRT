@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 20:14:11 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/13 23:39:37 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/18 17:32:19 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ bool	parse_line(char *line, t_world *world)
 	// 	return (parse_camera(line, world));
 	if (token == LIGHT)
 		return (parse_light(line, world));
-	// else if (token == SPHERE)
-	// 	return (parse_sphere(line, world));
+	else if (token == SPHERE)
+		return (parse_sphere(line, world));
 	// else if (token == PLANE)
 	// 	return (parse_plane(line, world));
 	// else if (token == CYLINDER)
