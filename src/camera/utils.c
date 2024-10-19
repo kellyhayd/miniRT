@@ -90,7 +90,10 @@ t_matrix	view_transform(t_point from, t_point to, t_vector up)
 	t_matrix	view_matrix;
 
 	forward = normalize(tuple_subtract(to, from));
-	left = cross(forward, normalize(up));
+	if (fmod(fabs(dot(forward, up)), 1) < EPSILON)
+		left = vector(-1, 0, 0);
+	else
+		left = cross(forward, normalize(up));
 	true_up = cross(left, forward);
 	orientation = identity();
 	mx_set(&orientation, 0, 0, left.x);
@@ -103,8 +106,6 @@ t_matrix	view_transform(t_point from, t_point to, t_vector up)
 	mx_set(&orientation, 2, 1, -forward.y);
 	mx_set(&orientation, 2, 2, -forward.z);
 	view_matrix = mx_multiply(
-			orientation,
-			translation(-from.x, -from.y, -from.z)
-			);
+			orientation, translation(-from.x, -from.y, -from.z));
 	return (view_matrix);
 }
