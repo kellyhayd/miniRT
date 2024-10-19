@@ -181,7 +181,9 @@ pit: all
 #	@$(CC) $(FLAGS) $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/sphere.c $(LIBS) -o pit
 #	@$(CC) $(FLAGS) $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/many_spheres.c $(LIBS) -o pit
 #	@$(CC) $(FLAGS) $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/planes.c $(LIBS) -o pit
-	@$(CC) $(FLAGS) $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/patterns.c $(LIBS) -o pit
+#	@$(CC) $(FLAGS) $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/patterns.c $(LIBS) -o pit
+#	@$(CC) $(FLAGS) $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/reflection_and_refraction.c $(LIBS) -o pit
+	@$(CC) $(FLAGS) $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/multiple_cameras.c $(LIBS) -o pit
 	@./pit
 
 ifeq ($(PROF), 1)

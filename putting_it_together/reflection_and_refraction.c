@@ -7,10 +7,11 @@ t_canvas	render_image(void)
 {
 	// WALLS
 	t_shape	floor = plane();
-	floor.material.pattern = ring_pattern(color(1, 1, 0), color(0, 1, 1));
 	set_pattern_transformation(&floor.material.pattern, mx_multiply(scaling(2, 2, 2), rotation_y(30 * M_PI / 180)));
-	floor.material.color = color(0.3, 0.3, 0.3);
-	floor.material.reflective = 0.5;
+	floor.material.color = color(1, 1, 1);
+	floor.material.reflective = 1;
+	floor.material.transparency = 1.0;
+	floor.material.refractive_index = 1.1;
 
 	// SPHERES
 	t_shape	middle = sphere();
@@ -33,7 +34,7 @@ t_canvas	render_image(void)
 	for (int i = 0; i < 5; i++)
 	{
 		// set_transformation(&spheres[i], mx_multiply(translation(-2 + i, 1, 0), scaling(0.5, 0.5, 0.5)));
-		set_transformation(&spheres[i], mx_multiply(translation(-2 + i, 1, 0), scaling(0.5, 0.5, 0.5)));
+		set_transformation(&spheres[i], mx_multiply(translation(-2 + i, -1, 0), scaling(0.5, 0.5, 0.5)));
 		set_pattern_transformation(
 			&spheres[i].material.pattern,
 			mx_multiply(
@@ -47,8 +48,15 @@ t_canvas	render_image(void)
 	middle.material.pattern = checkers_pattern(color(1, 1, 1), color(0, 0, 0));
 	set_pattern_transformation(&middle.material.pattern, scaling(0.5, 0.5, 0.5));
 
+	t_shape	cyl = cylinder();
+	cyl.cylinder_shape.maximum = 2;
+	cyl.cylinder_shape.minimum = -2;
+	cyl.material.color = color(0.1, 1, 0.5);
+	set_transformation(&cyl, mx_multiply(translation(0, 0, 2), rotation_z(M_PI / 2)));
+
 	// LIGHTS
 	t_light	light1 = point_light(point(0, 10, -10), color(1, 1, 1));
+	t_light	light2 = point_light(point(0, -10, -10), color(0.7, 0.7, 0.7));
 
 	// CAMERA
 	t_camera	camera_view = camera(WIDTH, HEIGHT, M_PI / 3);
@@ -62,13 +70,14 @@ t_canvas	render_image(void)
 	t_world	world_to_render = world();
 
 	add_shape(&world_to_render.shape, floor);
-
 	add_shape(&world_to_render.shape, middle);
+	add_shape(&world_to_render.shape, cyl);
 
 	for (int i = 0; i < 5; i++)
 		add_shape(&world_to_render.shape, spheres[i]);
 
 	add_light(&world_to_render.light, light1);
+	add_light(&world_to_render.light, light2);
 
 	world_to_render.pixel_sampling = 1;
 
@@ -111,7 +120,8 @@ int main(void)
 	t_canvas	image;
 	mlx_image_t	*mlx_image;
 
-	(void) write(STDOUT_FILENO, "\033[s", 4);
+	int a = write(STDOUT_FILENO, "\033[s", 4);
+	(void)a;
 	// mlx = mlx_init(WIDTH, HEIGHT, "patterns", false);
 	mlx = NULL;
 	image = render_image();
@@ -122,10 +132,11 @@ int main(void)
 		mlx_loop(mlx);
 	}
 
-	canvas_to_ppm(image, "patterns.ppm");
+	canvas_to_ppm(image, "reflection_and_refraction.ppm");
 	free(image.pixels);
 
-	(void) write(STDOUT_FILENO, "\n", 1);
+	a = write(STDOUT_FILENO, "\n", 1);
+	(void)a;
 
 	return (0);
 }
