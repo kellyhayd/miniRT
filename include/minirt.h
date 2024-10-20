@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:01:38 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/10/19 11:15:25 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/20 15:20:30 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -409,6 +409,7 @@ bool		parse_sphere(char *line, t_world *world);
 bool		parse_plane(char *line, t_world *world);
 bool		parse_normal(char *splitted, t_vector *normal);
 bool		parse_cylinder(char *line, t_world *world);
+bool		parse_cone(char *line, t_world *world);
 
 // -------------------------------------------------------------------------- //
 //                                   utils                                    //
