@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 14:05:53 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/20 15:19:52 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/20 18:06:08 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ bool	parse_cone(char *line, t_world *world)
 	add_shape(&world->shape, new_cone);
 	return (ft_free_split(splitted), true);
 }
-
 
 /*
 #Cylinder

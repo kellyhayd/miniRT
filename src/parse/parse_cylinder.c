@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 11:06:20 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/19 11:15:56 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/20 18:05:44 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ bool	parse_cylinder(char *line, t_world *world)
 	return (ft_free_split(splitted), true);
 }
 
-// onde colocar a normal e height do cilindro? adicionar campos no struct cylinder_shape?
+// onde colocar a normal e height do cilindro?
+// adicionar campos no struct cylinder_shape?
 
 /*
 #Cylinder
