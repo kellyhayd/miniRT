@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 08:50:59 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/05 08:51:35 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/20 18:22:58 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	intersect_cylinder(t_hit **hit_list, t_shape s, t_ray r)
 		add_intersection(hit_list, hits[1]);
 }
 
-t_vector	normal_at_cylinder(t_shape s, t_point obj_point)
+t_vector		normal_at_cylinder(t_shape s, t_point obj_point)
 {
 	double		dist;
 	t_vector	normal;
