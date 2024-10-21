@@ -18,7 +18,7 @@ void	check_extension(char *filename)
 	bool	ok;
 
 	ok = 1;
-	extension = ft_strchr(filename, '.') + 1;
+	extension = ft_strrchr(filename, '.') + 1;
 	if (!extension)
 		ok = 0;
 	if (ft_strncmp(extension, "rt", 2) != 0)
@@ -28,6 +28,55 @@ void	check_extension(char *filename)
 		ft_error("Invalid file extension\n");
 		exit(EXIT_FAILURE);
 	}
+}
+
+void	canvas_to_ppm(t_canvas canvas, char *filename)
+{
+	FILE	*file = fopen(filename, "w");
+
+	if (!file)
+	{
+		perror(filename);
+		return ;
+	}
+
+	fprintf(file, "P3\n%d %d\n255\n", canvas.width, canvas.height);
+	for (int y = 0; y < canvas.height; y++)
+	{
+		for (int x = 0; x < canvas.width; x++)
+		{
+			t_color	pixel = pixel_at(canvas, x, y);
+			int		r = (int)(pixel.r * 255);
+			int		g = (int)(pixel.g * 255);
+			int		b = (int)(pixel.b * 255);
+
+			fprintf(file, "%d %d %d\n", r, g, b);
+		}
+	}
+	fclose(file);
+}
+
+void	test_rendering(t_world world)
+{
+	t_camera	camera_view = camera(1000, 1000, M_PI / 3);
+	camera_view.transform = view_transform(
+		point(0, 1, -7),
+		point(0, 1, 0),
+		vector(0, 1, 0)
+	);
+	camera_view.inverse = inverse(camera_view.transform);
+
+	t_light	light1 = point_light(point(0, 20, -10), color(1, 1, 1));
+	add_light(&world.light, light1);
+
+	world.pixel_sampling = 1;
+
+	t_canvas	canvas = render(camera_view, world);
+
+	canvas_to_ppm(canvas, "test_sphere.ppm");
+	free(canvas.pixels);
+
+	(void)!write(STDOUT_FILENO, "\n", 1);
 }
 
 int	main(int argc, char **argv)
@@ -40,7 +89,13 @@ int	main(int argc, char **argv)
 	check_extension(argv[1]);
 	new_world = world();
 	fd = open(argv[1], O_RDONLY);
-	parse(fd, &new_world);
+	if (!parse(fd, &new_world))
+		ft_error("Invalid map\n");
+	close(fd);
+
+	(void)!write(STDOUT_FILENO, "\033[s", 4);
+
+	test_rendering(new_world);
 
 	return (0);
 }

@@ -98,11 +98,49 @@ bool	validate_normal_range(char **str)
 	int	i;
 
 	i = 0;
+
+	// Aqui é pra validar se o vetor normal está normalizado
+	// Juntar os 3 (em um vetor x, y e z) e ver se a magnitude é 1
+
 	while (str[i])
 	{
 		if (ft_atof(str[i]) < -1 || ft_atof(str[i]) > 1)
 			return (false);
 		i++;
 	}
+	return (true);
+}
+
+bool	parse_double(char *str, double *value)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] && ft_isdigit(str[i]))
+		i++;
+
+	if (str[i] == '.')
+		i++;
+	else if (str[i] && !ft_isdigit(str[i]))
+		return (false);
+
+	while (str[i] && ft_isdigit(str[i]))
+		i++;
+
+	if (str[i] != '\0')
+		return (false);
+
+	*value = ft_atof(str);
+	return (true);
+}
+
+bool	parse_radius(char *str, double *radius)
+{
+	if (!parse_double(str, radius))
+		return (false);
+
+	if (*radius <= 0)
+		return (false);
+
 	return (true);
 }

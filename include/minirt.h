@@ -428,11 +428,15 @@ void		ft_error(char *message);
 int			almost_zero(float num);
 void		swap(double *a, double *b);
 void		join_threads(pthread_t *threads, int thread_count);
+float		fternary(int condition, float if_true, float if_false);
+
+// parser
 bool		is_all_numbers(char **split);
 bool		validate_count(char **split, int count);
 bool		validate_color_range(char **str);
 bool		validate_normal_range(char **str);
-float		fternary(int condition, float if_true, float if_false);
+bool		parse_double(char *str, double *value);
+bool		parse_radius(char *str, double *radius);
 
 // NÃO SEI ONDE POR
 // Funções de adicionar coisas a alguma lista, está relacionado ao t_world

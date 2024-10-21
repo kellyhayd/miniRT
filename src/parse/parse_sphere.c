@@ -28,31 +28,36 @@
  */
 bool	parse_sphere(char *line, t_world *world)
 {
-	t_point	position;
-	t_color	new_color;
-	t_shape	new_sphere;
-	char	**splitted;
+	double		radius;
+	t_point		position;
+	t_shape		new_sphere;
+	char		**splitted;
 
 	splitted = ft_split(line, ' ');
-	if (!validate_count(splitted, 4) \
-		|| !parse_coordinates(splitted[1], &position) \
-		|| !parse_color(splitted[3], &new_color))
+	if (
+		// !validate_count(splitted, 4)
+		!parse_coordinates(splitted[1], &position)
+		|| !parse_radius(splitted[2], &radius)
+		|| !parse_color(splitted[3], &new_sphere.material.color)
+		|| splitted[4])		// Aqui verifica o último elemento, se não for NULL, dá erro.
+								// Aí não precisa do validate_count
 	{
 		ft_free_split(splitted);
 		return (false);
 	}
 	new_sphere = sphere();
-	new_sphere.sphere_shape.origin = position;
-	new_sphere.sphere_shape.radius = ft_atof(splitted[2]);
-	new_sphere.shape_type = SPHERE;
-	new_sphere.material = material();
-	new_sphere.material.color = new_color;
+	set_transformation(&new_sphere,
+		mx_multiply(
+			scaling(radius, radius, radius),
+			translation(position.x, position.y, position.z)
+		));
 	add_shape(&world->shape, new_sphere);
-	return (ft_free_split(splitted), true);
+	ft_free_split(splitted);
+	return (true);
 }
 
 /*
 # Sphere
-# <coordinates: x,y,z> <diameter> <color:red,green,blue>
-sp  0,0,0                1               255,51,255
+#  | <coordinates: x,y,z> | <diameter> | <color:red,green,blue> |
+sp          0,0,0               0              255,51,255
 */
