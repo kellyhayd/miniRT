@@ -24,7 +24,7 @@ t_canvas	render_image(void)
 	t_camera	camera_view = camera(WIDTH, HEIGHT, M_PI / 3);
 	camera_view.transform = view_transform(
 		point(0, 1, -7),
-		point(0, 1.1, 0),
+		point(0, 1, 0),
 		vector(0, 1, 0)
 	);
 	camera_view.inverse = inverse(camera_view.transform);

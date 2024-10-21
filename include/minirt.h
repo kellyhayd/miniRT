@@ -509,6 +509,7 @@ t_color		checkers_at(t_pattern pattern, t_point pattern_point);
 void		print_rendering_progress(int hsize, int vsize, int y);
 t_color		color_average(t_color *colors, int size);
 int			reset_threads(pthread_t *threads, int thread_count);
+t_ray		ray_for_pixel(t_camera c, int x, int y, t_anti_aliasing aa_data);
 
 // Funções usadas apenas em testes
 t_world		default_world(void);

@@ -42,6 +42,8 @@ t_tuple	tuple(double x, double y, double z, double w)
  */
 int	tuple_compare(t_tuple tuple1, t_tuple tuple2)
 {
+	// APENAS USADO NOS TESTES
+
 	return (float_compare(tuple1.x, tuple2.x)
 		&& float_compare(tuple1.y, tuple2.y)
 		&& float_compare(tuple1.z, tuple2.z)

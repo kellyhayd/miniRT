@@ -46,6 +46,8 @@ t_matrix	matrix_create(double *tab, int rows, int cols)
  */
 int	mx_compare(t_matrix matrix1, t_matrix matrix2)
 {
+	// FUNÇÃO USADA APENAS NOS TESTES
+
 	int	i;
 	int	size_all;
 
@@ -76,7 +78,7 @@ t_matrix	identity(void)
 {
 	t_matrix	result;
 
-	ft_bzero(&result.tab, sizeof(double) * 16);
+	result = (t_matrix) {0};
 	result.cols = 4;
 	result.rows = 4;
 	mx_set(&result, 0, 0, 1);

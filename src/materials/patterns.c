@@ -12,6 +12,18 @@
 
 #include "minirt.h"
 
+t_pattern	default_pattern(void)
+{
+	return ((t_pattern){
+		.pattern_type = STRIPE,
+		.has_pattern = false,
+		.color_a = color(0, 0, 0),
+		.color_b = color(0, 0, 0),
+		.transform = identity(),
+		.inverse = identity()
+	});
+}
+
 void	set_pattern_transformation(t_pattern *pattern, t_matrix transformation)
 {
 	pattern->transform = transformation;
