@@ -26,7 +26,7 @@ int	get_token(char *line)
 		return (PLANE);
 	else if (ft_strncmp(line, "cy", 2) == 0)
 		return (CYLINDER);
-	else if (ft_strncmp(line, "co", 2) == 0)
+	else if (ft_strncmp(line, "co", 2) == 0)		// Aqui é cn
 		return (CONE);
 	else
 		return (-1);
@@ -62,7 +62,7 @@ bool	parse(int fd, t_world *world)
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		if (!parse_line(line, world))
+		if (line[0] != '\n' && line[0] != '#' && !parse_line(line, world))
 		{
 			free(line);
 			return (false);
@@ -70,6 +70,5 @@ bool	parse(int fd, t_world *world)
 		free(line);
 		line = get_next_line(fd);
 	}
-	(void)world;
 	return (true);
 }
