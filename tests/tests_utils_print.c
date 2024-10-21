@@ -125,7 +125,7 @@ void	print_ko_ray(int num_test, void *expected, void *result)
 	);
 }
 
-static char	*get_shape_type(t_shapes shape_type)
+static char	*get_shape_type(int shape_type)
 {
 	static char	*shape_types[] = {
 		"SPHERE",
