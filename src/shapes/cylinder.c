@@ -16,17 +16,13 @@ t_shape	cylinder(void)
 {
 	t_shape	new_cylinder;
 
+	new_cylinder = new_shape();
+	new_cylinder.shape_type = CYLINDER;
 	new_cylinder.cylinder_shape.origin = point(0, 0, 0);
 	new_cylinder.cylinder_shape.radius = 1;
 	new_cylinder.cylinder_shape.closed = false;
-	new_cylinder.transform = identity();
-	new_cylinder.inverse = identity();
-	new_cylinder.transposed_inverse = identity();
-	new_cylinder.material = material();
-	new_cylinder.shape_type = CYLINDER;
 	new_cylinder.cylinder_shape.minimum = -INFINITY;
 	new_cylinder.cylinder_shape.maximum = INFINITY;
-	new_cylinder.next = NULL;
 	return (new_cylinder);
 }
 

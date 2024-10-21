@@ -41,6 +41,18 @@ t_material	material(void)
 		.specular = 0.9,
 		.shininess = 200,
 		.reflective = 0.0,
+		.transparency = 0.0,
+		.refractive_index = 1.0,
 		.pattern = default_pattern()
 	});
+}
+
+t_shape	glass_sphere(void)
+{
+	t_shape	g_sphere;
+
+	g_sphere = sphere();
+	g_sphere.material.transparency = 1.0;
+	g_sphere.material.refractive_index = 1.5;
+	return (g_sphere);
 }

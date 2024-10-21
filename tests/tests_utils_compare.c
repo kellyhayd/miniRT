@@ -184,6 +184,8 @@ int	material_compare_test(void *expected, void *result)
 		&& float_compare_test(&material_expected->specular, &material_result->specular)
 		&& float_compare_test(&material_expected->shininess, &material_result->shininess)
 		&& float_compare_test(&material_expected->reflective, &material_result->reflective)
+		&& float_compare_test(&material_expected->transparency, &material_result->transparency)
+		&& float_compare_test(&material_expected->refractive_index, &material_result->refractive_index)
 		&& color_compare_test(&material_expected->color, &material_result->color)
 		&& pattern_compare_test(&material_expected->pattern, &material_result->pattern))
 		return (1);

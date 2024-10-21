@@ -12,6 +12,20 @@
 
 #include "minirt.h"
 
+t_shape	new_shape(void)
+{
+	static int	shape_id;
+	t_shape		shape;
+
+	shape.id = shape_id++;
+	shape.transform = identity();
+	shape.inverse = identity();
+	shape.transposed_inverse = identity();
+	shape.material = material();
+	shape.next = NULL;
+	return (shape);
+}
+
 void	add_shape(t_shape **shape_list, t_shape shape_to_add)
 {
 	t_shape	*new_shape;

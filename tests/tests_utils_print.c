@@ -243,15 +243,23 @@ void	print_ko_material(int num_test, void *expected, void *result)
 	t_material	*material_result = result;
 
 	printf(PURPLE "%2d" RESET " - " RED "[ ✗ ] " RESET
-		"Expected: ambient (%.2lf) diffuse (%.2lf) specular (%.2lf) shininess (%.2lf) reflective (%.2lf) color (%.2lf, %.2lf, %.2lf)\n"
-		"\t\tResult: ambient (%.2lf) diffuse (%.2lf) specular (%.2lf) shininess (%.2lf) reflective (%.2lf) color (%.2lf, %.2lf, %.2lf)\n",
+		"Expected: ambient (%.2lf) diffuse (%.2lf) specular (%.2lf) shininess (%.2lf) "
+		"reflective (%.2lf) transparency (%.2lf) refractive_index (%.2lf) "
+		"color (%.2lf, %.2lf, %.2lf)\n"
+
+		"\t\tResult: ambient (%.2lf) diffuse (%.2lf) specular (%.2lf) shininess (%.2lf) "
+		"reflective (%.2lf) transparency (%.2lf) refractive_index (%.2lf) "
+		"color (%.2lf, %.2lf, %.2lf)\n",
+
 		num_test,
 
 		material_expected->ambient, material_expected->diffuse, material_expected->specular, material_expected->shininess,
-		material_expected->reflective, material_expected->color.r, material_expected->color.g, material_expected->color.b,
+		material_expected->reflective, material_expected->transparency, material_expected->refractive_index,
+		material_expected->color.r, material_expected->color.g, material_expected->color.b,
 
 		material_result->ambient, material_result->diffuse, material_result->specular, material_result->shininess,
-		material_result->reflective, material_result->color.r, material_result->color.g, material_result->color.b
+		material_result->reflective, material_result->transparency, material_result->refractive_index,
+		material_result->color.r, material_result->color.g, material_result->color.b
 	);
 }
 

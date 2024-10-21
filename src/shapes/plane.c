@@ -16,24 +16,20 @@ t_shape	plane(void)
 {
 	t_shape	new_plane;
 
-	new_plane.plane_shape.origin = point(0, 0, 0);
-	new_plane.transform = identity();
-	new_plane.inverse = identity();
-	new_plane.transposed_inverse = identity();
-	new_plane.material = material();
+	new_plane = new_shape();
 	new_plane.shape_type = PLANE;
-	new_plane.next = NULL;
+	new_plane.plane_shape.origin = point(0, 0, 0);
 	return (new_plane);
 }
 
 void	intersect_plane(t_hit **hit_list, t_shape s, t_ray r)
 {
+	double	t;
+
 	if (fabs(r.direction.y) < EPSILON)
 		return ;
-	add_intersection(
-		hit_list,
-		intersection(-r.origin.y / r.direction.y, s)
-		);
+	t = -r.origin.y / r.direction.y;
+	add_intersection(hit_list, intersection(t, s));
 }
 
 t_vector	normal_at_plane(t_shape plane, t_point obj_point)

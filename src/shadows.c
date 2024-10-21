@@ -24,7 +24,7 @@ bool	is_shadowed(t_world w, t_point position, t_light *light)
 	distance = magnitude(v);
 	hit_list = intersect_world(w, ray(position, normalize(v)));
 	h = hit(hit_list);
-	if (h && h->t < distance)
+	if (h && (int)(h->t * 100000) < (int)(distance * 100000))
 		result = true;
 	else
 		result = false;
