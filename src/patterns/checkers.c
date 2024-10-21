@@ -26,12 +26,14 @@ t_pattern	checkers_pattern(t_color color_a, t_color color_b)
 
 t_color	checkers_at(t_pattern pattern, t_point pattern_point)
 {
-	double	sum_of_coordinates;
+	int		sum_of_coordinates;
 	t_color	new_color;
 
-	sum_of_coordinates = floor(pattern_point.x) + floor(pattern_point.y) \
-		+ floor(pattern_point.z);
-	if (almost_zero(fmod(sum_of_coordinates, 2)))
+	sum_of_coordinates =
+		(int)(pattern_point.x) +
+		(int)(pattern_point.y) +
+		(int)(pattern_point.z);
+	if (sum_of_coordinates % 2 == 0)
 		new_color = pattern.color_a;
 	else
 		new_color = pattern.color_b;

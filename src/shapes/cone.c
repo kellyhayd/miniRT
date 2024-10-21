@@ -16,17 +16,13 @@ t_shape	cone(void)
 {
 	t_shape	new_cone;
 
+	new_cone = new_shape();
+	new_cone.shape_type = CONE;
 	new_cone.cone_shape.origin = point(0, 0, 0);
 	new_cone.cone_shape.radius = 1;
 	new_cone.cone_shape.minimum = -INFINITY;
 	new_cone.cone_shape.maximum = INFINITY;
 	new_cone.cone_shape.closed = false;
-	new_cone.shape_type = CONE;
-	new_cone.transform = identity();
-	new_cone.inverse = identity();
-	new_cone.transposed_inverse = identity();
-	new_cone.material = material();
-	new_cone.next = NULL;
 	return (new_cone);
 }
 

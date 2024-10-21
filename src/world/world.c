@@ -29,6 +29,7 @@ void	world_clear(t_world *world_to_clear)
 
 t_world	default_world(void)
 {
+	// USADO APENAS NOS TESTES
 	t_world	dfl_world;
 	t_shape	sphere1;
 	t_shape	sphere2;
@@ -57,40 +58,20 @@ t_hit	*intersect_world(t_world w, t_ray ray)
 	aux = w.shape;
 	while (aux)
 	{
-		intersect(&hit_list, *aux, ray);
+		intersect(&hit_list,
+			*aux,
+			ray);
 		aux = aux->next;
 	}
 	return (hit_list);
 }
 
-t_comps	prepare_computations(t_hit hit, t_ray ray)
-{
-	t_comps	comps;
-
-	comps.t = hit.t;
-	comps.object = hit.object;
-	comps.point = position(ray, comps.t);
-	comps.inside = false;
-	comps.sight.eye = tuple_negate(ray.direction);
-	comps.sight.normal = normal_at(comps.object, comps.point);
-	comps.sight.in_shadow = false;
-	if (dot(comps.sight.normal, comps.sight.eye) < 0)
-	{
-		comps.inside = true;
-		comps.sight.normal = tuple_negate(comps.sight.normal);
-	}
-	comps.reflectv = reflect(ray.direction, comps.sight.normal);
-	comps.over_point = tuple_add(comps.point,
-			tuple_multiply(comps.sight.normal, EPSILON)
-			);
-	return (comps);
-}
-
 t_color	shade_hit(t_world world, t_comps comps, int depth)
 {
 	t_color	color_shaded;
-	t_light	*aux;
 	t_color	color_reflected;
+	t_color	color_refracted;
+	t_light	*aux;
 
 	color_shaded = color(0, 0, 0);
 	aux = world.light;
@@ -109,7 +90,9 @@ t_color	shade_hit(t_world world, t_comps comps, int depth)
 		aux = aux->next;
 	}
 	color_reflected = reflected_color(world, comps, depth);
-	return (color_add(color_shaded, color_reflected));
+	color_refracted = refracted_color(world, comps, depth);
+	return (color_add(
+		color_add(color_shaded, color_reflected), color_refracted));
 }
 
 t_color	color_at(t_world w, t_ray r, int depth)
@@ -124,37 +107,9 @@ t_color	color_at(t_world w, t_ray r, int depth)
 	nearest_hit = hit(hits);
 	if (nearest_hit)
 	{
-		comps = prepare_computations(*nearest_hit, r);
+		comps = prepare_computations(*nearest_hit, r, hits);
 		color_at_hit = shade_hit(w, comps, depth);
 	}
 	hit_clear_list(&hits);
 	return (color_at_hit);
-}
-
-t_matrix	view_transform(t_point from, t_point to, t_vector up)
-{
-	t_vector	forward;
-	t_vector	left;
-	t_vector	true_up;
-	t_matrix	orientation;
-	t_matrix	view_matrix;
-
-	forward = normalize(tuple_subtract(to, from));
-	left = cross(forward, normalize(up));
-	true_up = cross(left, forward);
-	orientation = identity();
-	mx_set(&orientation, 0, 0, left.x);
-	mx_set(&orientation, 0, 1, left.y);
-	mx_set(&orientation, 0, 2, left.z);
-	mx_set(&orientation, 1, 0, true_up.x);
-	mx_set(&orientation, 1, 1, true_up.y);
-	mx_set(&orientation, 1, 2, true_up.z);
-	mx_set(&orientation, 2, 0, -forward.x);
-	mx_set(&orientation, 2, 1, -forward.y);
-	mx_set(&orientation, 2, 2, -forward.z);
-	view_matrix = mx_multiply(
-			orientation,
-			translation(-from.x, -from.y, -from.z)
-			);
-	return (view_matrix);
 }

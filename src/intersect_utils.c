@@ -89,3 +89,19 @@ void	hit_clear_list(t_hit **hit_list)
 		*hit_list = NULL;
 	}
 }
+
+t_hit	*hit_index(t_hit *hit_list, int index)
+{
+	// FUNÇÃO USADA APENAS NOS TESTES
+	int		i;
+	t_hit	*aux;
+
+	i = 0;
+	aux = hit_list;
+	while (aux && i < index)
+	{
+		aux = aux->next;
+		i++;
+	}
+	return (aux);
+}

@@ -12,19 +12,19 @@
 
 #include "minirt.h"
 
-void	print_rendering_progress(int hsize, int vsize, int x, int y)
+void	print_rendering_progress(int hsize, int vsize, int y)
 {
-	int		i;
-	double	progress;
+	int	i;
+	int	progress;
 
-	progress = ((double)(y * hsize + x)) / ((double)(hsize * vsize)) * 100;
-	printf("\r[");
+	progress = (((y + 1) * hsize * 100) / (hsize * vsize));
+	printf("\033[uProgress: [");
 	i = 0;
 	while (i < 50)
 	{
 		if (i < progress / 2)
 			printf("=");
-		else if (fabs(progress / 2 - i) < 1)
+		else if (abs((progress / 2) - i) < 1)
 			printf(">");
 		else if (i % 5 == 0)
 			printf("o");
@@ -32,8 +32,8 @@ void	print_rendering_progress(int hsize, int vsize, int x, int y)
 			printf(" ");
 		i++;
 	}
-	printf("] %.2f%%", progress);
-	// fflush(stdout);
+	printf("] %d%%", progress);
+	fflush(stdout);
 }
 
 t_color	color_average(t_color *colors, int size)
@@ -79,4 +79,33 @@ int	reset_threads(pthread_t *threads, int thread_count)
 		return (0);
 	}
 	return (thread_count);
+}
+
+t_matrix	view_transform(t_point from, t_point to, t_vector up)
+{
+	t_vector	forward;
+	t_vector	left;
+	t_vector	true_up;
+	t_matrix	orientation;
+	t_matrix	view_matrix;
+
+	forward = normalize(tuple_subtract(to, from));
+	if (fmod(fabs(dot(forward, up)), 1) < EPSILON)
+		left = vector(-1, 0, 0);
+	else
+		left = cross(forward, normalize(up));
+	true_up = cross(left, forward);
+	orientation = identity();
+	mx_set(&orientation, 0, 0, left.x);
+	mx_set(&orientation, 0, 1, left.y);
+	mx_set(&orientation, 0, 2, left.z);
+	mx_set(&orientation, 1, 0, true_up.x);
+	mx_set(&orientation, 1, 1, true_up.y);
+	mx_set(&orientation, 1, 2, true_up.z);
+	mx_set(&orientation, 2, 0, -forward.x);
+	mx_set(&orientation, 2, 1, -forward.y);
+	mx_set(&orientation, 2, 2, -forward.z);
+	view_matrix = mx_multiply(
+			orientation, translation(-from.x, -from.y, -from.z));
+	return (view_matrix);
 }
