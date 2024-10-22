@@ -131,27 +131,50 @@ typedef struct s_cone
 	int		closed;
 }	t_cone;
 
+typedef struct s_checkers
+{
+	int		width;
+	int		heigh;
+	t_color	color_a;
+	t_color	color_b;
+}	t_checkers;
+
+typedef struct s_map
+{
+	t_checkers	checkers;
+	void		(*map_fn)(t_point, double *, double *);
+}	t_map;
+
+typedef	struct s_uv_image
+{
+	int				has_bump_map;
+	mlx_texture_t	*texture;
+	void			(*map_fn)(t_point, double *, double *);
+}	t_uv_image;
+
 typedef struct s_pattern
 {
-	t_patterns	pattern_type;
-	int			has_pattern;
-	t_color		color_a;
-	t_color		color_b;
-	t_matrix	transform;
-	t_matrix	inverse;
+	t_patterns		pattern_type;
+	int				has_pattern;
+	t_color			color_a;
+	t_color			color_b;
+	t_map			map;
+	t_matrix		transform;
+	t_matrix		inverse;
 }	t_pattern;
 
 typedef struct s_material
 {
-	double		ambient;
-	double		diffuse;
-	double		specular;
-	double		shininess;
-	double		reflective;
-	double		transparency;
-	double		refractive_index;
-	t_color		color;
-	t_pattern	pattern;
+	double			ambient;
+	double			diffuse;
+	double			specular;
+	double			shininess;
+	double			reflective;
+	double			transparency;
+	double			refractive_index;
+	t_color			color;
+	t_pattern		pattern;
+	t_uv_image		bump_map;
 }	t_material;
 
 struct s_shape
@@ -519,5 +542,14 @@ t_hit		*hit_index(t_hit *hit_list, int index);
 // Refraction
 void		calculate_refractive_indexes(t_comps *comps, t_hit *hit_list);
 t_color		refracted_color(t_world w, t_comps comps, int depth);
+
+// texture map
+t_checkers	uv_checkers(int width, int heigh, t_color color_a, t_color color_b);
+t_color		uv_pattern_at(t_checkers checkers, double u, double v);
+void		spherical_map(t_point point, double *u, double *v);
+t_map		texture_map(t_checkers checkers, void (*map_fn)(t_point, double *, double *));
+void		cylindrical_map(t_point point, double *u, double *v);
+uint8_t		*get_pixel(mlx_texture_t *texture, int x, int y);
+t_color		texture_at_shape(t_shape object, t_point point);
 
 #endif
