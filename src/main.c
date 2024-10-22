@@ -66,8 +66,8 @@ void	test_rendering(t_world world)
 	);
 	camera_view.inverse = inverse(camera_view.transform);
 
-	t_light	light1 = point_light(point(0, 20, -10), color(1, 1, 1));
-	add_light(&world.light, light1);
+	// t_light	light1 = point_light(point(0, 20, -10), color(1, 1, 1));
+	// add_light(&world.light, light1);
 
 	world.pixel_sampling = 1;
 
