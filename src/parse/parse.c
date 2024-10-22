@@ -36,12 +36,14 @@ bool	parse_line(char *line, t_world *world)
 {
 	int	token;
 
+	if (!line[0] || line[0] == '\n' || line[0] == '#')
+		return (true);
 	token = get_token(line);
 	printf("token: %d\n", token);
 	// if (token == AMBIENT)
 	// 	return (parse_ambient(line, world));
-	// else if (token == CAMERA)
-	// 	return (parse_camera(line, world));
+	if (token == CAMERA)
+		return (parse_camera(line, world));
 	if (token == LIGHT)
 		return (parse_light(line, world));
 	else if (token == SPHERE)
@@ -62,7 +64,9 @@ bool	parse(int fd, t_world *world)
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		if (line[0] != '\n' && line[0] != '#' && !parse_line(line, world))
+		if (ft_strchr(line, '\n'))
+			ft_strchr(line, '\n')[0] = '\0';
+		if (!parse_line(line, world))
 		{
 			free(line);
 			return (false);

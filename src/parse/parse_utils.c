@@ -27,8 +27,10 @@ bool	is_all_numbers(char **split)
 {
 	int	i;
 	int	j;
+	int	dot_count;
 
 	i = 0;
+	dot_count = 0;
 	while (split[i])
 	{
 		j = 0;
@@ -38,10 +40,14 @@ bool	is_all_numbers(char **split)
 		{
 			if (!ft_isdigit(split[i][j]) && split[i][j] != '.')
 				return (false);
+			if (split[i][j] == '.')
+				dot_count++;
 			j++;
 		}
 		i++;
 	}
+	if (dot_count > 1)
+		return (false);
 	return (true);
 }
 
@@ -142,5 +148,18 @@ bool	parse_radius(char *str, double *radius)
 	if (*radius <= 0)
 		return (false);
 
+	return (true);
+}
+
+bool	parse_int(char *str, int *num)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] && ft_isdigit(str[i]))
+		i++;
+	if (str[i] != '\0')
+		return (false);
+	*num = ft_atoi(str);
 	return (true);
 }

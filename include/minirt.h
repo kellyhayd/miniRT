@@ -32,6 +32,9 @@
 # define EPSILON 0.00001
 # define NUM_THREADS 4
 
+# define WIDTH 1920
+# define HEIGH 1080
+
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -70,6 +73,7 @@ typedef struct s_hit	t_hit;
 typedef struct s_shape	t_shape;
 // typedef struct s_sphere	t_sphere;
 typedef struct s_light	t_light;
+typedef struct s_camera	t_camera;
 
 typedef enum e_tokens t_tokens;
 typedef enum e_patterns t_patterns;
@@ -209,12 +213,25 @@ struct s_light
 	t_light	*next;
 };
 
+struct s_camera
+{
+	double		hsize;
+	double		vsize;
+	double		field_of_view;
+	double		half_width;
+	double		half_height;
+	double		pixel_size;
+	t_matrix	transform;
+	t_matrix	inverse;
+};
+
 typedef struct s_world
 {
-	t_shape	*shape;
-	t_light	*light;
+	t_shape		*shape;
+	t_light		*light;
 	// mlx_t	*mlx;
-	int		pixel_sampling;
+	int			pixel_sampling;
+	t_camera	world_camera;
 }	t_world;
 
 typedef struct s_exposure
@@ -233,18 +250,6 @@ typedef struct s_sight
 	t_vector	normal;
 	bool		in_shadow;
 }	t_sight;
-
-typedef struct s_camera
-{
-	double		hsize;
-	double		vsize;
-	double		field_of_view;
-	double		half_width;
-	double		half_height;
-	double		pixel_size;
-	t_matrix	transform;
-	t_matrix	inverse;
-}	t_camera;
 
 typedef struct s_comps
 {
@@ -441,6 +446,7 @@ bool		parse_plane(char *line, t_world *world);
 bool		parse_normal(char *splitted, t_vector *normal);
 bool		parse_cylinder(char *line, t_world *world);
 bool		parse_cone(char *line, t_world *world);
+bool		parse_camera(char *line, t_world *world);
 
 // -------------------------------------------------------------------------- //
 //                                   utils                                    //
@@ -458,8 +464,11 @@ bool		is_all_numbers(char **split);
 bool		validate_count(char **split, int count);
 bool		validate_color_range(char **str);
 bool		validate_normal_range(char **str);
+
 bool		parse_double(char *str, double *value);
 bool		parse_radius(char *str, double *radius);
+bool		parse_int(char *str, int *num);
+bool		parse_direction(char *str, t_vector *direction);
 
 // NÃO SEI ONDE POR
 // Funções de adicionar coisas a alguma lista, está relacionado ao t_world

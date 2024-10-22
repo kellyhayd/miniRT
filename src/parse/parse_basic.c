@@ -99,7 +99,8 @@ bool	parse_coordinates(char *splitted, t_point *position)
 
 	*position = point(0, 0, 0);
 	coordinates = ft_split(splitted, ',');
-	if (!validate_count(coordinates, 3) || !is_all_numbers(coordinates))
+	if (!validate_count(coordinates, 3)
+		|| !is_all_numbers(coordinates))
 	{
 		ft_free_split(coordinates);
 		return (false);
@@ -108,5 +109,23 @@ bool	parse_coordinates(char *splitted, t_point *position)
 	position->y = ft_atof(coordinates[1]);
 	position->z = ft_atof(coordinates[2]);
 	ft_free_split(coordinates);
+	return (true);
+}
+
+bool	parse_direction(char *str, t_vector *direction)
+{
+	char		**splitted;
+
+	splitted = ft_split(str, ',');
+	if (!validate_count(splitted, 3)
+		|| !parse_double(splitted[0], &direction->x)
+		|| !parse_double(splitted[1], &direction->y)
+		|| !parse_double(splitted[2], &direction->z)
+		|| fabs(1 - magnitude(*direction)) >= EPSILON)
+	{
+		ft_free_split(splitted);
+		return (false);
+	}
+	direction->w = 0;
 	return (true);
 }

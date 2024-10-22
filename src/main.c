@@ -58,22 +58,22 @@ void	canvas_to_ppm(t_canvas canvas, char *filename)
 
 void	test_rendering(t_world world)
 {
-	t_camera	camera_view = camera(1000, 1000, M_PI / 3);
-	camera_view.transform = view_transform(
-		point(0, 1, -7),
-		point(0, 1, 0),
-		vector(0, 1, 0)
-	);
-	camera_view.inverse = inverse(camera_view.transform);
+	// t_camera	camera_view = camera(1000, 1000, M_PI / 3);
+	// camera_view.transform = view_transform(
+	// 	point(0, 1, -7),
+	// 	point(0, 1, 0),
+	// 	vector(0, 1, 0)
+	// );
+	// camera_view.inverse = inverse(camera_view.transform);
 
-	// t_light	light1 = point_light(point(0, 20, -10), color(1, 1, 1));
-	// add_light(&world.light, light1);
+	t_light	light1 = point_light(point(0, 20, -10), color(1, 1, 1));
+	add_light(&world.light, light1);
 
 	world.pixel_sampling = 1;
 
-	t_canvas	canvas = render(camera_view, world);
+	t_canvas	canvas = render(world.world_camera, world);
 
-	canvas_to_ppm(canvas, "test_sphere.ppm");
+	canvas_to_ppm(canvas, "test_camera.ppm");
 	free(canvas.pixels);
 
 	(void)!write(STDOUT_FILENO, "\n", 1);
@@ -96,6 +96,7 @@ int	main(int argc, char **argv)
 	(void)!write(STDOUT_FILENO, "\033[s", 4);
 
 	test_rendering(new_world);
+	world_clear(&new_world);
 
 	return (0);
 }
