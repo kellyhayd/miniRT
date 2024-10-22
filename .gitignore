@@ -415,6 +415,7 @@ tests_cylinder
 tests_cone
 tests_patterns
 tests_reflection
+tests_texture_map
 
 # Object files
 *.o
