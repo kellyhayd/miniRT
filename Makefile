@@ -16,7 +16,8 @@ NAME			= miniRT
 				tests_cylinder \
 				tests_cone \
 				tests_patterns \
-				tests_reflection
+				tests_reflection \
+				tests_texture_map
 # .SILENT:
 
 #----------------------------------------------- Colors
@@ -174,6 +175,10 @@ tests_reflection: all
 	@$(CC) $(FLAGS) $(HEADERS) $(TEST_FILES) tests/tests_reflection.c $(LIBS) -o $@
 	@$(VALGRIND) ./$@
 
+tests_texture_map: all
+	@$(CC) $(FLAGS) $(HEADERS) $(TEST_FILES) tests/tests_texture_map.c $(LIBS) -o $@
+	@$(VALGRIND) ./$@
+
 pit: all
 #	@$(CC) $(FLAGS) $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/projectiles.c $(LIBS) -o pit
 #	@$(CC) $(FLAGS) $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/parable.c $(LIBS) -o pit
@@ -183,7 +188,7 @@ pit: all
 #	@$(CC) $(FLAGS) $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/planes.c $(LIBS) -o pit
 #	@$(CC) $(FLAGS) $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/patterns.c $(LIBS) -o pit
 #	@$(CC) $(FLAGS) $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/reflection_and_refraction.c $(LIBS) -o pit
-	@$(CC) $(FLAGS) $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/multiple_cameras.c $(LIBS) -o pit
+	@$(CC) $(FLAGS) $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/checkers_uv.c $(LIBS) -o pit
 	@./pit
 
 ifeq ($(PROF), 1)
