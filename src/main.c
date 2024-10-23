@@ -58,13 +58,10 @@ void	canvas_to_ppm(t_canvas canvas, char *filename)
 
 void	test_rendering(t_world world)
 {
-	// t_camera	camera_view = camera(1000, 1000, M_PI / 3);
-	// camera_view.transform = view_transform(
-	// 	point(0, 1, -7),
-	// 	point(0, 1, 0),
-	// 	vector(0, 1, 0)
-	// );
-	// camera_view.inverse = inverse(camera_view.transform);
+	// t_shape	pl = plane();
+	// pl.material.color = color(1, 0, 0);
+	// set_transformation(&pl, translation(0, 0, 0));
+	// add_shape(&world.shape, pl);
 
 	t_light	light1 = point_light(point(0, 20, -10), color(1, 1, 1));
 	add_light(&world.light, light1);
@@ -73,7 +70,7 @@ void	test_rendering(t_world world)
 
 	t_canvas	canvas = render(world.world_camera, world);
 
-	canvas_to_ppm(canvas, "test_camera.ppm");
+	canvas_to_ppm(canvas, "test_plane.ppm");
 	free(canvas.pixels);
 
 	(void)!write(STDOUT_FILENO, "\n", 1);

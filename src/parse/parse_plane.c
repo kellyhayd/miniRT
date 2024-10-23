@@ -23,20 +23,21 @@ bool	parse_plane(char *line, t_world *world)
 	splitted = ft_split(line, ' ');
 	if (!validate_count(splitted, 4) \
 		|| !parse_coordinates(splitted[1], &position) \
-		|| !parse_normal(splitted[2], &normal) \
+		|| !parse_direction(splitted[2], &normal) \
 		|| !parse_color(splitted[3], &new_color))
 	{
 		ft_free_split(splitted);
 		return (false);
 	}
+	ft_free_split(splitted);
 	new_plane = plane();
-	new_plane.plane_shape.origin = position;
-	// new_plane.plane_shape.normal = normal;
-	new_plane.shape_type = PLANE;
-	new_plane.material = material();
-	new_plane.material.color = new_color;
+	new_plane.material.color = convert_color(new_color);
+	set_transformation(&new_plane,
+			mx_multiply(rotation_matrix(normal),
+			translation(position.x, position.y, position.x)
+		));
 	add_shape(&world->shape, new_plane);
-	return (ft_free_split(splitted), true);
+	return (true);
 }
 
 // onde colocar a normal do plano? adicionar um campo no struct plane_shape?

@@ -325,6 +325,7 @@ t_color		color_add(t_color color1, t_color color2);
 t_color		color_subtract(t_color color1, t_color color2);
 t_color		color_multiply(t_color color1, double scalar);
 t_color		color_hadamard(t_color color1, t_color color2);
+t_color		convert_color(t_color color);
 
 // -------------------------------------------------------------------------- //
 //                                   canvas                                   //
@@ -464,6 +465,7 @@ bool		is_all_numbers(char **split);
 bool		validate_count(char **split, int count);
 bool		validate_color_range(char **str);
 bool		validate_normal_range(char **str);
+t_matrix	rotation_matrix(t_vector direction);
 
 bool		parse_double(char *str, double *value);
 bool		parse_radius(char *str, double *radius);
