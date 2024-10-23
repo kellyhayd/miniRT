@@ -122,6 +122,8 @@ bool	parse_double(char *str, double *value)
 	int	i;
 
 	i = 0;
+	if (str[i] == '-')
+		i++;
 	while (str[i] && ft_isdigit(str[i]))
 		i++;
 
