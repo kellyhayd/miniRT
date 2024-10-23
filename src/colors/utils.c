@@ -1,6 +1,5 @@
 #include "minirt.h"
 
-
 /**
  * @brief Converts a normalized color value to an 8-bit color value.
  *
@@ -34,4 +33,13 @@ int	color_to_int(t_color color)
 		| convert(color.b) << 8
 		| 0xFF;
 	return (color_int);
+}
+
+t_color	convert_color(t_color color)
+{
+	return ((t_color){
+		.r = color.r / 255,
+		.g = color.g / 255,
+		.b = color.b / 255,
+	});
 }

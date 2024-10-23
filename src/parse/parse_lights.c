@@ -12,16 +12,6 @@
 
 #include "minirt.h"
 
-static t_color	convert_color(t_color color)
-{
-	t_color	converted;
-
-	converted.r = color.r / 255;
-	converted.g = color.g / 255;
-	converted.b = color.b / 255;
-	return (converted);
-}
-
 /**
  * @brief Parses a light definition from a line of input and adds it to the
  * world.
