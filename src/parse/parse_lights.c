@@ -33,7 +33,6 @@ bool	parse_light(char *line, t_world *world)
 	char	**splitted;
 
 	splitted = ft_split(line, ' ');
-	bright = 0;
 	if (!validate_count(splitted, 4) \
 		|| !parse_coordinates(splitted[1], &position) \
 		|| !parse_brightness(splitted[2], &bright) \
@@ -42,7 +41,6 @@ bool	parse_light(char *line, t_world *world)
 		ft_free_split(splitted);
 		return (false);
 	}
-	new_color = convert_color(new_color);
 	add_light(&world->light, \
 			point_light(position, color_multiply(new_color, bright)));
 	ft_free_split(splitted);
