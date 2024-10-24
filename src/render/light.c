@@ -103,7 +103,7 @@ t_color	lighting(t_shape object, t_light light, t_point position, t_sight sight)
 	e = exposure_init();
 	e.effective_color = color_hadamard(color_base, light.intensity);
 	e.lightv = normalize(tuple_subtract(light.position, position));
-	ambient = color_multiply(e.effective_color, object.material.ambient);
+	ambient = color_hadamard(e.effective_color, object.material.ambient);
 	if (sight.in_shadow == true)
 		return (ambient);
 	e.light_dot_normal = dot(e.lightv, sight.normal);

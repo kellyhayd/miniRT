@@ -169,7 +169,7 @@ typedef struct s_pattern
 
 typedef struct s_material
 {
-	double			ambient;
+	t_color			ambient;
 	double			diffuse;
 	double			specular;
 	double			shininess;
@@ -232,6 +232,8 @@ typedef struct s_world
 	// mlx_t	*mlx;
 	int			pixel_sampling;
 	t_camera	world_camera;
+	double		ambient_ratio;
+	t_color		ambient_color;
 }	t_world;
 
 typedef struct s_exposure
@@ -472,6 +474,7 @@ bool		parse_radius(char *str, double *radius);
 bool		parse_int(char *str, int *num);
 bool		parse_direction(char *str, t_vector *direction);
 bool		parse_int_color(char *str, int *num);
+bool		parse_ambient(char *line, t_world *world);
 
 // NÃO SEI ONDE POR
 // Funções de adicionar coisas a alguma lista, está relacionado ao t_world

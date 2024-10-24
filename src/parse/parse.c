@@ -26,7 +26,7 @@ int	get_token(char *line)
 		return (PLANE);
 	else if (ft_strncmp(line, "cy", 2) == 0)
 		return (CYLINDER);
-	else if (ft_strncmp(line, "co", 2) == 0)		// Aqui é cn
+	else if (ft_strncmp(line, "cn", 2) == 0)
 		return (CONE);
 	else
 		return (-1);
@@ -40,11 +40,11 @@ bool	parse_line(char *line, t_world *world)
 		return (true);
 	token = get_token(line);
 	printf("token: %d\n", token);
-	// if (token == AMBIENT)
-	// 	return (parse_ambient(line, world));
-	if (token == CAMERA)
+	if (token == AMBIENT)
+		return (parse_ambient(line, world));
+	else if (token == CAMERA)
 		return (parse_camera(line, world));
-	if (token == LIGHT)
+	else if (token == LIGHT)
 		return (parse_light(line, world));
 	else if (token == SPHERE)
 		return (parse_sphere(line, world));
@@ -55,6 +55,21 @@ bool	parse_line(char *line, t_world *world)
 	else if (token == CONE)
 		return (parse_cone(line, world));
 	return (true);
+}
+
+void	put_ambient_color(t_world *world)
+{
+	t_color	ambient_color;
+	t_shape	*aux;
+
+	ambient_color = color_multiply(world->ambient_color, world->ambient_ratio);
+	aux = world->shape;
+	while (aux)
+	{
+		aux->material.ambient = color_hadamard(ambient_color,
+			aux->material.color);
+		aux = aux->next;
+	}
 }
 
 bool	parse(int fd, t_world *world)
