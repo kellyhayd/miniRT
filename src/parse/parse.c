@@ -89,5 +89,6 @@ bool	parse(int fd, t_world *world)
 		free(line);
 		line = get_next_line(fd);
 	}
+	put_ambient_color(world);
 	return (true);
 }
