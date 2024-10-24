@@ -62,7 +62,8 @@ void	put_ambient_color(t_world *world)
 	t_color	ambient_color;
 	t_shape	*aux;
 
-	ambient_color = color_multiply(world->ambient_color, world->ambient_ratio);
+	ambient_color = color_multiply(world->scene.ambient_color,
+		world->scene.ambient_ratio);
 	aux = world->shape;
 	while (aux)
 	{

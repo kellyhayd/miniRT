@@ -225,15 +225,20 @@ struct s_camera
 	t_matrix	inverse;
 };
 
-typedef struct s_world
+typedef struct s_scene
 {
-	t_shape		*shape;
-	t_light		*light;
 	// mlx_t	*mlx;
 	int			pixel_sampling;
 	t_camera	world_camera;
 	double		ambient_ratio;
 	t_color		ambient_color;
+}	t_scene;
+
+typedef struct s_world
+{
+	t_shape		*shape;
+	t_light		*light;
+	t_scene		scene;
 }	t_world;
 
 typedef struct s_exposure

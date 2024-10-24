@@ -7,17 +7,17 @@ static t_color	render_pixel(t_camera c, t_world w, int x, int y)
 	t_ray			ray;
 	t_color			*colors;
 
-	colors = malloc(sizeof(t_color) * pow(w.pixel_sampling, 2));
-	aa_data.pixel_sampling = w.pixel_sampling;
+	colors = malloc(sizeof(t_color) * pow(w.scene.pixel_sampling, 2));
+	aa_data.pixel_sampling = w.scene.pixel_sampling;
 	aa_data.sample_y = 0;
-	while (aa_data.sample_y < w.pixel_sampling)
+	while (aa_data.sample_y < w.scene.pixel_sampling)
 	{
 		aa_data.sample_x = 0;
-		while (aa_data.sample_x < w.pixel_sampling)
+		while (aa_data.sample_x < w.scene.pixel_sampling)
 		{
 			ray = ray_for_pixel(c, x, y, aa_data);
 			colors[(int) aa_data.sample_x + (int)(aa_data.sample_y
-					* w.pixel_sampling)] = color_at(w, ray, 4); // color_at ganhou novo argumento (depth),
+					* w.scene.pixel_sampling)] = color_at(w, ray, 4); // color_at ganhou novo argumento (depth),
 																// precisa verificar como preencher aqui
 																// setei 4 por recomendação do livro (default)
 																// Dá pra colocar em uma variável no t_world
@@ -25,7 +25,7 @@ static t_color	render_pixel(t_camera c, t_world w, int x, int y)
 		}
 		aa_data.sample_y++;
 	}
-	color_average_result = color_average(colors, pow(w.pixel_sampling, 2));
+	color_average_result = color_average(colors, pow(w.scene.pixel_sampling, 2));
 	free(colors);
 	return (color_average_result);
 }

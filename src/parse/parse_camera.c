@@ -21,13 +21,10 @@ bool	parse_camera(char *line, t_world *world)
 	new_camera = camera(WIDTH, HEIGH, fov);
 	new_camera.transform = view_transform(
 		position,
-		tuple_add(
-			position,
-			normalize(direction)
-		),
+		tuple_add(position, normalize(direction)),
 		vector(0, 1, 1)
 	);
 	new_camera.inverse = inverse(new_camera.transform);
-	world->world_camera = new_camera;
+	world->scene.world_camera = new_camera;
 	return (true);
 }

@@ -17,7 +17,12 @@ t_world	world(void)
 	return ((t_world){
 		.light = NULL,
 		.shape = NULL,
-		.pixel_sampling = 1
+		.scene = {
+			.ambient_color = color(1, 1, 1),
+			.ambient_ratio = 0.1,
+			.world_camera = {0},
+			.pixel_sampling = 1
+		}
 	});
 }
 

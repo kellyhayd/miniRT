@@ -15,7 +15,7 @@ bool	parse_ambient(char *line, t_world *world)
 		return (false);
 	}
 	ft_free_split(splitted);
-	world->ambient_ratio = ambient_ratio;
-	world->ambient_color = ambient_color;
+	world->scene.ambient_ratio = ambient_ratio;
+	world->scene.ambient_color = ambient_color;
 	return (true);
 }
