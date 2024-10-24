@@ -14,35 +14,35 @@
 
 bool	parse_cone(char *line, t_world *world)
 {
+	double		radius;
 	t_point		position;
 	t_vector	normal;
-	t_color		new_color;
 	t_shape		new_cone;
 	char		**splitted;
 
+	new_cone = cone();
 	splitted = ft_split(line, ' ');
 	if (!validate_count(splitted, 6) \
 		|| !parse_coordinates(splitted[1], &position) \
-		|| !parse_normal(splitted[2], &normal) \
-		|| !parse_color(splitted[5], &new_color))
+		|| !parse_direction(splitted[2], &normal) \
+		|| !parse_double(splitted[3], &radius)
+		|| !parse_double(splitted[4], &new_cone.cone_shape.maximum)
+		|| !parse_color(splitted[5], &new_cone.material.color))
 	{
 		ft_free_split(splitted);
 		return (false);
 	}
-	new_cone = cone();
-	new_cone.cone_shape.origin = position;
-	// new_cone.cone_shape.normal = normal;
-	new_cone.cone_shape.radius = ft_atof(splitted[3]);
-	// new_cone.cone_shape.height = ft_atof(splitted[4]);
-	new_cone.shape_type = CONE;
-	new_cone.material = material();
-	new_cone.material.color = new_color;
+	ft_free_split(splitted);
+	new_cone.cone_shape.minimum = -new_cone.cone_shape.maximum;
+	new_cone.cone_shape.closed = true;
+	set_transformation(&new_cone, mx_multiply(rotation_matrix(normal),
+			translation(position.x, position.y, position.x)));
 	add_shape(&world->shape, new_cone);
-	return (ft_free_split(splitted), true);
+	return (true);
 }
 
 /*
-#Cylinder
+#cone
 # <coordinates: x,y,z> <normal: x,y,z> <diameter> <height> <color:red,green,blue>
 cy  50.0,0.0,20.6         0,0,1.0        14.2       21.42          10,0,255
 */

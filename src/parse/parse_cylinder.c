@@ -35,8 +35,7 @@ bool	parse_cylinder(char *line, t_world *world)
 	ft_free_split(splitted);
 	new_cylinder.cylinder_shape.minimum = 0;
 	new_cylinder.cylinder_shape.closed = true;
-	set_transformation(&new_cylinder, mx_multiply(
-			rotation_matrix(normal),
+	set_transformation(&new_cylinder, mx_multiply(rotation_matrix(normal),
 			translation(position.x, position.y, position.x)));
 	add_shape(&world->shape, new_cylinder);
 	return (true);
