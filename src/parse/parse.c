@@ -39,6 +39,8 @@ bool	parse_line(char *line, t_world *world)
 	if (!line[0] || line[0] == '\n' || line[0] == '#')
 		return (true);
 	token = get_token(line);
+	if (token == -1)
+		return (false);
 	printf("token: %d\n", token);
 	if (token == AMBIENT)
 		return (parse_ambient(line, world));
