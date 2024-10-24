@@ -471,6 +471,7 @@ bool		parse_double(char *str, double *value);
 bool		parse_radius(char *str, double *radius);
 bool		parse_int(char *str, int *num);
 bool		parse_direction(char *str, t_vector *direction);
+bool		parse_int_color(char *str, int *num);
 
 // NÃO SEI ONDE POR
 // Funções de adicionar coisas a alguma lista, está relacionado ao t_world

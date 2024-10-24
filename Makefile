@@ -95,9 +95,17 @@ $(BUILD):
 $(BUILD)/%.o: $(SRC_PATH)/%.c include/minirt.h
 	@echo "$(CYAN)Compiling $(GREEN)$(notdir $<)$(RESET)"
 	@mkdir -p $(dir $@)
-	@$(CC) $(FLAGS) $(HEADERS) -c $< -o $@
+	@$(CC) $(FLAGS) $(HEADERS) -c $< -o $@ &
+###########################################/\#######################
+###########################################||#######################
+#										ISSO TB
 
 $(NAME): $(LIBFT) $(LIBMLX) $(BUILD) $(OBJ)
+
+#	TIRAR ISSO DPS
+########################################################################################
+	sleep 1
+########################################################################################
 	@echo "$(PURPLE)Compiling $(YELLOW)miniRT$(PURPLE)...$(RESET)"
 	@$(CC) $(FLAGS) $(HEADERS) $(OBJ) $(LIBS) -o $(NAME)
 	@echo "$(GREEN)Done! Let's go!$(RESET)"

@@ -70,7 +70,7 @@ void	test_rendering(t_world world)
 
 	t_canvas	canvas = render(world.world_camera, world);
 
-	canvas_to_ppm(canvas, "test_plane.ppm");
+	canvas_to_ppm(canvas, "test_cylinder.ppm");
 	free(canvas.pixels);
 
 	(void)!write(STDOUT_FILENO, "\n", 1);
