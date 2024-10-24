@@ -31,31 +31,29 @@ bool	parse_sphere(char *line, t_world *world)
 	double		radius;
 	t_point		position;
 	t_shape		new_sphere;
-	t_color		sphere_color;
 	char		**splitted;
 
+	new_sphere = sphere();
 	splitted = ft_split(line, ' ');
 	if (
 		// !validate_count(splitted, 4)
 		!parse_coordinates(splitted[1], &position)
 		|| !parse_radius(splitted[2], &radius)
-		|| !parse_color(splitted[3], &sphere_color)
+		|| !parse_color(splitted[3], &new_sphere.material.color)
 		|| splitted[4])		// Aqui verifica o último elemento, se não for NULL, dá erro.
 								// Aí não precisa do validate_count
 	{
 		ft_free_split(splitted);
 		return (false);
 	}
+	ft_free_split(splitted);
 	radius = radius / 2;
-	new_sphere = sphere();
-	new_sphere.material.color = convert_color(sphere_color);
 	set_transformation(&new_sphere,
 		mx_multiply(
 			scaling(radius, radius, radius),
 			translation(position.x, position.y, position.z)
 		));
 	add_shape(&world->shape, new_sphere);
-	ft_free_split(splitted);
 	return (true);
 }
 
