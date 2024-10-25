@@ -89,6 +89,7 @@ bool	pos_validation(t_world *world)
 	else if (!world->shape)
 	{
 		state = false;
+		printf("Error\nPrecisa ter pelo menos 1 objeto na cena\n");
 		// state = mensagem_de_erro(sem objetos);
 	}
 	return (state);
