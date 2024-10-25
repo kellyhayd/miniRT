@@ -128,7 +128,7 @@ bool	parse_double(char *str, double *value)
 		i++;
 	while (str[i] && ft_isdigit(str[i]))
 		i++;
-	if (str[i] == '.')
+	if (str[i] == '.' && ft_isdigit(str[i + 1]))
 		i++;
 	else if (str[i] && !ft_isdigit(str[i]))
 		return (false);
