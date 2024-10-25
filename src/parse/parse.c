@@ -63,19 +63,26 @@ bool	parse_line(char *line, t_world *world)
 	return (true);
 }
 
+bool	print_error(char *message)
+{
+	ft_putendl_fd(RED "Error" RESET, 2);
+	ft_putendl_fd(message, 2);
+	return (false);
+}
+
 bool	pos_validation(t_world *world)
 {
 	bool	state;
 
 	state = true;
 	if (!world->scene.has_ambient_color)
-		state = print_error("Precisa ter 1 cor ambiente");
+		state = print_error("There must be 1 ambient color");
 	else if (!world->scene.has_camera)
-		state = print_error("Precisa ter 1 camera");
+		state = print_error("There must be 1 camera");
 	else if (!world->light)
-		state = print_error("Precisa ter pelo menos 1 luz");
+		state = print_error("There must be at least 1 light");
 	else if (!world->shape)
-		state = print_error("Precisa ter pelo menos 1 objeto na cena");
+		state = print_error("There must be at least 1 object in the scene");
 	return (state);
 }
 
