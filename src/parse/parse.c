@@ -29,7 +29,11 @@ int	get_token(char *line)
 	else if (ft_strncmp(line, "cn", 2) == 0)
 		return (CONE);
 	else
+	{
+		ft_putendl_fd(RED "Error!" RESET, 2);
+		ft_putendl_fd("Unexpected element", 2);
 		return (-1);
+	}
 }
 
 bool	parse_line(char *line, t_world *world)

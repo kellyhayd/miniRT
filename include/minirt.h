@@ -472,9 +472,10 @@ float		fternary(int condition, float if_true, float if_false);
 // parser
 bool		is_all_numbers(char **split);
 bool		validate_count(char **split, int count);
-bool		validate_color_range(char **str);
+// bool		validate_color_range(char **str);
 bool		validate_normal_range(char **str);
 t_matrix	rotation_matrix(t_vector direction);
+void		put_ambient_color(t_world *world);
 
 bool		parse_double(char *str, double *value);
 bool		parse_radius(char *str, double *radius);
