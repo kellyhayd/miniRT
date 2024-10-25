@@ -22,7 +22,8 @@ t_world	world(void)
 			.ambient_ratio = 0.1,
 			.world_camera = {0},
 			.pixel_sampling = 1,
-			.has_ambient_color = 0
+			.has_ambient_color = 0,
+			.has_camera = 0
 		}
 	});
 }

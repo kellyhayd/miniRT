@@ -232,6 +232,8 @@ typedef struct s_scene
 	t_camera	world_camera;
 	double		ambient_ratio;
 	t_color		ambient_color;
+	int			has_ambient_color;
+	int			has_camera;
 }	t_scene;
 
 typedef struct s_world

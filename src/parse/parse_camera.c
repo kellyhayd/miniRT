@@ -10,6 +10,7 @@ bool	parse_camera(char *line, t_world *world)
 
 	splitted = ft_split(line, ' ');
 	if (!validate_count(splitted, 4) \
+		|| !(world->scene.has_camera == 0) \
 		|| !parse_coordinates(splitted[1], &position) \
 		|| !parse_direction(splitted[2], &direction) \
 		|| !parse_int(splitted[3], &fov))
@@ -18,12 +19,10 @@ bool	parse_camera(char *line, t_world *world)
 		return (false);
 	}
 	ft_free_split(splitted);
+	world->scene.has_camera = 1;
 	new_camera = camera(WIDTH, HEIGH, fov);
 	new_camera.transform = view_transform(
-		position,
-		tuple_add(position, normalize(direction)),
-		vector(0, 1, 1)
-	);
+		position, tuple_add(position, normalize(direction)), vector(0, 1, 1));
 	new_camera.inverse = inverse(new_camera.transform);
 	world->scene.world_camera = new_camera;
 	return (true);

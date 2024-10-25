@@ -75,6 +75,34 @@ void	put_ambient_color(t_world *world)
 	}
 }
 
+bool	pos_validation(t_world *world)
+{
+	bool	state;
+
+	state = true;
+	if (!world->scene.has_camera)
+	{
+		state = false;
+		// state = mensagem_de_erro(sem camera);
+	}
+	else if (!world->scene.has_ambient_color)
+	{
+		state = false;
+		// state = mensagem_de_erro(sem cor ambiente)
+	}
+	else if (!world->shape)
+	{
+		state = false;
+		// state = mensagem_de_erro(sem objetos);
+	}
+	else if (!world->light)
+	{
+		state = false;
+		// state = mensagem_de_erro(sem luz);
+	}
+	return (state);
+}
+
 bool	parse(int fd, t_world *world)
 {
 	char	*line;
@@ -92,6 +120,8 @@ bool	parse(int fd, t_world *world)
 		free(line);
 		line = get_next_line(fd);
 	}
+	if (!pos_validation(world))
+		return (false);
 	put_ambient_color(world);
 	return (true);
 }
