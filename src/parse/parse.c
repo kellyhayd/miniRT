@@ -63,22 +63,6 @@ bool	parse_line(char *line, t_world *world)
 	return (true);
 }
 
-void	put_ambient_color(t_world *world)
-{
-	t_color	ambient_color;
-	t_shape	*aux;
-
-	ambient_color = color_multiply(world->scene.ambient_color,
-		world->scene.ambient_ratio);
-	aux = world->shape;
-	while (aux)
-	{
-		aux->material.ambient = color_hadamard(ambient_color,
-			aux->material.color);
-		aux = aux->next;
-	}
-}
-
 bool	pos_validation(t_world *world)
 {
 	bool	state;
