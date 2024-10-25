@@ -71,7 +71,11 @@ bool	validate_count(char **split, int count)
 	while (split[i])
 		i++;
 	if (i != count)
+	{
+		ft_putendl_fd(RED "Error!" RESET, 2);
+		ft_putendl_fd("Invalid number of elements", 2);
 		return (false);
+	}
 	return (true);
 }
 
