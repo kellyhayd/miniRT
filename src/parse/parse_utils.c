@@ -23,33 +23,33 @@
  * @param split An array of strings to be checked.
  * @return true if all strings in the array are numeric, false otherwise.
  */
-bool	is_all_numbers(char **split)
-{
-	int	i;
-	int	j;
-	int	dot_count;
-
-	i = 0;
-	dot_count = 0;
-	while (split[i])
-	{
-		j = 0;
-		if (split[i][j] == '-')
-			j++;
-		while (split[i][j] != '\0' && split[i][j] != '\n')
-		{
-			if (!ft_isdigit(split[i][j]) && split[i][j] != '.')
-				return (false);
-			if (split[i][j] == '.')
-				dot_count++;
-			j++;
-		}
-		i++;
-	}
-	if (dot_count > 1)
-		return (false);
-	return (true);
-}
+// bool	is_all_numbers(char **split)
+// {
+// 	int	i;
+// 	int	j;
+// 	int	dot_count;
+//
+// 	i = 0;
+// 	dot_count = 0;
+// 	while (split[i])
+// 	{
+// 		j = 0;
+// 		if (split[i][j] == '-')
+// 			j++;
+// 		while (split[i][j] != '\0' && split[i][j] != '\n')
+// 		{
+// 			if (!ft_isdigit(split[i][j]) && split[i][j] != '.')
+// 				return (false);
+// 			if (split[i][j] == '.')
+// 				dot_count++;
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// 	if (dot_count > 1)
+// 		return (false);
+// 	return (true);
+// }
 
 /**
  * @brief Validates the number of elements in a split string array.
@@ -85,19 +85,19 @@ bool	validate_count(char **split, int count)
  * @param str An array of strings to be checked.
  * @return true if all strings represent valid color values, false otherwise.
  */
-bool	validate_color_range(char **str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (ft_atoi(str[i]) < 0 || ft_atoi(str[i]) > 255)
-			return (false);
-		i++;
-	}
-	return (true);
-}
+// bool	validate_color_range(char **str)
+// {
+// 	int	i;
+//
+// 	i = 0;
+// 	while (str[i])
+// 	{
+// 		if (ft_atoi(str[i]) < 0 || ft_atoi(str[i]) > 255)
+// 			return (false);
+// 		i++;
+// 	}
+// 	return (true);
+// }
 
 bool	validate_normal_range(char **str)
 {
@@ -119,29 +119,16 @@ bool	validate_normal_range(char **str)
 	return (true);
 }
 
-bool	parse_double(char *str, double *value)
+void	put_ambient_color(t_world *world)
 {
-	int	i;
+	t_color	ambient_color;
+	t_shape	*aux;
 
-	i = 0;
-	if (str[i] == '-')
-		i++;
-	while (str[i] && ft_isdigit(str[i]))
-		i++;
-	if (str[i] == '.' && ft_isdigit(str[i + 1]))
-		i++;
-	else if (str[i] && !ft_isdigit(str[i]))
-		return (false);
-	while (str[i] && ft_isdigit(str[i]))
-		i++;
-	if (str[i] != '\0')
-		return (false);
-	*value = ft_atof(str);
-	return (true);
-}
-
-bool	parse_radius(char *str, double *radius)
-{
+	ambient_color = color_multiply(world->scene.ambient_color,
+		world->scene.ambient_ratio);
+	aux = world->shape;
+	while (aux)
+	{
 	if (!parse_double(str, radius)
 		|| !(*radius > 0))
 		return (false);
