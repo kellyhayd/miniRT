@@ -1,5 +1,14 @@
 #include "minirt.h"
 
+bool	validade_if_has_ambient_color(int has_ambient_color)
+{
+	if (has_ambient_color == 0)
+		return (true);
+	ft_putendl_fd(RED "Error!" RESET, 2);
+	ft_putendl_fd("Only one ambient light allowed", 2);
+	return (false);
+}
+
 bool	parse_ambient(char *line, t_world *world)
 {
 	double	ambient_ratio;
@@ -8,7 +17,7 @@ bool	parse_ambient(char *line, t_world *world)
 
 	splitted = ft_split(line, ' ');
 	if (!validate_count(splitted, 3)
-		|| !(world->scene.has_ambient_color == 0)
+		|| !validade_if_has_ambient_color(world->scene.has_ambient_color)
 		|| !parse_double(splitted[1], &ambient_ratio)
 		|| !parse_color(splitted[2], &ambient_color))
 	{
