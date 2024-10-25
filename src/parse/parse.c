@@ -112,8 +112,10 @@ bool	pos_validation(t_world *world)
 
 bool	parse(int fd, t_world *world)
 {
+	int		count_line;
 	char	*line;
 
+	count_line = 1;
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
@@ -121,11 +123,18 @@ bool	parse(int fd, t_world *world)
 			ft_strchr(line, '\n')[0] = '\0';
 		if (!parse_line(line, world))
 		{
+			ft_putstr_fd(BLUE "Line: " RESET, 2);
+			if (count_line < 10)
+				ft_putchar_fd('0', 2);
+			ft_putnbr_fd(count_line, 2);
+			ft_putstr_fd(" | ", 2);
+			ft_putendl_fd(line, 2);
 			free(line);
 			return (false);
 		}
 		free(line);
 		line = get_next_line(fd);
+		count_line++;
 	}
 	if (!pos_validation(world))
 		return (false);
