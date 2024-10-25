@@ -12,6 +12,40 @@
 
 #include "minirt.h"
 
+bool	parse_brightness_range(char *str, double *brightness)
+{
+	if (!(*brightness >= 0 && *brightness <= 1))
+	{
+		ft_putendl_fd(RED "Error!" RESET, 2);
+		ft_putstr_fd("Expected " GREEN "value between 0 and 1" RESET
+			", received " GREEN, 2);
+		ft_putstr_fd(str, 2);
+		ft_putendl_fd(RESET, 2);
+		return (false);
+	}
+	return (true);
+}
+
+/**
+ * @brief Parses the brightness value from a given string.
+ *
+ * This function takes a string representing the brightness value and parses
+ * it into a double. The parsed brightness value is then stored in the
+ * provided double pointer.
+ *
+ * @param splitted A string containing the brightness value to be parsed.
+ * @param brightness A pointer to a double where the parsed brightness value
+ *                   will be stored.
+ * @return true if the parsing is successful, false otherwise.
+ */
+bool	parse_brightness(char *str, double *brightness)
+{
+	if (!parse_double(str, brightness)
+		|| !parse_brightness_range(str, brightness))
+		return (false);
+	return (true);
+}
+
 /**
  * @brief Parses a light definition from a line of input and adds it to the
  * world.
@@ -41,8 +75,8 @@ bool	parse_light(char *line, t_world *world)
 		ft_free_split(splitted);
 		return (false);
 	}
+	ft_free_split(splitted);
 	add_light(&world->light, \
 			point_light(position, color_multiply(new_color, bright)));
-	ft_free_split(splitted);
 	return (true);
 }

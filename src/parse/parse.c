@@ -92,15 +92,16 @@ bool	pos_validation(t_world *world)
 		printf("Error\nPrecisa ter 1 camera\n");
 		// state = mensagem_de_erro(sem cor ambiente)
 	}
+	else if (!world->light)
+	{
+		state = false;
+		printf("Error\nPrecisa ter pelo menos 1 luz\n");
+		// state = mensagem_de_erro(sem luz);
+	}
 	else if (!world->shape)
 	{
 		state = false;
 		// state = mensagem_de_erro(sem objetos);
-	}
-	else if (!world->light)
-	{
-		state = false;
-		// state = mensagem_de_erro(sem luz);
 	}
 	return (state);
 }
