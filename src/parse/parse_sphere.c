@@ -36,12 +36,13 @@ bool	parse_sphere(char *line, t_world *world)
 	new_sphere = sphere();
 	splitted = ft_split(line, ' ');
 	if (
-		// !validate_count(splitted, 4)
-		!parse_coordinates(splitted[1], &position)
+		!validate_count(splitted, 4)
+		|| !parse_coordinates(splitted[1], &position)
 		|| !parse_radius(splitted[2], &radius)
 		|| !parse_color(splitted[3], &new_sphere.material.color)
-		|| splitted[4])		// Aqui verifica o último elemento, se não for NULL, dá erro.
-								// Aí não precisa do validate_count
+		// || splitted[4]		// Aqui verifica o último elemento, se não for NULL, dá erro.
+		// 						// Aí não precisa do validate_count
+		)
 	{
 		ft_free_split(splitted);
 		return (false);
