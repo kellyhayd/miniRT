@@ -69,29 +69,13 @@ bool	pos_validation(t_world *world)
 
 	state = true;
 	if (!world->scene.has_ambient_color)
-	{
-		state = false;
-		printf("Error\nPrecisa ter 1 cor ambiente\n");
-		// state = mensagem_de_erro(sem camera);
-	}
+		state = print_error("Precisa ter 1 cor ambiente");
 	else if (!world->scene.has_camera)
-	{
-		state = false;
-		printf("Error\nPrecisa ter 1 camera\n");
-		// state = mensagem_de_erro(sem cor ambiente)
-	}
+		state = print_error("Precisa ter 1 camera");
 	else if (!world->light)
-	{
-		state = false;
-		printf("Error\nPrecisa ter pelo menos 1 luz\n");
-		// state = mensagem_de_erro(sem luz);
-	}
+		state = print_error("Precisa ter pelo menos 1 luz");
 	else if (!world->shape)
-	{
-		state = false;
-		printf("Error\nPrecisa ter pelo menos 1 objeto na cena\n");
-		// state = mensagem_de_erro(sem objetos);
-	}
+		state = print_error("Precisa ter pelo menos 1 objeto na cena");
 	return (state);
 }
 
