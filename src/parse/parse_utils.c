@@ -129,29 +129,8 @@ void	put_ambient_color(t_world *world)
 	aux = world->shape;
 	while (aux)
 	{
-	if (!parse_double(str, radius)
-		|| !(*radius > 0))
-		return (false);
-	return (true);
-}
-
-bool	parse_int(char *str, int *num)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] && ft_isdigit(str[i]))
-		i++;
-	if (str[i] != '\0')
-		return (false);
-	*num = ft_atoi(str);
-	return (true);
-}
-
-bool	parse_int_color(char *str, int *num)
-{
-	if (!parse_int(str, num)
-		|| !(*num >= 0 && *num <= 255))
-		return (false);
-	return (true);
+		aux->material.ambient = color_hadamard(ambient_color,
+			aux->material.color);
+		aux = aux->next;
+	}
 }
