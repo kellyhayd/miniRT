@@ -68,7 +68,7 @@ bool	validate_count(char **split, int count)
 	int	i;
 
 	i = 0;
-	while (split[i])
+	while (split && split[i])
 		i++;
 	if (i != count)
 	{

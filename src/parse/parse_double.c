@@ -53,3 +53,23 @@ bool	parse_radius(char *str, double *radius)
 		return (false);
 	return (true);
 }
+
+bool	validate_double_range(char *str, double value, double min, double max)
+{
+	if (!(value >= min && value <= max))
+	{
+		ft_putendl_fd(RED "Error!" RESET, 2);
+		ft_putstr_fd("Expected " GREEN "value between ", 2);
+		ft_putnbr_fd(min, 2);
+		ft_putstr_fd(" and ", 2);
+		if (max == INFINITY)
+			ft_putstr_fd("INFINITY", 2);
+		else
+			ft_putnbr_fd(max, 2);
+		ft_putstr_fd(RESET ", received " GREEN, 2);
+		ft_putstr_fd(str, 2);
+		ft_putendl_fd(RESET, 2);
+		return (false);
+	}
+	return (true);
+}

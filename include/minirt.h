@@ -51,10 +51,11 @@ enum e_tokens
 	AMBIENT,
 	CAMERA,
 	LIGHT,
+	MATERIAL,
 	SPHERE,
 	PLANE,
 	CYLINDER,
-	CONE
+	CONE,
 };
 
 enum e_patterns
@@ -77,6 +78,9 @@ typedef struct s_camera	t_camera;
 
 typedef enum e_tokens t_tokens;
 typedef enum e_patterns t_patterns;
+
+typedef struct s_material_list t_material_list;
+typedef struct s_pattern_list t_pattern_list;
 
 struct s_tuple
 {
@@ -181,6 +185,20 @@ typedef struct s_material
 	t_uv_image		bump_map;
 }	t_material;
 
+struct s_material_list
+{
+	char			*name;
+	t_material		material;
+	t_material_list	*next;
+};
+
+struct s_pattern_list
+{
+	char			*name;
+	t_pattern		pattern;
+	t_pattern_list	*next;
+};
+
 struct s_shape
 {
 	int			id;
@@ -227,13 +245,15 @@ struct s_camera
 
 typedef struct s_scene
 {
-	// mlx_t	*mlx;
-	int			pixel_sampling;
-	t_camera	world_camera;
-	double		ambient_ratio;
-	t_color		ambient_color;
-	int			has_ambient_color;
-	int			has_camera;
+	// mlx_t		*mlx;
+	int				pixel_sampling;
+	t_camera		world_camera;
+	double			ambient_ratio;
+	t_color			ambient_color;
+	int				has_ambient_color;
+	int				has_camera;
+	t_material_list		*material_list;
+	t_pattern_list	*pattern_list;
 }	t_scene;
 
 typedef struct s_world
@@ -476,6 +496,8 @@ bool		validate_count(char **split, int count);
 bool		validate_normal_range(char **str);
 t_matrix	rotation_matrix(t_vector direction);
 void		put_ambient_color(t_world *world);
+void		add_material(t_material_list **material_list, t_material material, char *name);
+bool		validate_double_range(char *str, double value, double min, double max);
 
 bool		parse_double(char *str, double *value);
 bool		parse_radius(char *str, double *radius);
@@ -483,6 +505,8 @@ bool		parse_int(char *str, int *num);
 bool		parse_direction(char *str, t_vector *direction);
 bool		parse_int_color(char *str, int *num);
 bool		parse_ambient(char *line, t_world *world);
+bool		parse_material(char *line, t_world *world);
+bool		parse_material_name(char *str, t_material *material, t_world *world);
 
 // NÃO SEI ONDE POR
 // Funções de adicionar coisas a alguma lista, está relacionado ao t_world

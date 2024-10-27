@@ -36,12 +36,14 @@ bool	parse_sphere(char *line, t_world *world)
 	new_sphere = sphere();
 	splitted = ft_split(line, ' ');
 	if (
-		!validate_count(splitted, 4)
-		|| !parse_coordinates(splitted[1], &position)
+		// !validate_count(splitted, 4)
+		!parse_coordinates(splitted[1], &position)
 		|| !parse_radius(splitted[2], &radius)
 		|| !parse_color(splitted[3], &new_sphere.material.color)
-		// || splitted[4]		// Aqui verifica o último elemento, se não for NULL, dá erro.
-		// 						// Aí não precisa do validate_count
+		|| !parse_material_name(splitted[4], &new_sphere.material, world)
+		|| (splitted[4] && splitted[5])
+								// Aqui verifica o último elemento, se não for NULL, dá erro.
+								// Aí não precisa do validate_count
 		)
 	{
 		ft_free_split(splitted);
@@ -49,10 +51,15 @@ bool	parse_sphere(char *line, t_world *world)
 	}
 	ft_free_split(splitted);
 	radius = radius / 2;
+	// set_transformation(&new_sphere,
+	// 	mx_multiply(
+	// 		scaling(radius, radius, radius),
+	// 		translation(position.x, position.y, position.z)
+	// 	));
 	set_transformation(&new_sphere,
 		mx_multiply(
-			scaling(radius, radius, radius),
-			translation(position.x, position.y, position.z)
+			translation(position.x, position.y, position.z),
+			scaling(radius, radius, radius)
 		));
 	add_shape(&world->shape, new_sphere);
 	return (true);
