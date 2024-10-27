@@ -4,7 +4,10 @@ bool	print_error_double(char *str)
 {
 	ft_putendl_fd(RED "Error!" RESET, 2);
 	ft_putstr_fd("Expected " GREEN "double" RESET ", received " GREEN, 2);
-	ft_putstr_fd(str, 2);
+	if (str)
+		ft_putstr_fd(str, 2);
+	else
+		ft_putstr_fd("NULL", 2);
 	ft_putendl_fd(RESET, 2);
 	return (false);
 }
@@ -14,6 +17,8 @@ bool	parse_double(char *str, double *value)
 	int	i;
 
 	i = 0;
+	if (!str)
+		return (print_error_double(str));
 	if (str[i] == '.')
 		return (print_error_double(str));
 	if (str[i] == '-' && ft_isdigit(str[i + 1]))

@@ -31,14 +31,11 @@ bool	parse_plane(char *line, t_world *world)
 
 	new_plane = plane();
 	splitted = ft_split(line, ' ');
-	if (
-		// !validate_count(splitted, 4)
-		!parse_coordinates(splitted[1], &position)
+	if (!parse_coordinates(splitted[1], &position)
 		|| !parse_direction(splitted[2], &normal)
 		|| !parse_color(splitted[3], &new_plane.material.color)
 		|| !parse_material_shape(&splitted[4], &new_plane.material, world)
-		|| (splitted[4] && splitted[5] && splitted[6])
-		)
+		|| !validade_optionals(&splitted[4]))
 	{
 		ft_free_split(splitted);
 		return (false);

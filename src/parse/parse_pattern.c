@@ -82,7 +82,8 @@ bool	parse_pattern(char *line, t_world *world)
 	char		**split;
 
 	split = ft_split(line, ' ');
-	if (!check_if_pattern_exists(split[1], world)
+	if (!validate_count(split, 8)
+		|| !check_if_pattern_exists(split[1], world)
 		|| !parse_pattern_type(split[2], &pattern.pattern_type)
 		|| !parse_color(split[3], &pattern.color_a)
 		|| !parse_color(split[4], &pattern.color_b)

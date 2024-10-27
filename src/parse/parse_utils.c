@@ -103,25 +103,25 @@ bool	validate_count(char **split, int count)
 // 	return (true);
 // }
 
-bool	validate_normal_range(char **str)
-{
-	int	i;
-
-	i = 0;
-
-	// Aqui é pra validar se o vetor normal está normalizado
-	// Juntar os 3 (em um vetor x, y e z) e ver se a magnitude é 1
-
-	// OBS: acabei não usado, fiz a parse_direction pra isso
-
-	while (str[i])
-	{
-		if (ft_atof(str[i]) < -1 || ft_atof(str[i]) > 1)
-			return (false);
-		i++;
-	}
-	return (true);
-}
+// bool	validate_normal_range(char **str)
+// {
+// 	int	i;
+//
+// 	i = 0;
+//
+// 	// Aqui é pra validar se o vetor normal está normalizado
+// 	// Juntar os 3 (em um vetor x, y e z) e ver se a magnitude é 1
+//
+// 	// OBS: acabei não usado, fiz a parse_direction pra isso
+//
+// 	while (str[i])
+// 	{
+// 		if (ft_atof(str[i]) < -1 || ft_atof(str[i]) > 1)
+// 			return (false);
+// 		i++;
+// 	}
+// 	return (true);
+// }
 
 void	put_ambient_color(t_world *world)
 {
@@ -137,4 +137,15 @@ void	put_ambient_color(t_world *world)
 			aux->material.color);
 		aux = aux->next;
 	}
+}
+
+bool	validade_optionals(char **splitted)
+{
+	if (splitted[0] && splitted[1] && splitted[2])
+	{
+		ft_putendl_fd(RED "Error!" RESET, 2);
+		ft_putendl_fd("Invalid number of elements", 2);
+		return (false);
+	}
+	return (true);
 }

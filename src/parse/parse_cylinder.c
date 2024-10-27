@@ -22,20 +22,14 @@ bool	parse_cylinder(char *line, t_world *world)
 
 	new_cylinder = cylinder();
 	splitted = ft_split(line, ' ');
-	if (
-		// !validate_count(splitted, 6)
-		!parse_coordinates(splitted[1], &position)
+	if (!parse_coordinates(splitted[1], &position)
 		|| !parse_direction(splitted[2], &normal)
 		|| !parse_double(splitted[3], &radius)
 		|| !parse_double(splitted[4], &new_cylinder.cylinder_shape.maximum)
 		|| !parse_color(splitted[5], &new_cylinder.material.color)
 		|| !parse_material_shape(&splitted[6], &new_cylinder.material, world)
-		|| (splitted[6] && splitted[7] && splitted[8])
-		)
-	{
-		ft_free_split(splitted);
-		return (false);
-	}
+		|| !validade_optionals(&splitted[6]))
+		return (ft_free_split(splitted), false);
 	ft_free_split(splitted);
 	new_cylinder.cylinder_shape.minimum = 0;
 	new_cylinder.cylinder_shape.closed = true;
