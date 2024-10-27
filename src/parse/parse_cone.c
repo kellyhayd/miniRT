@@ -22,12 +22,15 @@ bool	parse_cone(char *line, t_world *world)
 
 	new_cone = cone();
 	splitted = ft_split(line, ' ');
-	if (!validate_count(splitted, 6) \
-		|| !parse_coordinates(splitted[1], &position) \
-		|| !parse_direction(splitted[2], &normal) \
+	if (
+		// !validate_count(splitted, 6)
+		!parse_coordinates(splitted[1], &position)
+		|| !parse_direction(splitted[2], &normal)
 		|| !parse_double(splitted[3], &radius)
 		|| !parse_double(splitted[4], &new_cone.cone_shape.maximum)
-		|| !parse_color(splitted[5], &new_cone.material.color))
+		|| !parse_color(splitted[5], &new_cone.material.color)
+		|| !parse_material_name(splitted[6], &new_cone.material, world)
+		|| (splitted[6] && splitted[7]))
 	{
 		ft_free_split(splitted);
 		return (false);
