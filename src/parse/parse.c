@@ -14,21 +14,21 @@
 
 int	get_token(char *line)
 {
-	if (ft_strncmp(line, "A", 1) == 0)
+	if (ft_strncmp(line, "A ", 2) == 0)
 		return (AMBIENT);
-	else if (ft_strncmp(line, "C", 1) == 0)
+	else if (ft_strncmp(line, "C ", 2) == 0)
 		return (CAMERA);
-	else if (ft_strncmp(line, "L", 1) == 0)
+	else if (ft_strncmp(line, "L ", 2) == 0)
 		return (LIGHT);
-	else if (ft_strncmp(line, "sp", 2) == 0)
+	else if (ft_strncmp(line, "sp ", 3) == 0)
 		return (SPHERE);
-	else if (ft_strncmp(line, "pl", 2) == 0)
+	else if (ft_strncmp(line, "pl ", 3) == 0)
 		return (PLANE);
-	else if (ft_strncmp(line, "cy", 2) == 0)
+	else if (ft_strncmp(line, "cy ", 3) == 0)
 		return (CYLINDER);
-	else if (ft_strncmp(line, "cn", 2) == 0)
+	else if (ft_strncmp(line, "cn ", 3) == 0)
 		return (CONE);
-	else if (ft_strncmp(line, "m", 1) == 0)
+	else if (ft_strncmp(line, "m ", 2) == 0)
 		return (MATERIAL);
 	else
 	{
