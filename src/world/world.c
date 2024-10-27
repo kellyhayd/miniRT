@@ -23,7 +23,9 @@ t_world	world(void)
 			.world_camera = {0},
 			.pixel_sampling = 1,
 			.has_ambient_color = 0,
-			.has_camera = 0
+			.has_camera = 0,
+			.pattern_list = NULL,
+			.material_list = NULL
 		}
 	});
 }
