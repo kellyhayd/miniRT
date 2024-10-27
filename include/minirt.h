@@ -498,6 +498,10 @@ t_matrix	rotation_matrix(t_vector direction);
 void		put_ambient_color(t_world *world);
 void		add_material(t_material_list **material_list, t_material material, char *name);
 bool		validate_double_range(char *str, double value, double min, double max);
+bool		parse_material_name(char *str, t_material *material, t_world *world);
+void		add_material(t_material_list **material_list, t_material material, char *name);
+void		init_default_material(t_world *world);
+void		clear_material_list(t_world *world);
 
 bool		parse_double(char *str, double *value);
 bool		parse_radius(char *str, double *radius);
