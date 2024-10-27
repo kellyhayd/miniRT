@@ -52,6 +52,7 @@ enum e_tokens
 	CAMERA,
 	LIGHT,
 	MATERIAL,
+	PATTERN,
 	SPHERE,
 	PLANE,
 	CYLINDER,
@@ -502,6 +503,7 @@ bool		parse_material_name(char *str, t_material *material, t_world *world);
 void		add_material(t_material_list **material_list, t_material material, char *name);
 void		init_default_material(t_world *world);
 void		clear_material_list(t_world *world);
+void		clear_pattern_list(t_world *world);
 
 bool		parse_double(char *str, double *value);
 bool		parse_radius(char *str, double *radius);
@@ -511,6 +513,9 @@ bool		parse_int_color(char *str, int *num);
 bool		parse_ambient(char *line, t_world *world);
 bool		parse_material(char *line, t_world *world);
 bool		parse_material_name(char *str, t_material *material, t_world *world);
+bool		parse_pattern(char *line, t_world *world);
+bool		parse_pattern_name(char *str, t_pattern *pattern, t_world *world);
+bool		parse_material_shape(char **splitted, t_material *material, t_world *world);
 
 // NÃO SEI ONDE POR
 // Funções de adicionar coisas a alguma lista, está relacionado ao t_world

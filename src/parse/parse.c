@@ -30,6 +30,8 @@ int	get_token(char *line)
 		return (CONE);
 	else if (ft_strncmp(line, "m ", 2) == 0)
 		return (MATERIAL);
+	else if (ft_strncmp(line, "p ", 2) == 0)
+		return (PATTERN);
 	else
 	{
 		ft_putendl_fd(RED "Error!" RESET, 2);
@@ -59,6 +61,8 @@ bool	parse_line(char *line, t_world *world)
 		return (parse_light(line, world));
 	else if (token == MATERIAL)
 		return (parse_material(line, world));
+	else if (token == PATTERN)
+		return (parse_pattern(line, world));
 	else if (token == SPHERE)
 		return (parse_sphere(line, world));
 	else if (token == PLANE)
@@ -130,5 +134,6 @@ bool	parse(int fd, t_world *world)
 		state = false;
 	put_ambient_color(world);
 	clear_material_list(world);
+	clear_pattern_list(world);
 	return (state);
 }

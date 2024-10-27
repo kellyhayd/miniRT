@@ -40,8 +40,8 @@ bool	parse_sphere(char *line, t_world *world)
 		!parse_coordinates(splitted[1], &position)
 		|| !parse_radius(splitted[2], &radius)
 		|| !parse_color(splitted[3], &new_sphere.material.color)
-		|| !parse_material_name(splitted[4], &new_sphere.material, world)
-		|| (splitted[4] && splitted[5])
+		|| !parse_material_shape(&splitted[4], &new_sphere.material, world)
+		|| (splitted[4] && splitted[5] && splitted[6])
 								// Aqui verifica o último elemento, se não for NULL, dá erro.
 								// Aí não precisa do validate_count
 		)

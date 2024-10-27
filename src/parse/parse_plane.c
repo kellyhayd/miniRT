@@ -12,6 +12,16 @@
 
 #include "minirt.h"
 
+int	sign(int number)
+{
+	if (number > 0)
+		return 1;
+	else if (number < 0)
+		return -1;
+	else
+		return 0;
+}
+
 bool	parse_plane(char *line, t_world *world)
 {
 	t_point		position;
@@ -26,8 +36,8 @@ bool	parse_plane(char *line, t_world *world)
 		!parse_coordinates(splitted[1], &position)
 		|| !parse_direction(splitted[2], &normal)
 		|| !parse_color(splitted[3], &new_plane.material.color)
-		|| !parse_material_name(splitted[4], &new_plane.material, world)
-		|| (splitted[4] && splitted[5])
+		|| !parse_material_shape(&splitted[4], &new_plane.material, world)
+		|| (splitted[4] && splitted[5] && splitted[6])
 		)
 	{
 		ft_free_split(splitted);
@@ -35,7 +45,7 @@ bool	parse_plane(char *line, t_world *world)
 	}
 	ft_free_split(splitted);
 	set_transformation(&new_plane,
-			mx_multiply(translation(position.x, position.y, position.x),
+			mx_multiply(translation(position.x, sign(normal.y) * position.y, position.x),
 			rotation_matrix(normal)
 		));
 	add_shape(&world->shape, new_plane);

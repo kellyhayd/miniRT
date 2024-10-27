@@ -1,6 +1,6 @@
 #include "minirt.h"
 
-bool	validade_if_already_exists(char *name, t_world *world)
+bool	check_if_material_exists(char *name, t_world *world)
 {
 	t_material_list	*current;
 
@@ -27,7 +27,7 @@ bool	parse_material(char *line, t_world *world)
 
 	split = ft_split(line, ' ');
 	if (!validate_count(split, 5)
-		|| !validade_if_already_exists(split[1], world)
+		|| !check_if_material_exists(split[1], world)
 		|| !parse_double(split[2], &material.reflective)
 		|| !validate_double_range(split[2], material.reflective, 0, 1)
 		|| !parse_double(split[3], &material.transparency)
@@ -131,4 +131,16 @@ void	clear_material_list(t_world *world)
 		current = next;
 	}
 	world->scene.material_list = NULL;
+}
+
+bool	parse_material_shape(char **splitted, t_material *material, t_world *world)
+{
+	bool	status;
+
+	status = true;
+	if (splitted[0])
+		status = parse_material_name(splitted[0], material, world);
+	if (status && splitted[0] && splitted[1])
+		status = parse_pattern_name(splitted[1], &material->pattern, world);
+	return (status);
 }

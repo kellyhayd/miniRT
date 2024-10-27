@@ -29,8 +29,8 @@ bool	parse_cylinder(char *line, t_world *world)
 		|| !parse_double(splitted[3], &radius)
 		|| !parse_double(splitted[4], &new_cylinder.cylinder_shape.maximum)
 		|| !parse_color(splitted[5], &new_cylinder.material.color)
-		|| !parse_material_name(splitted[6], &new_cylinder.material, world)
-		|| (splitted[6] && splitted[7])
+		|| !parse_material_shape(&splitted[6], &new_cylinder.material, world)
+		|| (splitted[6] && splitted[7] && splitted[8])
 		)
 	{
 		ft_free_split(splitted);
