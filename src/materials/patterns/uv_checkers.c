@@ -40,9 +40,6 @@ t_map	texture_map(t_checkers checkers, void (*map_fn)(t_point, double *, double 
 
 void	cylindrical_map(t_point point, double *u, double *v)
 {
-	// int	algum_valor = point.y * 100000;
-
 	*v = fmod(point.y, 1);
-	// *v = (algum_valor % 100000) / 100000;
 	*u = 1 - (atan2(point.x, point.z) / (2 * M_PI) + 0.5);
 }
