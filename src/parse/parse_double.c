@@ -16,7 +16,7 @@ bool	parse_double(char *str, double *value)
 	i = 0;
 	if (str[i] == '.')
 		return (print_error_double(str));
-	if (str[i] == '-')
+	if (str[i] == '-' && ft_isdigit(str[i + 1]))
 		i++;
 	while (str[i] && ft_isdigit(str[i]))
 		i++;
