@@ -51,8 +51,8 @@ t_color	pattern_at_shape(t_pattern pattern, t_shape object, t_point world_point)
 		if (object.shape_type == SPHERE || object.shape_type == CONE
 			|| object.shape_type == CYLINDER)
 		{
-			// spherical_map(pattern_point, &u, &v);
-			pattern.map.map_fn(pattern_point, &u, &v);
+			spherical_map(pattern_point, &u, &v);
+			// pattern.map.map_fn(pattern_point, &u, &v);
 			color_pattern = uv_pattern_at(pattern.map.checkers, u, v);
 		}
 		else
