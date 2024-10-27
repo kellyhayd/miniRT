@@ -43,6 +43,8 @@ void	*ft_free_split(char **split)
 	int	i;
 
 	i = 0;
+	if (!split)
+		return (NULL);
 	while (split[i])
 	{
 		free(split[i]);
@@ -60,13 +62,13 @@ char	**ft_split(char const *s, char c)
 	size_t	word_count;
 	char	**split;
 
+	if (!s)
+		return (NULL);
 	i = 0;
 	word_iter = 0;
 	word_size = 0;
 	word_count = count_words(s, c);
 	split = ft_calloc(word_count + 1, sizeof(char *));
-	if (!split)
-		return (NULL);
 	while (word_iter < word_count)
 	{
 		while (s[i] == c)
