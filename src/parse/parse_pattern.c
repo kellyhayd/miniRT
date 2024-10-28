@@ -9,8 +9,10 @@ bool	check_if_pattern_exists(char *name, t_world *world)
 	{
 		if (ft_strncmp(current->name, name, ft_strlen(current->name)) == 0)
 		{
-			// ARRUMAR AQUI
-			printf("Pattern already exists: %s\n", name);
+			ft_putendl_fd(RED "Error!" RESET, 2);
+			ft_putstr_fd("Pattern already exists: " GREEN, 2);
+			ft_putstr_fd(name, 2);
+			ft_putendl_fd(RESET, 2);
 			return (false);
 		}
 		current = current->next;
@@ -142,8 +144,10 @@ bool	parse_pattern_name(char *str, t_pattern *pattern, t_world *world)
 	find = find_pattern(str, world);
 	if (!find)
 	{
-		// ARRUMAR AQUI
-		printf("Pattern not found: %s\n", str);
+		ft_putendl_fd(RED "Error!" RESET, 2);
+		ft_putstr_fd("Pattern not found: " GREEN, 2);
+		ft_putstr_fd(str, 2);
+		ft_putendl_fd(RESET, 2);
 		return (false);
 	}
 	*pattern = find->pattern;

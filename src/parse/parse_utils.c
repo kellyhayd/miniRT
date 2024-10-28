@@ -149,3 +149,10 @@ bool	validade_optionals(char **splitted)
 	}
 	return (true);
 }
+
+bool	print_error(char *message)
+{
+	ft_putendl_fd(RED "Error" RESET, 2);
+	ft_putendl_fd(message, 2);
+	return (false);
+}

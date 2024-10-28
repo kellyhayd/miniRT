@@ -66,8 +66,10 @@ bool	parse_material_name(char *str, t_material *material, t_world *world)
 	find = find_material(str, world);
 	if (!find)
 	{
-		// ARRUMAR AQUI
-		printf("Material not found: %s\n", str);
+		ft_putendl_fd(RED "Error!" RESET, 2);
+		ft_putstr_fd("Material not found: " GREEN, 2);
+		ft_putstr_fd(str, 2);
+		ft_putendl_fd(RESET, 2);
 		return (false);
 	}
 	material->reflective = find->material.reflective;

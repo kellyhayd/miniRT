@@ -49,10 +49,6 @@ bool	parse_line(char *line, t_world *world)
 	token = get_token(line);
 	if (token == -1)
 		return (false);
-
-	// Apenas para testes
-	printf("token: %d\n", token);
-
 	if (token == AMBIENT)
 		return (parse_ambient(line, world));
 	else if (token == CAMERA)
@@ -72,13 +68,6 @@ bool	parse_line(char *line, t_world *world)
 	else if (token == CONE)
 		return (parse_cone(line, world));
 	return (true);
-}
-
-bool	print_error(char *message)
-{
-	ft_putendl_fd(RED "Error" RESET, 2);
-	ft_putendl_fd(message, 2);
-	return (false);
 }
 
 bool	pos_validation(t_world *world)
