@@ -95,17 +95,9 @@ $(BUILD):
 $(BUILD)/%.o: $(SRC_PATH)/%.c include/minirt.h
 	@echo "$(CYAN)Compiling $(GREEN)$(notdir $<)$(RESET)"
 	@mkdir -p $(dir $@)
-	@$(CC) $(FLAGS) $(HEADERS) -c $< -o $@ &
-###########################################/\#######################
-###########################################||#######################
-#										ISSO TB
+	@$(CC) $(FLAGS) $(HEADERS) -c $< -o $@
 
 $(NAME): $(LIBFT) $(LIBMLX) $(BUILD) $(OBJ)
-
-#	TIRAR ISSO DPS
-########################################################################################
-	sleep 1
-########################################################################################
 	@echo "$(PURPLE)Compiling $(YELLOW)miniRT$(PURPLE)...$(RESET)"
 	@$(CC) $(FLAGS) $(HEADERS) $(OBJ) $(LIBS) -o $(NAME)
 	@echo "$(GREEN)Done! Let's go!$(RESET)"
@@ -196,7 +188,8 @@ pit: all
 #	@$(CC) $(FLAGS) $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/planes.c $(LIBS) -o pit
 #	@$(CC) $(FLAGS) $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/patterns.c $(LIBS) -o pit
 #	@$(CC) $(FLAGS) $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/reflection_and_refraction.c $(LIBS) -o pit
-	@$(CC) $(FLAGS) $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/checkers_uv.c $(LIBS) -o pit
+#	@$(CC) $(FLAGS) $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/checkers_uv.c $(LIBS) -o pit
+	@$(CC) $(FLAGS) $(HEADERS) $(shell find src -iname "*.c" ! -name "main.c") putting_it_together/test_parse_rotation.c $(LIBS) -o pit
 	@./pit
 
 ifeq ($(PROF), 1)

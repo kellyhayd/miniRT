@@ -67,10 +67,12 @@ t_canvas	render(t_camera c, t_world w)
 		.line_size = c.hsize, .canvas = &image, .world = w, .camera = c};
 			pthread_create(&threads[thread_count], NULL,
 				render_line, &threads_data[thread_count]);
+				// render_line(&threads_data[thread_count]);
 			thread_count++;
 		}
 		thread_count = reset_threads(threads, thread_count);	// Uma pequena gambiarra
 		print_rendering_progress(c.hsize, c.vsize, y);
+		// thread_count = 0;
 	}
 	join_threads(threads, thread_count);
 	return (image);

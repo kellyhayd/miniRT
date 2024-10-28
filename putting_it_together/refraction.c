@@ -1,7 +1,7 @@
 #include "minirt.h"
 
-#define WIDTH 1000
-#define HEIGHT 1000
+// #define WIDTH 1000
+// #define HEIGHT 1000
 
 t_canvas	render_image(void)
 {
@@ -21,7 +21,7 @@ t_canvas	render_image(void)
 	t_light	light1 = point_light(point(0, 20, -10), color(1, 1, 1));
 
 	// CAMERA
-	t_camera	camera_view = camera(WIDTH, HEIGHT, M_PI / 3);
+	t_camera	camera_view = camera(WIDTH, HEIGH, M_PI / 3);
 	camera_view.transform = view_transform(
 		point(0, 1, -7),
 		point(0, 1, 0),
@@ -36,7 +36,7 @@ t_canvas	render_image(void)
 
 	add_light(&world_to_render.light, light1);
 
-	world_to_render.pixel_sampling = 1;
+	world_to_render.scene.pixel_sampling = 1;
 
 	t_canvas	canvas = render(camera_view, world_to_render);
 

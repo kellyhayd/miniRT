@@ -63,14 +63,16 @@ void	test_rendering(t_world world)
 	// set_transformation(&pl, translation(0, 0, 0));
 	// add_shape(&world.shape, pl);
 
-	t_light	light1 = point_light(point(0, 20, -10), color(1, 1, 1));
-	add_light(&world.light, light1);
+	// t_light	light1 = point_light(point(0, 20, -10), color(1, 1, 1));
+	// add_light(&world.light, light1);
 
-	world.pixel_sampling = 1;
+	world.scene.pixel_sampling = 1;
 
-	t_canvas	canvas = render(world.world_camera, world);
+	(void)!write(STDOUT_FILENO, "\033[s", 4);
 
-	canvas_to_ppm(canvas, "test_cylinder.ppm");
+	t_canvas	canvas = render(world.scene.world_camera, world);
+
+	canvas_to_ppm(canvas, "test_rotation.ppm");
 	free(canvas.pixels);
 
 	(void)!write(STDOUT_FILENO, "\n", 1);
@@ -82,17 +84,28 @@ int	main(int argc, char **argv)
 	t_world	new_world;
 
 	if (argc != 2)
+	{
 		ft_error("Usage: ./miniRT [scene.rt]\n");
+		return (1);
+	}
 	check_extension(argv[1]);
 	new_world = world();
 	fd = open(argv[1], O_RDONLY);
-	if (!parse(fd, &new_world))
+
+	// só para testes
+	if (fd < 0)
+		perror(argv[1]);
+
+	if (fd < 0 || !parse(fd, &new_world))
 		ft_error("Invalid map\n");
+	else
+	{
+		test_rendering(new_world);
+	}
 	close(fd);
 
 	(void)!write(STDOUT_FILENO, "\033[s", 4);
 
-	test_rendering(new_world);
 	world_clear(&new_world);
 
 	return (0);

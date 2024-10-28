@@ -37,7 +37,7 @@ void	ft_error(char *message)
 	ft_putstr_fd(ORANGE, 2);
 	ft_putstr_fd(message, 2);
 	ft_putstr_fd(RESET, 2);
-	exit(EXIT_FAILURE);
+	// exit(EXIT_FAILURE);
 }
 
 int	almost_zero(float num)
