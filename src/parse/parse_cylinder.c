@@ -14,7 +14,6 @@
 
 bool	parse_cylinder(char *line, t_world *world)
 {
-	// double		radius;
 	t_point		position;
 	t_vector	normal;
 	t_shape		new_cylinder;
@@ -32,21 +31,11 @@ bool	parse_cylinder(char *line, t_world *world)
 		return (ft_free_split(splitted), false);
 	ft_free_split(splitted);
 	new_cylinder.cylinder_shape.radius /= 2;
+	new_cylinder.cylinder_shape.maximum /= new_cylinder.cylinder_shape.radius;
 	new_cylinder.cylinder_shape.minimum = 0;
 	new_cylinder.cylinder_shape.closed = true;
-
-	// set_transformation(&new_cylinder, mx_multiply(
-	// 		translation(position.x, position.y, position.x),
-	// 		rotation_matrix(normal)));
-
-	set_transformation(&new_cylinder, rotation_matrix(position, normal, new_cylinder));
-
+	set_transformation(&new_cylinder, rotation_matrix(position, normal,
+		new_cylinder));
 	add_shape(&world->shape, new_cylinder);
 	return (true);
 }
-
-/*
-#Cylinder
-# <coordinates: x,y,z> <normal: x,y,z> <diameter> <height> <color:red,green,blue>
-cy  50.0,0.0,20.6         0,0,1.0        14.2       21.42          10,0,255
-*/

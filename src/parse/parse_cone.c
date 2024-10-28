@@ -14,7 +14,6 @@
 
 bool	parse_cone(char *line, t_world *world)
 {
-	// double		radius;
 	t_point		position;
 	t_vector	normal;
 	t_shape		new_cone;
@@ -35,18 +34,8 @@ bool	parse_cone(char *line, t_world *world)
 	new_cone.cone_shape.maximum /= new_cone.cone_shape.radius;
 	new_cone.cone_shape.minimum = -new_cone.cone_shape.maximum;
 	new_cone.cone_shape.closed = true;
-
-	// set_transformation(&new_cone, mx_multiply(rotation_matrix(normal),
-	// 		translation(position.x, position.y, position.x)));
-
-	set_transformation(&new_cone, rotation_matrix(position, normal, new_cone));
-
+	set_transformation(&new_cone, rotation_matrix(position, normal,
+		new_cone));
 	add_shape(&world->shape, new_cone);
 	return (true);
 }
-
-/*
-#cone
-# <coordinates: x,y,z> <normal: x,y,z> <diameter> <height> <color:red,green,blue>
-cy  50.0,0.0,20.6         0,0,1.0        14.2       21.42          10,0,255
-*/

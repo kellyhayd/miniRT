@@ -31,13 +31,8 @@ bool	parse_plane(char *line, t_world *world)
 		return (false);
 	}
 	ft_free_split(splitted);
-	set_transformation(&new_plane, rotation_matrix(position, normal, new_plane));
+	set_transformation(&new_plane, rotation_matrix(position, normal,
+		new_plane));
 	add_shape(&world->shape, new_plane);
 	return (true);
 }
-
-/*
-# Plane
-# <coordinates: x,y,z> <normal: x,y,z> <color:red,green,blue>
-pl  0,0,0                0,1.0,0           255,0,225
-*/
