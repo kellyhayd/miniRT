@@ -21,7 +21,7 @@ t_world	world(void)
 			.ambient_color = color(1, 1, 1),
 			.ambient_ratio = 0.1,
 			.world_camera = {0},
-			.pixel_sampling = 1,
+			.pixel_sampling = PIXEL_SAMPLING,
 			.has_ambient_color = 0,
 			.has_camera = 0,
 			.pattern_list = NULL,

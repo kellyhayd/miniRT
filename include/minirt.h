@@ -29,11 +29,12 @@
 # define BLINK  "\001\033[5m\002"
 # define REVERSE "\001\033[7m\002"
 
-# define EPSILON 0.00001
-# define NUM_THREADS 4
+# define EPSILON        0.00001
+# define NUM_THREADS    4
+/*mudar aqui para 3 dps*/# define PIXEL_SAMPLING 1
 
-# define WIDTH 1920
-# define HEIGH 1080
+# define WIDTH 1000
+# define HEIGH 1000
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -487,7 +488,7 @@ bool		parse_brightness(char *splitted, double *brightness);
 bool		parse_color(char *splitted, t_color *new_color);
 bool		parse_sphere(char *line, t_world *world);
 bool		parse_plane(char *line, t_world *world);
-bool		parse_normal(char *splitted, t_vector *normal);
+// bool		parse_normal(char *splitted, t_vector *normal);
 bool		parse_cylinder(char *line, t_world *world);
 bool		parse_cone(char *line, t_world *world);
 bool		parse_camera(char *line, t_world *world);
@@ -502,9 +503,12 @@ int			almost_zero(float num);
 void		swap(double *a, double *b);
 void		join_threads(pthread_t *threads, int thread_count);
 float		fternary(int condition, float if_true, float if_false);
+void		check_extension(char *filename);
+void		canvas_to_ppm(t_canvas canvas, char *filename);
+char		*get_file_name(char *file_name_base);
 
 // parser
-bool		is_all_numbers(char **split);
+// bool		is_all_numbers(char **split);
 bool		validate_count(char **split, int count);
 // bool		validate_color_range(char **str);
 // bool		validate_normal_range(char **str);
@@ -620,7 +624,12 @@ t_color		uv_pattern_at(t_checkers checkers, double u, double v);
 void		spherical_map(t_point point, double *u, double *v);
 t_map		texture_map(t_checkers checkers, void (*map_fn)(t_point, double *, double *));
 void		cylindrical_map(t_point point, double *u, double *v);
-uint8_t		*get_pixel(mlx_texture_t *texture, int x, int y);
-t_color		texture_at_shape(t_shape object, t_point point);
+// uint8_t		*get_pixel(mlx_texture_t *texture, int x, int y);
+// t_color		texture_at_shape(t_shape object, t_point point);
+
+// mlx
+void		key_hook(mlx_key_data_t keydata, void *param);
+void		start_render(t_world world, int save_to_file, char *file_name);
+
 
 #endif
