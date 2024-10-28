@@ -43,7 +43,7 @@ t_matrix	view_transform(t_point from, t_point to, t_vector up)
 	t_matrix	view_matrix;
 
 	forward = normalize(tuple_subtract(to, from));
-	if (fmod(fabs(dot(forward, up)), 1) < EPSILON)
+	if (1 - fabs(dot(forward, up)) < EPSILON)
 		left = vector(-1, 0, 0);
 	else
 		left = cross(forward, normalize(up));

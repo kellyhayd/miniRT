@@ -46,9 +46,9 @@ bool	parse_camera(char *line, t_world *world)
 	}
 	ft_free_split(splitted);
 	world->scene.has_camera = 1;
-	new_camera = camera(WIDTH, HEIGH, fov);
-	new_camera.transform = view_transform(position,
-		tuple_add(position, normalize(direction)), vector(0, 1, 1));
+	new_camera = camera(WIDTH, HEIGH, (fov * M_PI) / 180);
+	new_camera.transform = view_transform(position, \
+		tuple_add(position, direction), vector(0, 1, 0));
 	new_camera.inverse = inverse(new_camera.transform);
 	world->scene.world_camera = new_camera;
 	return (true);
