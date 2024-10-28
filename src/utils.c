@@ -53,10 +53,3 @@ void	swap(double *a, double *b)
 	*a = *b;
 	*b = tmp;
 }
-
-float	fternary(int condition, float if_true, float if_false)
-{
-	if (condition)
-		return (if_true);
-	return (if_false);
-}

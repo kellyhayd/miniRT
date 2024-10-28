@@ -15,13 +15,10 @@ t_color	refracted_color(t_world w, t_comps comps, int depth)
 		return (color(0, 0, 0));
 	cos_t = sqrt(1.0 - sin2_t);
 	refract_ray = ray(comps.under_point,
-		tuple_subtract(
-			tuple_multiply(comps.sight.normal, (n_ratio * cos_i) - cos_t),
-			tuple_multiply(comps.sight.eye, n_ratio)
-		)
-	);
+			tuple_subtract(
+				tuple_multiply(comps.sight.normal, (n_ratio * cos_i) - cos_t),
+				tuple_multiply(comps.sight.eye, n_ratio)));
 	return (color_multiply(
-		color_at(w, refract_ray, depth - 1),
-		comps.object.material.transparency)
-	);
+			color_at(w, refract_ray, depth - 1),
+			comps.object.material.transparency));
 }

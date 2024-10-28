@@ -20,7 +20,7 @@ static t_color	render_pixel(t_camera c, t_world w, int x, int y)
 					* w.scene.pixel_sampling)] = color_at(w, ray, 4); // color_at ganhou novo argumento (depth),
 																// precisa verificar como preencher aqui
 																// setei 4 por recomendação do livro (default)
-																// Dá pra colocar em uma variável no t_world
+																// - Pode deixar assim mesmo
 			aa_data.sample_x++;
 		}
 		aa_data.sample_y++;
@@ -67,12 +67,10 @@ t_canvas	render(t_camera c, t_world w)
 		.line_size = c.hsize, .canvas = &image, .world = w, .camera = c};
 			pthread_create(&threads[thread_count], NULL,
 				render_line, &threads_data[thread_count]);
-				// render_line(&threads_data[thread_count]);
 			thread_count++;
 		}
-		thread_count = reset_threads(threads, thread_count);	// Uma pequena gambiarra
+		thread_count = reset_threads(threads, thread_count);
 		print_rendering_progress(c.hsize, c.vsize, y);
-		// thread_count = 0;
 	}
 	join_threads(threads, thread_count);
 	return (image);

@@ -5,8 +5,6 @@ t_shape	get_last_shape(t_shape *shape_list)
 	t_shape	*aux;
 
 	aux = shape_list;
-	// if (!aux)
-	// 	return ((t_shape) {0});
 	while (aux && aux->next)
 		aux = aux->next;
 	return (*aux);
@@ -87,6 +85,17 @@ void	update_containers(t_shape **containers, t_shape object)
 		add_shape_to_container(containers, object);
 }
 
+double	get_n1_refract(t_shape *containers)
+{
+	double	refract;
+
+	if (!containers)
+		refract = 1.0;
+	else
+		refract = get_last_shape(containers).material.refractive_index;
+	return (refract);
+}
+
 void	calculate_refractive_indexes(t_comps *comps, t_hit *hit_list)
 {
 	t_hit	*aux_hit;
@@ -97,27 +106,14 @@ void	calculate_refractive_indexes(t_comps *comps, t_hit *hit_list)
 	while (aux_hit)
 	{
 		if (is_same_hit(aux_hit, intersection(comps->t, comps->object)))
-		{
-			if (!containers)
-				comps->n1 = 1.0;
-			else
-				comps->n1 = get_last_shape(containers).material.refractive_index;
-			// comps->n1 = fternary(!containers,
-			// 	1.0, get_last_shape(containers).material.refractive_index);
-		}
+			comps->n1 = get_n1_refract(containers);
 		update_containers(&containers, aux_hit->object);
-		// if (has_shape(containers, comps->object))
-		// 	remove_shape_from_container(&containers, comps->object);
-		// else
-		// 	add_shape_to_container(&containers, comps->object);
 		if (is_same_hit(aux_hit, intersection(comps->t, comps->object)))
 		{
 			if (!containers)
 				comps->n2 = 1.0;
 			else
 				comps->n2 = get_last_shape(containers).material.refractive_index;
-			// comps->n2 = fternary(!containers,
-			// 	1.0, get_last_shape(containers).material.refractive_index);
 			break ;
 		}
 		aux_hit = aux_hit->next;

@@ -318,6 +318,19 @@ typedef struct s_thread
 	t_camera	camera;
 }	t_thread;
 
+typedef struct s_intersect_cone
+{
+	double	disc_a;
+	double	disc_b;
+	double	disc_c;
+	double	disc;
+	double	y[2];
+	t_hit	hits[2];
+	t_hit	**hit_list;
+	t_shape	s;
+	t_ray	r;
+}	t_intersect_cone;
+
 // -------------------------------------------------------------------------- //
 //                                   tuple                                    //
 // -------------------------------------------------------------------------- //

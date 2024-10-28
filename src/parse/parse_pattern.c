@@ -91,8 +91,7 @@ bool	parse_pattern(char *line, t_world *world)
 		|| !parse_color(split[4], &pattern.color_b)
 		|| !parse_coordinates(split[5], &scale_factor)
 		|| !parse_coordinates(split[6], &rotation_factor)
-		|| !parse_coordinates(split[7], &translation_factor)
-		|| (split[8]))
+		|| !parse_coordinates(split[7], &translation_factor) || (split[8]))
 		return (ft_free_split(split), false);
 	if (pattern.pattern_type == CHECKERS)
 		pattern.map = texture_map(uv_checkers(16, 8,

@@ -30,7 +30,8 @@ void	spherical_map(t_point point, double *u, double *v)
 	*v = 1 - *v;
 }
 
-t_map	texture_map(t_checkers checkers, void (*map_fn)(t_point, double *, double *))
+t_map	texture_map(t_checkers checkers,
+	void (*map_fn)(t_point, double *, double *))
 {
 	return ((t_map){
 		.checkers = checkers,

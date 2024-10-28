@@ -73,6 +73,27 @@ t_exposure	exposure_init(void)
 	return (e);
 }
 
+static t_color	calculate_diffuse_specular(t_exposure e, t_shape object,
+	t_sight sight, t_color *diffuse)
+{
+	t_color	specular;
+	t_color	light_intesity;
+
+	light_intesity = *diffuse;
+	specular = color(0, 0, 0);
+	*diffuse = color_multiply(e.effective_color,
+			object.material.diffuse * e.light_dot_normal);
+	e.reflectv = reflect(tuple_negate(e.lightv), sight.normal);
+	e.reflect_dot_eye = dot(e.reflectv, sight.eye);
+	if (e.reflect_dot_eye > 0)
+	{
+		e.factor = pow(e.reflect_dot_eye, object.material.shininess);
+		specular = color_multiply(light_intesity,
+				e.factor * object.material.specular);
+	}
+	return (specular);
+}
+
 /**
  * @brief Calculates the lighting effect on a material at a given position.
  *
@@ -97,7 +118,8 @@ t_color	lighting(t_shape object, t_light light, t_point position, t_sight sight)
 
 	color_base = object.material.color;
 	if (object.material.pattern.has_pattern)
-		color_base = pattern_at_shape(object.material.pattern, object, position);
+		color_base = pattern_at_shape(object.material.pattern,
+				object, position);
 	diffuse = color(0, 0, 0);
 	specular = color(0, 0, 0);
 	e = exposure_init();
@@ -109,14 +131,8 @@ t_color	lighting(t_shape object, t_light light, t_point position, t_sight sight)
 	e.light_dot_normal = dot(e.lightv, sight.normal);
 	if (e.light_dot_normal >= 0)
 	{
-		diffuse = color_multiply(e.effective_color, object.material.diffuse * e.light_dot_normal);
-		e.reflectv = reflect(tuple_negate(e.lightv), sight.normal);
-		e.reflect_dot_eye = dot(e.reflectv, sight.eye);
-		if (e.reflect_dot_eye > 0)
-		{
-			e.factor = pow(e.reflect_dot_eye, object.material.shininess);
-			specular = color_multiply(light.intensity, e.factor * object.material.specular);
-		}
+		diffuse = light.intensity;
+		specular = calculate_diffuse_specular(e, object, sight, &diffuse);
 	}
 	return (color_add(color_add(ambient, diffuse), specular));
 }

@@ -155,12 +155,11 @@ t_matrix	inverse(t_matrix matrix)
 	double		matrix_determinant;
 	t_matrix	result;
 
-	ft_bzero(&result.tab, sizeof(double) * 16);
 	result.cols = matrix.cols;
 	result.rows = matrix.rows;
 	matrix_determinant = determinant(matrix);
 	if (matrix_determinant == 0)
-		return (result);
+		return (identity());
 	matrix_cofactor = 0;
 	y = 0;
 	while (y < result.rows)
