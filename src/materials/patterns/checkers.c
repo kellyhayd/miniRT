@@ -30,10 +30,9 @@ t_color	checkers_at(t_pattern pattern, t_point pattern_point)
 	int		sum_of_coordinates;
 	t_color	new_color;
 
-	sum_of_coordinates =
-		(int)(pattern_point.x) +
-		(int)(pattern_point.y) +
-		(int)(pattern_point.z);
+	sum_of_coordinates = (int)(pattern_point.x)
+		+ (int)(pattern_point.y)
+		+ (int)(pattern_point.z);
 	if (sum_of_coordinates % 2 == 0)
 		color_mod = 0;
 	else
