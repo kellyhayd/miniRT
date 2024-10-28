@@ -505,6 +505,7 @@ void		init_default_material(t_world *world);
 void		clear_material_list(t_world *world);
 void		clear_pattern_list(t_world *world);
 bool		validade_optionals(char **splitted);
+bool		print_error(char *message);
 
 bool		parse_double(char *str, double *value);
 bool		parse_radius(char *str, double *radius);
