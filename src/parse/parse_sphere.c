@@ -28,7 +28,7 @@
  */
 bool	parse_sphere(char *line, t_world *world)
 {
-	double		radius;
+	// double		radius;
 	t_point		position;
 	t_shape		new_sphere;
 	char		**splitted;
@@ -36,7 +36,7 @@ bool	parse_sphere(char *line, t_world *world)
 	new_sphere = sphere();
 	splitted = ft_split(line, ' ');
 	if (!parse_coordinates(splitted[1], &position)
-		|| !parse_radius(splitted[2], &radius)
+		|| !parse_radius(splitted[2], &new_sphere.sphere_shape.radius)
 		|| !parse_color(splitted[3], &new_sphere.material.color)
 		|| !parse_material_shape(&splitted[4], &new_sphere.material, world)
 		|| !validade_optionals(&splitted[4]))
@@ -45,17 +45,20 @@ bool	parse_sphere(char *line, t_world *world)
 		return (false);
 	}
 	ft_free_split(splitted);
-	radius = radius / 2;
+	new_sphere.sphere_shape.radius /= 2;
 	// set_transformation(&new_sphere,
 	// 	mx_multiply(
 	// 		scaling(radius, radius, radius),
 	// 		translation(position.x, position.y, position.z)
 	// 	));
-	set_transformation(&new_sphere,
-		mx_multiply(
-			translation(position.x, position.y, position.z),
-			scaling(radius, radius, radius)
-		));
+	// set_transformation(&new_sphere,
+	// 	mx_multiply(
+	// 		translation(position.x, position.y, position.z),
+	// 		scaling(radius, radius, radius)
+	// 	));
+
+	set_transformation(&new_sphere, rotation_matrix(position, point(0, 1, 0), new_sphere));
+
 	add_shape(&world->shape, new_sphere);
 	return (true);
 }

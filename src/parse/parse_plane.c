@@ -12,16 +12,6 @@
 
 #include "minirt.h"
 
-int	sign(int number)
-{
-	if (number > 0)
-		return 1;
-	else if (number < 0)
-		return -1;
-	else
-		return 0;
-}
-
 bool	parse_plane(char *line, t_world *world)
 {
 	t_point		position;
@@ -41,10 +31,7 @@ bool	parse_plane(char *line, t_world *world)
 		return (false);
 	}
 	ft_free_split(splitted);
-	set_transformation(&new_plane,
-			mx_multiply(translation(position.x, sign(normal.y) * position.y, position.x),
-			rotation_matrix(normal)
-		));
+	set_transformation(&new_plane, rotation_matrix(position, normal, new_plane));
 	add_shape(&world->shape, new_plane);
 	return (true);
 }
