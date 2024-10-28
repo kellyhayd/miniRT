@@ -77,11 +77,11 @@ bool	pos_validation(t_world *world)
 	state = true;
 	if (!world->scene.has_ambient_color)
 		state = print_error("There must be 1 ambient color");
-	else if (!world->scene.has_camera)
+	if (!world->scene.has_camera)
 		state = print_error("There must be 1 camera");
-	else if (!world->light)
+	if (!world->light)
 		state = print_error("There must be at least 1 light");
-	else if (!world->shape)
+	if (!world->shape)
 		state = print_error("There must be at least 1 object in the scene");
 	return (state);
 }
