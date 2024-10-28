@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:01:38 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/10/12 14:13:36 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/20 15:20:30 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,22 +32,31 @@
 # define EPSILON 0.00001
 # define NUM_THREADS 4
 
+# define WIDTH 1920
+# define HEIGH 1080
+
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <math.h>
 # include <pthread.h>
+# include <fcntl.h>
 
 # include "libft.h"
+# include "get_next_line.h"
 # include "MLX42/MLX42.h"
 
-enum e_shapes
+enum e_tokens
 {
+	AMBIENT,
+	CAMERA,
+	LIGHT,
+	MATERIAL,
+	PATTERN,
 	SPHERE,
 	PLANE,
 	CYLINDER,
 	CONE,
-	// TRIANGLE,
 };
 
 enum e_patterns
@@ -66,9 +75,13 @@ typedef struct s_hit	t_hit;
 typedef struct s_shape	t_shape;
 // typedef struct s_sphere	t_sphere;
 typedef struct s_light	t_light;
+typedef struct s_camera	t_camera;
 
-typedef enum e_shapes t_shapes;
+typedef enum e_tokens t_tokens;
 typedef enum e_patterns t_patterns;
+
+typedef struct s_material_list t_material_list;
+typedef struct s_pattern_list t_pattern_list;
 
 struct s_tuple
 {
@@ -127,28 +140,65 @@ typedef struct s_cone
 	int		closed;
 }	t_cone;
 
+typedef struct s_checkers
+{
+	int		width;
+	int		heigh;
+	t_color	color_a;
+	t_color	color_b;
+}	t_checkers;
+
+typedef struct s_map
+{
+	t_checkers	checkers;
+	void		(*map_fn)(t_point, double *, double *);
+}	t_map;
+
+typedef	struct s_uv_image
+{
+	int				has_bump_map;
+	mlx_texture_t	*texture;
+	void			(*map_fn)(t_point, double *, double *);
+}	t_uv_image;
+
 typedef struct s_pattern
 {
-	t_patterns	pattern_type;
-	int			has_pattern;
-	t_color		color_a;
-	t_color		color_b;
-	t_matrix	transform;
-	t_matrix	inverse;
+	t_patterns		pattern_type;
+	int				has_pattern;
+	t_color			color_a;
+	t_color			color_b;
+	t_map			map;
+	t_matrix		transform;
+	t_matrix		inverse;
 }	t_pattern;
 
 typedef struct s_material
 {
-	double		ambient;
-	double		diffuse;
-	double		specular;
-	double		shininess;
-	double		reflective;
-	double		transparency;
-	double		refractive_index;
-	t_color		color;
-	t_pattern	pattern;
+	t_color			ambient;
+	double			diffuse;
+	double			specular;
+	double			shininess;
+	double			reflective;
+	double			transparency;
+	double			refractive_index;
+	t_color			color;
+	t_pattern		pattern;
+	t_uv_image		bump_map;
 }	t_material;
+
+struct s_material_list
+{
+	char			*name;
+	t_material		material;
+	t_material_list	*next;
+};
+
+struct s_pattern_list
+{
+	char			*name;
+	t_pattern		pattern;
+	t_pattern_list	*next;
+};
 
 struct s_shape
 {
@@ -164,7 +214,7 @@ struct s_shape
 	t_matrix	inverse;
 	t_matrix	transposed_inverse;
 	t_material	material;
-	t_shapes	shape_type;
+	t_tokens	shape_type;
 	t_shape		*next;
 };
 
@@ -182,12 +232,36 @@ struct s_light
 	t_light	*next;
 };
 
+struct s_camera
+{
+	double		hsize;
+	double		vsize;
+	double		field_of_view;
+	double		half_width;
+	double		half_height;
+	double		pixel_size;
+	t_matrix	transform;
+	t_matrix	inverse;
+};
+
+typedef struct s_scene
+{
+	// mlx_t		*mlx;
+	int				pixel_sampling;
+	t_camera		world_camera;
+	double			ambient_ratio;
+	t_color			ambient_color;
+	int				has_ambient_color;
+	int				has_camera;
+	t_material_list		*material_list;
+	t_pattern_list	*pattern_list;
+}	t_scene;
+
 typedef struct s_world
 {
-	t_shape	*shape;
-	t_light	*light;
-	// mlx_t	*mlx;
-	int		pixel_sampling;
+	t_shape		*shape;
+	t_light		*light;
+	t_scene		scene;
 }	t_world;
 
 typedef struct s_exposure
@@ -206,18 +280,6 @@ typedef struct s_sight
 	t_vector	normal;
 	bool		in_shadow;
 }	t_sight;
-
-typedef struct s_camera
-{
-	double		hsize;
-	double		vsize;
-	double		field_of_view;
-	double		half_width;
-	double		half_height;
-	double		pixel_size;
-	t_matrix	transform;
-	t_matrix	inverse;
-}	t_camera;
 
 typedef struct s_comps
 {
@@ -293,6 +355,7 @@ t_color		color_add(t_color color1, t_color color2);
 t_color		color_subtract(t_color color1, t_color color2);
 t_color		color_multiply(t_color color1, double scalar);
 t_color		color_hadamard(t_color color1, t_color color2);
+t_color		convert_color(t_color color);
 
 // -------------------------------------------------------------------------- //
 //                                   canvas                                   //
@@ -400,6 +463,23 @@ t_camera	camera(double hsize, double vsize, double field_of_view);
 t_color		reflected_color(t_world world, t_comps comps, int depth);
 
 // -------------------------------------------------------------------------- //
+//                                  parsing                                   //
+// -------------------------------------------------------------------------- //
+bool		parse(int fd, t_world *new_world);
+bool		parse_line(char *line, t_world *world);
+int			get_token(char *line);
+bool		parse_light(char *line, t_world *world);
+bool		parse_coordinates(char *splitted, t_point *position);
+bool		parse_brightness(char *splitted, double *brightness);
+bool		parse_color(char *splitted, t_color *new_color);
+bool		parse_sphere(char *line, t_world *world);
+bool		parse_plane(char *line, t_world *world);
+bool		parse_normal(char *splitted, t_vector *normal);
+bool		parse_cylinder(char *line, t_world *world);
+bool		parse_cone(char *line, t_world *world);
+bool		parse_camera(char *line, t_world *world);
+
+// -------------------------------------------------------------------------- //
 //                                   utils                                    //
 // -------------------------------------------------------------------------- //
 
@@ -409,6 +489,35 @@ int			almost_zero(float num);
 void		swap(double *a, double *b);
 void		join_threads(pthread_t *threads, int thread_count);
 float		fternary(int condition, float if_true, float if_false);
+
+// parser
+bool		is_all_numbers(char **split);
+bool		validate_count(char **split, int count);
+// bool		validate_color_range(char **str);
+// bool		validate_normal_range(char **str);
+t_matrix	rotation_matrix(t_point position, t_vector direction, t_shape shape);
+void		put_ambient_color(t_world *world);
+void		add_material(t_material_list **material_list, t_material material, char *name);
+bool		validate_double_range(char *str, double value, double min, double max);
+bool		parse_material_name(char *str, t_material *material, t_world *world);
+void		add_material(t_material_list **material_list, t_material material, char *name);
+void		init_default_material(t_world *world);
+void		clear_material_list(t_world *world);
+void		clear_pattern_list(t_world *world);
+bool		validade_optionals(char **splitted);
+bool		print_error(char *message);
+
+bool		parse_double(char *str, double *value);
+bool		parse_radius(char *str, double *radius);
+bool		parse_int(char *str, int *num);
+bool		parse_direction(char *str, t_vector *direction);
+bool		parse_int_color(char *str, int *num);
+bool		parse_ambient(char *line, t_world *world);
+bool		parse_material(char *line, t_world *world);
+bool		parse_material_name(char *str, t_material *material, t_world *world);
+bool		parse_pattern(char *line, t_world *world);
+bool		parse_pattern_name(char *str, t_pattern *pattern, t_world *world);
+bool		parse_material_shape(char **splitted, t_material *material, t_world *world);
 
 // NÃO SEI ONDE POR
 // Funções de adicionar coisas a alguma lista, está relacionado ao t_world
@@ -481,6 +590,7 @@ t_color		checkers_at(t_pattern pattern, t_point pattern_point);
 void		print_rendering_progress(int hsize, int vsize, int y);
 t_color		color_average(t_color *colors, int size);
 int			reset_threads(pthread_t *threads, int thread_count);
+t_ray		ray_for_pixel(t_camera c, int x, int y, t_anti_aliasing aa_data);
 
 // Funções usadas apenas em testes
 t_world		default_world(void);
@@ -490,5 +600,14 @@ t_hit		*hit_index(t_hit *hit_list, int index);
 // Refraction
 void		calculate_refractive_indexes(t_comps *comps, t_hit *hit_list);
 t_color		refracted_color(t_world w, t_comps comps, int depth);
+
+// texture map
+t_checkers	uv_checkers(int width, int heigh, t_color color_a, t_color color_b);
+t_color		uv_pattern_at(t_checkers checkers, double u, double v);
+void		spherical_map(t_point point, double *u, double *v);
+t_map		texture_map(t_checkers checkers, void (*map_fn)(t_point, double *, double *));
+void		cylindrical_map(t_point point, double *u, double *v);
+uint8_t		*get_pixel(mlx_texture_t *texture, int x, int y);
+t_color		texture_at_shape(t_shape object, t_point point);
 
 #endif

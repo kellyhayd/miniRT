@@ -12,18 +12,6 @@
 
 #include "minirt.h"
 
-t_pattern	default_pattern(void)
-{
-	return ((t_pattern){
-		.pattern_type = STRIPE,
-		.has_pattern = false,
-		.color_a = color(0, 0, 0),
-		.color_b = color(0, 0, 0),
-		.transform = identity(),
-		.inverse = identity()
-	});
-}
-
 /**
  * @brief Creates and returns a default material.
  *
@@ -36,7 +24,7 @@ t_material	material(void)
 {
 	return ((t_material){
 		.color = color(1, 1, 1),
-		.ambient = 0.1,
+		.ambient = color_multiply(color(1, 1, 1), 0.1),
 		.diffuse = 0.9,
 		.specular = 0.9,
 		.shininess = 200,

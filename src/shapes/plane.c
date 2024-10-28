@@ -29,7 +29,8 @@ void	intersect_plane(t_hit **hit_list, t_shape s, t_ray r)
 	if (fabs(r.direction.y) < EPSILON)
 		return ;
 	t = -r.origin.y / r.direction.y;
-	add_intersection(hit_list, intersection(t, s));
+	if (fabs(t) > EPSILON)
+		add_intersection(hit_list, intersection(t, s));
 }
 
 t_vector	normal_at_plane(t_shape plane, t_point obj_point)

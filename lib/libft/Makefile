@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+         #
+#    By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/10 19:29:07 by danbarbo          #+#    #+#              #
-#    Updated: 2024/09/13 13:35:16 by danbarbo         ###   ########.fr        #
+#    Updated: 2024/10/13 21:42:52 by krocha-h         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,8 @@ GREEN	= \033[0;32m
 RESET	= \033[0m
 
 SRC	= ${addprefix src/, \
+			ft_array_size.c \
+			ft_atof.c \
 			ft_atoi.c \
 			ft_bzero.c \
 			ft_calloc.c \
@@ -66,6 +68,8 @@ SRC	= ${addprefix src/, \
 			ft_lstmap_bonus.c \
 			ft_lstnew_bonus.c \
 			ft_lstsize_bonus.c \
+			get_next_line.c \
+			get_next_line_utils.c \
 		}
 OBJ	= ${SRC:src/%.c=obj/%.o}
 

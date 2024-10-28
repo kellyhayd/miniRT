@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 13:55:40 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/26 22:19:43 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/20 18:17:53 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,23 +79,20 @@ t_matrix	submatrix(t_matrix matrix, int y, int x)
 			}
 			x_matrix1++;
 		}
-
-		//////////////////////////////////////////////
-		// NÃO TIRAR ISSO POR ENQUANTO, PODE SER ÚTIL, SE PRECISAR ECONOMIZAR LINHAS DEPOIS
-		//
-		// jres = jres + (y_matrix1 != y);		// if y_matrix1 != y then jres += 1
-		//
-
-		// ISSO É O MESMO QUE O DE CIMA, MAS MAIS LEGÍVEL
 		if (y_matrix1 != y)
 			y_matrix2++;
-
-		//////////////////////////////////////////////
-
 		y_matrix1++;
 	}
 	return (result);
 }
+
+/*
+NÃO TIRAR ISSO POR ENQUANTO, PODE SER ÚTIL, SE PRECISAR ECONOMIZAR LINHAS DEPOIS
+	jres = jres + (y_matrix1 != y);		// if y_matrix1 != y then jres += 1
+ISSO É O MESMO QUE O DE CIMA, MAS MAIS LEGÍVEL
+	if (y_matrix1 != y)
+		y_matrix2++;
+*/
 
 /**
  * Calculates the minor of a matrix element.

@@ -9,9 +9,9 @@ t_canvas	render_image(void)
 	t_shape	floor = plane();
 	set_pattern_transformation(&floor.material.pattern, mx_multiply(scaling(2, 2, 2), rotation_y(30 * M_PI / 180)));
 	floor.material.color = color(1, 1, 1);
-	floor.material.reflective = 1;
-	floor.material.transparency = 1.0;
-	floor.material.refractive_index = 1.1;
+	// floor.material.reflective = 1;
+	floor.material.transparency = 0.1;
+	// floor.material.refractive_index = 10;
 
 	// SPHERES
 	t_shape	middle = sphere();
@@ -45,8 +45,9 @@ t_canvas	render_image(void)
 	}
 
 	set_transformation(&middle, translation(0, 3, 1));
-	middle.material.pattern = checkers_pattern(color(1, 1, 1), color(0, 0, 0));
-	set_pattern_transformation(&middle.material.pattern, scaling(0.5, 0.5, 0.5));
+	middle.material.pattern = checkers_pattern(color(0.5, 0.5, 0.5), color(0.75, 0.75, 0.75));
+	middle.material.pattern.map = texture_map(uv_checkers(16, 8, color(0.5, 0.5, 0.5), color(0.75, 0.75, 0.75)), spherical_map);
+	// middle.material.transparency = 1;
 
 	t_shape	cyl = cylinder();
 	cyl.cylinder_shape.maximum = 2;
@@ -71,7 +72,7 @@ t_canvas	render_image(void)
 
 	add_shape(&world_to_render.shape, floor);
 	add_shape(&world_to_render.shape, middle);
-	add_shape(&world_to_render.shape, cyl);
+	// add_shape(&world_to_render.shape, cyl);
 
 	for (int i = 0; i < 5; i++)
 		add_shape(&world_to_render.shape, spheres[i]);
@@ -79,7 +80,7 @@ t_canvas	render_image(void)
 	add_light(&world_to_render.light, light1);
 	add_light(&world_to_render.light, light2);
 
-	world_to_render.pixel_sampling = 1;
+	world_to_render.scene.pixel_sampling = 1;
 
 	t_canvas	canvas = render(camera_view, world_to_render);
 

@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:08:09 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/05 08:54:05 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/13 16:12:23 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,20 +98,15 @@ t_color	lighting(t_shape object, t_light light, t_point position, t_sight sight)
 	color_base = object.material.color;
 	if (object.material.pattern.has_pattern)
 		color_base = pattern_at_shape(object.material.pattern, object, position);
-
 	diffuse = color(0, 0, 0);
 	specular = color(0, 0, 0);
-
 	e = exposure_init();
 	e.effective_color = color_hadamard(color_base, light.intensity);
 	e.lightv = normalize(tuple_subtract(light.position, position));
-	ambient = color_multiply(e.effective_color, object.material.ambient);
-
+	ambient = color_hadamard(e.effective_color, object.material.ambient);
 	if (sight.in_shadow == true)
 		return (ambient);
-
 	e.light_dot_normal = dot(e.lightv, sight.normal);
-
 	if (e.light_dot_normal >= 0)
 	{
 		diffuse = color_multiply(e.effective_color, object.material.diffuse * e.light_dot_normal);
