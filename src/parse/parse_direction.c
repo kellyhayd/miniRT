@@ -24,23 +24,6 @@ bool	parse_direction_part(char *str, double *value)
 
 bool	validate_if_direction_is_normalized(char *str, t_vector *direction)
 {
-	// Não sei se precisa exigir que o vetor seja normalizado
-	// Essa função faz isso
-	// Mas não sei se é necessário
-	// Se for tirar, verifique o caso onde a direção é (0, 0, 0)
-
-	// Esse aqui verifica se está normalizado
-	// if (!(fabs(1 - magnitude(*direction)) < EPSILON))
-	// {
-	// 	ft_putendl_fd(RED "Error!" RESET, 2);
-	// 	ft_putstr_fd("Expected " GREEN "a normalized vector" RESET
-	// 		", received " GREEN, 2);
-	// 	ft_putstr_fd(str, 2);
-	// 	ft_putendl_fd(RESET, 2);
-	// 	return (false);
-	// }
-
-	// Esse aqui verifica apenas se o vetor não é 0,0,0
 	if (almost_zero(magnitude(*direction)))
 	{
 		ft_putendl_fd(RED "Error!" RESET, 2);

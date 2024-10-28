@@ -2,10 +2,6 @@
 
 bool	parse_int(char *str, int *num)
 {
-	// OBS: eu não sei se o parse_int precisa receber números negativos também
-	// vou deixar ele só aceitar números positivos
-	// Os negativos só são usados para double
-
 	int	i;
 
 	i = 0;
