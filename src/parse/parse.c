@@ -14,7 +14,9 @@
 
 int	get_token(char *line)
 {
-	if (ft_strncmp(line, "A ", 2) == 0)
+	if (!line)
+		return (-1);
+	else if (ft_strncmp(line, "A ", 2) == 0)
 		return (AMBIENT);
 	else if (ft_strncmp(line, "C ", 2) == 0)
 		return (CAMERA);
@@ -32,22 +34,18 @@ int	get_token(char *line)
 		return (MATERIAL);
 	else if (ft_strncmp(line, "p ", 2) == 0)
 		return (PATTERN);
-	else
-	{
-		ft_putendl_fd(RED "Error!" RESET, 2);
-		ft_putendl_fd("Unexpected element", 2);
-		return (-1);
-	}
+	else if (!(!line[0] || line[0] == '\n' || line[0] == '#'))
+		print_error("Unexpected element");
+	return (-1);
 }
 
 bool	parse_line(char *line, t_world *world)
 {
-	int	token;
+	const int	token = get_token(line);
 
 	if (!line[0] || line[0] == '\n' || line[0] == '#')
 		return (true);
-	token = get_token(line);
-	if (token == -1)
+	else if (token == -1)
 		return (false);
 	if (token == AMBIENT)
 		return (parse_ambient(line, world));
@@ -67,7 +65,7 @@ bool	parse_line(char *line, t_world *world)
 		return (parse_cylinder(line, world));
 	else if (token == CONE)
 		return (parse_cone(line, world));
-	return (true);
+	return (false);			// Preciso verificar se isso aqui é necessário
 }
 
 bool	pos_validation(t_world *world)

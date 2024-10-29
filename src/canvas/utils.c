@@ -2,13 +2,56 @@
 
 void print_ppm_header(int width, int height, int fd)
 {
-	// dprintf - mais uma função que não poderia usar, mas o bônus deixa
-	dprintf(fd, "P3\n%d %d\n255\n", width, height);
+	ft_putstr_fd("P3\n", fd);
+	ft_putnbr_fd(width, fd);
+	ft_putstr_fd(" ", fd);
+	ft_putnbr_fd(height, fd);
+	ft_putstr_fd("\n255\n", fd);
 }
 
-void print_line_ppm(t_color pixel, int fd)
+char	*join_colors(t_color pixel)
 {
-	dprintf(fd, "%d %d %d ", (int)(pixel.r * 255), (int)(pixel.g * 255), (int)(pixel.b * 255));
+	char	*r;
+	char	*g;
+	char	*b;
+	char	*line;
+	char	*tmp;
+
+	r = ft_itoa((int)(pixel.r * 255));
+	g = ft_itoa((int)(pixel.g * 255));
+	b = ft_itoa((int)(pixel.b * 255));
+	tmp = ft_strjoin(r, " ");
+	line = ft_strjoin(tmp, g);
+	free(tmp);
+	tmp = ft_strjoin(line, " ");
+	free(line);
+	line = ft_strjoin(tmp, b);
+	free(tmp);
+	tmp = ft_strjoin(line, "\n");
+	free(line);
+	free(r);
+	free(g);
+	free(b);
+	return (tmp);
+}
+
+void print_line_ppm(t_color pixel, int fd, int flush)
+{
+	char		*line;
+	static int	i;
+	static char	saved[BUFFER_SIZE + 20];
+
+	if (flush && i == 0)
+		return ;
+	line = join_colors(pixel);
+	if (i + ft_strlen(line) > BUFFER_SIZE || flush)
+	{
+		(void)!write(fd, saved, i);
+		i = 0;
+	}
+	i += ft_strlcpy(saved + i, line, ft_strlen(line) + 1);
+	if (line)
+		free(line);
 }
 
 void	canvas_to_ppm(t_canvas canvas, char *filename)
@@ -31,10 +74,11 @@ void	canvas_to_ppm(t_canvas canvas, char *filename)
 		print_rendering_progress(canvas.width, canvas.height, y);
 		while (x < canvas.width)
 		{
-			print_line_ppm(pixel_at(canvas, x, y), fd);
+			print_line_ppm(pixel_at(canvas, x, y), fd, 0);
 			x++;
 		}
 		y++;
 	}
+	print_line_ppm((t_color){0, 0, 0}, fd, 1);
 	close(fd);
 }
