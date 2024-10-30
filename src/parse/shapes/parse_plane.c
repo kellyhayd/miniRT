@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 10:40:14 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/30 07:35:17 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/30 08:04:59 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ bool	parse_plane(char *line, t_world *world)
 	if (!parse_coordinates(splitted[1], &position)
 		|| !parse_direction(splitted[2], &normal)
 		|| !parse_color(splitted[3], &new_plane.material.color)
-		|| !parse_material_shape(&splitted[4], &new_plane.material, world)
+		|| !parse_mater_shape(&splitted[4], &new_plane.material, world)
 		|| !validade_optionals(&splitted[4]))
 	{
 		ft_free_split(splitted);

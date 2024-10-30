@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 21:33:19 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/30 07:34:34 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/30 08:04:59 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static	t_material_lst	*find_material(char *name, t_world *world)
 	return (NULL);
 }
 
-bool	parse_material_name(char *str, t_material *material, t_world *world)
+bool	parse_mater_name(char *str, t_material *material, t_world *world)
 {
 	t_material_lst	*find;
 
@@ -71,13 +71,13 @@ bool	parse_material_name(char *str, t_material *material, t_world *world)
 	return (true);
 }
 
-bool	parse_material_shape(char **splitted, t_material *mater, t_world *world)
+bool	parse_mater_shape(char **splitted, t_material *mater, t_world *world)
 {
 	bool	status;
 
 	status = true;
 	if (splitted[0])
-		status = parse_material_name(splitted[0], mater, world);
+		status = parse_mater_name(splitted[0], mater, world);
 	if (status && splitted[0] && splitted[1])
 		status = parse_pattern_name(splitted[1], &mater->pattern, world);
 	return (status);

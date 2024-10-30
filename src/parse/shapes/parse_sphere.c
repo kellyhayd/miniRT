@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 20:42:43 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/30 07:35:22 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/30 08:04:59 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ bool	parse_sphere(char *line, t_world *world)
 	if (!parse_coordinates(splitted[1], &position)
 		|| !parse_radius(splitted[2], &new_sphere.sphere_shape.radius)
 		|| !parse_color(splitted[3], &new_sphere.material.color)
-		|| !parse_material_shape(&splitted[4], &new_sphere.material, world)
+		|| !parse_mater_shape(&splitted[4], &new_sphere.material, world)
 		|| !validade_optionals(&splitted[4]))
 	{
 		ft_free_split(splitted);

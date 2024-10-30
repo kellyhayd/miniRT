@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:01:38 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/10/30 07:31:19 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/30 08:22:51 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@
 
 # define EPSILON        0.00001
 # define NUM_THREADS    4
-/*mudar aqui para 3 dps*/# define PIXEL_SAMPLING 1
+/*mudar aqui para 3 dps*/
+# define PIXEL_SAMPLING 1
 
 # define WIDTH 1000
 # define HEIGH 1000
@@ -47,7 +48,11 @@
 # include "get_next_line.h"
 # include "MLX42/MLX42.h"
 
-enum e_tokens
+typedef struct s_tuple	t_tuple;
+typedef struct s_tuple	t_point;
+typedef struct s_tuple	t_vector;
+
+typedef enum e_tokens
 {
 	AMBIENT,
 	CAMERA,
@@ -58,31 +63,15 @@ enum e_tokens
 	PLANE,
 	CYLINDER,
 	CONE,
-};
+}	t_tokens;
 
-enum e_patterns
+typedef enum e_patterns
 {
 	STRIPE,
 	GRADIENT,
 	RING,
 	CHECKERS,
-};
-
-typedef struct s_tuple	t_tuple;
-typedef struct s_tuple	t_point;
-typedef struct s_tuple	t_vector;
-
-typedef struct s_hit	t_hit;
-typedef struct s_shape	t_shape;
-// typedef struct s_sphere	t_sphere;
-typedef struct s_light	t_light;
-typedef struct s_camera	t_camera;
-
-typedef enum e_tokens t_tokens;
-typedef enum e_patterns t_patterns;
-
-typedef struct s_material_lst t_material_lst;
-typedef struct s_pattern_list t_pattern_list;
+}	t_patterns;
 
 struct s_tuple
 {
@@ -155,7 +144,7 @@ typedef struct s_map
 	void		(*map_fn)(t_point, double *, double *);
 }	t_map;
 
-typedef	struct s_uv_image
+typedef struct s_uv_image
 {
 	int				has_bump_map;
 	mlx_texture_t	*texture;
@@ -164,46 +153,46 @@ typedef	struct s_uv_image
 
 typedef struct s_pattern
 {
-	t_patterns		pattern_type;
-	int				has_pattern;
-	t_color			color_a;
-	t_color			color_b;
-	t_map			map;
-	t_matrix		transform;
-	t_matrix		inverse;
+	int			has_pattern;
+	t_color		color_a;
+	t_color		color_b;
+	t_map		map;
+	t_matrix	transform;
+	t_matrix	inverse;
+	t_patterns	pattern_type;
 }	t_pattern;
 
 typedef struct s_material
 {
-	t_color			ambient;
-	double			diffuse;
-	double			specular;
-	double			shininess;
-	double			reflective;
-	double			transparency;
-	double			refractive_index;
-	t_color			color;
-	t_pattern		pattern;
-	t_uv_image		bump_map;
+	t_color		ambient;
+	double		diffuse;
+	double		specular;
+	double		shininess;
+	double		reflective;
+	double		transparency;
+	double		refractive_index;
+	t_color		color;
+	t_pattern	pattern;
+	t_uv_image	bump_map;
 }	t_material;
 
-struct s_material_lst
+typedef struct s_material_lst
 {
-	char			*name;
-	t_material		material;
-	t_material_lst	*next;
-};
+	char					*name;
+	t_material				material;
+	struct s_material_lst	*next;
+}	t_material_lst;
 
-struct s_pattern_list
+typedef struct s_pattern_list
 {
-	char			*name;
-	t_pattern		pattern;
-	t_pattern_list	*next;
-};
+	char					*name;
+	t_pattern				pattern;
+	struct s_pattern_list	*next;
+}	t_pattern_list;
 
-struct s_shape
+typedef struct s_shape
 {
-	int			id;
+	int				id;
 	union
 	{
 		t_sphere	sphere_shape;
@@ -211,29 +200,29 @@ struct s_shape
 		t_cylinder	cylinder_shape;
 		t_cone		cone_shape;
 	};
-	t_matrix	transform;
-	t_matrix	inverse;
-	t_matrix	transposed_inverse;
-	t_material	material;
-	t_tokens	shape_type;
-	t_shape		*next;
-};
+	t_matrix		transform;
+	t_matrix		inverse;
+	t_matrix		transposed_inverse;
+	t_material		material;
+	t_tokens		shape_type;
+	struct s_shape	*next;
+}	t_shape;
 
-struct s_hit
+typedef struct s_hit
 {
-	double	t;
-	t_shape	object;
-	t_hit	*next;
-};
+	double			t;
+	t_shape			object;
+	struct s_hit	*next;
+}	t_hit;
 
-struct s_light
+typedef struct s_light
 {
-	t_color	intensity;
-	t_point	position;
-	t_light	*next;
-};
+	t_color			intensity;
+	t_point			position;
+	struct s_light	*next;
+}	t_light;
 
-struct s_camera
+typedef struct s_camera
 {
 	double		hsize;
 	double		vsize;
@@ -243,7 +232,7 @@ struct s_camera
 	double		pixel_size;
 	t_matrix	transform;
 	t_matrix	inverse;
-};
+}	t_camera;
 
 typedef struct s_scene
 {
@@ -254,7 +243,7 @@ typedef struct s_scene
 	t_color			ambient_color;
 	int				has_ambient_color;
 	int				has_camera;
-	t_material_lst		*material_list;
+	t_material_lst	*material_list;
 	t_pattern_list	*pattern_list;
 }	t_scene;
 
@@ -375,7 +364,6 @@ t_color		convert_color(t_color color);
 //                                   canvas                                   //
 // -------------------------------------------------------------------------- //
 
-// void		write_pixel(mlx_image_t *image, int x, int y, int color);
 void		write_pixel(mlx_image_t *image, int x, int y, t_color color);
 int			color_to_int(t_color color);
 
@@ -426,13 +414,28 @@ t_ray		ray_transform(t_ray ray, t_matrix matrix);
 //                                   shapes                                   //
 // -------------------------------------------------------------------------- //
 
-// criação dos shapes
-t_shape	new_shape(void);
+t_shape		new_shape(void);
+void		add_shape(t_shape **shape_list, t_shape shape);
 
-// spheres
+//sphere
 t_shape		sphere(void);
 void		intersect_sphere(t_hit **hit_list, t_shape s, t_ray r);
 t_vector	normal_at_sphere(t_shape sphere, t_point obj_point);
+
+// plane
+t_shape		plane(void);
+void		intersect_plane(t_hit **hit_list, t_shape s, t_ray r);
+t_vector	normal_at_plane(t_shape plane, t_point obj_point);
+
+// cylinder
+t_shape		cylinder(void);
+void		intersect_cylinder(t_hit **hit_list, t_shape s, t_ray r);
+t_vector	normal_at_cylinder(t_shape s, t_point obj_point);
+
+// plane
+t_shape		cone(void);
+void		intersect_cone(t_hit **hit_list, t_shape s, t_ray r);
+t_vector	normal_at_cone(t_shape s, t_point obj_point);
 
 // -------------------------------------------------------------------------- //
 //                                intersection                                //
@@ -444,38 +447,6 @@ int			intersection_count(t_hit *hit_list);
 void		hit_clear_list(t_hit **hit_list);
 void		add_intersection(t_hit **hit_list, t_hit isect);
 t_hit		*hit(t_hit *hit_list);
-
-// -------------------------------------------------------------------------- //
-//                                  light                                     //
-// -------------------------------------------------------------------------- //
-t_vector	normal_at(t_shape shape, t_point world_point);
-t_vector	reflect(t_vector in, t_vector normal);
-t_light		point_light(t_point position, t_color intensity);
-t_material	material(void);
-t_color		lighting(t_shape object, t_light light, t_point position, t_sight sight);
-
-// -------------------------------------------------------------------------- //
-//                                  shadow                                    //
-// -------------------------------------------------------------------------- //
-bool		is_shadowed(t_world w, t_point position, t_light *light);
-
-// -------------------------------------------------------------------------- //
-//                                   world                                    //
-// -------------------------------------------------------------------------- //
-t_world		world(void);
-t_hit		*intersect_world(t_world w, t_ray ray);
-
-// -------------------------------------------------------------------------- //
-//                                  camera                                    //
-// -------------------------------------------------------------------------- //
-t_camera	camera(double hsize, double vsize, double field_of_view);
-// t_ray		ray_for_pixel(t_camera c, int x, int y);
-
-// -------------------------------------------------------------------------- //
-//                                 reflection                                 //
-// -------------------------------------------------------------------------- //
-
-t_color		reflected_color(t_world world, t_comps comps, int depth);
 
 // -------------------------------------------------------------------------- //
 //                                   utils                                    //
@@ -490,14 +461,6 @@ float		fternary(int condition, float if_true, float if_false);
 void		check_extension(char *filename);
 void		canvas_to_ppm(t_canvas canvas, char *filename);
 char		*get_file_name(char *file_name_base);
-
-// parser
-
-
-// NÃO SEI ONDE POR
-// Funções de adicionar coisas a alguma lista, está relacionado ao t_world
-void		add_shape(t_shape **shape_list, t_shape shape);
-void		add_light(t_light **light_list, t_light light_to_add);
 
 // E essas são pra dar free nas listas
 void		shape_clear_list(t_shape **shape_list);
@@ -518,27 +481,15 @@ t_canvas	create_canvas(int width, int height);
 void		write_pixel_to_canvas(t_canvas *canvas, int x, int y, t_color color);
 t_color		pixel_at(t_canvas canvas, int x, int y);
 mlx_image_t	*canvas_to_image(t_canvas canvas, mlx_t *mlx);
+void		key_hook(mlx_key_data_t keydata, void *param);
+void		start_render(t_world world, int save_to_file, char *file_name);
 
 // Parte da refatoração para adequar vários shapes
 void		local_intersect(t_hit **hit_list, t_shape s, t_ray r);
 t_vector	local_normal_at(t_shape s, t_point obj_point);
 void		set_transformation(t_shape *shape, t_matrix tranformation);		// Tirei esse do luga para por num lugar melhor
 
-// NOVOS SHAPES - criação - intersect - normal
-// plane
-t_shape		plane(void);
-void		intersect_plane(t_hit **hit_list, t_shape s, t_ray r);
-t_vector	normal_at_plane(t_shape plane, t_point obj_point);
-
-// cylinder
-t_shape		cylinder(void);
-void		intersect_cylinder(t_hit **hit_list, t_shape s, t_ray r);
-t_vector	normal_at_cylinder(t_shape s, t_point obj_point);
-
-// plane
-t_shape		cone(void);
-void		intersect_cone(t_hit **hit_list, t_shape s, t_ray r);
-t_vector	normal_at_cone(t_shape s, t_point obj_point);
+t_material	material(void);
 
 // patterns
 void		set_pattern_transformation(t_pattern *pattern, t_matrix transformation);
@@ -546,7 +497,7 @@ t_color		pattern_at_shape(t_pattern pattern, t_shape object, t_point world_point
 t_pattern	default_pattern(void);
 
 // stripe
-t_pattern 	stripe_pattern(t_color color_a, t_color color_b);
+t_pattern	stripe_pattern(t_color color_a, t_color color_b);
 t_color		stripe_at(t_pattern pattern, t_point pattern_point);
 
 // gradient
@@ -572,12 +523,6 @@ t_world		default_world(void);
 t_shape		glass_sphere(void);
 t_hit		*hit_index(t_hit *hit_list, int index);
 
-// Refraction
-void		calculate_refractive_indexes(t_comps *comps, t_hit *hit_list);
-t_color		refracted_color(t_world w, t_comps comps, int depth);
-void		update_containers(t_shape **containers, t_shape object);
-int			is_same_object(t_shape shape1, t_shape shape2);
-
 // texture map
 t_checkers	uv_checkers(int width, int heigh, t_color color_a, t_color color_b);
 t_color		uv_pattern_at(t_checkers checkers, double u, double v);
@@ -588,8 +533,6 @@ void		cylindrical_map(t_point point, double *u, double *v);
 // t_color		texture_at_shape(t_shape object, t_point point);
 
 // mlx
-void		key_hook(mlx_key_data_t keydata, void *param);
-void		start_render(t_world world, int save_to_file, char *file_name);
 
 
 #endif

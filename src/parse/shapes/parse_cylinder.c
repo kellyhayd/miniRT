@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 11:06:20 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/30 07:35:12 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/30 08:04:59 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ bool	parse_cylinder(char *line, t_world *world)
 		|| !parse_double(splitted[3], &new_cylinder.cylinder_shape.radius)
 		|| !parse_double(splitted[4], &new_cylinder.cylinder_shape.maximum)
 		|| !parse_color(splitted[5], &new_cylinder.material.color)
-		|| !parse_material_shape(&splitted[6], &new_cylinder.material, world)
+		|| !parse_mater_shape(&splitted[6], &new_cylinder.material, world)
 		|| !validade_optionals(&splitted[6]))
 		return (ft_free_split(splitted), false);
 	ft_free_split(splitted);
