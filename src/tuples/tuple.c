@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:51:06 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/10/29 21:41:43 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/30 06:57:26 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,23 @@
 t_tuple	tuple(double x, double y, double z, double w)
 {
 	return ((t_tuple){.x = x, .y = y, .z = z, .w = w});
+}
+
+/**
+ * @brief Compares two floating-point numbers for equality.
+ *
+ * This function compares two double precision floating-point numbers
+ * to determine if they are equal within a certain tolerance.
+ *
+ * @param d1 The first double to compare.
+ * @param d2 The second double to compare.
+ * @return An integer indicating the result of the comparison:
+ *         1 if the numbers are considered equal (minor than EPSILON),
+ *         0 otherwise.
+ */
+int	float_compare(double d1, double d2)
+{
+	return (fabs(d1 - d2) < EPSILON);
 }
 
 /**
