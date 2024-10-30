@@ -3,7 +3,7 @@
 NAME			= miniRT
 .DEFAULT_GOAL	= all
 .PHONY:			all clean fclean re libft libmlx
-# .SILENT:
+.SILENT:
 
 #----------------------------------------------- Colors
 CYAN	= \033[0;36m
@@ -42,6 +42,14 @@ SRC_PATH		= src
 
 SRC				= $(shell find src -iname "*.c")
 OBJ				= $(SRC:$(SRC_PATH)/%.c=$(BUILD)/%.o)
+
+#----------------------------------------------- bonus
+# define bonus
+# 	ifdef WITH_BONUS
+# 	NAME		= $(NAME_BONUS)
+# 	SRCS		= $(SRCS_BONUS)
+# 	OBJS		= $(OBJS_BONUS)
+# endif
 
 #----------------------------------------------- Rules
 all: $(NAME)
