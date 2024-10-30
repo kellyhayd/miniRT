@@ -6,11 +6,12 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 20:15:43 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/30 07:35:00 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/30 18:37:39 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+#include "scene.h"
 
 bool	parse_brightness_range(char *str, double *brightness)
 {

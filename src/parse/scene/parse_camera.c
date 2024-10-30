@@ -6,11 +6,12 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 21:33:40 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/30 07:34:56 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/30 18:37:53 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+#include "scene.h"
 
 bool	validade_if_has_camera(t_world *world)
 {

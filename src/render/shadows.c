@@ -6,11 +6,11 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 13:04:14 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/29 17:31:39 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/30 18:38:15 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "scene.h"
 
 bool	is_shadowed(t_world w, t_point position, t_light *light)
 {

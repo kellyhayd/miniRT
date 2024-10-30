@@ -6,11 +6,11 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 15:49:48 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/29 22:10:30 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/30 18:36:12 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "scene.h"
 
 t_color	reflected_color(t_world world, t_comps comps, int depth)
 {
