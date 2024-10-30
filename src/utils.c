@@ -56,15 +56,9 @@ void	swap(double *a, double *b)
 void	check_extension(char *filename)
 {
 	char	*extension;
-	bool	ok;
 
-	ok = 1;
-	extension = ft_strrchr(filename, '.') + 1;
-	if (!extension)
-		ok = 0;
-	if (ft_strncmp(extension, "rt", 2) != 0)
-		ok = 0;
-	if (ok == 0)
+	extension = ft_strrchr(filename, '.');
+	if (!extension || ft_strncmp(extension, ".rt", -1) != 0)
 	{
 		ft_error("Invalid file extension\n");
 		exit(EXIT_FAILURE);
