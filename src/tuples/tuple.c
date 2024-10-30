@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:51:06 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/26 22:14:09 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/29 21:41:43 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ t_tuple	tuple(double x, double y, double z, double w)
 }
 
 /**
- * @brief Compares two tuples for equality.
+ * @brief Compares two tuples for equality. For tests use only.
  *
- * This function takes two tuples as input and compares them to determine
+ * This function takes two tuples as input and compares them to determinez
  * if they are equal.
  *
  * @param tuple1 The first tuple to compare.
@@ -42,8 +42,6 @@ t_tuple	tuple(double x, double y, double z, double w)
  */
 int	tuple_compare(t_tuple tuple1, t_tuple tuple2)
 {
-	// APENAS USADO NOS TESTES
-
 	return (float_compare(tuple1.x, tuple2.x)
 		&& float_compare(tuple1.y, tuple2.y)
 		&& float_compare(tuple1.z, tuple2.z)
