@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 19:46:49 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/29 10:25:46 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/29 22:07:15 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,20 @@ void	hit_clear_list(t_hit **hit_list)
 	}
 }
 
+/**
+ * @brief Retrieves the hit at the specified index from the hit list.
+ * For tests use only.
+ *
+ * This function takes a list of hits and an index, and returns the hit
+ * located at that index in the list.
+ *
+ * @param hit_list A pointer to the list of hits.
+ * @param index The index of the hit to retrieve.
+ * @return A pointer to the hit at the specified index,
+ * or NULL if the index is out of bounds.
+ */
 t_hit	*hit_index(t_hit *hit_list, int index)
 {
-	// FUNÇÃO USADA APENAS NOS TESTES
 	int		i;
 	t_hit	*aux;
 

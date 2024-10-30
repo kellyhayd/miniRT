@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:01:38 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/10/20 15:20:30 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/29 22:15:24 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -617,6 +617,8 @@ t_hit		*hit_index(t_hit *hit_list, int index);
 // Refraction
 void		calculate_refractive_indexes(t_comps *comps, t_hit *hit_list);
 t_color		refracted_color(t_world w, t_comps comps, int depth);
+void		update_containers(t_shape **containers, t_shape object);
+int			is_same_object(t_shape shape1, t_shape shape2);
 
 // texture map
 t_checkers	uv_checkers(int width, int heigh, t_color color_a, t_color color_b);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/29 22:07:48 by krocha-h          #+#    #+#             */
+/*   Updated: 2024/10/29 22:11:22 by krocha-h         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 static t_color	render_pixel(t_camera c, t_world w, int x, int y)
@@ -17,15 +29,13 @@ static t_color	render_pixel(t_camera c, t_world w, int x, int y)
 		{
 			ray = ray_for_pixel(c, x, y, aa_data);
 			colors[(int) aa_data.sample_x + (int)(aa_data.sample_y
-					* w.scene.pixel_sampling)] = color_at(w, ray, 4); // color_at ganhou novo argumento (depth),
-																// precisa verificar como preencher aqui
-																// setei 4 por recomendação do livro (default)
-																// - Pode deixar assim mesmo
+					* w.scene.pixel_sampling)] = color_at(w, ray, 4);
 			aa_data.sample_x++;
 		}
 		aa_data.sample_y++;
 	}
-	color_average_result = color_average(colors, pow(w.scene.pixel_sampling, 2));
+	color_average_result = color_average(colors, \
+						pow(w.scene.pixel_sampling, 2));
 	free(colors);
 	return (color_average_result);
 }
