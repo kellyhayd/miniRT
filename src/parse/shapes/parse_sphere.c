@@ -6,11 +6,11 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 20:42:43 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/29 22:41:25 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/30 07:35:22 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "parser.h"
 
 /**
  * @brief Parses a line to extract sphere data and adds it to the world.

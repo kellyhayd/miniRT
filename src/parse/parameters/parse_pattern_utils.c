@@ -6,11 +6,11 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 23:44:46 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/29 23:46:13 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/30 07:34:41 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "parser.h"
 
 void	clear_pattern_list(t_world *world)
 {

@@ -6,11 +6,11 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 11:06:20 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/29 22:41:04 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/30 07:35:12 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "parser.h"
 
 bool	parse_cylinder(char *line, t_world *world)
 {

@@ -6,11 +6,11 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 21:33:19 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/29 23:46:30 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/30 07:34:34 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "parser.h"
 
 bool	parse_material(char *line, t_world *world)
 {

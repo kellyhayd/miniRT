@@ -6,11 +6,11 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 20:14:11 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/29 23:29:49 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/30 07:35:47 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "parser.h"
 
 int	get_token(char *line)
 {

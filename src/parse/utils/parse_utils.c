@@ -6,11 +6,11 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 10:03:33 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/29 23:25:38 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/30 07:35:37 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "parser.h"
 
 void	put_ambient_color(t_world *world)
 {

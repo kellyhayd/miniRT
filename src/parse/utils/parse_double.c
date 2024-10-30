@@ -6,11 +6,11 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 21:33:14 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/29 21:33:15 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/30 07:35:31 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "parser.h"
 
 bool	print_error_double(char *str)
 {

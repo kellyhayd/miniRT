@@ -6,11 +6,11 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 21:33:02 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/29 21:33:03 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/30 07:34:13 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "parser.h"
 
 bool	validate_color_range(char *str, int *num)
 {

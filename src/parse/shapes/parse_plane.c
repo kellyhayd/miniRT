@@ -6,11 +6,11 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 10:40:14 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/29 22:41:09 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/30 07:35:17 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "parser.h"
 
 bool	parse_plane(char *line, t_world *world)
 {

@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:01:38 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/10/29 23:49:32 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/30 07:31:19 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -412,6 +412,7 @@ t_matrix	rotation_x(double radians);
 t_matrix	rotation_y(double radians);
 t_matrix	rotation_z(double radians);
 t_matrix	shearing(double *prop_x, double *prop_y, double *prop_z);
+t_matrix	rotation_matrix(t_point position, t_vector direction, t_shape shape);
 
 // -------------------------------------------------------------------------- //
 //                                    ray                                     //
@@ -477,23 +478,6 @@ t_camera	camera(double hsize, double vsize, double field_of_view);
 t_color		reflected_color(t_world world, t_comps comps, int depth);
 
 // -------------------------------------------------------------------------- //
-//                                  parsing                                   //
-// -------------------------------------------------------------------------- //
-bool		parse(int fd, t_world *new_world);
-bool		parse_line(char *line, t_world *world);
-int			get_token(char *line);
-bool		parse_light(char *line, t_world *world);
-bool		parse_coordinates(char *splitted, t_point *position);
-bool		parse_brightness(char *splitted, double *brightness);
-bool		parse_color(char *splitted, t_color *new_color);
-bool		parse_sphere(char *line, t_world *world);
-bool		parse_plane(char *line, t_world *world);
-// bool		parse_normal(char *splitted, t_vector *normal);
-bool		parse_cylinder(char *line, t_world *world);
-bool		parse_cone(char *line, t_world *world);
-bool		parse_camera(char *line, t_world *world);
-
-// -------------------------------------------------------------------------- //
 //                                   utils                                    //
 // -------------------------------------------------------------------------- //
 
@@ -508,38 +492,7 @@ void		canvas_to_ppm(t_canvas canvas, char *filename);
 char		*get_file_name(char *file_name_base);
 
 // parser
-// bool		is_all_numbers(char **split);
-bool		validate_count(char **split, int count);
-// bool		validate_color_range(char **str);
-// bool		validate_normal_range(char **str);
-t_matrix	rotation_matrix(t_point position, t_vector direction, t_shape shape);
-void		put_ambient_color(t_world *world);
-void		add_material(t_material_lst **material_list, t_material material, char *name);
-bool		validate_double_range(char *str, double value, double min, double max);
-bool		parse_material_name(char *str, t_material *material, t_world *world);
-void		add_material(t_material_lst **material_list, t_material material, char *name);
-void		init_default_material(t_world *world);
-void		clear_material_list(t_world *world);
-void		clear_pattern_list(t_world *world);
-bool		validade_optionals(char **splitted);
-bool		pos_validation(t_world *world);
-bool		print_error(char *message);
-void		print_line_error(char *line, int count_line);
-bool		check_if_material_exists(char *name, t_world *world);
-bool		check_if_pattern_exists(char *name, t_world *world);
-void		add_pattern(t_pattern_list **pattern_list, t_pattern pattern, char *name);
 
-bool		parse_double(char *str, double *value);
-bool		parse_radius(char *str, double *radius);
-bool		parse_int(char *str, int *num);
-bool		parse_direction(char *str, t_vector *direction);
-bool		parse_int_color(char *str, int *num);
-bool		parse_ambient(char *line, t_world *world);
-bool		parse_material(char *line, t_world *world);
-bool		parse_material_name(char *str, t_material *material, t_world *world);
-bool		parse_pattern(char *line, t_world *world);
-bool		parse_pattern_name(char *str, t_pattern *pattern, t_world *world);
-bool		parse_material_shape(char **splitted, t_material *material, t_world *world);
 
 // NÃO SEI ONDE POR
 // Funções de adicionar coisas a alguma lista, está relacionado ao t_world

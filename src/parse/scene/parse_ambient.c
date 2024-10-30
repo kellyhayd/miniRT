@@ -6,11 +6,11 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 21:33:37 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/29 21:33:38 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/30 07:34:52 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "parser.h"
 
 bool	validade_if_has_ambient_color(int has_ambient_color)
 {

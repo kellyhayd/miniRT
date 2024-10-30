@@ -6,11 +6,11 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 21:33:07 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/29 21:33:08 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/30 07:34:20 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "parser.h"
 
 /**
  * @brief Parses a string containing coordinates and stores the result in a

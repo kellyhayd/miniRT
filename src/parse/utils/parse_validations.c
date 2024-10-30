@@ -6,11 +6,11 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 23:25:08 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/29 23:26:01 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/30 07:35:42 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "parser.h"
 
 /**
  * @brief Validates the number of elements in a split string array.
