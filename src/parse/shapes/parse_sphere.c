@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 20:42:43 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/19 11:11:14 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/29 22:41:25 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ bool	parse_sphere(char *line, t_world *world)
 	ft_free_split(splitted);
 	new_sphere.sphere_shape.radius /= 2;
 	set_transformation(&new_sphere, rotation_matrix(position, point(0, 1, 0),
-		new_sphere));
+			new_sphere));
 	add_shape(&world->shape, new_sphere);
 	return (true);
 }

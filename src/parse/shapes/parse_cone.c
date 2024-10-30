@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 14:05:53 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/20 18:06:08 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/29 22:40:51 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ bool	parse_cone(char *line, t_world *world)
 	new_cone.cone_shape.minimum = -new_cone.cone_shape.maximum;
 	new_cone.cone_shape.closed = true;
 	set_transformation(&new_cone, rotation_matrix(position, normal,
-		new_cone));
+			new_cone));
 	add_shape(&world->shape, new_cone);
 	return (true);
 }

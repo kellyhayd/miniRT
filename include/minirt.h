@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:01:38 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/10/29 22:15:24 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/29 23:49:32 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ typedef struct s_camera	t_camera;
 typedef enum e_tokens t_tokens;
 typedef enum e_patterns t_patterns;
 
-typedef struct s_material_list t_material_list;
+typedef struct s_material_lst t_material_lst;
 typedef struct s_pattern_list t_pattern_list;
 
 struct s_tuple
@@ -187,11 +187,11 @@ typedef struct s_material
 	t_uv_image		bump_map;
 }	t_material;
 
-struct s_material_list
+struct s_material_lst
 {
 	char			*name;
 	t_material		material;
-	t_material_list	*next;
+	t_material_lst	*next;
 };
 
 struct s_pattern_list
@@ -254,7 +254,7 @@ typedef struct s_scene
 	t_color			ambient_color;
 	int				has_ambient_color;
 	int				has_camera;
-	t_material_list		*material_list;
+	t_material_lst		*material_list;
 	t_pattern_list	*pattern_list;
 }	t_scene;
 
@@ -514,15 +514,20 @@ bool		validate_count(char **split, int count);
 // bool		validate_normal_range(char **str);
 t_matrix	rotation_matrix(t_point position, t_vector direction, t_shape shape);
 void		put_ambient_color(t_world *world);
-void		add_material(t_material_list **material_list, t_material material, char *name);
+void		add_material(t_material_lst **material_list, t_material material, char *name);
 bool		validate_double_range(char *str, double value, double min, double max);
 bool		parse_material_name(char *str, t_material *material, t_world *world);
-void		add_material(t_material_list **material_list, t_material material, char *name);
+void		add_material(t_material_lst **material_list, t_material material, char *name);
 void		init_default_material(t_world *world);
 void		clear_material_list(t_world *world);
 void		clear_pattern_list(t_world *world);
 bool		validade_optionals(char **splitted);
+bool		pos_validation(t_world *world);
 bool		print_error(char *message);
+void		print_line_error(char *line, int count_line);
+bool		check_if_material_exists(char *name, t_world *world);
+bool		check_if_pattern_exists(char *name, t_world *world);
+void		add_pattern(t_pattern_list **pattern_list, t_pattern pattern, char *name);
 
 bool		parse_double(char *str, double *value);
 bool		parse_radius(char *str, double *radius);

@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 11:06:20 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/20 18:05:44 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/29 22:41:04 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ bool	parse_cylinder(char *line, t_world *world)
 	new_cylinder.cylinder_shape.minimum = 0;
 	new_cylinder.cylinder_shape.closed = true;
 	set_transformation(&new_cylinder, rotation_matrix(position, normal,
-		new_cylinder));
+			new_cylinder));
 	add_shape(&world->shape, new_cylinder);
 	return (true);
 }

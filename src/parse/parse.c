@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 20:14:11 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/20 18:05:20 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/29 23:29:49 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,25 +65,15 @@ bool	parse_line(char *line, t_world *world)
 		return (parse_plane(line, world));
 	else if (token == CYLINDER)
 		return (parse_cylinder(line, world));
-	else if (token == CONE)
+	else
 		return (parse_cone(line, world));
-	return (true);
 }
 
-bool	pos_validation(t_world *world)
+void	finish_parsing(t_world *world)
 {
-	bool	state;
-
-	state = true;
-	if (!world->scene.has_ambient_color)
-		state = print_error("There must be 1 ambient color");
-	if (!world->scene.has_camera)
-		state = print_error("There must be 1 camera");
-	if (!world->light)
-		state = print_error("There must be at least 1 light");
-	if (!world->shape)
-		state = print_error("There must be at least 1 object in the scene");
-	return (state);
+	put_ambient_color(world);
+	clear_material_list(world);
+	clear_pattern_list(world);
 }
 
 bool	parse(int fd, t_world *world)
@@ -102,16 +92,7 @@ bool	parse(int fd, t_world *world)
 			ft_strchr(line, '\n')[0] = '\0';
 		if (!parse_line(line, world))
 		{
-			// Isso pode virar uma função
-			ft_putstr_fd(BLUE "Line: " RESET, 2);
-			if (count_line < 10)
-				ft_putchar_fd('0', 2);
-			ft_putnbr_fd(count_line, 2);
-			ft_putstr_fd(" | ", 2);
-			ft_putendl_fd(line, 2);
-			////////////////////////////////
-
-			free(line);
+			print_line_error(line, count_line);
 			state = false;
 			break ;
 		}
@@ -119,10 +100,7 @@ bool	parse(int fd, t_world *world)
 		line = get_next_line(fd);
 		count_line++;
 	}
-	if (state && !pos_validation(world))
-		state = false;
-	put_ambient_color(world);
-	clear_material_list(world);
-	clear_pattern_list(world);
+	state = state && pos_validation(world);
+	finish_parsing(world);
 	return (state);
 }
