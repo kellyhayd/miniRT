@@ -3,123 +3,96 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/21 09:00:16 by haydkelly         #+#    #+#             */
-/*   Updated: 2023/11/22 12:37:32 by krocha-h         ###   ########.fr       */
+/*   Created: 2023/10/26 23:30:44 by danbarbo          #+#    #+#             */
+/*   Updated: 2023/11/15 16:36:45 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdlib.h>
 
-void	clean_lst(t_list **lst, t_list *last_node)
+int	gnl_lstadd_back(t_list_gnl **lst, char c)
 {
-	size_t	i;
-	size_t	j;
+	t_list_gnl	*new;
+	t_list_gnl	*aux;
 
-	if (!last_node)
-		return ;
-	j = 0;
-	while (last_node->content[j] && last_node->content[j] != '\n')
-		j++;
-	if (last_node->content[j] == '\n')
-		j++;
-	i = 0;
-	while (last_node->content[j])
+	new = malloc(sizeof(t_list_gnl));
+	if (!new)
+		return (FAIL);
+	new->content = c;
+	new->next = NULL;
+	if (!(*lst))
+		*lst = new;
+	else
 	{
-		last_node->content[i] = last_node->content[j];
-		i++;
-		j++;
+		aux = *lst;
+		while (aux->next)
+			aux = aux->next;
+		aux->next = new;
 	}
-	last_node->content[i] = '\0';
-	lst_remake(lst);
+	return (0);
 }
 
-void	create_str(t_list *lst, char *line)
+void	gnl_lstclear(t_list_gnl **lst)
 {
-	size_t	i;
-	size_t	j;
+	t_list_gnl	*aux1;
+	t_list_gnl	*aux2;
 
-	if (!lst)
-		return ;
-	i = 0;
-	while (lst)
+	if (lst)
 	{
-		j = 0;
-		while (lst->content[j])
+		aux1 = *lst;
+		while (aux1)
 		{
-			if (lst->content[j] == '\n')
-			{
-				line[i] = '\n';
-				line[i + 1] = '\0';
-				return ;
-			}
-			line[i] = lst->content[j];
-			j++;
-			i++;
+			aux2 = aux1->next;
+			free(aux1);
+			aux1 = aux2;
 		}
-		lst = lst->next;
+		*lst = NULL;
 	}
-	line[i] = '\0';
 }
 
-char	*create_line(t_list *lst)
+char	*read_fd(int fd, t_list_gnl **line)
 {
-	char	*line;
-	size_t	len;
+	int		read_status;
+	char	*line_part;
+	char	*line_to_return;
 
-	if (!lst)
-		return (NULL);
-	len = get_line_len(lst);
-	line = malloc(len + 1);
+	read_status = READ;
+	line_part = NULL;
+	line_to_return = NULL;
 	if (!line)
 		return (NULL);
-	create_str(lst, line);
-	return (line);
-}
-
-int	create_lst(int fd, t_list **lst, t_list **last_node)
-{
-	char	*buffer;
-	int		nbytes;
-
-	while (!has_nl(*last_node))
+	while (read_status == READ)
 	{
-		buffer = malloc(BUFFER_SIZE + 1);
-		if (!buffer)
-			return (0);
-		nbytes = read(fd, buffer, BUFFER_SIZE);
-		if (nbytes <= 0)
-		{
-			free(buffer);
-			return (nbytes == 0);
-		}
-		buffer[nbytes] = '\0';
-		if (!lstadd_node(lst, last_node, buffer))
-		{
-			free(buffer);
-			return (0);
-		}
+		line_part = (char *) malloc(BUFFER_SIZE * sizeof(char));
+		if (!line_part)
+			return (NULL);
+		read_status = read(fd, line_part, BUFFER_SIZE);
+		if (read_status != FAIL)
+			read_status = put_in_list(line, line_part, read_status);
+		free(line_part);
+		line_part = NULL;
 	}
-	return (1);
+	if (read_status == FAIL)
+		return (NULL);
+	if (read_status == BUILD_STRING)
+		line_to_return = build_line(line);
+	return (line_to_return);
 }
 
 char	*get_next_line(int fd)
 {
-	static t_list	*lst;
-	t_list			*last_node;
-	char			*new_line;
+	char				*line_to_return;
+	static t_list_gnl	*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
-	last_node = ft_lstlast(lst);
-	if (!create_lst(fd, &lst, &last_node))
 	{
-		clean_lst(&lst, last_node);
+		gnl_lstclear(&line);
 		return (NULL);
 	}
-	new_line = create_line(lst);
-	clean_lst(&lst, last_node);
-	return (new_line);
+	line_to_return = read_fd(fd, &line);
+	if (!line_to_return)
+		gnl_lstclear(&line);
+	return (line_to_return);
 }

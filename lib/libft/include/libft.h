@@ -21,6 +21,12 @@
 #  define BUFFER_SIZE 4096
 # endif
 
+typedef struct s_list
+{
+	void			*content;
+	struct s_list	*next;
+}	t_list;
+
 /* mandatory */
 /* part 1 - libc functions */
 /* ascii symbols validation and transformation */
