@@ -37,8 +37,7 @@ static t_color	checkers_shape(t_pattern pattern, t_shape object,
 	double	v;
 	t_color	color_pattern;
 
-	if (object.shape_type == SPHERE || object.shape_type == CONE
-		|| object.shape_type == CYLINDER)
+	if (object.shape_type == SPHERE)
 	{
 		spherical_map(pattern_point, &u, &v);
 		color_pattern = uv_pattern_at(pattern.map.checkers, u, v);

@@ -31,6 +31,7 @@ bool	parse_cone(char *line, t_world *world)
 		return (ft_free_split(splitted), false);
 	ft_free_split(splitted);
 	new_cone.cone_shape.radius /= 2;
+	new_cone.cone_shape.maximum /= 2;
 	new_cone.cone_shape.maximum /= new_cone.cone_shape.radius;
 	new_cone.cone_shape.minimum = -new_cone.cone_shape.maximum;
 	new_cone.cone_shape.closed = true;
