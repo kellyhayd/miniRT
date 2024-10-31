@@ -6,11 +6,11 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:08:09 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/29 22:18:31 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/30 18:35:59 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "scene.h"
 
 /**
  * @brief Creates a point light source.

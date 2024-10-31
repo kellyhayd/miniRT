@@ -6,11 +6,11 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 22:18:12 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/29 22:18:39 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/30 18:36:05 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "scene.h"
 
 void	add_light(t_light **light_list, t_light light_to_add)
 {

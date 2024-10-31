@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 20:20:12 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/10/07 20:20:13 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/10/30 18:35:38 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "scene.h"
 
 void	print_rendering_progress(int hsize, int vsize, int y)
 {

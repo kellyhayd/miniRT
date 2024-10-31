@@ -6,11 +6,11 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 22:07:40 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/29 22:09:56 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/30 18:38:38 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "scene.h"
 
 t_color	shade_hit(t_world world, t_comps comps, int depth)
 {

@@ -6,12 +6,13 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:28:32 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/10/30 07:37:32 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/30 18:39:47 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include "parser.h"
+#include "scene.h"
 
 int	main(int argc, char **argv)
 {

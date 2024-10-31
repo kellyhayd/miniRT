@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   refrative_shape.c                                  :+:      :+:    :+:   */
+/*   containers.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 21:42:05 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/29 21:50:55 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/30 18:39:21 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "scene.h"
 
 int	has_shape(t_shape *containers, t_shape shape)
 {

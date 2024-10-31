@@ -6,11 +6,11 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 21:49:15 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/29 21:53:06 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/30 18:37:02 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "scene.h"
 
 int	is_same_object(t_shape shape1, t_shape shape2)
 {

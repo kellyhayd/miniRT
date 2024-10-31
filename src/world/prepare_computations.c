@@ -6,11 +6,11 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 21:41:59 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/29 21:42:00 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/30 18:39:32 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "scene.h"
 
 t_comps	prepare_computations(t_hit hit, t_ray ray, t_hit *hit_list)
 {
