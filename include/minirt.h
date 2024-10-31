@@ -56,7 +56,6 @@ void		ft_error(char *message);
 int			almost_zero(float num);
 void		swap(double *a, double *b);
 void		join_threads(pthread_t *threads, int thread_count);
-float		fternary(int condition, float if_true, float if_false);
 void		check_extension(char *filename);
 char		*get_file_name(char *file_name_base);
 

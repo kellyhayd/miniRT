@@ -40,7 +40,7 @@ void		put_ambient_color(t_world *world);
 bool		parse_light(char *line, t_world *world);
 
 // -------------------------------------------------------------------------- //
-//                                parameteres                                 //
+//                                parameters                                  //
 // -------------------------------------------------------------------------- //
 bool		parse_coordinates(char *splitted, t_point *position);
 bool		parse_brightness(char *splitted, double *brightness);
