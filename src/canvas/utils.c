@@ -49,7 +49,7 @@ char	*join_colors(t_color pixel)
 	return (tmp);
 }
 
-void print_line_ppm(t_color pixel, int fd, int flush)
+void	print_line_ppm(t_color pixel, int fd, int flush)
 {
 	char		*line;
 	static int	i;

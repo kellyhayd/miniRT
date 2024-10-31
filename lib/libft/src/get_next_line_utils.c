@@ -3,97 +3,79 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/10 12:55:04 by krocha-h          #+#    #+#             */
-/*   Updated: 2023/11/22 09:50:34 by krocha-h         ###   ########.fr       */
+/*   Created: 2023/10/31 13:34:01 by danbarbo          #+#    #+#             */
+/*   Updated: 2023/11/15 16:45:10 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdlib.h>
 
-t_list	*ft_lstlast(t_list *lst)
+int	gnl_lst_next_line_size(t_list_gnl *lst)
 {
-	if (lst == NULL)
-		return (NULL);
-	while (lst->next)
-		lst = lst->next;
-	return (lst);
-}
-
-int	has_nl(t_list *lst)
-{
-	size_t	i;
+	int			i;
+	t_list_gnl	*aux;
 
 	i = 0;
-	while (i <= BUFFER_SIZE && lst && lst->content[i])
+	aux = lst;
+	while (aux)
 	{
-		if (lst->content[i] == '\n')
-			return (1);
+		i++;
+		if (aux->content == '\n')
+			return (i);
+		aux = aux->next;
+	}
+	return (i);
+}
+
+char	*build_line(t_list_gnl **line)
+{
+	int			i;
+	int			line_size;
+	char		*line_to_return;
+	t_list_gnl	*aux;
+
+	i = 0;
+	if (*line == NULL)
+		return (NULL);
+	line_size = gnl_lst_next_line_size(*line);
+	line_to_return = (char *) malloc(line_size + 1);
+	if (!line_to_return)
+		return (NULL);
+	line_to_return[line_size] = '\0';
+	while (i < line_size)
+	{
+		aux = *line;
+		line_to_return[i] = (*line)->content;
+		*line = (*line)->next;
+		free(aux);
 		i++;
 	}
-	return (0);
+	aux = NULL;
+	return (line_to_return);
 }
 
-int	lstadd_node(t_list **lst, t_list **last_node, char *buffer)
+int	put_in_list(t_list_gnl **line, char *line_part, int size_readed)
 {
-	t_list	*new_node;
+	int	i;
+	int	status_node_creation;
+	int	return_status;
 
-	new_node = malloc(sizeof(t_list));
-	if (!new_node)
-		return (0);
-	if (!*last_node)
-		*lst = new_node;
-	else
-		(*last_node)->next = new_node;
-	new_node->content = buffer;
-	new_node->next = NULL;
-	(*last_node) = new_node;
-	return (1);
-}
-
-size_t	get_line_len(t_list *lst)
-{
-	size_t	i;
-	size_t	len;
-
-	len = 0;
-	while (lst)
+	i = 0;
+	return_status = READ;
+	if (!line_part)
+		return (FAIL);
+	if (size_readed == 0)
+		return (BUILD_STRING);
+	while (i < size_readed)
 	{
-		i = 0;
-		while (lst->content[i])
-		{
-			if (lst->content[i] == '\n')
-			{
-				len++;
-				return (len);
-			}
-			i++;
-			len++;
-		}
-		lst = lst->next;
+		status_node_creation = gnl_lstadd_back(line, line_part[i]);
+		if (status_node_creation == FAIL)
+			return (FAIL);
+		if (line_part[i] == '\n')
+			return_status = BUILD_STRING;
+		i++;
 	}
-	return (len);
-}
-
-void	lst_remake(t_list **lst)
-{
-	t_list	*node;
-
-	if (!lst)
-		return ;
-	while ((*lst)->next)
-	{
-		node = *lst;
-		*lst = (*lst)->next;
-		free(node->content);
-		free(node);
-	}
-	if (!(*lst)->content[0])
-	{
-		free((*lst)->content);
-		free(*lst);
-		*lst = NULL;
-	}
+	return (return_status);
 }

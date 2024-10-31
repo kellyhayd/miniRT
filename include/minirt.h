@@ -31,10 +31,10 @@
 
 # define EPSILON        0.00001
 # define NUM_THREADS    3
-# define PIXEL_SAMPLING 1
+# define PIXEL_SAMPLING 3
 
-# define WIDTH 1000
-# define HEIGH 1000
+# define WIDTH 1280
+# define HEIGH 720
 
 # include <stdlib.h>
 # include <stdio.h>
@@ -58,6 +58,5 @@ void		swap(double *a, double *b);
 void		join_threads(pthread_t *threads, int thread_count);
 void		check_extension(char *filename);
 char		*get_file_name(char *file_name_base);
-
 
 #endif

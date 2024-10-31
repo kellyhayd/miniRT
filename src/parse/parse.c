@@ -72,6 +72,7 @@ void	finish_parsing(t_world *world)
 	put_ambient_color(world);
 	clear_material_list(world);
 	clear_pattern_list(world);
+	get_next_line(-1);
 }
 
 bool	parse(int fd, t_world *world)
@@ -98,7 +99,7 @@ bool	parse(int fd, t_world *world)
 		line = get_next_line(fd);
 		count_line++;
 	}
-	state = state && pos_validation(world);
+	state = state * pos_validation(world);
 	finish_parsing(world);
 	return (state);
 }

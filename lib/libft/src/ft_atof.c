@@ -52,5 +52,5 @@ double	ft_atof(const char *str)
 	}
 	if (*str == '.')
 		decimal = calculate_decimal(str, dec_place);
-	return (result + decimal) * sign;
+	return ((result + decimal) * sign);
 }
