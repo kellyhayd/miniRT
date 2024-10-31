@@ -12,7 +12,7 @@
 
 NAME	= libft.a
 CC		= cc
-FLAGS	= -Wall -Wextra -Werror
+FLAGS	= -Wall -Wextra -Werror -O2 -g3
 INCLUDE	= include
 # .SILENT:
 

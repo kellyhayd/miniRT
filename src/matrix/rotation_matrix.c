@@ -84,9 +84,9 @@ t_matrix	rotation_matrix(t_point position, t_vector direction, t_shape shape)
 		radius = shape.cylinder_shape.radius;
 	return (
 		get_matrix(
-			scaling(radius, radius, radius),
-			get_rot_matrix(z_angle, x_angle),
-			translation(position.x, position.y, position.z)
+			translation(position.x, position.y, position.z),
+			get_rot_matrix(x_angle, z_angle),
+			scaling(radius, radius, radius)
 		)
 	);
 }
