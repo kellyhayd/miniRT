@@ -98,7 +98,7 @@ bool	parse(int fd, t_world *world)
 		line = get_next_line(fd);
 		count_line++;
 	}
-	state = state && pos_validation(world);
+	state = state * pos_validation(world);
 	finish_parsing(world);
 	return (state);
 }
