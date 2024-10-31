@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   shading.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/29 22:07:40 by krocha-h          #+#    #+#             */
+/*   Updated: 2024/10/29 22:09:56 by krocha-h         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 t_color	shade_hit(t_world world, t_comps comps, int depth)
@@ -13,20 +25,20 @@ t_color	shade_hit(t_world world, t_comps comps, int depth)
 	{
 		comps.sight.in_shadow = is_shadowed(world, comps.over_point, aux);
 		color_shaded = color_add(
-			color_shaded,
-			lighting(
-				comps.object,
-				*aux,
-				comps.point,
-				comps.sight
-			)
-		);
+				color_shaded,
+				lighting(
+					comps.object,
+					*aux,
+					comps.point,
+					comps.sight
+					)
+				);
 		aux = aux->next;
 	}
 	color_reflected = reflected_color(world, comps, depth);
 	color_refracted = refracted_color(world, comps, depth);
 	return (color_add(
-		color_add(color_shaded, color_reflected), color_refracted));
+			color_add(color_shaded, color_reflected), color_refracted));
 }
 
 t_color	color_at(t_world w, t_ray r, int depth)

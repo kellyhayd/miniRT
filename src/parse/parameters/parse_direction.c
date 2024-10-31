@@ -1,4 +1,16 @@
-#include "minirt.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_direction.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/29 21:33:11 by krocha-h          #+#    #+#             */
+/*   Updated: 2024/10/30 07:34:25 by krocha-h         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "parser.h"
 
 bool	validate_direction_range(char *str, double *value)
 {
@@ -33,7 +45,6 @@ bool	validate_if_direction_is_normalized(char *str, t_vector *direction)
 		ft_putendl_fd(RESET, 2);
 		return (false);
 	}
-
 	return (true);
 }
 
@@ -47,7 +58,7 @@ bool	parse_direction(char *str, t_vector *direction)
 		|| !parse_direction_part(splitted[1], &direction->y)
 		|| !parse_direction_part(splitted[2], &direction->z)
 		|| !validate_if_direction_is_normalized(str, direction)
-		)
+	)
 	{
 		ft_free_split(splitted);
 		return (false);

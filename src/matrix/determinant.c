@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 13:55:40 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/20 18:17:53 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/29 22:32:55 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,43 +56,32 @@ double	determinant(t_matrix matrix)
  */
 t_matrix	submatrix(t_matrix matrix, int y, int x)
 {
-	int			x_matrix1;
-	int			y_matrix1;
-	int			x_matrix2;
-	int			y_matrix2;
+	int			x_mx1;
+	int			y_mx1;
+	int			x_mx2;
+	int			y_mx2;
 	t_matrix	result;
 
 	result.cols = matrix.cols - 1;
 	result.rows = matrix.rows - 1;
-	y_matrix1 = 0;
-	y_matrix2 = 0;
-	while (y_matrix1 < matrix.rows)
+	y_mx1 = -1;
+	y_mx2 = 0;
+	while (++y_mx1 < matrix.rows)
 	{
-		x_matrix1 = 0;
-		x_matrix2 = 0;
-		while (x_matrix1 < matrix.cols)
+		x_mx1 = -1;
+		x_mx2 = 0;
+		while (++x_mx1 < matrix.cols)
 		{
-			if (x_matrix1 != x && y_matrix1 != y)
+			if (x_mx1 != x && y_mx1 != y)
 			{
-				mx_set(&result, y_matrix2, x_matrix2, mx_get(&matrix, y_matrix1, x_matrix1));
-				x_matrix2++;
+				mx_set(&result, y_mx2, x_mx2, mx_get(&matrix, y_mx1, x_mx1));
+				x_mx2++;
 			}
-			x_matrix1++;
 		}
-		if (y_matrix1 != y)
-			y_matrix2++;
-		y_matrix1++;
+		y_mx2 += (y_mx1 != y);
 	}
 	return (result);
 }
-
-/*
-NÃO TIRAR ISSO POR ENQUANTO, PODE SER ÚTIL, SE PRECISAR ECONOMIZAR LINHAS DEPOIS
-	jres = jres + (y_matrix1 != y);		// if y_matrix1 != y then jres += 1
-ISSO É O MESMO QUE O DE CIMA, MAS MAIS LEGÍVEL
-	if (y_matrix1 != y)
-		y_matrix2++;
-*/
 
 /**
  * Calculates the minor of a matrix element.

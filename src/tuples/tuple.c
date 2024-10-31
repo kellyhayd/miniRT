@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:51:06 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/26 22:14:09 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/30 06:57:26 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,26 @@ t_tuple	tuple(double x, double y, double z, double w)
 }
 
 /**
- * @brief Compares two tuples for equality.
+ * @brief Compares two floating-point numbers for equality.
  *
- * This function takes two tuples as input and compares them to determine
+ * This function compares two double precision floating-point numbers
+ * to determine if they are equal within a certain tolerance.
+ *
+ * @param d1 The first double to compare.
+ * @param d2 The second double to compare.
+ * @return An integer indicating the result of the comparison:
+ *         1 if the numbers are considered equal (minor than EPSILON),
+ *         0 otherwise.
+ */
+int	float_compare(double d1, double d2)
+{
+	return (fabs(d1 - d2) < EPSILON);
+}
+
+/**
+ * @brief Compares two tuples for equality. For tests use only.
+ *
+ * This function takes two tuples as input and compares them to determinez
  * if they are equal.
  *
  * @param tuple1 The first tuple to compare.
@@ -42,8 +59,6 @@ t_tuple	tuple(double x, double y, double z, double w)
  */
 int	tuple_compare(t_tuple tuple1, t_tuple tuple2)
 {
-	// APENAS USADO NOS TESTES
-
 	return (float_compare(tuple1.x, tuple2.x)
 		&& float_compare(tuple1.y, tuple2.y)
 		&& float_compare(tuple1.z, tuple2.z)

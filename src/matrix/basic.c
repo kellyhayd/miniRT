@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 14:01:17 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/26 22:12:41 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/29 21:31:44 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_matrix	matrix_create(double *tab, int rows, int cols)
 }
 
 /**
- * @brief Compares two matrices for equality.
+ * @brief Compares two matrices for equality. For tests use only
  *
  * This function takes two matrices as input and compares them element by
  * element. It returns a non-zero value if the matrices are equal, and zero
@@ -46,8 +46,6 @@ t_matrix	matrix_create(double *tab, int rows, int cols)
  */
 int	mx_compare(t_matrix matrix1, t_matrix matrix2)
 {
-	// FUNÇÃO USADA APENAS NOS TESTES
-
 	int	i;
 	int	size_all;
 
@@ -78,7 +76,7 @@ t_matrix	identity(void)
 {
 	t_matrix	result;
 
-	result = (t_matrix) {0};
+	result = (t_matrix){0};
 	result.cols = 4;
 	result.rows = 4;
 	mx_set(&result, 0, 0, 1);

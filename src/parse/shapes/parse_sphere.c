@@ -6,11 +6,11 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 20:42:43 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/19 11:11:14 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/30 08:04:59 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "parser.h"
 
 /**
  * @brief Parses a line to extract sphere data and adds it to the world.
@@ -37,7 +37,7 @@ bool	parse_sphere(char *line, t_world *world)
 	if (!parse_coordinates(splitted[1], &position)
 		|| !parse_radius(splitted[2], &new_sphere.sphere_shape.radius)
 		|| !parse_color(splitted[3], &new_sphere.material.color)
-		|| !parse_material_shape(&splitted[4], &new_sphere.material, world)
+		|| !parse_mater_shape(&splitted[4], &new_sphere.material, world)
 		|| !validade_optionals(&splitted[4]))
 	{
 		ft_free_split(splitted);
@@ -46,7 +46,7 @@ bool	parse_sphere(char *line, t_world *world)
 	ft_free_split(splitted);
 	new_sphere.sphere_shape.radius /= 2;
 	set_transformation(&new_sphere, rotation_matrix(position, point(0, 1, 0),
-		new_sphere));
+			new_sphere));
 	add_shape(&world->shape, new_sphere);
 	return (true);
 }

@@ -6,11 +6,11 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 11:06:20 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/20 18:05:44 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/30 08:04:59 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "parser.h"
 
 bool	parse_cylinder(char *line, t_world *world)
 {
@@ -26,7 +26,7 @@ bool	parse_cylinder(char *line, t_world *world)
 		|| !parse_double(splitted[3], &new_cylinder.cylinder_shape.radius)
 		|| !parse_double(splitted[4], &new_cylinder.cylinder_shape.maximum)
 		|| !parse_color(splitted[5], &new_cylinder.material.color)
-		|| !parse_material_shape(&splitted[6], &new_cylinder.material, world)
+		|| !parse_mater_shape(&splitted[6], &new_cylinder.material, world)
 		|| !validade_optionals(&splitted[6]))
 		return (ft_free_split(splitted), false);
 	ft_free_split(splitted);
@@ -35,7 +35,7 @@ bool	parse_cylinder(char *line, t_world *world)
 	new_cylinder.cylinder_shape.minimum = 0;
 	new_cylinder.cylinder_shape.closed = true;
 	set_transformation(&new_cylinder, rotation_matrix(position, normal,
-		new_cylinder));
+			new_cylinder));
 	add_shape(&world->shape, new_cylinder);
 	return (true);
 }

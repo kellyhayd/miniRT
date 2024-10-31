@@ -1,13 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rotation_matrix.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/29 22:22:32 by krocha-h          #+#    #+#             */
+/*   Updated: 2024/10/29 22:24:15 by krocha-h         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 static int	sign(int number)
 {
 	if (number > 0)
-		return 1;
+		return (1);
 	else if (number < 0)
-		return -1;
+		return (-1);
 	else
-		return 0;
+		return (0);
 }
 
 static void	calculate_rotation_angles(t_vector vec, double *x, double *z)

@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 15:49:48 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/12 14:12:49 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/29 22:10:30 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_vector	local_normal_at(t_shape s, t_point obj_point)
 	else if (s.shape_type == CONE)
 		normal = normal_at_cone(s, obj_point);
 	else
-		normal = (t_vector) {0, 0, 0, 0};
+		normal = (t_vector){0, 0, 0, 0};
 	return (normal);
 }
 

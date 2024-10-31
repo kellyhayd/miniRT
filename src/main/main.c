@@ -6,11 +6,12 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:28:32 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/10/19 10:46:36 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/30 07:37:32 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+#include "parser.h"
 
 int	main(int argc, char **argv)
 {
@@ -19,17 +20,12 @@ int	main(int argc, char **argv)
 	t_world	new_world;
 
 	if (!(argc == 2 || argc == 3))
-	{
-		ft_error("Usage: ./miniRT [scene.rt] (--save-to-file)\n");
-		return (1);
-	}
+		return (ft_error("Usage: ./miniRT [scene.rt] (--save-to-file)\n"), 1);
 	check_extension(argv[1]);
 	new_world = world();
 	fd = open(argv[1], O_RDONLY);
-
 	if (fd < 0)
 		perror(argv[1]);
-
 	if (fd < 0 || !parse(fd, &new_world))
 		ft_error("Invalid map\n");
 	else
@@ -42,8 +38,6 @@ int	main(int argc, char **argv)
 	}
 	if (fd != -1)
 		close(fd);
-
 	world_clear(&new_world);
-
 	return (0);
 }

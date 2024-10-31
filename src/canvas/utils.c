@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/29 21:26:50 by krocha-h          #+#    #+#             */
+/*   Updated: 2024/10/29 21:29:34 by krocha-h         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
-void print_ppm_header(int width, int height, int fd)
+void	print_ppm_header(int width, int height, int fd)
 {
 	ft_putstr_fd("P3\n", fd);
 	ft_putnbr_fd(width, fd);

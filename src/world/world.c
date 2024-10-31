@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 08:14:46 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/12 14:11:57 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/29 21:42:35 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	world_clear(t_world *world_to_clear)
 
 t_world	default_world(void)
 {
-	// USADO APENAS NOS TESTES
 	t_world	dfl_world;
 	t_shape	sphere1;
 	t_shape	sphere2;
