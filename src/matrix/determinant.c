@@ -6,11 +6,11 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 13:55:40 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/29 22:32:55 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/31 06:12:35 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "tuples.h"
 
 /**
  * @brief Calculates the determinant of a given matrix.

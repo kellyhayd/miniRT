@@ -6,17 +6,18 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 21:30:26 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/29 21:30:27 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/31 08:56:08 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "shapes.h"
 #include "minirt.h"
 
 t_checkers	uv_checkers(int width, int heigh, t_color color_a, t_color color_b)
 {
 	return ((t_checkers){
 		.width = width,
-		.heigh = heigh,
+		.height = heigh,
 		.color_a = color_a,
 		.color_b = color_b
 	});
@@ -28,7 +29,7 @@ t_color	uv_pattern_at(t_checkers checkers, double u, double v)
 	double	v2;
 
 	u2 = floor(u * checkers.width);
-	v2 = floor(v * checkers.heigh);
+	v2 = floor(v * checkers.height);
 	if (almost_zero(fmod(u2 + v2, 2)))
 		return (checkers.color_a);
 	return (checkers.color_b);

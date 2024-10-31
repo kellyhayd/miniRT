@@ -6,11 +6,12 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 20:39:46 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/26 15:00:49 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/31 08:53:46 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+#include "ray.h"
 
 /**
  * @brief Creates a ray with a given origin and direction.

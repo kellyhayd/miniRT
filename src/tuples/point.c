@@ -6,11 +6,11 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 20:22:16 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/26 15:01:05 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/31 06:11:17 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "tuples.h"
 
 /**
  * @brief Creates a point with the given x, y, and z coordinates.

@@ -6,11 +6,13 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:51:06 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/10/30 06:57:26 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/31 08:55:29 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "tuples.h"
 #include "minirt.h"
+
 /**
  * @brief Creates a tuple with the given x, y, z, and w components.
  *

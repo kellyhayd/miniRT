@@ -6,11 +6,13 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 13:39:07 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/26 22:27:56 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/31 08:48:23 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "tuples.h"
 #include "minirt.h"
+#include "shapes.h"
 
 /**
  * @brief Creates a translation matrix.

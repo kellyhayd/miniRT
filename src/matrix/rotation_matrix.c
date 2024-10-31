@@ -6,11 +6,13 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 22:22:32 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/29 22:24:15 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/31 08:50:04 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "tuples.h"
 #include "minirt.h"
+#include "shapes.h"
 
 static int	sign(int number)
 {

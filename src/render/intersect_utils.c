@@ -6,11 +6,13 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 19:46:49 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/10/29 22:07:15 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/31 08:53:12 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+#include "scene.h"
+#include "ray.h"
 
 /**
  * @brief Adds an intersection to the hit list.

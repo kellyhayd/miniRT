@@ -6,10 +6,11 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 18:19:37 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/20 18:20:59 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/31 08:56:00 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "shapes.h"
 #include "minirt.h"
 
 t_pattern	stripe_pattern(t_color color_a, t_color color_b)

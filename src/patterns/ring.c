@@ -6,10 +6,11 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 18:19:42 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/20 18:19:43 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/31 08:55:55 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "shapes.h"
 #include "minirt.h"
 
 t_pattern	ring_pattern(t_color color_a, t_color color_b)

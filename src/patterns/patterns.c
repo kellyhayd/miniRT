@@ -6,11 +6,11 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 18:19:46 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/20 18:20:45 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/31 06:35:06 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "shapes.h"
 
 t_pattern	default_pattern(void)
 {
@@ -24,7 +24,7 @@ t_pattern	default_pattern(void)
 	});
 }
 
-void	set_pattern_transformation(t_pattern *pattern, t_matrix transformation)
+void	set_pattern_transform(t_pattern *pattern, t_matrix transformation)
 {
 	pattern->transform = transformation;
 	pattern->inverse = inverse(transformation);

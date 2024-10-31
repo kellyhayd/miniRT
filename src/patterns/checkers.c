@@ -6,11 +6,11 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 18:19:53 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/20 18:20:20 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/31 06:13:40 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "shapes.h"
 
 t_pattern	checkers_pattern(t_color color_a, t_color color_b)
 {

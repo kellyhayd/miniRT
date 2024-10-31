@@ -6,11 +6,12 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 07:33:10 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/30 18:35:26 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/31 08:42:25 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scene.h"
+#include "minirt.h"
 
 t_camera	camera(double hsize, double vsize, double field_of_view)
 {

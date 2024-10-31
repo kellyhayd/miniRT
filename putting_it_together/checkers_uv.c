@@ -9,7 +9,7 @@ t_canvas	render_image(void)
 	t_shape	floor = plane();
 	// set_transformation(&floor, mx_multiply(rotation_x(90 * M_PI / 180), translation(0, 0, 5)));
 	floor.material.pattern = checkers_pattern(color(0.5, 0.5, 0.5), color(0.75, 0.75, 0.75));
-	set_pattern_transformation(&floor.material.pattern, scaling(0.05, 0.05, 0.05));
+	set_pattern_transform(&floor.material.pattern, scaling(0.05, 0.05, 0.05));
 	floor.material.reflective = 1;
 
 	// SPHERES

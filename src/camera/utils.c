@@ -6,11 +6,12 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 20:20:12 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/10/30 18:35:38 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/31 08:52:20 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scene.h"
+#include "minirt.h"
 
 void	print_rendering_progress(int hsize, int vsize, int y)
 {

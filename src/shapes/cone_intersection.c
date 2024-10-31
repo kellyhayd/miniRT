@@ -6,11 +6,13 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 08:48:56 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/29 21:57:41 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/31 08:54:53 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+#include "shapes.h"
+#include "ray.h"
 
 static int	check_cap(t_ray r, double t, double cap_y_pos)
 {

@@ -6,11 +6,11 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 08:41:10 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/12 08:23:37 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/31 06:13:28 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "shapes.h"
 
 /**
  * @brief Creates and returns a default material.

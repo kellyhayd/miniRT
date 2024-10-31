@@ -6,11 +6,11 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 21:29:57 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/29 21:29:58 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/31 06:13:09 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "tuples.h"
 
 /**
  * @brief Converts a normalized color value to an 8-bit color value.

@@ -6,11 +6,11 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:05:08 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/26 22:20:19 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/31 06:13:04 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "tuples.h"
 
 /**
  * @brief Creates a color structure with the specified red, green, and blue

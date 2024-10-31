@@ -6,11 +6,12 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 19:52:47 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/09/26 22:22:38 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/31 08:53:23 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+#include "ray.h"
 
 /**
  * @brief Represents an intersection between a ray and a shape.

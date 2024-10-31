@@ -6,11 +6,11 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 22:22:28 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/29 22:22:30 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/31 06:12:43 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "tuples.h"
 
 /**
  * @brief Retrieves the value from a matrix at the specified row and column.

@@ -6,10 +6,11 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 20:31:43 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/09/26 22:28:51 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/31 08:55:17 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "tuples.h"
 #include "minirt.h"
 
 /**

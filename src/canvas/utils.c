@@ -6,21 +6,31 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 21:26:50 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/29 21:29:34 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/31 08:47:20 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+#include "tuples.h"
+#include "scene.h"
 
 void	print_ppm_header(int width, int height, int fd)
 {
-	dprintf(fd, "P3\n%d %d\n255\n", width, height);
+	(void) width;
+	(void) height;
+	(void) fd;
+	ft_error("Unimplemented print_line_ppm\n");
+	exit(1);
+	// dprintf(fd, "P3\n%d %d\n255\n", width, height);
 }
 
 void	print_line_ppm(t_color pixel, int fd)
 {
-	dprintf(fd, "%d %d %d ", (int)(pixel.r * 255), \
-			(int)(pixel.g * 255), (int)(pixel.b * 255));
+	(void) pixel;
+	(void) fd;
+	ft_error("Unimplemented print_line_ppm\n");
+	exit(1);
+	// dprintf(fd, "%d %d %d ", (int)(pixel.r * 255), (int)(pixel.g * 255), (int)(pixel.b * 255));
 }
 
 void	canvas_to_ppm(t_canvas canvas, char *filename)

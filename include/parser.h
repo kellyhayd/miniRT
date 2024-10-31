@@ -6,14 +6,15 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 07:19:55 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/30 08:20:33 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/31 08:50:33 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
-#include "minirt.h"
+# include "scene.h"
+# include "minirt.h"
 
 // -------------------------------------------------------------------------- //
 //                                 basic                                      //
@@ -69,8 +70,8 @@ void		clear_material_list(t_world *world);
 //                                 validation                                 //
 // -------------------------------------------------------------------------- //
 bool		validate_count(char **split, int count);
-bool		validate_double_range(char *str, double value, double min, \
-								double max);
+bool		validate_double_range(char *str, double value, \
+								double min, double max);
 bool		validade_optionals(char **splitted);
 bool		pos_validation(t_world *world);
 

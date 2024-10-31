@@ -6,11 +6,13 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 18:18:33 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/05 08:47:55 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/31 08:43:21 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+#include "tuples.h"
+#include "scene.h"
 
 /**
  * @brief Writes a pixel to the specified coordinates in the given image.

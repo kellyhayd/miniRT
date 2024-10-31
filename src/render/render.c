@@ -6,11 +6,13 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 22:07:48 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/29 22:11:22 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/31 08:51:41 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+#include "tuples.h"
+#include "scene.h"
 
 static t_color	render_pixel(t_camera c, t_world w, int x, int y)
 {

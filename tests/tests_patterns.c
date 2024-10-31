@@ -161,7 +161,7 @@ void	test_stripes_with_a_pattern_transformation(int num_test)
 
 	t_shape		sphere1 = sphere();
 	t_pattern	pattern = stripe_pattern(white, black);
-	set_pattern_transformation(&pattern, scaling(2, 2, 2));
+	set_pattern_transform(&pattern, scaling(2, 2, 2));
 
 	t_color		result;
 	t_color		expected = white;
@@ -184,7 +184,7 @@ void	test_stripes_with_both_an_object_and_a_pattern_transformation(int num_test)
 	set_transformation(&sphere1, scaling(2, 2, 2));
 
 	t_pattern	pattern = stripe_pattern(white, black);
-	set_pattern_transformation(&pattern, translation(0.5, 0, 0));
+	set_pattern_transform(&pattern, translation(0.5, 0, 0));
 
 	t_color		result;
 	t_color		expected = white;

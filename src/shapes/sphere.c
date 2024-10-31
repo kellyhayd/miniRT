@@ -6,11 +6,13 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 22:28:43 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/10/05 08:46:17 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/31 08:54:37 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+#include "shapes.h"
+#include "ray.h"
 
 /**
  * @brief Creates and returns a new sphere shape.

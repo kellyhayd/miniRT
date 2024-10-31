@@ -6,11 +6,12 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 21:32:17 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/29 21:32:18 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/31 08:53:35 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+#include "scene.h"
 
 void	key_hook(mlx_key_data_t keydata, void *param)
 {

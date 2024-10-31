@@ -88,9 +88,4 @@ fclean: clean
 	@rm -rf $(TESTS)
 	@rm -rf pit
 
-ifeq ($(PROF), 1)
-	@gprof pit gmon.out > prof
-	@< prof gprof2dot | dot -Tpng -o output.png
-endif
-
 re: fclean all

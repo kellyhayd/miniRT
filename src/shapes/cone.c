@@ -6,11 +6,13 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 21:56:37 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/29 21:57:27 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/31 08:54:45 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+#include "shapes.h"
+#include "ray.h"
 
 t_shape	cone(void)
 {

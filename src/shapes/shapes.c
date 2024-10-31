@@ -6,11 +6,13 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 08:41:23 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/05 08:41:25 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/31 08:54:29 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+#include "shapes.h"
+#include "ray.h"
 
 t_shape	new_shape(void)
 {
