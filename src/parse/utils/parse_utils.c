@@ -22,8 +22,12 @@ void	put_ambient_color(t_world *world)
 	aux = world->shape;
 	while (aux)
 	{
-		aux->material.ambient = color_hadamard(ambient_color,
-				aux->material.color);
+		if (aux->material.pattern.has_pattern)
+			aux->material.ambient = color_hadamard(ambient_color,
+					aux->material.pattern.color_a);
+		else
+			aux->material.ambient = color_hadamard(ambient_color,
+					aux->material.color);
 		aux = aux->next;
 	}
 }
