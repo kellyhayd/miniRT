@@ -38,6 +38,7 @@ LIBMLX			= $(LIBMLX_FOLDER)/build/libmlx42.a
 LIBS			= $(LIBMLX) $(LIBFT) -ldl -lglfw -pthread -lm
 
 BUILD			= build
+BUILD_BONUS		= build_bonus
 SRC_PATH		= src
 SRC_PATH_BONUS	= src_bonus
 
@@ -186,6 +187,7 @@ ifdef WITH_BONUS
 	SRC_PATH	= $(SRC_PATH_BONUS)
 	SRC			= $(SRC_BONUS)
 	OBJ			= $(OBJ_BONUS)
+	BUILD		= $(BUILD_BONUS)
 endif
 
 #----------------------------------------------- Rules
@@ -221,8 +223,8 @@ clean:
 	@rm -rf $(BUILD)
 
 fclean: clean
-	@make -C $(LIBFT_FOLDER) fclean
-	@rm -rf $(LIBMLX_FOLDER)/build
+	# @make -C $(LIBFT_FOLDER) fclean
+	# @rm -rf $(LIBMLX_FOLDER)/build
 	@rm -rf $(NAME) $(NAME_BONUS)
 
 re: fclean all
