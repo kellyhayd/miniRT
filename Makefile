@@ -223,8 +223,8 @@ clean:
 	@rm -rf $(BUILD)
 
 fclean: clean
-	# @make -C $(LIBFT_FOLDER) fclean
-	# @rm -rf $(LIBMLX_FOLDER)/build
+	@make -C $(LIBFT_FOLDER) fclean
+	@rm -rf $(LIBMLX_FOLDER)/build
 	@rm -rf $(NAME) $(NAME_BONUS)
 
 re: fclean all
