@@ -34,4 +34,4 @@ pl  0,-2,0           0,1,0           255,0,0        default         checkers
 
 # Cone              normal
 #   position        direction       radius          altura          color           material        pattern
-cn  0,0,0         0,1,1           0.5             1.5             0,0,255           transparent     gradient
+cn  0,0,0           0,1,1           0.5             1.5             0,0,255         transparent     gradient
