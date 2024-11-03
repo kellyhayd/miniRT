@@ -153,11 +153,11 @@ SRC_BONUS		= src_bonus/render/mlx_bonus.c \
 					src_bonus/parse/utils/parse_double_bonus.c \
 					src_bonus/parse/utils/parse_utils_bonus.c \
 					src_bonus/parse/utils/parse_int_bonus.c \
-					src_bonus/parse/parameters/parse_material_utils.c \
+					src_bonus/parse/parameters/parse_material_utils_bonus.c \
 					src_bonus/parse/parameters/parse_direction_bonus.c \
 					src_bonus/parse/parameters/parse_pattern_bonus.c \
 					src_bonus/parse/parameters/parse_material_bonus.c \
-					src_bonus/parse/parameters/parse_pattern_utils.c \
+					src_bonus/parse/parameters/parse_pattern_utils_bonus.c \
 					src_bonus/parse/parameters/parse_coordinates_bonus.c \
 					src_bonus/parse/parameters/parse_color_bonus.c \
 					src_bonus/parse/shapes/parse_cylinder_bonus.c \
