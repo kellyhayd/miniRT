@@ -220,7 +220,7 @@ bonus:
 
 clean:
 	@echo "$(RED)Removing objects...$(RESET)"
-	@rm -rf $(BUILD)
+	@rm -rf $(BUILD) $(BUILD_BONUS)
 
 fclean: clean
 	@make -C $(LIBFT_FOLDER) fclean
