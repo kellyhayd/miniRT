@@ -73,7 +73,7 @@ bool		validate_count(char **split, int count);
 bool		validate_double_range(char *str, double value, \
 								double min, double max);
 bool		validade_optionals(char **splitted);
-bool		pos_validation(t_world *world);
+bool	pos_validation(t_world *world, int state);
 
 // -------------------------------------------------------------------------- //
 //                                   utils                                    //

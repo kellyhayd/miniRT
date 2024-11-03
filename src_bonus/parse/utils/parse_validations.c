@@ -51,11 +51,10 @@ bool	validade_optionals(char **splitted)
 	return (true);
 }
 
-bool	pos_validation(t_world *world)
+bool	pos_validation(t_world *world, int state)
 {
-	bool	state;
-
-	state = true;
+	if (!state)
+		return (false);
 	if (!world->scene.has_ambient_color)
 		state = print_error("There must be 1 ambient color");
 	if (!world->scene.has_camera)
