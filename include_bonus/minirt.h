@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 20:01:38 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/11/03 15:31:54 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/11/03 15:32:01 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@
 # define REVERSE "\001\033[7m\002"
 
 # define EPSILON        0.00001
-# define NUM_THREADS    3
-# define PIXEL_SAMPLING 3
+# define NUM_THREADS    4
+# define PIXEL_SAMPLING 1
 
 # define WIDTH 1280
 # define HEIGH 720
@@ -41,6 +41,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <math.h>
+# include <pthread.h>
 
 # include "libft.h"
 # include "get_next_line.h"
@@ -50,11 +51,12 @@
 //                                   utils                                    //
 // -------------------------------------------------------------------------- //
 
-int		float_compare(double d1, double d2);
-void	ft_error(char *message);
-int		almost_zero(float num);
-void	swap(double *a, double *b);
-void	check_extension(char *filename);
-char	*get_file_name(char *file_name_base);
+int			float_compare(double d1, double d2);
+void		ft_error(char *message);
+int			almost_zero(float num);
+void		swap(double *a, double *b);
+void		join_threads(pthread_t *threads, int thread_count);
+void		check_extension(char *filename);
+char		*get_file_name(char *file_name_base);
 
 #endif

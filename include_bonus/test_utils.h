@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   testutils.h                                        :+:      :+:    :+:   */
+/*   test_utils.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 08:39:26 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/10/31 08:40:12 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/11/03 15:40:13 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TESTUTILS_H
-# define TESTUTILS_H
+#ifndef TEST_UTILS_H
+# define TEST_UTILS_H
 
 # include "scene.h"
 

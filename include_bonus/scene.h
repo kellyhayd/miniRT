@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 08:10:16 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/11/03 14:52:34 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/31 08:51:12 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,6 +172,7 @@ t_matrix	view_transform(t_point from, t_point to, t_vector up);
 t_canvas	render(t_camera c, t_world w);
 void		print_rendering_progress(int hsize, int vsize, int y);
 t_color		color_average(t_color *colors, int size);
+int			reset_threads(pthread_t *threads, int thread_count);
 t_ray		ray_for_pixel(t_camera c, int x, int y, t_anti_aliasing aa_data);
 
 #endif
