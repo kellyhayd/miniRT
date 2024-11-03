@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 22:07:48 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/11/03 14:34:54 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/31 08:51:41 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,18 +62,28 @@ void	*render_line(void *param)
 t_canvas	render(t_camera c, t_world w)
 {
 	int			y;
+	int			thread_count;
 	t_canvas	image;
-	t_thread	threads_data[1];
+	t_thread	threads_data[NUM_THREADS];
+	pthread_t	threads[NUM_THREADS];
 
 	y = -1;
+	thread_count = 0;
 	image = create_canvas(c.hsize, c.vsize);
 	print_rendering_progress(c.hsize, c.vsize, 0);
 	while (++y < c.vsize)
 	{
-		threads_data[0] = (t_thread){.line = y, \
-	.line_size = c.hsize, .canvas = &image, .world = w, .camera = c};
-		render_line(&threads_data[0]);
+		if (thread_count < NUM_THREADS)
+		{
+			threads_data[thread_count] = (t_thread){.line = y, \
+		.line_size = c.hsize, .canvas = &image, .world = w, .camera = c};
+			pthread_create(&threads[thread_count], NULL,
+				render_line, &threads_data[thread_count]);
+			thread_count++;
+		}
+		thread_count = reset_threads(threads, thread_count);
 		print_rendering_progress(c.hsize, c.vsize, y);
 	}
+	join_threads(threads, thread_count);
 	return (image);
 }

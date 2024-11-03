@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 20:20:12 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/11/03 14:39:54 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/31 08:52:20 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	print_rendering_progress(int hsize, int vsize, int y)
 		i++;
 	}
 	printf("] %d%%", progress);
+	fflush(stdout);
 }
 
 t_color	color_average(t_color *colors, int size)
@@ -57,4 +58,26 @@ t_color	color_average(t_color *colors, int size)
 	}
 	average = color(r / size, g / size, b / size);
 	return (average);
+}
+
+void	join_threads(pthread_t *threads, int thread_count)
+{
+	int	i;
+
+	i = 0;
+	while (i < thread_count)
+	{
+		pthread_join(threads[i], NULL);
+		i++;
+	}
+}
+
+int	reset_threads(pthread_t *threads, int thread_count)
+{
+	if (thread_count >= NUM_THREADS)
+	{
+		join_threads(threads, NUM_THREADS);
+		return (0);
+	}
+	return (thread_count);
 }

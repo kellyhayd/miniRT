@@ -1,4 +1,3 @@
-
 #----------------------------------------------- Basic
 NAME			= miniRT
 .DEFAULT_GOAL	= all
@@ -17,11 +16,7 @@ RESET	= \033[0m
 #----------------------------------------------- Compilation
 CC		:= cc
 
-ifeq ($(PROF), 1)
-	FLAGS	:= -pg
-else
-	FLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -O2 -g3
-endif
+FLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -O2 -g3
 
 VALGRIND	:= valgrind -q --leak-check=full --show-leak-kinds=all --track-origins=yes
 
@@ -84,8 +79,5 @@ fclean: clean
 	@make -C $(LIBFT_FOLDER) fclean
 	@rm -rf $(LIBMLX_FOLDER)/build
 	@rm -rf $(NAME)
-	@rm -rf test
-	@rm -rf $(TESTS)
-	@rm -rf pit
 
 re: fclean all

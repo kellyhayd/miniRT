@@ -6,7 +6,7 @@
 /*   By: krocha-h <krocha-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 23:25:08 by krocha-h          #+#    #+#             */
-/*   Updated: 2024/11/03 14:43:58 by krocha-h         ###   ########.fr       */
+/*   Updated: 2024/10/30 07:35:42 by krocha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ bool	pos_validation(t_world *world)
 		state = print_error("There must be 1 ambient color");
 	if (!world->scene.has_camera)
 		state = print_error("There must be 1 camera");
-	if (!world->light || (world->light && world->light->next))
+	if (!world->light)
 		state = print_error("There must be 1 light");
 	if (!world->shape)
 		state = print_error("There must be at least 1 object in the scene");
