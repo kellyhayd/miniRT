@@ -109,73 +109,73 @@ SRC				= src/render/ray.c \
 					src/shapes/cylinder.c \
 					src/shapes/cylinder_intersection.c \
 					src/shapes/cone.c
-SRC_BONUS		= src_bonus/render/ray.c \
-					src_bonus/render/shading.c \
-					src_bonus/render/render.c \
-					src_bonus/render/shadows.c \
-					src_bonus/render/intersections.c \
-					src_bonus/render/mlx.c \
-					src_bonus/render/light.c \
-					src_bonus/render/intersect_utils.c \
-					src_bonus/render/reflection.c \
-					src_bonus/render/light_list.c \
-					src_bonus/world/refractive_idx.c \
-					src_bonus/world/world.c \
-					src_bonus/world/refractions.c \
-					src_bonus/world/containers.c \
-					src_bonus/world/prepare_computations.c \
-					src_bonus/patterns/gradient.c \
-					src_bonus/patterns/patterns.c \
-					src_bonus/patterns/uv_checkers.c \
-					src_bonus/patterns/stripe.c \
-					src_bonus/patterns/ring.c \
-					src_bonus/patterns/checkers.c \
-					src_bonus/matrix/operations.c \
-					src_bonus/matrix/transformation.c \
-					src_bonus/matrix/rotation_matrix.c \
-					src_bonus/matrix/determinant.c \
-					src_bonus/matrix/rotation.c \
-					src_bonus/matrix/basic.c \
-					src_bonus/matrix/modification.c \
-					src_bonus/tuples/tuple.c \
-					src_bonus/tuples/tuple_operations.c \
-					src_bonus/tuples/vector.c \
-					src_bonus/tuples/point.c \
-					src_bonus/camera/utils.c \
-					src_bonus/camera/camera.c \
-					src_bonus/main/main.c \
-					src_bonus/main/utils.c \
-					src_bonus/parse/scene/parse_ambient.c \
-					src_bonus/parse/scene/parse_lights.c \
-					src_bonus/parse/scene/parse_camera.c \
-					src_bonus/parse/utils/parse_int.c \
-					src_bonus/parse/utils/parse_double.c \
-					src_bonus/parse/utils/parse_utils.c \
-					src_bonus/parse/utils/parse_validations.c \
-					src_bonus/parse/parameters/parse_color.c \
-					src_bonus/parse/parameters/parse_coordinates.c \
-					src_bonus/parse/parameters/parse_material.c \
+SRC_BONUS		= src_bonus/render/mlx_bonus.c \
+					src_bonus/render/light_bonus.c \
+					src_bonus/render/render_bonus.c \
+					src_bonus/render/shadows_bonus.c \
+					src_bonus/render/intersect_utils_bonus.c \
+					src_bonus/render/ray_bonus.c \
+					src_bonus/render/reflection_bonus.c \
+					src_bonus/render/intersections_bonus.c \
+					src_bonus/render/shading_bonus.c \
+					src_bonus/render/light_list_bonus.c \
+					src_bonus/world/world_bonus.c \
+					src_bonus/world/containers_bonus.c \
+					src_bonus/world/refractive_idx_bonus.c \
+					src_bonus/world/prepare_computations_bonus.c \
+					src_bonus/world/refractions_bonus.c \
+					src_bonus/patterns/uv_checkers_bonus.c \
+					src_bonus/patterns/ring_bonus.c \
+					src_bonus/patterns/patterns_bonus.c \
+					src_bonus/patterns/checkers_bonus.c \
+					src_bonus/patterns/stripe_bonus.c \
+					src_bonus/patterns/gradient_bonus.c \
+					src_bonus/matrix/basic_bonus.c \
+					src_bonus/matrix/modification_bonus.c \
+					src_bonus/matrix/determinant_bonus.c \
+					src_bonus/matrix/operations_bonus.c \
+					src_bonus/matrix/rotation_matrix_bonus.c \
+					src_bonus/matrix/rotation_bonus.c \
+					src_bonus/matrix/transformation_bonus.c \
+					src_bonus/tuples/tuple_bonus.c \
+					src_bonus/tuples/tuple_operations_bonus.c \
+					src_bonus/tuples/vector_bonus.c \
+					src_bonus/tuples/point_bonus.c \
+					src_bonus/camera/camera_bonus.c \
+					src_bonus/camera/utils_bonus.c \
+					src_bonus/main/utils_bonus.c \
+					src_bonus/main/main_bonus.c \
+					src_bonus/parse/parse_bonus.c \
+					src_bonus/parse/scene/parse_camera_bonus.c \
+					src_bonus/parse/scene/parse_lights_bonus.c \
+					src_bonus/parse/scene/parse_ambient_bonus.c \
+					src_bonus/parse/utils/parse_validations_bonus.c \
+					src_bonus/parse/utils/parse_double_bonus.c \
+					src_bonus/parse/utils/parse_utils_bonus.c \
+					src_bonus/parse/utils/parse_int_bonus.c \
 					src_bonus/parse/parameters/parse_material_utils.c \
+					src_bonus/parse/parameters/parse_direction_bonus.c \
+					src_bonus/parse/parameters/parse_pattern_bonus.c \
+					src_bonus/parse/parameters/parse_material_bonus.c \
 					src_bonus/parse/parameters/parse_pattern_utils.c \
-					src_bonus/parse/parameters/parse_direction.c \
-					src_bonus/parse/parameters/parse_pattern.c \
-					src_bonus/parse/parse.c \
-					src_bonus/parse/shapes/parse_cylinder.c \
-					src_bonus/parse/shapes/parse_cone.c \
-					src_bonus/parse/shapes/parse_plane.c \
-					src_bonus/parse/shapes/parse_sphere.c \
-					src_bonus/canvas/canvas.c \
-					src_bonus/canvas/utils.c \
-					src_bonus/colors/colors.c \
-					src_bonus/colors/utils.c \
-					src_bonus/materials/material.c \
-					src_bonus/shapes/plane.c \
-					src_bonus/shapes/sphere.c \
-					src_bonus/shapes/shapes.c \
-					src_bonus/shapes/cone_intersection.c \
-					src_bonus/shapes/cylinder.c \
-					src_bonus/shapes/cylinder_intersection.c \
-					src_bonus/shapes/cone.c
+					src_bonus/parse/parameters/parse_coordinates_bonus.c \
+					src_bonus/parse/parameters/parse_color_bonus.c \
+					src_bonus/parse/shapes/parse_cylinder_bonus.c \
+					src_bonus/parse/shapes/parse_plane_bonus.c \
+					src_bonus/parse/shapes/parse_cone_bonus.c \
+					src_bonus/parse/shapes/parse_sphere_bonus.c \
+					src_bonus/canvas/canvas_bonus.c \
+					src_bonus/canvas/utils_bonus.c \
+					src_bonus/colors/colors_bonus.c \
+					src_bonus/colors/utils_bonus.c \
+					src_bonus/materials/material_bonus.c \
+					src_bonus/shapes/sphere_bonus.c \
+					src_bonus/shapes/plane_bonus.c \
+					src_bonus/shapes/cone_bonus.c \
+					src_bonus/shapes/cylinder_bonus.c \
+					src_bonus/shapes/cone_intersection_bonus.c \
+					src_bonus/shapes/cylinder_intersection_bonus.c \
+					src_bonus/shapes/shapes_bonus.c
 
 OBJ				= $(SRC:$(SRC_PATH)/%.c=$(BUILD)/%.o)
 OBJ_BONUS		= $(SRC_BONUS:$(SRC_PATH_BONUS)/%.c=$(BUILD)/%.o)
@@ -205,7 +205,7 @@ $(LIBMLX):
 $(BUILD):
 	@mkdir -p $(BUILD)
 
-$(BUILD)/%.o: $(SRC_PATH)/%.c include/minirt.h
+$(BUILD)/%.o: $(SRC_PATH)/%.c
 	@echo "$(CYAN)Compiling $(GREEN)$(notdir $<)$(RESET)"
 	@mkdir -p $(dir $@)
 	@$(CC) $(FLAGS) $(HEADERS) -c $< -o $@
