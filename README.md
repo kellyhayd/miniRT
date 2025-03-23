@@ -42,5 +42,22 @@ Optional enhancements include:
 - Multiple colored light sources.
 - Additional shapes like cone, hyperboloid, or paraboloid.
 - Support for bump map textures.
+ 
+<h2> Image I </h2>
+
+![Image](https://github.com/user-attachments/assets/43424bcb-eefe-48fe-b201-9e0baae6c644)
+
+<h2> Image II </h2>
+
+![Image](https://github.com/user-attachments/assets/2a1ac2f6-107c-4505-81d8-baa28a0e363f)
+
+<h2> Image III </h2>
+
+![Image](https://github.com/user-attachments/assets/8118a825-2ba7-4565-a757-f45605c57142)
+
+<h2> Image IV </h2>
+
+![Image](https://github.com/user-attachments/assets/457cc172-fdf9-4888-ae10-c42c6f8c27ad)
+
 
 --- 
